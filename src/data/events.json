@@ -1,19 +1,59 @@
 [
   {
+    "title": "Weinfrühling Sandersdorf",
+    "date": "09.05.2026",
+    "time": "16:30 Uhr",
+    "location": "Platz der Deutschen Einheit",
+    "image": "./src/img/veranstaltungenUndNews/weinfruehling.png",
+    "links": [
+      { "type": "more", "label": "Mehr erfahren", "url": "https://www.sandersdorf-brehna.de/Meine-Stadt/Stadt-Land-Kultur/Veranstaltungen/Weinfr%C3%BChling-" },
+      { "type": "maps", "label": "Maps", "url": "https://share.google/tL5HyahC52M0jCNGp" }
+    ]
+  },
+  {
+    "title": "Sessions-Eröffnung",
+    "date": "11.11.2026",
+    "time": "11:11 Uhr",
+    "location": "Rathaus Sandersdorf",
+    "image": "./src/img/veranstaltungenUndNews/sessionseroeffnung.png",
+    "links": [
+      { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/vgFrF9jjJLxYL7fg8" },
+      { "type": "mail", "label": "E-Mail", "url": "mailto:info@skvonline.de" }
+    ]
+  },{
     "title": "1. Lumpenball",
     "date": "14.11.2026",
     "time": "19:11 Uhr",
     "einlass": "18:11 Uhr",
     "preis": "19,50 €",
     "location": "Mehrzweckhalle Sandersdorf",
-    "image": "./src/img/veranstaltungenUndNews/weinfruehling.png",
     "links": [
-      { "type": "more", "label": "Mehr erfahren", "url": "https://www.sandersdorf-brehna.de/Meine-Stadt/Stadt-Land-Kultur/Veranstaltungen/Weinfr%C3%BChling-" },
-      { "type": "instagram", "label": "Instagram", "url": "https://www.instagram.com/" },
-      { "type": "facebook", "label": "Facebook", "url": "https://www.facebook.com/" },
-      { "type": "tiktok", "label": "TikTok", "url": "https://www.tiktok.com/" },
-      { "type": "maps", "label": "Maps", "url": "https://www.maps.google.com/" },
-      { "type": "mail", "label": "E-Mail", "url": "mailto:kontakt@skvonline.de" }
+      { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/tAwJbH2cMwa1GWu1A" },
+      { "type": "mail", "label": "E-Mail", "url": "mailto:info@skvonline.de" }
+    ]
+  },
+  {
+    "title": "2. Lumpenball",
+    "date": "20.11.2026",
+    "time": "19:11 Uhr",
+    "einlass": "18:11 Uhr",
+    "preis": "19,50 €",
+    "location": "Mehrzweckhalle Sandersdorf",
+    "links": [
+      { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/tAwJbH2cMwa1GWu1A" },
+      { "type": "mail", "label": "E-Mail", "url": "mailto:info@skvonline.de" }
+    ]
+  },
+  {
+    "title": "1. Lumpenball",
+    "date": "21.11.2026",
+    "time": "19:11 Uhr",
+    "einlass": "18:11 Uhr",
+    "preis": "19,50 €",
+    "location": "Mehrzweckhalle Sandersdorf",
+    "links": [
+      { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/tAwJbH2cMwa1GWu1A" },
+      { "type": "mail", "label": "E-Mail", "url": "mailto:info@skvonline.de" }
     ]
   }
 ]

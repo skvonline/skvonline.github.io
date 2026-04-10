@@ -67,6 +67,8 @@ const NEWS_LINK_ICONS = {
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4c.6 1.7 1.7 3 3.7 3.6V11c-1.5-.1-2.7-.6-3.7-1.4v5.7a5.3 5.3 0 1 1-4.2-5.2v3a2.3 2.3 0 1 0 1.2 2.1V4h3z" fill="currentColor"></path></svg>',
   mail:
     '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"></rect><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="2"></path></svg>',
+  maps:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2"></path><circle cx="12" cy="10" r="2.8" fill="none" stroke="currentColor" stroke-width="2"></circle></svg>',
 };
 
 function getNewsLinksMarkup(entry) {
@@ -81,7 +83,7 @@ function getNewsLinksMarkup(entry) {
     .filter((link) => link && link.url)
     .map((link) => {
       const type = (link.type || 'more').toLowerCase();
-      const classType = ['more', 'instagram', 'facebook', 'tiktok', 'mail'].includes(type) ? type : 'more';
+      const classType = ['more', 'instagram', 'facebook', 'tiktok', 'mail', 'maps'].includes(type) ? type : 'more';
       const isMailto = link.url.startsWith('mailto:');
       const rel = isMailto ? '' : ' rel="noopener noreferrer"';
       const target = isMailto ? '' : ' target="_blank"';
@@ -97,6 +99,23 @@ function getNewsLinksMarkup(entry) {
     .join('');
 
   return markup ? `<div class="news-links">${markup}</div>` : '';
+}
+
+function getEventDetailsMarkup(event) {
+  const detailRows = [
+    event.date && `<p><strong>Datum:</strong> ${event.date}</p>`,
+    event.time && `<p><strong>Uhrzeit:</strong> ${event.time}</p>`,
+    event.einlass && `<p><strong>Einlass:</strong> ${event.einlass}</p>`,
+    event.preis && `<p><strong>Preis:</strong> ${event.preis}</p>`,
+    event.location && `<p><strong>Ort:</strong> ${event.location}</p>`,
+    event.description && `<p>${event.description}</p>`,
+  ].filter(Boolean);
+
+  if (detailRows.length === 0) {
+    return '';
+  }
+
+  return `<div class="event-details">${detailRows.join('')}</div>`;
 }
 
 function getElferratImagePath(member) {
@@ -129,13 +148,26 @@ async function loadHomeContent() {
     containerId: 'events-grid',
     buttonId: 'events-more',
     chunkSize: 3,
-    renderItem: (event) => `
-      <article class="card">
-        <h3>${event.title}</h3>
-        <p><strong>${event.date}</strong></p>
-        <p>${event.location}</p>
+    renderItem: (event, index) => {
+      const hasImage = Boolean(event.image);
+      const imageSideClass = hasImage ? (index % 2 === 0 ? 'event-card--image-left' : 'event-card--image-right') : 'event-card--no-image';
+      const imageMarkup = hasImage
+        ? `<div class="event-card-media"><img class="event-image" src="${event.image}" alt="${event.title || 'Veranstaltung'}" loading="lazy" /></div>`
+        : '';
+
+      return `
+      <article class="card event-card ${imageSideClass}">
+        <div class="event-card-layout">
+          ${imageMarkup}
+          <div class="event-card-body">
+            <h3>${event.title || 'Veranstaltung'}</h3>
+            ${getEventDetailsMarkup(event)}
+            ${getNewsLinksMarkup(event)}
+          </div>
+        </div>
       </article>
-    `,
+    `;
+    },
   });
 
   chunkRender({
