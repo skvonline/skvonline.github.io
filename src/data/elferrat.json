@@ -1,26 +1,57 @@
 [
   {
-    "name": "Ronny Lehmann",
-    "role": "Elferratspräsident",
-    "image": "./src/img/verein/elferrat/gerd-ritter.png",
-    "description": "Leitet den Elferrat und koordiniert Auftritte während der Session."
+    "name": "Stephan Brühl",
+    "role": "Umzugsminister",
+    "image": "./src/img/verein/elferrat/stephan-bruehl.svg"
   },
   {
-    "name": "Michael Seifert",
-    "role": "Sitzungsleitung",
-    "image": "./src/img/dummy.svg",
-    "description": "Verantwortlich für den Ablauf der Abendveranstaltungen und Programmpunkte."
+    "name": "Ivo Gottlöber",
+    "role": "Verpflegungsminister",
+    "image": "./src/img/verein/elferrat/ivo-gottloeber.svg"
   },
   {
-    "name": "Torsten Weber",
-    "role": "Organisation",
-    "image": "./src/img/dummy.svg",
-    "description": "Kümmert sich um Logistik, Aufbau und interne Abstimmungen."
+    "name": "Wolfram Heide",
+    "role": "Print Medien",
+    "image": "./src/img/verein/elferrat/wolfram-heide.svg"
   },
   {
-    "name": "Steffen Richter",
-    "role": "Protokoll",
-    "image": "./src/img/dummy.svg",
-    "description": "Dokumentiert die Sitzungen und unterstützt die Planung des Programms."
+    "name": "Volker Heide",
+    "role": "Webminister",
+    "image": "./src/img/verein/elferrat/volker-heide.svg"
+  },
+  {
+    "name": "Heike Nywelt",
+    "role": "Programmministerin",
+    "image": "./src/img/verein/elferrat/heike-nywelt.svg"
+  },
+  {
+    "name": "Anja Richter",
+    "role": "Protokollführerin",
+    "image": "./src/img/verein/elferrat/anja-richter.svg"
+  },
+  {
+    "name": "Dominik Richter",
+    "role": "Soziale Medien",
+    "image": "./src/img/verein/elferrat/dominik-richter.svg"
+  },
+  {
+    "name": "Elke Ritter",
+    "role": "Prinzenpaarministerin",
+    "image": "./src/img/verein/elferrat/elke-ritter.svg"
+  },
+  {
+    "name": "David Roth",
+    "role": "Sponsoring",
+    "image": "./src/img/verein/elferrat/david-roth.svg"
+  },
+  {
+    "name": "Dirk Schilling",
+    "role": "Sicherheitsminister",
+    "image": "./src/img/verein/elferrat/dirk-schilling.svg"
+  },
+  {
+    "name": "Simon Zachrau",
+    "role": "Jugendminister",
+    "image": "./src/img/verein/elferrat/simon-zachrau.svg"
   }
 ]

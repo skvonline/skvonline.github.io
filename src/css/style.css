@@ -235,20 +235,112 @@ a {
   background: #ea4335;
 }
 
-.royal-card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 0.8rem;
-  background: #e2e8f0;
-}
-
 .role {
   display: inline-block;
   margin-bottom: 0.35rem;
   font-size: 0.9rem;
   color: #475569;
+}
+
+.royals-section {
+  background:
+    radial-gradient(circle at 12% 20%, rgba(31, 78, 216, 0.16), transparent 34%),
+    radial-gradient(circle at 88% 85%, rgba(14, 43, 125, 0.15), transparent 30%),
+    var(--skv-light);
+}
+
+.royals-intro {
+  margin: 0 0 1.5rem;
+  max-width: 760px;
+  line-height: 1.6;
+  color: #334155;
+}
+
+.royals-grid {
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+
+.royal-card {
+  border: 1px solid #dbe6ff;
+  background: linear-gradient(180deg, #ffffff, #f7faff);
+  padding: 0;
+  overflow: hidden;
+}
+
+.royal-card-head {
+  padding: 1rem 1.1rem 0.3rem;
+}
+
+.royal-card-head h3 {
+  margin: 0;
+  font-size: 1.12rem;
+}
+
+.royal-session {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  background: #e8efff;
+  color: var(--skv-dark);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.royal-card-layout {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.royal-card-media {
+  padding: 0.75rem 1rem 1rem;
+}
+
+.royal-card-image {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #e2e8f0;
+}
+
+.royal-card-body {
+  padding: 0.85rem 1.1rem 1rem;
+}
+
+.royal-card-pair {
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  border-radius: 10px;
+  background: #eff4ff;
+  border: 1px solid #d5e2ff;
+  line-height: 1.45;
+}
+
+.royal-card-pair + .royal-card-pair {
+  margin-top: 0.55rem;
+}
+
+.royal-card-pair span {
+  display: block;
+  margin-bottom: 0.2rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #475569;
+  font-weight: 700;
+}
+
+.royal-card-pair--child {
+  background: #fff3e6;
+  border-color: #ffd7a8;
+}
+
+.royal-card-text {
+  margin: 0.8rem 0 0;
+  color: #334155;
+  line-height: 1.5;
 }
 
 .elferrat-card {
@@ -535,10 +627,29 @@ a {
   .board-details {
     bottom: 0;
   }
+
+  .royal-card-layout {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 640px) {
   .board-wrapper {
     padding: 0;
+  }
+}
+
+@media (min-width: 961px) {
+  .royal-card-layout {
+    grid-template-columns: minmax(0, 1.3fr) minmax(240px, 0.9fr);
+    align-items: center;
+  }
+
+  .royal-card--no-image .royal-card-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .royal-card--image-left .royal-card-media {
+    order: -1;
   }
 }

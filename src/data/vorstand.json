@@ -6,9 +6,7 @@
     "tags": ["Repräsentation", "Vereinsleitung", "Teamführung", "Netzwerk"],
     "description": "Gerd Ritter ist der Präsident unseres Vereins. Seine Entschlossenheit und sein Engagement sind inspirierend für uns alle.",
     "socials": [
-      { "label": "Instagram", "href": "#", "className": "liInstagram", "icon": "IG" },
-      { "label": "Facebook", "href": "#", "className": "liFacebook", "icon": "f" },
-      { "label": "E-Mail", "href": "mailto:vorstand@skvonline.de", "className": "liEmail", "icon": "@" }
+      { "label": "E-Mail", "href": "mailto:gerd.ritter@skvonline.de", "className": "liEmail", "icon": "@" }
     ]
   },
   {
@@ -18,7 +16,6 @@
     "tags": ["Behörden", "Anträge"],
     "description": "Als Vizepräsidentin bringt Eva Klupsch eine Fülle von Fachwissen mit. Ihre organisatorischen Fähigkeiten machen sie zu einer unverzichtbaren Kraft im Vorstand.",
     "socials": [
-      { "label": "Facebook", "href": "#", "className": "liFacebook", "icon": "f" },
       { "label": "E-Mail", "href": "mailto:eva.klupsch@skvonline.de", "className": "liEmail", "icon": "@" }
     ]
   },
@@ -29,8 +26,6 @@
     "tags": ["Finanzen", "Mitglieder"],
     "description": "Ramona Richter ist unsere Finanzexpertin des Vereins. Mit einem scharfen Auge für Zahlen hält sie unsere Finanzen stabil und transparent.",
     "socials": [
-      { "label": "Instagram", "href": "#", "className": "liInstagram", "icon": "IG" },
-      { "label": "Facebook", "href": "#", "className": "liFacebook", "icon": "f" },
       { "label": "E-Mail", "href": "mailto:ramona.richter@skvonline.de", "className": "liEmail", "icon": "@" }
     ]
   }

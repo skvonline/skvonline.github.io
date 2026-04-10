@@ -1,46 +1,35 @@
 [
   {
-    "title": "Session gestartet",
-    "text": "Unsere neue Session ist eröffnet – danke an alle Unterstützerinnen und Unterstützer.",
-    "image": "./src/img/home-gallery/eröffnung.png",
+    "title": "Auftritt beim Weinfrühling in Sandersdorf",
+    "text": "Unsere Tanzgruppen Unique und Zuckerpuppen werden euch beim Weinfrühling in Sandersdorf mit Ihren Tänzen verzaubern.",
+    "image": "./src/img/veranstaltungenUndNews/weinfruehling.png",
     "links": [
-      { "type": "more", "label": "Mehr erfahren", "url": "https://skvonline.de/aktuelles" },
+      { "type": "more", "label": "Mehr erfahren", "url": "https://www.sandersdorf-brehna.de/Meine-Stadt/Stadt-Land-Kultur/Veranstaltungen/Weinfr%C3%BChling-" },
+      { "type": "instagram", "label": "Instagram", "url": "https://www.instagram.com/skv_unique" },
+      { "type": "instagram", "label": "Instagram", "url": "https://www.instagram.com/skv_zuckerpuppen" }
+    ]
+  },
+  {
+    "title": "xyz",
+    "text": "BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBla",
+    "links": [
+      { "type": "more", "label": "Mehr erfahren", "url": "https://www.sandersdorf-brehna.de/Meine-Stadt/Stadt-Land-Kultur/Veranstaltungen/Weinfr%C3%BChling-" },
+      { "type": "mail", "label": "E-Mail", "url": "mailto:info@skvonline.de" }
+    ]
+  },
+  {
+    "title": "xyz",
+    "text": "BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBla",
+    "links": [
+      { "type": "mail", "label": "E-Mail", "url": "mailto:info@skvonline.de" }
+    ]
+  },
+  {
+    "title": "xyz",
+    "text": "BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBla",
+    "links": [
       { "type": "instagram", "label": "Instagram", "url": "https://www.instagram.com/" },
-      { "type": "facebook", "label": "Facebook", "url": "https://www.facebook.com/" },
-      { "type": "tiktok", "label": "TikTok", "url": "https://www.tiktok.com/" },
-      { "type": "mail", "label": "E-Mail", "url": "mailto:kontakt@skvonline.de" }
+      { "type": "facebook", "label": "Facebook", "url": "https://www.facebook.com/" }
     ]
-  },
-  {
-    "title": "Neue Kostüme eingetroffen",
-    "text": "Die Tanzgruppen freuen sich über neue Outfits und starten motiviert in die Saison.",
-    "image": "./src/img/home-gallery/publikum.jpg",
-    "links": [
-      { "type": "more", "label": "Mehr erfahren", "url": "https://skvonline.de/aktuelles" },
-      { "type": "instagram", "label": "Instagram", "url": "https://www.instagram.com/" }
-    ]
-  },
-  {
-    "title": "Vorverkauf läuft",
-    "text": "Tickets für die Abendveranstaltungen sind ab sofort erhältlich.",
-    "links": [
-      { "type": "more", "label": "Mehr erfahren", "url": "https://skvonline.de/aktuelles" },
-      { "type": "mail", "label": "E-Mail", "url": "mailto:kontakt@skvonline.de" }
-    ]
-  },
-  {
-    "title": "Trainingslager erfolgreich",
-    "text": "Alle Gruppen blicken auf ein intensives und erfolgreiches Wochenende zurück."
-  },
-  {
-    "title": "Neue Mitglieder begrüßt",
-    "text": "Wir heißen unsere neuen Mitglieder herzlich willkommen und freuen uns auf die gemeinsame Zeit.",
-    "links": [
-      { "type": "tiktok", "label": "TikTok", "url": "https://www.tiktok.com/" }
-    ]
-  },
-  {
-    "title": "Dank an Sponsoren",
-    "text": "Ohne die Unterstützung unserer regionalen Partner wäre vieles nicht möglich."
   }
 ]

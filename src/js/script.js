@@ -44,8 +44,8 @@ function chunkRender({ items, containerId, buttonId, chunkSize, renderItem }) {
 
   function renderNextChunk() {
     const nextItems = items.slice(renderedCount, renderedCount + chunkSize);
-    nextItems.forEach((item) => {
-      container.insertAdjacentHTML('beforeend', renderItem(item));
+    nextItems.forEach((item, chunkIndex) => {
+      container.insertAdjacentHTML('beforeend', renderItem(item, renderedCount + chunkIndex));
     });
     renderedCount += nextItems.length;
     button.hidden = renderedCount >= items.length;
@@ -176,7 +176,7 @@ async function loadHomeContent() {
             </div>
             <p class="board-desc">${person.description}</p>
             <div class="board-social">
-              <h5>Soziale Medien</h5>
+              <h5>Kontakt</h5>
               <ul>
                 ${person.socials
                   .map(
@@ -214,32 +214,32 @@ async function loadHomeContent() {
     containerId: 'royals-grid',
     buttonId: 'royals-more',
     chunkSize: 3,
-    renderItem: (pair) => {
+    renderItem: (pair, index) => {
       const hasImage = Boolean(pair.image);
       const hasChildPair = Boolean(pair.childPair);
       const imageMarkup = hasImage
-        ? `<img class="royal-card-image" src="${pair.image}" alt="${pair.title}" loading="lazy" />`
+        ? `<div class="royal-card-media"><img class="royal-card-image" src="${pair.image}" alt="${pair.title}" loading="lazy" /></div>`
         : '';
-      const adultPair = pair.adultPair || pair.text || 'Kein Erwachsenen-PP hinterlegt.';
+      const adultPair = pair.adultPair || pair.text || 'Keine Informationen zum Erwachsenen-Prinzenpaar hinterlegt.';
+      const description = pair.description ? `<p class="royal-card-text">${pair.description}</p>` : '';
       const childPairMarkup = hasChildPair
         ? `<p class="royal-card-pair royal-card-pair--child"><span>Kinder-PP</span>${pair.childPair}</p>`
         : '';
-      const layoutClass = hasChildPair
-        ? hasImage
-          ? 'royal-card-layout'
-          : 'royal-card-layout royal-card-layout--no-image'
-        : hasImage
-          ? 'royal-card-layout royal-card-layout--adult-only'
-          : 'royal-card-layout royal-card-layout--single';
+      const imageSideClass = hasImage ? (index % 2 === 0 ? 'royal-card--image-right' : 'royal-card--image-left') : 'royal-card--no-image';
 
       return `
-      <article class="card royal-card">
-        <h3>${pair.title}</h3>
-        <p><strong>${pair.session}</strong></p>
-        <div class="${layoutClass}">
-          <p class="royal-card-pair royal-card-pair--adult"><span>Erwachsene</span>${adultPair}</p>
+      <article class="card royal-card ${imageSideClass}">
+        <header class="royal-card-head">
+          <span class="royal-session">${pair.session}</span>
+          <h3>${pair.title}</h3>
+        </header>
+        <div class="royal-card-layout">
+          <div class="royal-card-body">
+            <p class="royal-card-pair royal-card-pair--adult"><span>Erwachsene</span>${adultPair}</p>
+            ${childPairMarkup}
+            ${description}
+          </div>
           ${imageMarkup}
-          ${childPairMarkup}
         </div>
       </article>
     `;
