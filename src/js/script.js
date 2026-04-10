@@ -214,14 +214,21 @@ async function loadHomeContent() {
     containerId: 'royals-grid',
     buttonId: 'royals-more',
     chunkSize: 3,
-    renderItem: (pair) => `
+    renderItem: (pair) => {
+      const hasImage = Boolean(pair.image);
+      const imageMarkup = hasImage
+        ? `<img src="${pair.image}" alt="${pair.title}" loading="lazy" />`
+        : '';
+
+      return `
       <article class="card royal-card">
-        <img src="${pair.image}" alt="${pair.title}" loading="lazy" />
+        ${imageMarkup}
         <h3>${pair.title}</h3>
         <p><strong>${pair.session}</strong></p>
         <p>${pair.text}</p>
       </article>
-    `,
+    `;
+    },
   });
 }
 
