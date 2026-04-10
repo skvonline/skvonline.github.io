@@ -214,14 +214,36 @@ async function loadHomeContent() {
     containerId: 'royals-grid',
     buttonId: 'royals-more',
     chunkSize: 3,
-    renderItem: (pair) => `
+    renderItem: (pair) => {
+      const hasImage = Boolean(pair.image);
+      const hasChildPair = Boolean(pair.childPair);
+      const imageMarkup = hasImage
+        ? `<img class="royal-card-image" src="${pair.image}" alt="${pair.title}" loading="lazy" />`
+        : '';
+      const adultPair = pair.adultPair || pair.text || 'Kein Erwachsenen-PP hinterlegt.';
+      const childPairMarkup = hasChildPair
+        ? `<p class="royal-card-pair royal-card-pair--child"><span>Kinder-PP</span>${pair.childPair}</p>`
+        : '';
+      const layoutClass = hasChildPair
+        ? hasImage
+          ? 'royal-card-layout'
+          : 'royal-card-layout royal-card-layout--no-image'
+        : hasImage
+          ? 'royal-card-layout royal-card-layout--adult-only'
+          : 'royal-card-layout royal-card-layout--single';
+
+      return `
       <article class="card royal-card">
-        <img src="${pair.image}" alt="${pair.title}" loading="lazy" />
         <h3>${pair.title}</h3>
         <p><strong>${pair.session}</strong></p>
-        <p>${pair.text}</p>
+        <div class="${layoutClass}">
+          <p class="royal-card-pair royal-card-pair--adult"><span>Erwachsene</span>${adultPair}</p>
+          ${imageMarkup}
+          ${childPairMarkup}
+        </div>
       </article>
-    `,
+    `;
+    },
   });
 }
 
