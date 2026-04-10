@@ -171,11 +171,17 @@ a {
 }
 
 #events-grid {
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  align-items: start;
 }
 
 .event-card {
   padding: 1rem;
+  grid-column: 1 / -1;
+}
+
+.event-card--no-image {
+  grid-column: auto;
 }
 
 .event-card-layout {
@@ -186,6 +192,10 @@ a {
 
 .event-card--image-right .event-card-layout {
   flex-direction: row-reverse;
+}
+
+.event-card--no-image .event-card-layout {
+  display: block;
 }
 
 .event-card-media {
