@@ -220,26 +220,23 @@ async function loadHomeContent() {
       const imageMarkup = hasImage
         ? `<img class="royal-card-image" src="${pair.image}" alt="${pair.title}" loading="lazy" />`
         : '';
-      const adultPair = pair.adultPair || pair.text || 'Kein Erwachsenen-PP hinterlegt.';
+      const adultPair = pair.adultPair || pair.text || 'Keine Informationen zum Erwachsenen-Prinzenpaar hinterlegt.';
+      const description = pair.description ? `<p class="royal-card-text">${pair.description}</p>` : '';
       const childPairMarkup = hasChildPair
         ? `<p class="royal-card-pair royal-card-pair--child"><span>Kinder-PP</span>${pair.childPair}</p>`
         : '';
-      const layoutClass = hasChildPair
-        ? hasImage
-          ? 'royal-card-layout'
-          : 'royal-card-layout royal-card-layout--no-image'
-        : hasImage
-          ? 'royal-card-layout royal-card-layout--adult-only'
-          : 'royal-card-layout royal-card-layout--single';
 
       return `
       <article class="card royal-card">
-        <h3>${pair.title}</h3>
-        <p><strong>${pair.session}</strong></p>
-        <div class="${layoutClass}">
+        <header class="royal-card-head">
+          <span class="royal-session">${pair.session}</span>
+          <h3>${pair.title}</h3>
+        </header>
+        ${imageMarkup}
+        <div class="royal-card-body">
           <p class="royal-card-pair royal-card-pair--adult"><span>Erwachsene</span>${adultPair}</p>
-          ${imageMarkup}
           ${childPairMarkup}
+          ${description}
         </div>
       </article>
     `;
