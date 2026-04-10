@@ -25,6 +25,28 @@
   }
 ```
 
+# Veranstaltung
+
+```json
+{
+    "title": "1. Lumpenball",
+    "date": "14.11.2026",
+    "time": "19:11 Uhr",
+    "einlass": "18:11 Uhr",
+    "preis": "19,50 €",
+    "location": "Mehrzweckhalle Sandersdorf",
+    "image": "./src/img/veranstaltungenUndNews/weinfruehling.png",
+    "links": [
+      { "type": "more", "label": "Mehr erfahren", "url": "https://www.sandersdorf-brehna.de/Meine-Stadt/Stadt-Land-Kultur/Veranstaltungen/Weinfr%C3%BChling-" },
+      { "type": "instagram", "label": "Instagram", "url": "https://www.instagram.com/" },
+      { "type": "facebook", "label": "Facebook", "url": "https://www.facebook.com/" },
+      { "type": "tiktok", "label": "TikTok", "url": "https://www.tiktok.com/" },
+      { "type": "maps", "label": "Maps", "url": "https://www.maps.google.com/" },
+      { "type": "mail", "label": "E-Mail", "url": "mailto:kontakt@skvonline.de" }
+    ]
+  }
+```
+
 # Vorstand
 
 ```json
