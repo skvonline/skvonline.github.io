@@ -44,8 +44,8 @@ function chunkRender({ items, containerId, buttonId, chunkSize, renderItem }) {
 
   function renderNextChunk() {
     const nextItems = items.slice(renderedCount, renderedCount + chunkSize);
-    nextItems.forEach((item) => {
-      container.insertAdjacentHTML('beforeend', renderItem(item));
+    nextItems.forEach((item, chunkIndex) => {
+      container.insertAdjacentHTML('beforeend', renderItem(item, renderedCount + chunkIndex));
     });
     renderedCount += nextItems.length;
     button.hidden = renderedCount >= items.length;
@@ -214,29 +214,32 @@ async function loadHomeContent() {
     containerId: 'royals-grid',
     buttonId: 'royals-more',
     chunkSize: 3,
-    renderItem: (pair) => {
+    renderItem: (pair, index) => {
       const hasImage = Boolean(pair.image);
       const hasChildPair = Boolean(pair.childPair);
       const imageMarkup = hasImage
-        ? `<img class="royal-card-image" src="${pair.image}" alt="${pair.title}" loading="lazy" />`
+        ? `<div class="royal-card-media"><img class="royal-card-image" src="${pair.image}" alt="${pair.title}" loading="lazy" /></div>`
         : '';
       const adultPair = pair.adultPair || pair.text || 'Keine Informationen zum Erwachsenen-Prinzenpaar hinterlegt.';
       const description = pair.description ? `<p class="royal-card-text">${pair.description}</p>` : '';
       const childPairMarkup = hasChildPair
         ? `<p class="royal-card-pair royal-card-pair--child"><span>Kinder-PP</span>${pair.childPair}</p>`
         : '';
+      const imageSideClass = hasImage ? (index % 2 === 0 ? 'royal-card--image-right' : 'royal-card--image-left') : 'royal-card--no-image';
 
       return `
-      <article class="card royal-card">
+      <article class="card royal-card ${imageSideClass}">
         <header class="royal-card-head">
           <span class="royal-session">${pair.session}</span>
           <h3>${pair.title}</h3>
         </header>
-        ${imageMarkup}
-        <div class="royal-card-body">
-          <p class="royal-card-pair royal-card-pair--adult"><span>Erwachsene</span>${adultPair}</p>
-          ${childPairMarkup}
-          ${description}
+        <div class="royal-card-layout">
+          <div class="royal-card-body">
+            <p class="royal-card-pair royal-card-pair--adult"><span>Erwachsene</span>${adultPair}</p>
+            ${childPairMarkup}
+            ${description}
+          </div>
+          ${imageMarkup}
         </div>
       </article>
     `;

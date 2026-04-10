@@ -2,36 +2,39 @@
   {
     "title": "Prinzenpaar der Session 2025/2026",
     "session": "Session 2025/2026",
-    "text": "Prinz Max I. und Prinzessin Laura I. repräsentierten den SKV mit Charme und Präsenz."
+    "image": "./src/img/home-gallery/titelbild.jpeg",
+    "adultPair": "Prinz Max I. und Prinzessin Laura I.",
+    "childPair": "Kinderprinz Ben I. und Kinderprinzessin Mia I.",
+    "description": "Ein gemeinsamer Auftritt von großem und kleinem Prinzenpaar sorgte für besondere Momente bei den Veranstaltungen."
   },
   {
     "title": "Prinzenpaar der Session 2024/2025",
     "session": "Session 2024/2025",
-    "image": "/images/galerien/home-gallery/umzug.jpg",
+    "image": "./src/img/home-gallery/umzug.jpg",
     "text": "Prinz Tim I. und Prinzessin Jana I. begeisterten mit einem starken Bühnenauftritt."
   },
   {
     "title": "Prinzenpaar der Session 2023/2024",
     "session": "Session 2023/2024",
-    "image": "/images/galerien/home-gallery/publikum.jpg",
+    "image": "./src/img/home-gallery/publikum.jpg",
     "text": "Prinz Felix I. und Prinzessin Marie I. führten die Session mit viel Herzblut."
   },
   {
     "title": "Prinzenpaar der Session 2022/2023",
     "session": "Session 2022/2023",
-    "image": "/images/galerien/home-gallery/eröffnung.png",
+    "image": "./src/img/home-gallery/eröffnung.png",
     "text": "Prinz Jonas I. und Prinzessin Lisa I. stärkten den Gemeinschaftsgedanken im Verein."
   },
   {
     "title": "Prinzenpaar der Session 2021/2022",
     "session": "Session 2021/2022",
-    "image": "/images/galerien/home-gallery/tickets.jpg",
+    "image": "./src/img/home-gallery/tickets.jpg",
     "text": "Prinz Paul I. und Prinzessin Sophie I. standen für Kontinuität und Optimismus."
   },
   {
     "title": "Prinzenpaar der Session 2020/2021",
     "session": "Session 2020/2021",
-    "image": "/images/galerien/home-gallery/umzug.jpg",
+    "image": "./src/img/home-gallery/umzug.jpg",
     "text": "Prinz Leon I. und Prinzessin Anne I. hielten die Tradition unter besonderen Bedingungen lebendig."
   }
 ]
