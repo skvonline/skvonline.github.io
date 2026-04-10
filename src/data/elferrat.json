@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Ronny Lehmann",
+    "role": "Elferratspräsident",
+    "image": "./src/img/verein/elferrat/gerd-ritter.png",
+    "description": "Leitet den Elferrat und koordiniert Auftritte während der Session."
+  },
+  {
+    "name": "Michael Seifert",
+    "role": "Sitzungsleitung",
+    "image": "./src/img/dummy.svg",
+    "description": "Verantwortlich für den Ablauf der Abendveranstaltungen und Programmpunkte."
+  },
+  {
+    "name": "Torsten Weber",
+    "role": "Organisation",
+    "image": "./src/img/dummy.svg",
+    "description": "Kümmert sich um Logistik, Aufbau und interne Abstimmungen."
+  },
+  {
+    "name": "Steffen Richter",
+    "role": "Protokoll",
+    "image": "./src/img/dummy.svg",
+    "description": "Dokumentiert die Sitzungen und unterstützt die Planung des Programms."
+  }
+]

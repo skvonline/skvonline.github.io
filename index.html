@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SKV | Sandersdorfer Karnevalsverein e.V.</title>
+  <meta
+    name="description"
+    content="Offizielle Webseite des Sandersdorfer Karnevalsverein e.V. mit Veranstaltungen, Neuigkeiten, Vorstand, Elferrat und Prinzenpaaren."
+  />
+  <link rel="stylesheet" href="srcss/style.css" />
+</head>
+<body data-page="home">
+  <div id="header-component"></div>
+
+  <main>
+    <section id="welcome" class="hero">
+      <div class="hero-slides" aria-hidden="true">
+        <img class="hero-slide active" src="srcmg/home-gallery/titelbild.jpeg" alt="SKV Titelbild" />
+        <img class="hero-slide" src="srcmg/home-gallery/umzug.jpg" alt="Karnevalsumzug" />
+        <img class="hero-slide" src="srcmg/home-gallery/eröffnung.png" alt="Sessionseröffnung" />
+        <img class="hero-slide" src="srcmg/home-gallery/publikum.jpg" alt="Publikum" />
+        <img class="hero-slide" src="srcmg/home-gallery/tickets.jpg" alt="Tickets" />
+      </div>
+      <div class="container hero-content">
+        <h1>Herzlich willkommen beim Sandersdorfer Karnevalsverein e.V.</h1>
+        <p class="lead">Tradition, Gemeinschaft und Stimmung – seit Jahrzehnten mitten in Sandersdorf.</p>
+      </div>
+    </section>
+
+    <section id="events" class="section events">
+      <div class="container">
+        <h2>Unsere nächsten Veranstaltungen</h2>
+        <div id="events-grid" class="grid cards-3"></div>
+        <p><button id="events-more" class="btn" hidden>Mehr Veranstaltungen laden</button></p>
+      </div>
+    </section>
+
+    <section id="news" class="section">
+      <div class="container">
+        <h2>Aktuelles</h2>
+        <div id="news-grid" class="grid cards-3"></div>
+        <p><button id="news-more" class="btn" hidden>Mehr News laden</button></p>
+      </div>
+    </section>
+
+    <section id="vorstand" class="section board-section">
+      <div class="container board-main">
+        <h2>Unser Vorstand</h2>
+        <p class="board-intro">
+          Hier ist unser Vorstandsteam, das die Leitung und Verwaltung unseres Vereins macht. Jedes Mitglied bringt
+          einzigartige Fähigkeiten und Erfahrungen mit, um unsere Ziele zu erreichen und unsere Gemeinschaft zu
+          stärken.
+        </p>
+        <div id="vorstand-grid" class="board-wrapper"></div>
+      </div>
+    </section>
+
+    <section id="elferrat" class="section">
+      <div class="container">
+        <h2>Unser Elferrat</h2>
+        <div id="elferrat-grid" class="grid cards-3"></div>
+      </div>
+    </section>
+
+    <section id="royals" class="section section-alt">
+      <div class="container">
+        <h2>Prinzenpaare</h2>
+        <div id="royals-grid" class="grid cards-3"></div>
+        <p><button id="royals-more" class="btn" hidden>Mehr Prinzenpaare laden</button></p>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-component"></div>
+
+  <script src="srcs/script.js" defer></script>
+</body>
+</html>
