@@ -2,39 +2,41 @@
   {
     "title": "Prinzenpaar der Session 2025/2026",
     "session": "Session 2025/2026",
-    "image": "./src/img/home-gallery/titelbild.jpeg",
-    "adultPair": "Prinz Max I. und Prinzessin Laura I.",
-    "childPair": "Kinderprinz Ben I. und Kinderprinzessin Mia I.",
-    "description": "Ein gemeinsamer Auftritt von großem und kleinem Prinzenpaar sorgte für besondere Momente bei den Veranstaltungen."
+    "image": "./src/img/verein/prinzenpaare/pp2526.jpg",
+    "adultPair": "Prinz Dominik I. und Prinzessin Lisa I.",
+    "childPair": "Kinderprinz Til I. und Kinderprinzessin Pauline I."
   },
   {
     "title": "Prinzenpaar der Session 2024/2025",
     "session": "Session 2024/2025",
     "image": "./src/img/home-gallery/umzug.jpg",
-    "text": "Prinz Tim I. und Prinzessin Jana I. begeisterten mit einem starken Bühnenauftritt."
+    "adultPair": "Prinz Dominik I. und Prinzessin Lisa I."
   },
   {
     "title": "Prinzenpaar der Session 2023/2024",
     "session": "Session 2023/2024",
     "image": "./src/img/home-gallery/publikum.jpg",
-    "text": "Prinz Felix I. und Prinzessin Marie I. führten die Session mit viel Herzblut."
+    "childPair": "Kinderprinz Til I. und Kinderprinzessin Pauline I."
   },
   {
     "title": "Prinzenpaar der Session 2022/2023",
     "session": "Session 2022/2023",
     "image": "./src/img/home-gallery/eröffnung.png",
-    "text": "Prinz Jonas I. und Prinzessin Lisa I. stärkten den Gemeinschaftsgedanken im Verein."
+    "adultPair": "Prinz Dominik I. und Prinzessin Lisa I.",
+    "childPair": "Kinderprinz Til I. und Kinderprinzessin Pauline I."
   },
   {
     "title": "Prinzenpaar der Session 2021/2022",
     "session": "Session 2021/2022",
     "image": "./src/img/home-gallery/tickets.jpg",
-    "text": "Prinz Paul I. und Prinzessin Sophie I. standen für Kontinuität und Optimismus."
+    "adultPair": "Prinz Dominik I. und Prinzessin Lisa I.",
+    "childPair": "Kinderprinz Til I. und Kinderprinzessin Pauline I."
   },
   {
     "title": "Prinzenpaar der Session 2020/2021",
     "session": "Session 2020/2021",
     "image": "./src/img/home-gallery/umzug.jpg",
-    "text": "Prinz Leon I. und Prinzessin Anne I. hielten die Tradition unter besonderen Bedingungen lebendig."
+    "adultPair": "Prinz Dominik I. und Prinzessin Lisa I.",
+    "childPair": "Kinderprinz Til I. und Kinderprinzessin Pauline I."
   }
 ]

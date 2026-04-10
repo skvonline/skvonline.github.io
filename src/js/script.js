@@ -176,7 +176,7 @@ async function loadHomeContent() {
             </div>
             <p class="board-desc">${person.description}</p>
             <div class="board-social">
-              <h5>Soziale Medien</h5>
+              <h5>Kontakt</h5>
               <ul>
                 ${person.socials
                   .map(
