@@ -217,15 +217,20 @@ async function loadHomeContent() {
     renderItem: (pair) => {
       const hasImage = Boolean(pair.image);
       const imageMarkup = hasImage
-        ? `<img src="${pair.image}" alt="${pair.title}" loading="lazy" />`
+        ? `<img class="royal-card-image" src="${pair.image}" alt="${pair.title}" loading="lazy" />`
         : '';
+      const adultPair = pair.adultPair || pair.text || 'Kein Erwachsenen-PP hinterlegt.';
+      const childPair = pair.childPair || 'Kein Kinder-PP hinterlegt.';
 
       return `
       <article class="card royal-card">
-        ${imageMarkup}
         <h3>${pair.title}</h3>
         <p><strong>${pair.session}</strong></p>
-        <p>${pair.text}</p>
+        <div class="royal-card-layout ${hasImage ? '' : 'royal-card-layout--no-image'}">
+          <p class="royal-card-pair royal-card-pair--adult"><span>Erwachsenen-PP</span>${adultPair}</p>
+          ${imageMarkup}
+          <p class="royal-card-pair royal-card-pair--child"><span>Kinder-PP</span>${childPair}</p>
+        </div>
       </article>
     `;
     },

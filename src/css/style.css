@@ -235,13 +235,49 @@ a {
   background: #ea4335;
 }
 
-.royal-card img {
+.royal-card-layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(140px, 220px) 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.royal-card-layout--no-image {
+  grid-template-columns: 1fr 1fr;
+}
+
+.royal-card-image {
   width: 100%;
   height: 220px;
   object-fit: cover;
   border-radius: 10px;
-  margin-bottom: 0.8rem;
   background: #e2e8f0;
+}
+
+.royal-card-pair {
+  margin: 0;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.royal-card-pair span {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.85rem;
+  color: #475569;
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .royal-card-layout,
+  .royal-card-layout--no-image {
+    grid-template-columns: 1fr;
+  }
+
+  .royal-card-image {
+    max-width: 280px;
+    justify-self: center;
+  }
 }
 
 .role {
