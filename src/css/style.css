@@ -158,6 +158,10 @@ a {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
+#royals-grid {
+  grid-template-columns: 1fr;
+}
+
 .card {
   padding: 1.15rem;
   border-radius: 16px;
@@ -244,6 +248,14 @@ a {
 
 .royal-card-layout--no-image {
   grid-template-columns: 1fr 1fr;
+}
+
+.royal-card-layout--adult-only {
+  grid-template-columns: 1fr minmax(140px, 220px);
+}
+
+.royal-card-layout--single {
+  grid-template-columns: 1fr;
 }
 
 .royal-card-image {
