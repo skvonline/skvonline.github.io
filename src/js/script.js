@@ -207,79 +207,6 @@ function normalizeRoyalEntry(entry) {
   };
 }
 
-function buildRoyalLightboxText(pair) {
-  const headlineParts = [pair.session, pair.year ? `(${pair.year})` : ''].filter(Boolean);
-  const detailParts = [pair.largePair, pair.smallPair].filter(Boolean);
-  return [...headlineParts, ...detailParts].join(' - ');
-}
-
-function setupRoyalsLightbox(royals) {
-  const lightbox = document.getElementById('royals-lightbox');
-  const image = document.getElementById('royals-lightbox-image');
-  const details = document.getElementById('royals-lightbox-details');
-  const closeButton = document.getElementById('royals-lightbox-close');
-  const prevButton = document.getElementById('royals-lightbox-prev');
-  const nextButton = document.getElementById('royals-lightbox-next');
-  const backdrop = lightbox?.querySelector('[data-lightbox-close]');
-  const galleryItems = Array.from(document.querySelectorAll('.royal-gallery-item'));
-
-  if (!lightbox || !image || !details || !closeButton || !prevButton || !nextButton || !backdrop || galleryItems.length === 0) {
-    return;
-  }
-
-  let currentIndex = 0;
-
-  function setLightboxContent(index) {
-    const safeIndex = ((index % royals.length) + royals.length) % royals.length;
-    const pair = royals[safeIndex];
-    currentIndex = safeIndex;
-
-    image.src = pair.image || '';
-    image.alt = pair.title || pair.session || 'Prinzenpaar';
-    details.textContent = buildRoyalLightboxText(pair);
-  }
-
-  function openLightbox(index) {
-    setLightboxContent(index);
-    lightbox.hidden = false;
-    lightbox.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('lightbox-open');
-  }
-
-  function closeLightbox() {
-    lightbox.hidden = true;
-    lightbox.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('lightbox-open');
-  }
-
-  function goNext() {
-    setLightboxContent(currentIndex + 1);
-  }
-
-  function goPrev() {
-    setLightboxContent(currentIndex - 1);
-  }
-
-  galleryItems.forEach((item) => {
-    item.addEventListener('click', () => {
-      const itemIndex = Number(item.dataset.royalIndex || 0);
-      openLightbox(itemIndex);
-    });
-  });
-
-  nextButton.addEventListener('click', goNext);
-  prevButton.addEventListener('click', goPrev);
-  closeButton.addEventListener('click', closeLightbox);
-  backdrop.addEventListener('click', closeLightbox);
-
-  document.addEventListener('keydown', (event) => {
-    if (lightbox.hidden) return;
-    if (event.key === 'Escape') closeLightbox();
-    if (event.key === 'ArrowRight') goNext();
-    if (event.key === 'ArrowLeft') goPrev();
-  });
-}
-
 async function loadHomeContent() {
   const [events, news, vorstand, elferrat, royals] = await Promise.all([
     fetch('./src/data/events.json').then((r) => r.json()),
@@ -401,13 +328,13 @@ async function loadHomeContent() {
     royalsGrid.innerHTML = normalizedRoyals
       .map((pair, index) => {
         return `
-        <button type="button" class="royal-gallery-item" data-royal-index="${index}" aria-label="${pair.title || pair.session}">
+        <article class="royal-gallery-item" aria-label="${pair.title || pair.session}">
           <img class="royal-gallery-image" src="${pair.image}" alt="${pair.title || pair.session}" loading="lazy" />
           ${createRoyalOverlayText(pair.session, 'top-left')}
           ${createRoyalOverlayText(pair.year, 'top-right')}
           ${createRoyalOverlayText(pair.largePair, 'bottom-left')}
           ${createRoyalOverlayText(pair.smallPair, 'bottom-right')}
-        </button>
+        </article>
       `;
       })
       .join('');
@@ -415,7 +342,6 @@ async function loadHomeContent() {
   if (royalsMoreButton) {
     royalsMoreButton.hidden = true;
   }
-  setupRoyalsLightbox(normalizedRoyals);
 }
 
 (async function init() {
