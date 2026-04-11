@@ -2,7 +2,7 @@
   {
     "session": "47. Session",
     "year": "2025/2026",
-    "image": "./src/img/verein/prinzenpaare/pp2526.jpg",
+    "image": "./src/img/verein/prinzenpaare/pp2526.JPG",
     "adultPair": [
       {"prince": "Dominik I.", "princess":  "Lisa I."}
     ],
@@ -13,7 +13,7 @@
   {
     "session": "46. Session",
     "year": "2024/2025",
-    "image": "./src/img/verein/prinzenpaare/pp2425.jpg",
+    "image": "./src/img/verein/prinzenpaare/pp2425.JPG",
     "adultPair": [
       {"prince": "Andreas II.", "princess":  "Anja II."}
     ],
@@ -24,7 +24,7 @@
   {
     "session": "45. Session",
     "year": "2023/2024",
-    "image": "./src/img/verein/prinzenpaare/pp2324.jpg",
+    "image": "./src/img/verein/prinzenpaare/pp2324.JPG",
     "adultPair": [
       {"prince": "Robin I.", "princess":  "Jenniefer I."}
     ],
@@ -35,7 +35,7 @@
   {
     "session": "44. Session",
     "year": "2022/2023",
-    "image": "./src/img/verein/prinzenpaare/pp2223.jpg",
+    "image": "./src/img/verein/prinzenpaare/pp2223.JPG",
     "adultPair": [
       {"prince": "René I.", "princess":  "Anja I."}
     ],
