@@ -13,6 +13,7 @@
 ```json
 {
     "title": "Auftritt beim Weinfrühling in Sandersdorf",
+    "date": "11.04.2026",
     "text": "Unsere Tanzgruppen Unique und Zuckerpuppen werden euch beim Weinfrühling in Sandersdorf mit Ihren Tänzen verzaubern.",
     "image": "./src/img/home-gallery/eröffnung.png",
     "links": [
