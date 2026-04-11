@@ -142,6 +142,82 @@ function getElferratImagePath(member) {
   return `./src/img/verein/elferrat/${slug}.png`;
 }
 
+function createRoyalOverlayText(label, value, modifierClass) {
+  return `<span class="royal-gallery-overlay royal-gallery-overlay--${modifierClass}"><strong>${label}</strong>${value || 'Nicht hinterlegt'}</span>`;
+}
+
+function setupRoyalsLightbox(royals) {
+  const lightbox = document.getElementById('royals-lightbox');
+  const image = document.getElementById('royals-lightbox-image');
+  const details = document.getElementById('royals-lightbox-details');
+  const closeButton = document.getElementById('royals-lightbox-close');
+  const prevButton = document.getElementById('royals-lightbox-prev');
+  const nextButton = document.getElementById('royals-lightbox-next');
+  const backdrop = lightbox?.querySelector('[data-lightbox-close]');
+  const galleryItems = Array.from(document.querySelectorAll('.royal-gallery-item'));
+
+  if (!lightbox || !image || !details || !closeButton || !prevButton || !nextButton || !backdrop || galleryItems.length === 0) {
+    return;
+  }
+
+  let currentIndex = 0;
+
+  function setLightboxContent(index) {
+    const safeIndex = ((index % royals.length) + royals.length) % royals.length;
+    const pair = royals[safeIndex];
+    currentIndex = safeIndex;
+
+    image.src = pair.image || '';
+    image.alt = pair.title || pair.session || 'Prinzenpaar';
+    details.innerHTML = `
+      <p><strong>Session:</strong> ${pair.session || 'Nicht hinterlegt'}</p>
+      <p><strong>Jahr:</strong> ${pair.session || 'Nicht hinterlegt'}</p>
+      <p><strong>Großes PP:</strong><br>${pair.adultPair || pair.text || 'Nicht hinterlegt'}</p>
+      <p><strong>Kleines PP:</strong><br>${pair.childPair || 'Nicht hinterlegt'}</p>
+    `;
+  }
+
+  function openLightbox(index) {
+    setLightboxContent(index);
+    lightbox.hidden = false;
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lightbox-open');
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('lightbox-open');
+  }
+
+  function goNext() {
+    setLightboxContent(currentIndex + 1);
+  }
+
+  function goPrev() {
+    setLightboxContent(currentIndex - 1);
+  }
+
+  galleryItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      const itemIndex = Number(item.dataset.royalIndex || 0);
+      openLightbox(itemIndex);
+    });
+  });
+
+  nextButton.addEventListener('click', goNext);
+  prevButton.addEventListener('click', goPrev);
+  closeButton.addEventListener('click', closeLightbox);
+  backdrop.addEventListener('click', closeLightbox);
+
+  document.addEventListener('keydown', (event) => {
+    if (lightbox.hidden) return;
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'ArrowRight') goNext();
+    if (event.key === 'ArrowLeft') goPrev();
+  });
+}
+
 async function loadHomeContent() {
   const [events, news, vorstand, elferrat, royals] = await Promise.all([
     fetch('./src/data/events.json').then((r) => r.json()),
@@ -256,42 +332,29 @@ async function loadHomeContent() {
     });
   }
 
-  chunkRender({
-    items: royals,
-    containerId: 'royals-grid',
-    buttonId: 'royals-more',
-    chunkSize: 3,
-    renderItem: (pair, index) => {
-      const hasImage = Boolean(pair.image);
-      const hasChildPair = Boolean(pair.childPair);
-      const imageMarkup = hasImage
-        ? `<div class="royal-card-media"><img class="royal-card-image" src="${pair.image}" alt="${pair.title}" loading="lazy" /></div>`
-        : '';
-      const adultPair = pair.adultPair || pair.text || 'Keine Informationen zum Erwachsenen-Prinzenpaar hinterlegt.';
-      const description = pair.description ? `<p class="royal-card-text">${pair.description}</p>` : '';
-      const childPairMarkup = hasChildPair
-        ? `<p class="royal-card-pair royal-card-pair--child"><span>Kinder-PP</span>${pair.childPair}</p>`
-        : '';
-      const imageSideClass = hasImage ? (index % 2 === 0 ? 'royal-card--image-right' : 'royal-card--image-left') : 'royal-card--no-image';
-
-      return `
-      <article class="card royal-card ${imageSideClass}">
-        <header class="royal-card-head">
-          <span class="royal-session">${pair.session}</span>
-          <h3>${pair.title}</h3>
-        </header>
-        <div class="royal-card-layout">
-          <div class="royal-card-body">
-            <p class="royal-card-pair royal-card-pair--adult"><span>Erwachsene</span>${adultPair}</p>
-            ${childPairMarkup}
-            ${description}
-          </div>
-          ${imageMarkup}
-        </div>
-      </article>
-    `;
-    },
-  });
+  const royalsGrid = document.getElementById('royals-grid');
+  const royalsMoreButton = document.getElementById('royals-more');
+  if (royalsGrid) {
+    royalsGrid.innerHTML = royals
+      .map((pair, index) => {
+        const largePair = pair.adultPair || pair.text || 'Nicht hinterlegt';
+        const smallPair = pair.childPair || 'Nicht hinterlegt';
+        return `
+        <button type="button" class="royal-gallery-item" data-royal-index="${index}" aria-label="${pair.title || pair.session}">
+          <img class="royal-gallery-image" src="${pair.image}" alt="${pair.title || pair.session}" loading="lazy" />
+          ${createRoyalOverlayText('Session', pair.session, 'top-left')}
+          ${createRoyalOverlayText('Jahr', pair.session, 'top-right')}
+          ${createRoyalOverlayText('Großes PP', largePair, 'bottom-left')}
+          ${createRoyalOverlayText('Kleines PP', smallPair, 'bottom-right')}
+        </button>
+      `;
+      })
+      .join('');
+  }
+  if (royalsMoreButton) {
+    royalsMoreButton.hidden = true;
+  }
+  setupRoyalsLightbox(royals);
 }
 
 (async function init() {
