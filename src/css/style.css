@@ -455,6 +455,7 @@ a {
 .royal-gallery-overlay--top-right {
     top: 0.6rem;
     right: 0.6rem;
+    text-align: right;
 }
 
 .royal-gallery-overlay--bottom-left {
@@ -465,6 +466,7 @@ a {
 .royal-gallery-overlay--bottom-right {
     bottom: 0.6rem;
     right: 0.6rem;
+    text-align: right;
 }
 
 .royal-gallery-item:hover .royal-gallery-overlay,

@@ -177,7 +177,7 @@ function formatPairText(pairValue) {
     const prince = pairValue.prince || pairValue.prinz || pairValue.Prinz || '';
     const princess = pairValue.princess || pairValue.prinzessin || pairValue.Prinzessin || '';
     if (prince && princess) {
-      return `${prince} und ${princess}`;
+      return `${prince}<br>${princess}`;
     }
     if (prince) {
       return prince;
