@@ -157,6 +157,41 @@ function getRoyalField(entry, candidates) {
   return key ? entry[key] : '';
 }
 
+function formatPairText(pairValue, options = {}) {
+  const { princePrefix = 'Prinz', princessPrefix = 'Prinzessin' } = options;
+
+  if (!pairValue) {
+    return '';
+  }
+
+  if (typeof pairValue === 'string') {
+    return pairValue;
+  }
+
+  if (Array.isArray(pairValue)) {
+    const normalizedPairs = pairValue
+      .map((pair) => formatPairText(pair, options))
+      .filter(Boolean);
+    return normalizedPairs.join('<br>');
+  }
+
+  if (typeof pairValue === 'object') {
+    const prince = pairValue.prince || pairValue.prinz || pairValue.Prinz || '';
+    const princess = pairValue.princess || pairValue.prinzessin || pairValue.Prinzessin || '';
+    if (prince && princess) {
+      return `${princePrefix} ${prince} und ${princessPrefix} ${princess}`;
+    }
+    if (prince) {
+      return `${princePrefix} ${prince}`;
+    }
+    if (princess) {
+      return `${princessPrefix} ${princess}`;
+    }
+  }
+
+  return '';
+}
+
 function normalizeRoyalEntry(entry) {
   const session = getRoyalField(entry, ['session', 'Session']);
   const year = getRoyalField(entry, ['year', 'jahr', 'Jahr']) || session;
@@ -167,8 +202,8 @@ function normalizeRoyalEntry(entry) {
     ...entry,
     session,
     year,
-    largePair,
-    smallPair,
+    largePair: formatPairText(largePair),
+    smallPair: formatPairText(smallPair, { princePrefix: 'Kinderprinz', princessPrefix: 'Kinderprinzessin' }),
     image: entry.image || '',
     title: entry.title || session || 'Prinzenpaar',
   };
