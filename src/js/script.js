@@ -174,14 +174,15 @@ async function loadHomeContent() {
     items: news,
     containerId: 'news-grid',
     buttonId: 'news-more',
-    chunkSize: 3,
+    chunkSize: 4,
     renderItem: (entry) => {
+      const isFeatured = Boolean(entry.featured || entry.image);
       const imageMarkup = entry.image
         ? `<img class="news-image" src="${entry.image}" alt="${entry.title}" loading="lazy" />`
         : '';
 
       return `
-        <article class="card news-card">
+        <article class="card news-card ${isFeatured ? 'news-card--featured' : 'news-card--compact'}">
           ${imageMarkup}
           <h3>${entry.title}</h3>
           <p>${entry.text}</p>
