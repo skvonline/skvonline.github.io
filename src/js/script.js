@@ -207,6 +207,130 @@ function normalizeRoyalEntry(entry) {
   };
 }
 
+function setupRoyalsLightbox(royals) {
+  const lightbox = document.getElementById('royals-lightbox');
+  const image = document.getElementById('royals-lightbox-image');
+  const details = document.getElementById('royals-lightbox-details');
+  const closeButton = document.getElementById('royals-lightbox-close');
+  const prevButton = document.getElementById('royals-lightbox-prev');
+  const nextButton = document.getElementById('royals-lightbox-next');
+  const backdrop = lightbox?.querySelector('[data-lightbox-close]');
+  const galleryItems = Array.from(document.querySelectorAll('.royal-gallery-item'));
+
+  if (!lightbox || !image || !details || !closeButton || !prevButton || !nextButton || !backdrop || galleryItems.length === 0) {
+    return;
+  }
+
+  let currentIndex = 0;
+
+  function setLightboxContent(index) {
+    const safeIndex = ((index % royals.length) + royals.length) % royals.length;
+    const pair = royals[safeIndex];
+    currentIndex = safeIndex;
+
+    image.src = pair.image || '';
+    image.alt = pair.title || pair.session || 'Prinzenpaar';
+    details.innerHTML = `
+      <p>${pair.session}</p>
+      <p>${pair.year}</p>
+      <p>${pair.largePair}</p>
+      ${pair.smallPair ? `<p>${pair.smallPair}</p>` : ''}
+    `;
+  }
+
+  function openLightbox(index) {
+    setLightboxContent(index);
+    lightbox.hidden = false;
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lightbox-open');
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('lightbox-open');
+  }
+
+  function goNext() {
+    setLightboxContent(currentIndex + 1);
+  }
+
+  function goPrev() {
+    setLightboxContent(currentIndex - 1);
+  }
+
+  galleryItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      const itemIndex = Number(item.dataset.royalIndex || 0);
+      openLightbox(itemIndex);
+    });
+  });
+
+  nextButton.addEventListener('click', goNext);
+  prevButton.addEventListener('click', goPrev);
+  closeButton.addEventListener('click', closeLightbox);
+  backdrop.addEventListener('click', closeLightbox);
+
+  document.addEventListener('keydown', (event) => {
+    if (lightbox.hidden) return;
+    if (event.key === 'Escape') closeLightbox();
+    if (event.key === 'ArrowRight') goNext();
+    if (event.key === 'ArrowLeft') goPrev();
+  });
+}
+
+function setupBoardCards() {
+  const boardCards = Array.from(document.querySelectorAll('.board-card'));
+  if (boardCards.length === 0) {
+    return;
+  }
+
+  const isMobileViewport = () => window.matchMedia('(max-width: 960px)').matches;
+
+  function closeAllBoardCards() {
+    boardCards.forEach((card) => {
+      card.classList.remove('is-open');
+      const trigger = card.querySelector('.board-poster');
+      if (trigger) {
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  boardCards.forEach((card) => {
+    const trigger = card.querySelector('.board-poster');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', (event) => {
+      if (!isMobileViewport()) {
+        return;
+      }
+
+      event.preventDefault();
+      const isOpen = card.classList.contains('is-open');
+      closeAllBoardCards();
+      card.classList.toggle('is-open', !isOpen);
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!isMobileViewport()) {
+      return;
+    }
+    if (event.target.closest('.board-card')) {
+      return;
+    }
+    closeAllBoardCards();
+  });
+
+  window.addEventListener('resize', () => {
+    if (!isMobileViewport()) {
+      closeAllBoardCards();
+    }
+  });
+}
+
 async function loadHomeContent() {
   const [events, news, vorstand, elferrat, royals] = await Promise.all([
     fetch('./src/data/events.json').then((r) => r.json()),
@@ -273,14 +397,14 @@ async function loadHomeContent() {
 
   const vorstandGrid = document.getElementById('vorstand-grid');
   if (vorstandGrid) {
-    vorstand.forEach((person) => {
+    vorstand.forEach((person, index) => {
       vorstandGrid.insertAdjacentHTML(
         'beforeend',
         `<article class="board-card">
-          <div class="board-poster">
+          <button type="button" class="board-poster" aria-expanded="false" aria-controls="board-details-${index}">
             <img src="${person.image}" alt="${person.name}" loading="lazy" />
-          </div>
-          <div class="board-details">
+          </button>
+          <div class="board-details" id="board-details-${index}">
             <h3>${person.name}</h3>
             <h4>${person.role}</h4>
             <div class="board-tags">
@@ -304,6 +428,7 @@ async function loadHomeContent() {
         </article>`,
       );
     });
+    setupBoardCards();
   }
 
   const elferratGrid = document.getElementById('elferrat-grid');
