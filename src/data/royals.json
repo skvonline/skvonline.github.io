@@ -2,51 +2,45 @@
   {
     "session": "47. Session",
     "year": "2025/2026",
-    "image": "./src/img/verein/prinzenpaare/pp2526.JPG",
+    "image": "./src/img/verein/prinzenpaare/pp2526.jpg",
     "adultPair": [
-      {
-        "prince": "Dominik I.",
-        "princess": "Lisa I."
-      }
+      {"prince": "Dominik I.", "princess":  "Lisa I."}
     ],
     "childPair": [
-      {
-        "prince": "Til I.",
-        "princess": "Pauline I."
-      }
+      {"prince": "Til I.", "princess":  "Pauline I."}
     ]
   },
   {
-    "title": "Prinzenpaar der Session 2024/2025",
-    "session": "Session 2024/2025",
-    "image": "./src/img/home-gallery/umzug.jpg",
-    "adultPair": "Prinz Dominik I. und Prinzessin Lisa I."
+    "session": "46. Session",
+    "year": "2024/2025",
+    "image": "./src/img/verein/prinzenpaare/pp2425.jpg",
+    "adultPair": [
+      {"prince": "Andreas II.", "princess":  "Anja II."}
+    ],
+    "childPair": [
+      {"prince": "Bruno I.", "princess":  "Lainy I."}
+    ]
   },
   {
-    "title": "Prinzenpaar der Session 2023/2024",
-    "session": "Session 2023/2024",
-    "image": "./src/img/home-gallery/publikum.jpg",
-    "childPair": "Kinderprinz Til I. und Kinderprinzessin Pauline I."
+    "session": "45. Session",
+    "year": "2023/2024",
+    "image": "./src/img/verein/prinzenpaare/pp2324.jpg",
+    "adultPair": [
+      {"prince": "Robin I.", "princess":  "Jenniefer I."}
+    ],
+    "childPair": [
+      {"prince": "Oskar I.", "princess":  "Fiona I."}
+    ]
   },
   {
-    "title": "Prinzenpaar der Session 2022/2023",
-    "session": "Session 2022/2023",
-    "image": "./src/img/home-gallery/eröffnung.png",
-    "adultPair": "Prinz Dominik I. und Prinzessin Lisa I.",
-    "childPair": "Kinderprinz Til I. und Kinderprinzessin Pauline I."
-  },
-  {
-    "title": "Prinzenpaar der Session 2021/2022",
-    "session": "Session 2021/2022",
-    "image": "./src/img/home-gallery/tickets.jpg",
-    "adultPair": "Prinz Dominik I. und Prinzessin Lisa I.",
-    "childPair": "Kinderprinz Til I. und Kinderprinzessin Pauline I."
-  },
-  {
-    "title": "Prinzenpaar der Session 2020/2021",
-    "session": "Session 2020/2021",
-    "image": "./src/img/home-gallery/umzug.jpg",
-    "adultPair": "Prinz Dominik I. und Prinzessin Lisa I.",
-    "childPair": "Kinderprinz Til I. und Kinderprinzessin Pauline I."
+    "session": "44. Session",
+    "year": "2022/2023",
+    "image": "./src/img/verein/prinzenpaare/pp2223.jpg",
+    "adultPair": [
+      {"prince": "René I.", "princess":  "Anja I."}
+    ],
+    "childPair": [
+      {"prince": "Lennart I.", "princess":  "Mia I."}
+    ]
   }
 ]

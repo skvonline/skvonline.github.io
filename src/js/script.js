@@ -453,13 +453,13 @@ async function loadHomeContent() {
     royalsGrid.innerHTML = normalizedRoyals
       .map((pair, index) => {
         return `
-        <button type="button" class="royal-gallery-item" data-royal-index="${index}" aria-label="${pair.title || pair.session}">
+        <article class="royal-gallery-item" aria-label="${pair.title || pair.session}">
           <img class="royal-gallery-image" src="${pair.image}" alt="${pair.title || pair.session}" loading="lazy" />
           ${createRoyalOverlayText(pair.session, 'top-left')}
           ${createRoyalOverlayText(pair.year, 'top-right')}
           ${createRoyalOverlayText(pair.largePair, 'bottom-left')}
           ${createRoyalOverlayText(pair.smallPair, 'bottom-right')}
-        </button>
+        </article>
       `;
       })
       .join('');
@@ -467,7 +467,6 @@ async function loadHomeContent() {
   if (royalsMoreButton) {
     royalsMoreButton.hidden = true;
   }
-  setupRoyalsLightbox(normalizedRoyals);
 }
 
 (async function init() {
