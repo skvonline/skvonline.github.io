@@ -426,52 +426,26 @@ a {
   display: block;
 }
 
-.royal-gallery-overlay {
+.royal-gallery-caption {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  bottom: 0;
   color: #fff;
-  background: rgba(2, 6, 23, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  border-radius: 10px;
-  padding: 0.4rem 0.55rem;
-  font-size: 0.82rem;
-  line-height: 1.35;
-  max-width: calc(50% - 1.1rem);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.42));
+  padding: 0.8rem 0.95rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
   text-align: left;
-  transition: opacity 0.2s ease;
+  backdrop-filter: blur(1px);
 }
 
-.royal-gallery-overlay strong {
-  display: block;
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  margin-bottom: 0.14rem;
-}
-
-.royal-gallery-overlay--top-left {
-  top: 0.6rem;
-  left: 0.6rem;
-}
-
-.royal-gallery-overlay--top-right {
-  top: 0.6rem;
-  right: 0.6rem;
-}
-
-.royal-gallery-overlay--bottom-left {
-  bottom: 0.6rem;
-  left: 0.6rem;
-}
-
-.royal-gallery-overlay--bottom-right {
-  bottom: 0.6rem;
-  right: 0.6rem;
-}
-
-.royal-gallery-item:hover .royal-gallery-overlay,
-.royal-gallery-item:focus-visible .royal-gallery-overlay {
-  opacity: 1;
+@media (max-width: 700px) {
+  .royal-gallery-caption {
+    font-size: 0.82rem;
+    padding: 0.65rem 0.75rem;
+  }
 }
 
 .royals-lightbox {
