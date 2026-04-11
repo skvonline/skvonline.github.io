@@ -142,11 +142,11 @@ function getElferratImagePath(member) {
   return `./src/img/verein/elferrat/${slug}.png`;
 }
 
-function createRoyalOverlayText(label, value, modifierClass) {
+function createRoyalOverlayText(value, modifierClass) {
   if (!value) {
     return '';
   }
-  return `<span class="royal-gallery-overlay royal-gallery-overlay--${modifierClass}"><strong>${label}</strong>${value || 'Nicht hinterlegt'}</span>`;
+  return `<span class="royal-gallery-overlay royal-gallery-overlay--${modifierClass}">${value || 'Nicht hinterlegt'}</span>`;
 }
 
 function getRoyalField(entry, candidates) {
@@ -155,6 +155,39 @@ function getRoyalField(entry, candidates) {
     return value !== undefined && value !== null && String(value).trim() !== '';
   });
   return key ? entry[key] : '';
+}
+
+function formatPairText(pairValue) {
+  if (!pairValue) {
+    return '';
+  }
+
+  if (typeof pairValue === 'string') {
+    return pairValue;
+  }
+
+  if (Array.isArray(pairValue)) {
+    const normalizedPairs = pairValue
+      .map((pair) => formatPairText(pair))
+      .filter(Boolean);
+    return normalizedPairs.join('<br>');
+  }
+
+  if (typeof pairValue === 'object') {
+    const prince = pairValue.prince || pairValue.prinz || pairValue.Prinz || '';
+    const princess = pairValue.princess || pairValue.prinzessin || pairValue.Prinzessin || '';
+    if (prince && princess) {
+      return `${prince} und ${princess}`;
+    }
+    if (prince) {
+      return prince;
+    }
+    if (princess) {
+      return princess;
+    }
+  }
+
+  return '';
 }
 
 function normalizeRoyalEntry(entry) {
@@ -167,8 +200,8 @@ function normalizeRoyalEntry(entry) {
     ...entry,
     session,
     year,
-    largePair,
-    smallPair,
+    largePair: formatPairText(largePair),
+    smallPair: formatPairText(smallPair),
     image: entry.image || '',
     title: entry.title || session || 'Prinzenpaar',
   };
@@ -198,10 +231,10 @@ function setupRoyalsLightbox(royals) {
     image.src = pair.image || '';
     image.alt = pair.title || pair.session || 'Prinzenpaar';
     details.innerHTML = `
-      <p><strong>Session:</strong> ${pair.session}</p>
-      <p><strong>Jahr:</strong> ${pair.year}</p>
-      <p><strong>Großes PP:</strong><br>${pair.largePair}</p>
-      ${pair.smallPair ? `<p><strong>Kleines PP:</strong><br>${pair.smallPair}</p>` : ''}
+      <p>${pair.session}</p>
+      <p>${pair.year}</p>
+      <p>${pair.largePair}</p>
+      ${pair.smallPair ? `<p>${pair.smallPair}</p>` : ''}
     `;
   }
 
@@ -369,10 +402,10 @@ async function loadHomeContent() {
         return `
         <button type="button" class="royal-gallery-item" data-royal-index="${index}" aria-label="${pair.title || pair.session}">
           <img class="royal-gallery-image" src="${pair.image}" alt="${pair.title || pair.session}" loading="lazy" />
-          ${createRoyalOverlayText('Session', pair.session, 'top-left')}
-          ${createRoyalOverlayText('Jahr', pair.year, 'top-right')}
-          ${createRoyalOverlayText('Großes PP', pair.largePair, 'bottom-left')}
-          ${createRoyalOverlayText('Kleines PP', pair.smallPair, 'bottom-right')}
+          ${createRoyalOverlayText(pair.session, 'top-left')}
+          ${createRoyalOverlayText(pair.year, 'top-right')}
+          ${createRoyalOverlayText(pair.largePair, 'bottom-left')}
+          ${createRoyalOverlayText(pair.smallPair, 'bottom-right')}
         </button>
       `;
       })
