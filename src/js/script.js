@@ -279,6 +279,58 @@ function setupRoyalsLightbox(royals) {
   });
 }
 
+function setupBoardCards() {
+  const boardCards = Array.from(document.querySelectorAll('.board-card'));
+  if (boardCards.length === 0) {
+    return;
+  }
+
+  const isMobileViewport = () => window.matchMedia('(max-width: 960px)').matches;
+
+  function closeAllBoardCards() {
+    boardCards.forEach((card) => {
+      card.classList.remove('is-open');
+      const trigger = card.querySelector('.board-poster');
+      if (trigger) {
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  boardCards.forEach((card) => {
+    const trigger = card.querySelector('.board-poster');
+    if (!trigger) return;
+
+    trigger.addEventListener('click', (event) => {
+      if (!isMobileViewport()) {
+        return;
+      }
+
+      event.preventDefault();
+      const isOpen = card.classList.contains('is-open');
+      closeAllBoardCards();
+      card.classList.toggle('is-open', !isOpen);
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!isMobileViewport()) {
+      return;
+    }
+    if (event.target.closest('.board-card')) {
+      return;
+    }
+    closeAllBoardCards();
+  });
+
+  window.addEventListener('resize', () => {
+    if (!isMobileViewport()) {
+      closeAllBoardCards();
+    }
+  });
+}
+
 async function loadHomeContent() {
   const [events, news, vorstand, elferrat, royals] = await Promise.all([
     fetch('./src/data/events.json').then((r) => r.json()),
@@ -345,14 +397,14 @@ async function loadHomeContent() {
 
   const vorstandGrid = document.getElementById('vorstand-grid');
   if (vorstandGrid) {
-    vorstand.forEach((person) => {
+    vorstand.forEach((person, index) => {
       vorstandGrid.insertAdjacentHTML(
         'beforeend',
         `<article class="board-card">
-          <div class="board-poster">
+          <button type="button" class="board-poster" aria-expanded="false" aria-controls="board-details-${index}">
             <img src="${person.image}" alt="${person.name}" loading="lazy" />
-          </div>
-          <div class="board-details">
+          </button>
+          <div class="board-details" id="board-details-${index}">
             <h3>${person.name}</h3>
             <h4>${person.role}</h4>
             <div class="board-tags">
@@ -376,6 +428,7 @@ async function loadHomeContent() {
         </article>`,
       );
     });
+    setupBoardCards();
   }
 
   const elferratGrid = document.getElementById('elferrat-grid');
