@@ -179,9 +179,10 @@ async function loadHomeContent() {
       const imageMarkup = entry.image
         ? `<img class="news-image" src="${entry.image}" alt="${entry.title}" loading="lazy" />`
         : '';
+      const newsSizeClass = entry.large ? ' news-card--large' : '';
 
       return `
-        <article class="card news-card">
+        <article class="card news-card${newsSizeClass}">
           ${imageMarkup}
           <h3>${entry.title}</h3>
           <p>${entry.text}</p>
