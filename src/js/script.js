@@ -118,6 +118,23 @@ function getEventDetailsMarkup(event) {
   return `<div class="event-details">${detailRows.join('')}</div>`;
 }
 
+function formatNewsDate(dateValue) {
+  if (!dateValue) {
+    return '';
+  }
+
+  const parsedDate = new Date(dateValue);
+  if (!Number.isNaN(parsedDate.getTime())) {
+    return parsedDate.toLocaleDateString('de-DE', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
+  }
+
+  return dateValue;
+}
+
 function getElferratImagePath(member) {
   if (member.image && member.image !== './src/img/dummy.svg') {
     return member.image;
@@ -180,11 +197,14 @@ async function loadHomeContent() {
         ? `<img class="news-image" src="${entry.image}" alt="${entry.title}" loading="lazy" />`
         : '';
       const newsSizeClass = entry.large ? ' news-card--large' : '';
+      const formattedDate = formatNewsDate(entry.date);
+      const dateMarkup = formattedDate ? `<p class="news-date">Vom ${formattedDate}</p>` : '';
 
       return `
         <article class="card news-card${newsSizeClass}">
           ${imageMarkup}
           <h3>${entry.title}</h3>
+          ${dateMarkup}
           <p>${entry.text}</p>
           ${getNewsLinksMarkup(entry)}
         </article>
