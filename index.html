@@ -74,6 +74,31 @@
         <p><button id="royals-more" class="btn" hidden>Mehr Prinzenpaare laden</button></p>
       </div>
     </section>
+
+    <div id="royals-lightbox" class="royals-lightbox" hidden>
+      <div class="royals-lightbox-backdrop" aria-hidden="true"></div>
+      <article class="royals-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Prinzenpaar Vorschau">
+        <button type="button" class="royals-lightbox-close" aria-label="Vorschau schließen">&times;</button>
+        <div class="royals-lightbox-media">
+          <button type="button" class="royals-lightbox-nav royals-lightbox-nav--left" data-action="prev" aria-label="Vorheriges Prinzenpaar">&#10094;</button>
+          <img class="royals-lightbox-image" src="" alt="" />
+          <button type="button" class="royals-lightbox-nav royals-lightbox-nav--right" data-action="next" aria-label="Nächstes Prinzenpaar">&#10095;</button>
+        </div>
+        <div class="royals-lightbox-info">
+          <div class="royals-lightbox-header">
+            <p><strong>Session:</strong> <span data-field="session"></span></p>
+            <p><strong>Jahr:</strong> <span data-field="year"></span></p>
+          </div>
+          <p><strong>Großes PP:</strong><br /><span data-field="adult"></span></p>
+          <p><strong>Kleines PP:</strong><br /><span data-field="child"></span></p>
+          <p data-field="description" hidden></p>
+        </div>
+        <div class="royals-lightbox-footer">
+          <button type="button" class="royals-lightbox-nav" data-action="prev" aria-label="Vorheriges Prinzenpaar">◀</button>
+          <button type="button" class="royals-lightbox-nav" data-action="next" aria-label="Nächstes Prinzenpaar">▶</button>
+        </div>
+      </article>
+    </div>
   </main>
 
   <div id="footer-component"></div>

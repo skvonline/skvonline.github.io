@@ -142,6 +142,86 @@ function getElferratImagePath(member) {
   return `./src/img/verein/elferrat/${slug}.png`;
 }
 
+function toTwoLineText(text) {
+  if (!text) return '—';
+  const separator = text.includes(' und ') ? ' und ' : ', ';
+  if (!text.includes(separator)) return text;
+  return text.split(separator).join(`<br>${separator.trim()} `);
+}
+
+function setupRoyalsLightbox(royals) {
+  const overlay = document.getElementById('royals-lightbox');
+  if (!overlay || !Array.isArray(royals) || royals.length === 0) return;
+
+  const image = overlay.querySelector('.royals-lightbox-image');
+  const session = overlay.querySelector('[data-field="session"]');
+  const year = overlay.querySelector('[data-field="year"]');
+  const adultPair = overlay.querySelector('[data-field="adult"]');
+  const childPair = overlay.querySelector('[data-field="child"]');
+  const description = overlay.querySelector('[data-field="description"]');
+  const closeButton = overlay.querySelector('.royals-lightbox-close');
+  const prevButtons = overlay.querySelectorAll('[data-action="prev"]');
+  const nextButtons = overlay.querySelectorAll('[data-action="next"]');
+  let activeIndex = 0;
+
+  function render(index) {
+    const pair = royals[index];
+    if (!pair) return;
+
+    const sessionValue = pair.session || 'Session unbekannt';
+    const yearValue = sessionValue.replace('Session', '').trim() || '—';
+    image.src = pair.image || '';
+    image.alt = pair.title || sessionValue;
+    session.textContent = sessionValue;
+    year.textContent = yearValue;
+    adultPair.innerHTML = toTwoLineText(pair.adultPair || pair.text);
+    childPair.innerHTML = toTwoLineText(pair.childPair);
+    description.textContent = pair.description || '';
+    description.hidden = !pair.description;
+    overlay.dataset.activeIndex = String(index);
+  }
+
+  function show(index) {
+    activeIndex = (index + royals.length) % royals.length;
+    render(activeIndex);
+    overlay.hidden = false;
+    document.body.classList.add('modal-open');
+  }
+
+  function hide() {
+    overlay.hidden = true;
+    document.body.classList.remove('modal-open');
+  }
+
+  function go(step) {
+    show(activeIndex + step);
+  }
+
+  document.querySelectorAll('.royal-gallery-item').forEach((item) => {
+    item.addEventListener('click', () => show(Number(item.dataset.index)));
+    item.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        show(Number(item.dataset.index));
+      }
+    });
+  });
+
+  closeButton?.addEventListener('click', hide);
+  overlay.addEventListener('click', (event) => {
+    if (event.target === overlay || event.target.classList.contains('royals-lightbox-backdrop')) hide();
+  });
+  prevButtons.forEach((button) => button.addEventListener('click', () => go(-1)));
+  nextButtons.forEach((button) => button.addEventListener('click', () => go(1)));
+
+  document.addEventListener('keydown', (event) => {
+    if (overlay.hidden) return;
+    if (event.key === 'Escape') hide();
+    if (event.key === 'ArrowLeft') go(-1);
+    if (event.key === 'ArrowRight') go(1);
+  });
+}
+
 async function loadHomeContent() {
   const [events, news, vorstand, elferrat, royals] = await Promise.all([
     fetch('./src/data/events.json').then((r) => r.json()),
@@ -256,42 +336,35 @@ async function loadHomeContent() {
     });
   }
 
-  chunkRender({
-    items: royals,
-    containerId: 'royals-grid',
-    buttonId: 'royals-more',
-    chunkSize: 3,
-    renderItem: (pair, index) => {
-      const hasImage = Boolean(pair.image);
-      const hasChildPair = Boolean(pair.childPair);
-      const imageMarkup = hasImage
-        ? `<div class="royal-card-media"><img class="royal-card-image" src="${pair.image}" alt="${pair.title}" loading="lazy" /></div>`
-        : '';
-      const adultPair = pair.adultPair || pair.text || 'Keine Informationen zum Erwachsenen-Prinzenpaar hinterlegt.';
-      const description = pair.description ? `<p class="royal-card-text">${pair.description}</p>` : '';
-      const childPairMarkup = hasChildPair
-        ? `<p class="royal-card-pair royal-card-pair--child"><span>Kinder-PP</span>${pair.childPair}</p>`
-        : '';
-      const imageSideClass = hasImage ? (index % 2 === 0 ? 'royal-card--image-right' : 'royal-card--image-left') : 'royal-card--no-image';
+  const royalsGrid = document.getElementById('royals-grid');
+  const royalsMoreButton = document.getElementById('royals-more');
+  if (royalsGrid) {
+    royals.forEach((pair, index) => {
+      const sessionValue = pair.session || 'Session unbekannt';
+      const yearValue = sessionValue.replace('Session', '').trim() || '—';
+      const adultPair = pair.adultPair || pair.text || '—';
+      const childPair = pair.childPair || '—';
 
-      return `
-      <article class="card royal-card ${imageSideClass}">
-        <header class="royal-card-head">
-          <span class="royal-session">${pair.session}</span>
-          <h3>${pair.title}</h3>
-        </header>
-        <div class="royal-card-layout">
-          <div class="royal-card-body">
-            <p class="royal-card-pair royal-card-pair--adult"><span>Erwachsene</span>${adultPair}</p>
-            ${childPairMarkup}
-            ${description}
+      royalsGrid.insertAdjacentHTML(
+        'beforeend',
+        `<article class="royal-gallery-item" data-index="${index}" tabindex="0" aria-label="Prinzenpaar ${sessionValue}">
+          <img class="royal-gallery-image" src="${pair.image}" alt="${pair.title || sessionValue}" loading="lazy" />
+          <div class="royal-gallery-overlay">
+            <p class="royal-gallery-tag royal-gallery-tag--top-left">Session</p>
+            <p class="royal-gallery-tag royal-gallery-tag--top-right">${yearValue}</p>
+            <p class="royal-gallery-tag royal-gallery-tag--bottom-left"><span>Großes PP</span>${toTwoLineText(adultPair)}</p>
+            <p class="royal-gallery-tag royal-gallery-tag--bottom-right"><span>Kleines PP</span>${toTwoLineText(childPair)}</p>
           </div>
-          ${imageMarkup}
-        </div>
-      </article>
-    `;
-    },
-  });
+        </article>`,
+      );
+    });
+  }
+
+  if (royalsMoreButton) {
+    royalsMoreButton.hidden = true;
+  }
+
+  setupRoyalsLightbox(royals);
 }
 
 (async function init() {

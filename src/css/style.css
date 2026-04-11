@@ -397,89 +397,176 @@ a {
 
 .royals-grid {
   gap: 1.25rem;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
-.royal-card {
-  border: 1px solid #dbe6ff;
-  background: linear-gradient(180deg, #ffffff, #f7faff);
+.royal-gallery-item {
+  position: relative;
+  border: 0;
   padding: 0;
-  overflow: hidden;
-}
-
-.royal-card-head {
-  padding: 1rem 1.1rem 0.3rem;
-}
-
-.royal-card-head h3 {
   margin: 0;
-  font-size: 1.12rem;
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 260px;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(30, 41, 59, 0.2);
 }
 
-.royal-session {
-  display: inline-block;
-  margin-bottom: 0.6rem;
-  padding: 0.3rem 0.6rem;
-  border-radius: 999px;
-  background: #e8efff;
-  color: var(--skv-dark);
-  font-size: 0.8rem;
-  font-weight: 700;
-}
-
-.royal-card-layout {
-  display: grid;
-  gap: 0.25rem;
-}
-
-.royal-card-media {
-  padding: 0.75rem 1rem 1rem;
-}
-
-.royal-card-image {
+.royal-gallery-image {
   width: 100%;
-  height: 240px;
+  height: 100%;
+  min-height: 260px;
   object-fit: cover;
-  border-radius: 12px;
+  display: block;
   background: #e2e8f0;
 }
 
-.royal-card-body {
-  padding: 0.85rem 1.1rem 1rem;
+.royal-gallery-overlay {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.25s ease;
 }
 
-.royal-card-pair {
+.royal-gallery-item:hover .royal-gallery-overlay,
+.royal-gallery-item:focus-visible .royal-gallery-overlay {
+  opacity: 0;
+}
+
+.royal-gallery-tag {
+  position: absolute;
   margin: 0;
-  padding: 0.65rem 0.75rem;
+  padding: 0.5rem 0.7rem;
+  max-width: 46%;
   border-radius: 10px;
-  background: #eff4ff;
-  border: 1px solid #d5e2ff;
-  line-height: 1.45;
-}
-
-.royal-card-pair + .royal-card-pair {
-  margin-top: 0.55rem;
-}
-
-.royal-card-pair span {
-  display: block;
-  margin-bottom: 0.2rem;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.03em;
-  color: #475569;
+  background: rgba(10, 25, 58, 0.8);
+  color: #fff;
+  font-size: 0.86rem;
+  line-height: 1.25;
   font-weight: 700;
 }
 
-.royal-card-pair--child {
-  background: #fff3e6;
-  border-color: #ffd7a8;
+.royal-gallery-tag span {
+  display: block;
+  margin-bottom: 0.25rem;
+  opacity: 0.85;
+  font-size: 0.72rem;
+  text-transform: uppercase;
 }
 
-.royal-card-text {
-  margin: 0.8rem 0 0;
-  color: #334155;
-  line-height: 1.5;
+.royal-gallery-tag--top-left {
+  top: 0.75rem;
+  left: 0.75rem;
+}
+
+.royal-gallery-tag--top-right {
+  top: 0.75rem;
+  right: 0.75rem;
+  text-align: right;
+}
+
+.royal-gallery-tag--bottom-left {
+  left: 0.75rem;
+  bottom: 0.75rem;
+}
+
+.royal-gallery-tag--bottom-right {
+  right: 0.75rem;
+  bottom: 0.75rem;
+  text-align: right;
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
+.royals-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.royals-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.7);
+}
+
+.royals-lightbox-dialog {
+  position: relative;
+  width: min(860px, 100%);
+  max-height: calc(100vh - 2rem);
+  background: #fff;
+  border-radius: 16px;
+  overflow: auto;
+  z-index: 1;
+}
+
+.royals-lightbox-close {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.6rem;
+  border: 0;
+  background: transparent;
+  font-size: 2rem;
+  line-height: 1;
+  color: #0f172a;
+  cursor: pointer;
+}
+
+.royals-lightbox-media {
+  position: relative;
+}
+
+.royals-lightbox-image {
+  width: 100%;
+  max-height: 68vh;
+  object-fit: contain;
+  background: #0f172a;
+}
+
+.royals-lightbox-nav {
+  border: 0;
+  border-radius: 999px;
+  width: 42px;
+  height: 42px;
+  background: rgba(15, 23, 42, 0.82);
+  color: #fff;
+  cursor: pointer;
+}
+
+.royals-lightbox-nav--left,
+.royals-lightbox-nav--right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.royals-lightbox-nav--left {
+  left: 0.7rem;
+}
+
+.royals-lightbox-nav--right {
+  right: 0.7rem;
+}
+
+.royals-lightbox-info {
+  padding: 1rem 1.2rem 0.5rem;
+}
+
+.royals-lightbox-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.5rem;
+}
+
+.royals-lightbox-footer {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.2rem 1rem 1.2rem;
 }
 
 .elferrat-card {
@@ -767,8 +854,14 @@ a {
     bottom: 0;
   }
 
-  .royal-card-layout {
-    grid-template-columns: 1fr;
+  .royal-gallery-tag {
+    font-size: 0.78rem;
+    max-width: 48%;
+  }
+
+  .royals-lightbox-nav--left,
+  .royals-lightbox-nav--right {
+    display: none;
   }
 }
 
@@ -778,17 +871,9 @@ a {
   }
 }
 
-@media (min-width: 961px) {
-  .royal-card-layout {
-    grid-template-columns: minmax(0, 1.3fr) minmax(240px, 0.9fr);
-    align-items: center;
-  }
-
-  .royal-card--no-image .royal-card-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .royal-card--image-left .royal-card-media {
-    order: -1;
+@media (max-width: 520px) {
+  .royal-gallery-tag {
+    max-width: 52%;
+    padding: 0.45rem 0.6rem;
   }
 }
