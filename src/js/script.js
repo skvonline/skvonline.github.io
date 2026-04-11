@@ -230,11 +230,10 @@ function setupRoyalsLightbox(royals) {
 
     image.src = pair.image || '';
     image.alt = pair.title || pair.session || 'Prinzenpaar';
+    const sessionAndYear = [pair.session, pair.year ? `(${pair.year})` : ''].filter(Boolean).join(' ');
+    const detailsParts = [sessionAndYear, pair.largePair, pair.smallPair].filter(Boolean);
     details.innerHTML = `
-      <p>${pair.session}</p>
-      <p>${pair.year}</p>
-      <p>${pair.largePair}</p>
-      ${pair.smallPair ? `<p>${pair.smallPair}</p>` : ''}
+      <p class="royals-lightbox-summary">${detailsParts.join(' - ')}</p>
     `;
   }
 
