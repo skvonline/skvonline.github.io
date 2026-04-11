@@ -207,6 +207,12 @@ function normalizeRoyalEntry(entry) {
   };
 }
 
+function buildRoyalLightboxText(pair) {
+  const headlineParts = [pair.session, pair.year ? `(${pair.year})` : ''].filter(Boolean);
+  const detailParts = [pair.largePair, pair.smallPair].filter(Boolean);
+  return [...headlineParts, ...detailParts].join(' - ');
+}
+
 function setupRoyalsLightbox(royals) {
   const lightbox = document.getElementById('royals-lightbox');
   const image = document.getElementById('royals-lightbox-image');
@@ -230,12 +236,7 @@ function setupRoyalsLightbox(royals) {
 
     image.src = pair.image || '';
     image.alt = pair.title || pair.session || 'Prinzenpaar';
-    details.innerHTML = `
-      <p>${pair.session}</p>
-      <p>${pair.year}</p>
-      <p>${pair.largePair}</p>
-      ${pair.smallPair ? `<p>${pair.smallPair}</p>` : ''}
-    `;
+    details.textContent = buildRoyalLightboxText(pair);
   }
 
   function openLightbox(index) {
