@@ -101,6 +101,14 @@ function getNewsLinksMarkup(entry) {
   return markup ? `<div class="news-links">${markup}</div>` : '';
 }
 
+function getNewsDateMarkup(entry) {
+  if (!entry.date) {
+    return '';
+  }
+
+  return `<span class="news-date" aria-label="Datum der News">${entry.date}</span>`;
+}
+
 function getEventDetailsMarkup(event) {
   const detailRows = [
     event.date && `<p><strong>Datum:</strong> ${event.date}</p>`,
@@ -176,13 +184,19 @@ async function loadHomeContent() {
     buttonId: 'news-more',
     chunkSize: 3,
     renderItem: (entry) => {
+      const dateMarkup = getNewsDateMarkup(entry);
       const imageMarkup = entry.image
-        ? `<img class="news-image" src="${entry.image}" alt="${entry.title}" loading="lazy" />`
+        ? `<div class="news-media">
+            <img class="news-image" src="${entry.image}" alt="${entry.title}" loading="lazy" />
+            ${dateMarkup}
+          </div>`
         : '';
       const newsSizeClass = entry.large ? ' news-card--large' : '';
+      const headerMarkup = !entry.image && dateMarkup ? `<div class="news-header">${dateMarkup}</div>` : '';
 
       return `
         <article class="card news-card${newsSizeClass}">
+          ${headerMarkup}
           ${imageMarkup}
           <h3>${entry.title}</h3>
           <p>${entry.text}</p>
