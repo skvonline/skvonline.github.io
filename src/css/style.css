@@ -882,7 +882,6 @@ body.lightbox-open {
 }
 
 .footer-links {
-    display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
 }
@@ -1017,4 +1016,67 @@ body.lightbox-open {
         grid-row: 3;
         background: var(--skv-primary);
     }
+}
+
+.linktree-page {
+    background: var(--skv-primary);
+    min-height: 70vh;
+    color: #fff;
+}
+
+.linktree-container {
+    width: min(680px, 92vw);
+}
+
+.linktree-logo {
+    width: 110px;
+    height: 110px;
+    object-fit: contain;
+    border-radius: 25%;
+    background: #fff;
+    padding: 0.5rem;
+    box-shadow: none;
+    margin-bottom: 1rem;
+}
+
+.linktree-links {
+    display: grid;
+    gap: 0.9rem;
+    margin-top: 2rem;
+}
+
+.linktree-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border-radius: 10px;
+    background: #fff;
+    color: var(--skv-dark);
+    padding: 0.95rem 1.2rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    box-shadow: none;
+    transition: opacity 0.2s ease;
+}
+
+.linktree-link:hover,
+.linktree-link:focus-visible {
+    opacity: 0.9;
+}
+
+.linktree-link:focus-visible {
+    outline: 3px solid rgba(31, 78, 216, 0.3);
+    outline-offset: 2px;
+}
+
+.linktree-link-icon {
+    display: inline-flex;
+    width: 1.35rem;
+    height: 1.35rem;
+}
+
+.linktree-link-icon svg {
+    width: 100%;
+    height: 100%;
 }
