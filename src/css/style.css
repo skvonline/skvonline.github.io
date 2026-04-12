@@ -756,6 +756,7 @@ body.lightbox-open {
     backdrop-filter: blur(16px) saturate(120%);
     transition: 0.3s;
     color: #fff;
+    text-align-last: left;
     z-index: 2;
 }
 
@@ -802,6 +803,7 @@ body.lightbox-open {
     line-height: 1.5;
     margin-bottom: 1em;
     font-size: 0.95rem;
+    text-align: left;
 }
 
 .board-social h5 {
