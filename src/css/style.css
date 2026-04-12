@@ -407,6 +407,7 @@ a {
     overflow: hidden;
     min-height: 240px;
     box-shadow: 0 8px 20px rgba(30, 41, 59, 0.13);
+    cursor: pointer;
 }
 
 .royal-gallery-item:hover,
@@ -472,6 +473,96 @@ a {
 .royal-gallery-item:hover .royal-gallery-overlay,
 .royal-gallery-item:focus-visible .royal-gallery-overlay {
     opacity: 0;
+}
+
+body.lightbox-open {
+    overflow: hidden;
+}
+
+.royals-lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+}
+
+.royals-lightbox[hidden] {
+    display: none;
+}
+
+.royals-lightbox-backdrop {
+    position: absolute;
+    inset: 0;
+    border: 0;
+    background: rgba(0, 0, 0, 0.82);
+}
+
+.royals-lightbox-dialog {
+    position: relative;
+    z-index: 1;
+    width: min(96vw, 1200px);
+    max-height: 95vh;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.royals-lightbox-content {
+    margin: 0;
+    display: grid;
+    gap: 0.85rem;
+    justify-items: center;
+}
+
+.royals-lightbox-image {
+    display: block;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    max-height: calc(95vh - 10rem);
+    border-radius: 10px;
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45);
+}
+
+.royals-lightbox-details {
+    width: 100%;
+    color: #f8fafc;
+    text-align: center;
+    line-height: 1.45;
+    font-weight: 600;
+}
+
+.royals-lightbox-details p {
+    margin: 0.2rem 0;
+}
+
+.royals-lightbox-close,
+.royals-lightbox-nav {
+    border: 0;
+    color: #fff;
+    background: rgba(15, 23, 42, 0.55);
+    cursor: pointer;
+}
+
+.royals-lightbox-close {
+    position: absolute;
+    top: -0.2rem;
+    right: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.royals-lightbox-nav {
+    width: 46px;
+    height: 70px;
+    border-radius: 999px;
+    font-size: 2rem;
 }
 
 
@@ -778,7 +869,7 @@ a {
   }
 
   .royals-lightbox-image {
-    max-height: 50vh;
+    max-height: calc(95vh - 13rem);
   }
 }
 

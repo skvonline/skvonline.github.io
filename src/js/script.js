@@ -231,9 +231,9 @@ function setupRoyalsLightbox(royals) {
     image.src = pair.image || '';
     image.alt = pair.title || pair.session || 'Prinzenpaar';
     details.innerHTML = `
-      <p>${pair.session}</p>
-      <p>${pair.year}</p>
-      <p>${pair.largePair}</p>
+      <p>${pair.session || ''}</p>
+      <p>${pair.year || ''}</p>
+      <p>${pair.largePair || ''}</p>
       ${pair.smallPair ? `<p>${pair.smallPair}</p>` : ''}
     `;
   }
@@ -261,6 +261,13 @@ function setupRoyalsLightbox(royals) {
 
   galleryItems.forEach((item) => {
     item.addEventListener('click', () => {
+      const itemIndex = Number(item.dataset.royalIndex || 0);
+      openLightbox(itemIndex);
+    });
+
+    item.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
       const itemIndex = Number(item.dataset.royalIndex || 0);
       openLightbox(itemIndex);
     });
@@ -453,7 +460,7 @@ async function loadHomeContent() {
     royalsGrid.innerHTML = normalizedRoyals
       .map((pair, index) => {
         return `
-        <article class="royal-gallery-item" aria-label="${pair.title || pair.session}">
+        <article class="royal-gallery-item" aria-label="${pair.title || pair.session}" role="button" tabindex="0" data-royal-index="${index}">
           <img class="royal-gallery-image" src="${pair.image}" alt="${pair.title || pair.session}" loading="lazy" />
           ${createRoyalOverlayText(pair.session, 'top-left')}
           ${createRoyalOverlayText(pair.year, 'top-right')}
@@ -467,6 +474,8 @@ async function loadHomeContent() {
   if (royalsMoreButton) {
     royalsMoreButton.hidden = true;
   }
+
+  setupRoyalsLightbox(normalizedRoyals);
 }
 
 (async function init() {

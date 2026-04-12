@@ -76,6 +76,19 @@
     </section>
   </main>
 
+  <div id="royals-lightbox" class="royals-lightbox" aria-hidden="true" hidden>
+    <button class="royals-lightbox-backdrop" type="button" aria-label="Vollbildansicht schließen" data-lightbox-close></button>
+    <div class="royals-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Prinzenpaar Vollbildansicht">
+      <button id="royals-lightbox-close" class="royals-lightbox-close" type="button" aria-label="Vollbildansicht schließen">×</button>
+      <button id="royals-lightbox-prev" class="royals-lightbox-nav royals-lightbox-nav--prev" type="button" aria-label="Vorheriges Bild">‹</button>
+      <figure class="royals-lightbox-content">
+        <img id="royals-lightbox-image" class="royals-lightbox-image" src="" alt="" loading="lazy" />
+        <figcaption id="royals-lightbox-details" class="royals-lightbox-details"></figcaption>
+      </figure>
+      <button id="royals-lightbox-next" class="royals-lightbox-nav royals-lightbox-nav--next" type="button" aria-label="Nächstes Bild">›</button>
+    </div>
+  </div>
+
   <div id="footer-component"></div>
 
   <script src="src/js/script.js" defer></script>
