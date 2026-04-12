@@ -47,6 +47,49 @@ function setupMobileMenu() {
   });
 }
 
+function setupHeaderSmoothScroll() {
+  const header = document.querySelector('.header');
+  const mobileNav = document.getElementById('mobile-nav');
+  const menuButton = document.getElementById('menu_button');
+  const headerLinks = document.querySelectorAll('#header-component a[href*="#"]');
+
+  if (!header || headerLinks.length === 0) {
+    return;
+  }
+
+  headerLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const targetUrl = new URL(link.href, window.location.href);
+      const isSamePage = targetUrl.pathname === window.location.pathname;
+      const targetId = targetUrl.hash ? targetUrl.hash.slice(1) : '';
+      if (!isSamePage || !targetId) {
+        return;
+      }
+
+      const targetElement = document.getElementById(targetId);
+      if (!targetElement) {
+        return;
+      }
+
+      event.preventDefault();
+      const headerHeight = header.getBoundingClientRect().height;
+      const scrollPosition = targetElement.getBoundingClientRect().top + window.scrollY - headerHeight - 8;
+
+      window.scrollTo({
+        top: Math.max(0, scrollPosition),
+        behavior: 'smooth',
+      });
+
+      if (mobileNav && !mobileNav.hidden) {
+        mobileNav.hidden = true;
+      }
+      if (menuButton) {
+        menuButton.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+}
+
 function setupHeroCarousel() {
   const slides = Array.from(document.querySelectorAll('.hero-slide'));
   if (slides.length <= 1) return;
@@ -595,6 +638,7 @@ async function loadLinktreeContent() {
     await loadComponent('footer-component', './components/footer.html');
     normalizeComponentLinks(page);
     setupMobileMenu();
+    setupHeaderSmoothScroll();
     setupHeroCarousel();
     await loadHomeContent();
     return;
@@ -605,6 +649,7 @@ async function loadLinktreeContent() {
     await loadComponent('footer-component', '../components/footer.html');
     normalizeComponentLinks(page);
     setupMobileMenu();
+    setupHeaderSmoothScroll();
     await loadLinktreeContent();
     return;
   }
@@ -614,6 +659,7 @@ async function loadLinktreeContent() {
     await loadComponent('footer-component', '../../components/footer.html');
     normalizeComponentLinks(page);
     setupMobileMenu();
+    setupHeaderSmoothScroll();
     return;
   }
 
@@ -621,4 +667,5 @@ async function loadLinktreeContent() {
   await loadComponent('footer-component', '../components/footer.html');
   normalizeComponentLinks(page);
   setupMobileMenu();
+  setupHeaderSmoothScroll();
 })();
