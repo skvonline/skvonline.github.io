@@ -118,6 +118,26 @@ function toReadableAltText(imagePath) {
   return normalized.charAt(0).toUpperCase() + normalized.slice(1);
 }
 
+function normalizeHeroImagePath(path) {
+  if (!path) {
+    return '';
+  }
+
+  if (/^(https?:)?\/\//i.test(path)) {
+    return path;
+  }
+
+  if (path.startsWith('/')) {
+    return `.${path}`;
+  }
+
+  if (path.startsWith('./')) {
+    return path;
+  }
+
+  return `./${path}`;
+}
+
 function getHeroGalleryImagePathsFromHtml(html, directoryPath) {
   const parser = new DOMParser();
   const documentFromDirectoryListing = parser.parseFromString(html, 'text/html');
@@ -150,13 +170,32 @@ async function loadHeroGalleryImages() {
   let imagePaths = [];
 
   try {
-    const response = await fetch(directoryPath);
-    if (response.ok) {
-      const directoryHtml = await response.text();
-      imagePaths = getHeroGalleryImagePathsFromHtml(directoryHtml, directoryPath);
+    const manifestResponse = await fetch('./src/data/home-gallery.json');
+    if (manifestResponse.ok) {
+      const manifestEntries = await manifestResponse.json();
+      if (Array.isArray(manifestEntries)) {
+        imagePaths = manifestEntries
+          .filter((entry) => typeof entry === 'string')
+          .map((entry) => normalizeHeroImagePath(entry))
+          .filter((entry) => /\.(avif|webp|png|jpe?g|gif|svg)$/i.test(entry));
+      }
     }
   } catch (error) {
     imagePaths = [];
+  }
+
+  try {
+    if (imagePaths.length === 0) {
+      const response = await fetch(directoryPath);
+      if (response.ok) {
+        const directoryHtml = await response.text();
+        imagePaths = getHeroGalleryImagePathsFromHtml(directoryHtml, directoryPath).map((entry) => normalizeHeroImagePath(entry));
+      }
+    }
+  } catch (error) {
+    if (imagePaths.length === 0) {
+      imagePaths = [];
+    }
   }
 
   if (imagePaths.length === 0) {
