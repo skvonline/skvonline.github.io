@@ -201,6 +201,32 @@ function formatLightboxInlineText(value) {
     .trim();
 }
 
+function formatTitledPairText(value, princeLabel, princessLabel) {
+  if (!value) {
+    return '';
+  }
+
+  const normalizedText = formatLightboxInlineText(value);
+  if (!normalizedText) {
+    return '';
+  }
+
+  if (/prinz/i.test(normalizedText)) {
+    return normalizedText;
+  }
+
+  const pairParts = String(value)
+    .split(/<br\s*\/?>/gi)
+    .map((part) => part.trim())
+    .filter(Boolean);
+
+  if (pairParts.length >= 2) {
+    return `${princeLabel} ${pairParts[0]} und ${princessLabel} ${pairParts[1]}`;
+  }
+
+  return normalizedText;
+}
+
 function normalizeRoyalEntry(entry) {
   const session = getRoyalField(entry, ['session', 'Session']);
   const year = getRoyalField(entry, ['year', 'jahr', 'Jahr']) || session;
@@ -243,8 +269,8 @@ function setupRoyalsLightbox(royals) {
     image.alt = pair.title || pair.session || 'Prinzenpaar';
     const sessionText = formatLightboxInlineText(pair.session);
     const yearText = formatLightboxInlineText(pair.year);
-    const largePairText = formatLightboxInlineText(pair.largePair);
-    const smallPairText = formatLightboxInlineText(pair.smallPair);
+    const largePairText = formatTitledPairText(pair.largePair, 'Prinz', 'Prinzessin');
+    const smallPairText = formatTitledPairText(pair.smallPair, 'Kinderprinz', 'Kinderprinzessin');
 
     const headingText = sessionText && yearText ? `${sessionText} (${yearText})` : sessionText || yearText;
     const detailParts = [headingText, largePairText, smallPairText].filter(Boolean);
