@@ -171,10 +171,11 @@ a {
 }
 
 #events-grid {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 320px));
     align-items: start;
     grid-auto-flow: dense;
     gap: 0.8rem;
+    justify-content: center;
 }
 
 .event-card {
@@ -239,10 +240,11 @@ a {
 
 
 #news-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 460px));
     grid-auto-rows: minmax(170px, auto);
     grid-auto-flow: dense;
     align-items: stretch;
+    justify-content: center;
 }
 
 .news-card--large {
@@ -596,6 +598,8 @@ body.lightbox-open {
 
 #elferrat-grid {
     gap: 0.85rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
+    justify-content: center;
 }
 
 .board-section {
