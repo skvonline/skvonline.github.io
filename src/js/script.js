@@ -190,6 +190,43 @@ function formatPairText(pairValue) {
   return '';
 }
 
+function formatLightboxInlineText(value) {
+  if (!value) {
+    return '';
+  }
+
+  return String(value)
+    .replace(/<br\s*\/?>/gi, ' und ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function formatTitledPairText(value, princeLabel, princessLabel) {
+  if (!value) {
+    return '';
+  }
+
+  const normalizedText = formatLightboxInlineText(value);
+  if (!normalizedText) {
+    return '';
+  }
+
+  if (/prinz/i.test(normalizedText)) {
+    return normalizedText;
+  }
+
+  const pairParts = String(value)
+    .split(/<br\s*\/?>/gi)
+    .map((part) => part.trim())
+    .filter(Boolean);
+
+  if (pairParts.length >= 2) {
+    return `${princeLabel} ${pairParts[0]} und ${princessLabel} ${pairParts[1]}`;
+  }
+
+  return normalizedText;
+}
+
 function normalizeRoyalEntry(entry) {
   const session = getRoyalField(entry, ['session', 'Session']);
   const year = getRoyalField(entry, ['year', 'jahr', 'Jahr']) || session;
@@ -230,12 +267,14 @@ function setupRoyalsLightbox(royals) {
 
     image.src = pair.image || '';
     image.alt = pair.title || pair.session || 'Prinzenpaar';
-    details.innerHTML = `
-      <p>${pair.session}</p>
-      <p>${pair.year}</p>
-      <p>${pair.largePair}</p>
-      ${pair.smallPair ? `<p>${pair.smallPair}</p>` : ''}
-    `;
+    const sessionText = formatLightboxInlineText(pair.session);
+    const yearText = formatLightboxInlineText(pair.year);
+    const largePairText = formatTitledPairText(pair.largePair, 'Prinz', 'Prinzessin');
+    const smallPairText = formatTitledPairText(pair.smallPair, 'Kinderprinz', 'Kinderprinzessin');
+
+    const headingText = sessionText && yearText ? `${sessionText} (${yearText})` : sessionText || yearText;
+    const detailParts = [headingText, largePairText, smallPairText].filter(Boolean);
+    details.textContent = detailParts.join(' - ');
   }
 
   function openLightbox(index) {
@@ -261,6 +300,13 @@ function setupRoyalsLightbox(royals) {
 
   galleryItems.forEach((item) => {
     item.addEventListener('click', () => {
+      const itemIndex = Number(item.dataset.royalIndex || 0);
+      openLightbox(itemIndex);
+    });
+
+    item.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
       const itemIndex = Number(item.dataset.royalIndex || 0);
       openLightbox(itemIndex);
     });
@@ -453,7 +499,7 @@ async function loadHomeContent() {
     royalsGrid.innerHTML = normalizedRoyals
       .map((pair, index) => {
         return `
-        <article class="royal-gallery-item" aria-label="${pair.title || pair.session}">
+        <article class="royal-gallery-item" aria-label="${pair.title || pair.session}" role="button" tabindex="0" data-royal-index="${index}">
           <img class="royal-gallery-image" src="${pair.image}" alt="${pair.title || pair.session}" loading="lazy" />
           ${createRoyalOverlayText(pair.session, 'top-left')}
           ${createRoyalOverlayText(pair.year, 'top-right')}
@@ -467,6 +513,8 @@ async function loadHomeContent() {
   if (royalsMoreButton) {
     royalsMoreButton.hidden = true;
   }
+
+  setupRoyalsLightbox(normalizedRoyals);
 }
 
 (async function init() {

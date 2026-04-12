@@ -1,0 +1,21 @@
+[
+  {
+    "icon": "website",
+    "text": "Webseite",
+    "url": "https://www.skvonline.de"
+  },
+  {
+    "icon": "instagram",
+    "text": "Instagram",
+    "url": "https://www.instagram.com/skv_sandoria"
+  },
+  {
+    "icon": "facebook",
+    "text": "Facebook",
+    "url": "https://www.facebook.com/skvonline"
+  },{
+    "icon": "download",
+    "text": "Anmeldung Umzug",
+    "url": "./src/download/AnmeldungUmzugSandersdorf.pdf"
+  }
+]
