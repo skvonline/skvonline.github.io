@@ -190,6 +190,17 @@ function formatPairText(pairValue) {
   return '';
 }
 
+function formatLightboxInlineText(value) {
+  if (!value) {
+    return '';
+  }
+
+  return String(value)
+    .replace(/<br\s*\/?>/gi, ' und ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 function normalizeRoyalEntry(entry) {
   const session = getRoyalField(entry, ['session', 'Session']);
   const year = getRoyalField(entry, ['year', 'jahr', 'Jahr']) || session;
@@ -230,12 +241,14 @@ function setupRoyalsLightbox(royals) {
 
     image.src = pair.image || '';
     image.alt = pair.title || pair.session || 'Prinzenpaar';
-    details.innerHTML = `
-      <p>${pair.session || ''}</p>
-      <p>${pair.year || ''}</p>
-      <p>${pair.largePair || ''}</p>
-      ${pair.smallPair ? `<p>${pair.smallPair}</p>` : ''}
-    `;
+    const sessionText = formatLightboxInlineText(pair.session);
+    const yearText = formatLightboxInlineText(pair.year);
+    const largePairText = formatLightboxInlineText(pair.largePair);
+    const smallPairText = formatLightboxInlineText(pair.smallPair);
+
+    const headingText = sessionText && yearText ? `${sessionText} (${yearText})` : sessionText || yearText;
+    const detailParts = [headingText, largePairText, smallPairText].filter(Boolean);
+    details.textContent = detailParts.join(' - ');
   }
 
   function openLightbox(index) {
