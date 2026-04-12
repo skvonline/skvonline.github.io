@@ -102,6 +102,79 @@ function setupHeroCarousel() {
   }, 5000);
 }
 
+const HERO_GALLERY_FALLBACK_IMAGES = [
+  './src/img/home-gallery/titelbild.jpeg',
+  './src/img/home-gallery/umzug.jpg',
+  './src/img/home-gallery/eröffnung.png',
+  './src/img/home-gallery/publikum.jpg',
+  './src/img/home-gallery/tickets.jpg',
+];
+
+function toReadableAltText(imagePath) {
+  const fileName = imagePath.split('/').pop() || 'SKV Galerie';
+  const withoutExtension = fileName.replace(/\.[^.]+$/, '');
+  const normalized = withoutExtension
+    .replace(/[-_]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (!normalized) {
+    return 'SKV Galerie';
+  }
+
+  return normalized.charAt(0).toUpperCase() + normalized.slice(1);
+}
+
+function getHeroGalleryImagePathsFromHtml(html, directoryPath) {
+  const parser = new DOMParser();
+  const documentFromDirectoryListing = parser.parseFromString(html, 'text/html');
+  const links = Array.from(documentFromDirectoryListing.querySelectorAll('a[href]'));
+
+  const imagePaths = links
+    .map((link) => link.getAttribute('href') || '')
+    .filter((href) => /\.(avif|webp|png|jpe?g|gif|svg)$/i.test(href))
+    .map((href) => {
+      if (/^(https?:)?\/\//i.test(href) || href.startsWith('/')) {
+        return href;
+      }
+      return `${directoryPath}${href}`.replace(/([^:]\/)\/+/g, '$1');
+    });
+
+  return [...new Set(imagePaths)];
+}
+
+async function loadHeroGalleryImages() {
+  const slidesContainer = document.querySelector('.hero-slides');
+  if (!slidesContainer) {
+    return;
+  }
+
+  const directoryPath = './src/img/home-gallery/';
+  let imagePaths = [];
+
+  try {
+    const response = await fetch(directoryPath);
+    if (response.ok) {
+      const directoryHtml = await response.text();
+      imagePaths = getHeroGalleryImagePathsFromHtml(directoryHtml, directoryPath);
+    }
+  } catch (error) {
+    imagePaths = [];
+  }
+
+  if (imagePaths.length === 0) {
+    imagePaths = HERO_GALLERY_FALLBACK_IMAGES;
+  }
+
+  slidesContainer.innerHTML = '';
+  imagePaths.forEach((path, index) => {
+    slidesContainer.insertAdjacentHTML(
+      'beforeend',
+      `<img class="hero-slide${index === 0 ? ' active' : ''}" src="${path}" alt="${toReadableAltText(path)}" />`,
+    );
+  });
+}
+
 function chunkRender({ items, containerId, buttonId, chunkSize, renderItem }) {
   const container = document.getElementById(containerId);
   const button = document.getElementById(buttonId);
@@ -639,6 +712,7 @@ async function loadLinktreeContent() {
     normalizeComponentLinks(page);
     setupMobileMenu();
     setupHeaderSmoothScroll();
+    await loadHeroGalleryImages();
     setupHeroCarousel();
     await loadHomeContent();
     return;
