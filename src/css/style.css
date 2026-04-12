@@ -882,7 +882,6 @@ body.lightbox-open {
 }
 
 .footer-links {
-    display: flex;
     gap: 0.5rem;
     flex-wrap: wrap;
 }
@@ -1033,7 +1032,7 @@ body.lightbox-open {
     width: 110px;
     height: 110px;
     object-fit: contain;
-    border-radius: 50%;
+    border-radius: 25%;
     background: #fff;
     padding: 0.5rem;
     box-shadow: none;
