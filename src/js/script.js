@@ -8,6 +8,30 @@ async function loadComponent(targetId, path) {
   target.innerHTML = await response.text();
 }
 
+function getRootPrefix(page) {
+  if (page === 'home') return './';
+  if (page === 'linktree') return '../';
+  if (page === 'legal') return '../../';
+  return '../';
+}
+
+function normalizeComponentLinks(page) {
+  const rootPrefix = getRootPrefix(page);
+  const internalAnchors = document.querySelectorAll('#header-component a[href^="/"], #footer-component a[href^="/"]');
+  internalAnchors.forEach((anchor) => {
+    const href = anchor.getAttribute('href');
+    if (!href) return;
+    anchor.setAttribute('href', `${rootPrefix}${href.slice(1)}`);
+  });
+
+  const internalImages = document.querySelectorAll('#header-component img[src^="/"], #footer-component img[src^="/"]');
+  internalImages.forEach((image) => {
+    const src = image.getAttribute('src');
+    if (!src) return;
+    image.setAttribute('src', `${rootPrefix}${src.slice(1)}`);
+  });
+}
+
 function setupMobileMenu() {
   const button = document.getElementById('menu_button');
   const mobileNav = document.getElementById('mobile-nav');
@@ -569,6 +593,7 @@ async function loadLinktreeContent() {
   if (page === 'home') {
     await loadComponent('header-component', './components/header.html');
     await loadComponent('footer-component', './components/footer.html');
+    normalizeComponentLinks(page);
     setupMobileMenu();
     setupHeroCarousel();
     await loadHomeContent();
@@ -578,12 +603,22 @@ async function loadLinktreeContent() {
   if (page === 'linktree') {
     await loadComponent('header-component', '../components/header.html');
     await loadComponent('footer-component', '../components/footer.html');
+    normalizeComponentLinks(page);
     setupMobileMenu();
     await loadLinktreeContent();
     return;
   }
 
+  if (page === 'legal') {
+    await loadComponent('header-component', '../../components/header.html');
+    await loadComponent('footer-component', '../../components/footer.html');
+    normalizeComponentLinks(page);
+    setupMobileMenu();
+    return;
+  }
+
   await loadComponent('header-component', '../components/header.html');
   await loadComponent('footer-component', '../components/footer.html');
+  normalizeComponentLinks(page);
   setupMobileMenu();
 })();
