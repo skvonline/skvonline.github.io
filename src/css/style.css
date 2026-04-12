@@ -183,6 +183,30 @@ a {
     background: rgba(255, 255, 255, 0.92);
 }
 
+
+.events .card,
+.events .card h1,
+.events .card h2,
+.events .card h3,
+.events .card h4,
+.events .card h5,
+.events .card h6,
+.events .card p,
+.events .card button,
+.events .card .btn,
+.news-card,
+.news-card h1,
+.news-card h2,
+.news-card h3,
+.news-card h4,
+.news-card h5,
+.news-card h6,
+.news-card p,
+.news-card button,
+.news-card .btn {
+    text-align: left;
+}
+
 #events-grid {
     display: flex;
     flex-wrap: wrap;
