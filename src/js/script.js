@@ -71,6 +71,17 @@ const NEWS_LINK_ICONS = {
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2"></path><circle cx="12" cy="10" r="2.8" fill="none" stroke="currentColor" stroke-width="2"></circle></svg>',
 };
 
+const LINKTREE_ICONS = {
+  website:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" fill="none" stroke="currentColor" stroke-width="2"></path></svg>',
+  instagram:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"></rect><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"></circle></svg>',
+  facebook:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-3 0-5 2-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1z" fill="currentColor"></path></svg>',
+  download:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v11m0 0l-4-4m4 4l4-4M5 20h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+};
+
 function getNewsLinksMarkup(entry) {
   const legacyLink = entry.link && entry.link.url ? [entry.link] : [];
   const links = Array.isArray(entry.links) && entry.links.length > 0 ? entry.links : legacyLink;
@@ -523,6 +534,35 @@ async function loadHomeContent() {
   setupRoyalsLightbox(normalizedRoyals);
 }
 
+async function loadLinktreeContent() {
+  const linksContainer = document.getElementById('linktree-links');
+  if (!linksContainer) {
+    return;
+  }
+
+  const entries = await fetch('../src/data/linktree.json').then((r) => r.json());
+  entries.forEach((entry) => {
+    if (!entry?.url || !entry?.text) {
+      return;
+    }
+
+    const iconKey = String(entry.icon || 'website').toLowerCase();
+    const iconMarkup = LINKTREE_ICONS[iconKey] || LINKTREE_ICONS.website;
+    const normalizedUrl = entry.url.startsWith('./') ? `../${entry.url.slice(2)}` : entry.url;
+    const shouldOpenInNewTab = /^https?:\/\//i.test(normalizedUrl);
+    const target = shouldOpenInNewTab ? ' target="_blank"' : '';
+    const rel = shouldOpenInNewTab ? ' rel="noopener noreferrer"' : '';
+
+    linksContainer.insertAdjacentHTML(
+      'beforeend',
+      `<a class="linktree-link" href="${normalizedUrl}"${target}${rel}>
+        <span class="linktree-link-icon">${iconMarkup}</span>
+        <span class="linktree-link-text">${entry.text}</span>
+      </a>`,
+    );
+  });
+}
+
 (async function init() {
   const page = document.body.dataset.page;
 
@@ -532,6 +572,14 @@ async function loadHomeContent() {
     setupMobileMenu();
     setupHeroCarousel();
     await loadHomeContent();
+    return;
+  }
+
+  if (page === 'linktree') {
+    await loadComponent('header-component', '../components/header.html');
+    await loadComponent('footer-component', '../components/footer.html');
+    setupMobileMenu();
+    await loadLinktreeContent();
     return;
   }
 

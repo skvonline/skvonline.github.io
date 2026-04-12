@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SKV Linktree | Sandersdorfer Karnevalsverein e.V.</title>
+  <meta
+    name="description"
+    content="Alle wichtigen SKV-Links auf einer Seite: Webseite, Social Media und Downloads."
+  />
+  <link rel="stylesheet" href="../src/css/style.css" />
 </head>
-<body>
+<body data-page="linktree">
+  <div id="header-component"></div>
 
+  <main class="linktree-page">
+    <section class="section">
+      <div class="container linktree-container">
+        <img class="linktree-logo" src="../src/img/logo.png" alt="SKV Logo" />
+        <h1>Unsere wichtigsten Links</h1>
+        <p class="lead">Schnellzugriff auf alle Plattformen des Sandersdorfer Karnevalsverein e.V.</p>
+        <div id="linktree-links" class="linktree-links" aria-live="polite"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-component"></div>
+
+  <script src="../src/js/script.js" defer></script>
 </body>
 </html>
