@@ -141,17 +141,17 @@ function normalizeHeroImagePath(path) {
 function getHeroGalleryImagePathsFromHtml(html, directoryPath) {
   const parser = new DOMParser();
   const documentFromDirectoryListing = parser.parseFromString(html, 'text/html');
-  const links = Array.from(documentFromDirectoryListing.querySelectorAll('a[href]'));
+  const links = Array.from(documentFromDirectoryListing.querySelectorAll('a[href], img[src]'));
   const directoryUrl = new URL(directoryPath, window.location.href);
 
   const imagePaths = links
-    .map((link) => link.getAttribute('href') || '')
+    .map((link) => link.getAttribute('href') || link.getAttribute('src') || '')
     .filter((href) => href && !href.startsWith('?') && !href.startsWith('#'))
     .filter((href) => /\.(avif|webp|png|jpe?g|gif|svg)$/i.test(href))
     .map((href) => {
       try {
         const normalizedUrl = new URL(href, directoryUrl);
-        return normalizedUrl.pathname + normalizedUrl.search;
+        return normalizedUrl.pathname + normalizedUrl.search + normalizedUrl.hash;
       } catch (error) {
         return '';
       }
@@ -160,43 +160,55 @@ function getHeroGalleryImagePathsFromHtml(html, directoryPath) {
   return [...new Set(imagePaths.filter(Boolean))];
 }
 
+async function discoverHeroGalleryImages() {
+  const directoryCandidates = [
+    './src/img/home-gallery/',
+    './src/img/home-gallery',
+    'src/img/home-gallery/',
+    'src/img/home-gallery',
+  ];
+
+  for (const directoryPath of directoryCandidates) {
+    try {
+      const response = await fetch(directoryPath);
+      if (!response.ok) {
+        continue;
+      }
+
+      const responseType = response.headers.get('content-type') || '';
+      if (responseType.includes('application/json')) {
+        const jsonValue = await response.json();
+        if (Array.isArray(jsonValue)) {
+          const paths = jsonValue
+            .filter((entry) => typeof entry === 'string')
+            .map((entry) => normalizeHeroImagePath(entry))
+            .filter((entry) => /\.(avif|webp|png|jpe?g|gif|svg)$/i.test(entry));
+          if (paths.length > 0) {
+            return paths;
+          }
+        }
+      }
+
+      const directoryHtml = await response.text();
+      const paths = getHeroGalleryImagePathsFromHtml(directoryHtml, directoryPath).map((entry) => normalizeHeroImagePath(entry));
+      if (paths.length > 0) {
+        return paths;
+      }
+    } catch (error) {
+      // nächster Kandidat
+    }
+  }
+
+  return [];
+}
+
 async function loadHeroGalleryImages() {
   const slidesContainer = document.querySelector('.hero-slides');
   if (!slidesContainer) {
     return;
   }
 
-  const directoryPath = './src/img/home-gallery/';
-  let imagePaths = [];
-
-  try {
-    const manifestResponse = await fetch('./src/data/home-gallery.json');
-    if (manifestResponse.ok) {
-      const manifestEntries = await manifestResponse.json();
-      if (Array.isArray(manifestEntries)) {
-        imagePaths = manifestEntries
-          .filter((entry) => typeof entry === 'string')
-          .map((entry) => normalizeHeroImagePath(entry))
-          .filter((entry) => /\.(avif|webp|png|jpe?g|gif|svg)$/i.test(entry));
-      }
-    }
-  } catch (error) {
-    imagePaths = [];
-  }
-
-  try {
-    if (imagePaths.length === 0) {
-      const response = await fetch(directoryPath);
-      if (response.ok) {
-        const directoryHtml = await response.text();
-        imagePaths = getHeroGalleryImagePathsFromHtml(directoryHtml, directoryPath).map((entry) => normalizeHeroImagePath(entry));
-      }
-    }
-  } catch (error) {
-    if (imagePaths.length === 0) {
-      imagePaths = [];
-    }
-  }
+  const imagePaths = await discoverHeroGalleryImages();
 
   if (imagePaths.length === 0) {
     slidesContainer.innerHTML = '';
