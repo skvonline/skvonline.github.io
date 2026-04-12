@@ -252,9 +252,9 @@ function setupRoyalsLightbox(royals) {
   const prevButton = document.getElementById('royals-lightbox-prev');
   const nextButton = document.getElementById('royals-lightbox-next');
   const backdrop = lightbox?.querySelector('[data-lightbox-close]');
-  const galleryItems = Array.from(document.querySelectorAll('.royal-gallery-item'));
+  const gallery = document.getElementById('royals-grid');
 
-  if (!lightbox || !image || !details || !closeButton || !prevButton || !nextButton || !backdrop || galleryItems.length === 0) {
+  if (!lightbox || !image || !details || !closeButton || !prevButton || !nextButton || !backdrop || !gallery) {
     return;
   }
 
@@ -298,18 +298,26 @@ function setupRoyalsLightbox(royals) {
     setLightboxContent(currentIndex - 1);
   }
 
-  galleryItems.forEach((item) => {
-    item.addEventListener('click', () => {
-      const itemIndex = Number(item.dataset.royalIndex || 0);
-      openLightbox(itemIndex);
-    });
+  gallery.addEventListener('click', (event) => {
+    const item = event.target.closest('.royal-gallery-item');
+    if (!item || !gallery.contains(item)) {
+      return;
+    }
 
-    item.addEventListener('keydown', (event) => {
-      if (event.key !== 'Enter' && event.key !== ' ') return;
-      event.preventDefault();
-      const itemIndex = Number(item.dataset.royalIndex || 0);
-      openLightbox(itemIndex);
-    });
+    const itemIndex = Number(item.dataset.royalIndex || 0);
+    openLightbox(itemIndex);
+  });
+
+  gallery.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    const item = event.target.closest('.royal-gallery-item');
+    if (!item || !gallery.contains(item)) {
+      return;
+    }
+
+    event.preventDefault();
+    const itemIndex = Number(item.dataset.royalIndex || 0);
+    openLightbox(itemIndex);
   });
 
   nextButton.addEventListener('click', goNext);
@@ -492,13 +500,15 @@ async function loadHomeContent() {
     });
   }
 
-  const royalsGrid = document.getElementById('royals-grid');
-  const royalsMoreButton = document.getElementById('royals-more');
   const normalizedRoyals = royals.map(normalizeRoyalEntry);
-  if (royalsGrid) {
-    royalsGrid.innerHTML = normalizedRoyals
-      .map((pair, index) => {
-        return `
+
+  chunkRender({
+    items: normalizedRoyals,
+    containerId: 'royals-grid',
+    buttonId: 'royals-more',
+    chunkSize: 3,
+    renderItem: (pair, index) => {
+      return `
         <article class="royal-gallery-item" aria-label="${pair.title || pair.session}" role="button" tabindex="0" data-royal-index="${index}">
           <img class="royal-gallery-image" src="${pair.image}" alt="${pair.title || pair.session}" loading="lazy" />
           ${createRoyalOverlayText(pair.session, 'top-left')}
@@ -507,12 +517,8 @@ async function loadHomeContent() {
           ${createRoyalOverlayText(pair.smallPair, 'bottom-right')}
         </article>
       `;
-      })
-      .join('');
-  }
-  if (royalsMoreButton) {
-    royalsMoreButton.hidden = true;
-  }
+    },
+  });
 
   setupRoyalsLightbox(normalizedRoyals);
 }
