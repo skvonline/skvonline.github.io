@@ -1,7 +1,7 @@
 :root {
     --skv-primary: #1f4ed8;
     --skv-dark: #0e2b7d;
-    --skv-light: #1f4ed8;
+    --skv-light: #f4f8ff;
     --skv-overlay: rgba(4, 16, 55, 0.6);
 }
 
@@ -12,8 +12,8 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    color: #fff;
-    background: var(--skv-primary);
+    color: #0f172a;
+    background: var(--skv-light);
     text-align: center;
 }
 
@@ -44,7 +44,7 @@ a {
 }
 
 .section-alt {
-    background: transparent;
+    background: var(--skv-light);
 }
 
 .header {
@@ -158,7 +158,7 @@ a {
 }
 
 .events {
-    background: transparent;
+    background: linear-gradient(135deg, #14368f, #1f4ed8);
     color: #fff;
 }
 
@@ -173,10 +173,10 @@ a {
 
 .card {
     padding: 1.15rem;
-    border-radius: 10px;
+    border-radius: 16px;
     background: #fff;
     color: #0f172a;
-    box-shadow: none;
+    box-shadow: 0 8px 20px rgba(30, 41, 59, 0.13);
 }
 
 .events .card {
@@ -1020,7 +1020,9 @@ body.lightbox-open {
 }
 
 .linktree-page {
+    background: var(--skv-primary);
     min-height: 70vh;
+    color: #fff;
 }
 
 .linktree-container {
