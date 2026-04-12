@@ -102,16 +102,9 @@ function setupHeroCarousel() {
   }, 5000);
 }
 
-const HERO_GALLERY_FALLBACK_IMAGES = [
-  './src/img/home-gallery/titelbild.jpeg',
-  './src/img/home-gallery/umzug.jpg',
-  './src/img/home-gallery/eröffnung.png',
-  './src/img/home-gallery/publikum.jpg',
-  './src/img/home-gallery/tickets.jpg',
-];
-
 function toReadableAltText(imagePath) {
-  const fileName = imagePath.split('/').pop() || 'SKV Galerie';
+  const decodedPath = decodeURIComponent(imagePath);
+  const fileName = decodedPath.split('/').pop() || 'SKV Galerie';
   const withoutExtension = fileName.replace(/\.[^.]+$/, '');
   const normalized = withoutExtension
     .replace(/[-_]+/g, ' ')
@@ -129,18 +122,22 @@ function getHeroGalleryImagePathsFromHtml(html, directoryPath) {
   const parser = new DOMParser();
   const documentFromDirectoryListing = parser.parseFromString(html, 'text/html');
   const links = Array.from(documentFromDirectoryListing.querySelectorAll('a[href]'));
+  const directoryUrl = new URL(directoryPath, window.location.href);
 
   const imagePaths = links
     .map((link) => link.getAttribute('href') || '')
+    .filter((href) => href && !href.startsWith('?') && !href.startsWith('#'))
     .filter((href) => /\.(avif|webp|png|jpe?g|gif|svg)$/i.test(href))
     .map((href) => {
-      if (/^(https?:)?\/\//i.test(href) || href.startsWith('/')) {
-        return href;
+      try {
+        const normalizedUrl = new URL(href, directoryUrl);
+        return normalizedUrl.pathname + normalizedUrl.search;
+      } catch (error) {
+        return '';
       }
-      return `${directoryPath}${href}`.replace(/([^:]\/)\/+/g, '$1');
     });
 
-  return [...new Set(imagePaths)];
+  return [...new Set(imagePaths.filter(Boolean))];
 }
 
 async function loadHeroGalleryImages() {
@@ -163,7 +160,8 @@ async function loadHeroGalleryImages() {
   }
 
   if (imagePaths.length === 0) {
-    imagePaths = HERO_GALLERY_FALLBACK_IMAGES;
+    slidesContainer.innerHTML = '';
+    return;
   }
 
   slidesContainer.innerHTML = '';
