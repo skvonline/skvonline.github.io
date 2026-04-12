@@ -13,7 +13,7 @@ body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     color: #0f172a;
-    background: #fff;
+    background: var(--skv-light);
     text-align: center;
 }
 
@@ -276,6 +276,11 @@ a {
 
 .event-card .news-links {
     margin-top: 0.55rem;
+}
+
+#events-more {
+    background: var(--skv-light);
+    color: var(--skv-primary);
 }
 
 
