@@ -594,6 +594,10 @@ body.lightbox-open {
     font-weight: 600;
 }
 
+#elferrat-grid {
+    gap: 0.85rem;
+}
+
 .board-section {
     padding-top: 3rem;
     background: var(--skv-light);
@@ -874,6 +878,47 @@ body.lightbox-open {
 }
 
 @media (max-width: 640px) {
+    #elferrat-grid {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+    }
+
+    .elferrat-card {
+        display: grid;
+        grid-template-columns: 76px minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-items: center;
+        text-align: left;
+        column-gap: 0.75rem;
+        row-gap: 0.1rem;
+        padding: 0.7rem 0.8rem;
+        border-radius: 14px;
+    }
+
+    .elferrat-image {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        width: 76px;
+        height: 76px;
+        margin: 0;
+        flex: 0 0 76px;
+    }
+
+    .elferrat-name {
+        grid-column: 2;
+        grid-row: 1;
+        margin: 0 0 0.2rem;
+        font-size: 1rem;
+        line-height: 1.25;
+    }
+
+    .elferrat-role {
+        grid-column: 2;
+        grid-row: 2;
+        font-size: 0.92rem;
+        line-height: 1.3;
+    }
+
     .board-wrapper {
         padding: 0;
     }
