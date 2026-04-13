@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>404 - Not Found</title>
+  <title>Oops!</title>
   <style>
     :root {
-      --bg-1: #0b0f1f;
-      --bg-2: #111a35;
-      --bg-3: #1a1240;
-      --neon-pink: #ff4fd8;
-      --neon-cyan: #4dfcff;
-      --neon-yellow: #ffe66d;
-      --neon-purple: #9b5cff;
-      --text: #f5f7ff;
-      --muted: rgba(245, 247, 255, 0.75);
+      --bg-1: #07142b;
+      --bg-2: #0d2f63;
+      --bg-3: #154a96;
+      --blue: #1f6fff;
+      --blue-light: #62b3ff;
+      --yellow: #ffd84d;
+      --yellow-soft: #fff0a6;
+      --white: #f8fbff;
       --glass: rgba(255, 255, 255, 0.08);
       --glass-border: rgba(255, 255, 255, 0.18);
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      --text-muted: rgba(248, 251, 255, 0.82);
     }
 
     * {
@@ -28,14 +28,14 @@
       margin: 0;
       padding: 0;
       min-height: 100%;
-      font-family: Inter, Arial, Helvetica, sans-serif;
-      color: var(--text);
       overflow: hidden;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--white);
       background:
-        radial-gradient(circle at 20% 20%, rgba(255, 79, 216, 0.20), transparent 25%),
-        radial-gradient(circle at 80% 30%, rgba(77, 252, 255, 0.18), transparent 30%),
-        radial-gradient(circle at 50% 80%, rgba(155, 92, 255, 0.18), transparent 30%),
-        linear-gradient(135deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+        radial-gradient(circle at 20% 20%, rgba(255, 216, 77, 0.18), transparent 26%),
+        radial-gradient(circle at 80% 20%, rgba(98, 179, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 50% 85%, rgba(31, 111, 255, 0.22), transparent 30%),
+        linear-gradient(135deg, var(--bg-1), var(--bg-2) 48%, var(--bg-3));
     }
 
     body::before {
@@ -45,40 +45,39 @@
       background:
         linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.85), rgba(0,0,0,0.35));
+      background-size: 38px 38px;
+      opacity: 0.45;
+      animation: gridMove 12s linear infinite;
       pointer-events: none;
-      animation: gridDrift 10s linear infinite;
     }
 
-    @keyframes gridDrift {
+    @keyframes gridMove {
       from { transform: translateY(0); }
-      to { transform: translateY(42px); }
+      to { transform: translateY(38px); }
     }
 
     .orb {
       position: fixed;
       border-radius: 50%;
-      filter: blur(40px);
+      filter: blur(44px);
       opacity: 0.45;
       pointer-events: none;
-      animation: floatOrb 8s ease-in-out infinite;
+      animation: floatOrb 9s ease-in-out infinite;
     }
 
     .orb.one {
       width: 260px;
       height: 260px;
-      background: var(--neon-pink);
-      top: 10%;
+      background: rgba(255, 216, 77, 0.9);
+      top: 8%;
       left: 8%;
-      animation-delay: 0s;
     }
 
     .orb.two {
-      width: 320px;
-      height: 320px;
-      background: var(--neon-cyan);
-      bottom: 5%;
+      width: 300px;
+      height: 300px;
+      background: rgba(31, 111, 255, 0.9);
+      bottom: 2%;
       right: 8%;
       animation-delay: 2s;
     }
@@ -86,24 +85,20 @@
     .orb.three {
       width: 180px;
       height: 180px;
-      background: var(--neon-purple);
-      top: 55%;
-      left: 55%;
+      background: rgba(98, 179, 255, 0.85);
+      top: 54%;
+      left: 56%;
       animation-delay: 4s;
     }
 
     @keyframes floatOrb {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
-      }
-      50% {
-        transform: translate(18px, -24px) scale(1.08);
-      }
+      0%, 100% { transform: translate(0,0) scale(1); }
+      50% { transform: translate(18px,-20px) scale(1.08); }
     }
 
     .wrapper {
       position: relative;
-      z-index: 2;
+      z-index: 3;
       min-height: 100vh;
       display: grid;
       place-items: center;
@@ -112,17 +107,17 @@
 
     .card {
       position: relative;
-      width: min(900px, 100%);
-      padding: 48px 36px;
-      border-radius: 28px;
+      width: min(980px, 100%);
+      padding: 52px 36px 38px;
+      border-radius: 30px;
       background: var(--glass);
       border: 1px solid var(--glass-border);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: var(--shadow);
-      text-align: center;
       overflow: hidden;
-      animation: cardFloat 5s ease-in-out infinite;
+      text-align: center;
+      animation: floatCard 5s ease-in-out infinite;
     }
 
     .card::before {
@@ -133,153 +128,75 @@
       padding: 2px;
       background: linear-gradient(
         135deg,
-        rgba(255,79,216,0.9),
-        rgba(77,252,255,0.9),
-        rgba(255,230,109,0.9),
-        rgba(155,92,255,0.9)
+        rgba(255, 216, 77, 0.9),
+        rgba(98, 179, 255, 0.95),
+        rgba(255,255,255,0.7),
+        rgba(31, 111, 255, 0.95)
       );
       -webkit-mask:
         linear-gradient(#000 0 0) content-box,
         linear-gradient(#000 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
-      opacity: 0.75;
       pointer-events: none;
+      opacity: 0.9;
     }
 
-    @keyframes cardFloat {
-      0%, 100% { transform: translateY(0); }
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0px); }
       50% { transform: translateY(-8px); }
     }
 
-    .badge {
-      display: inline-block;
-      padding: 10px 16px;
-      border-radius: 999px;
-      margin-bottom: 22px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #fff;
-      background: linear-gradient(90deg, rgba(255,79,216,.22), rgba(77,252,255,.22));
-      border: 1px solid rgba(255,255,255,.18);
-      box-shadow: 0 0 20px rgba(77,252,255,.14);
-    }
-
-    .glitch-wrap {
+    .headline {
       position: relative;
-      display: inline-block;
-      margin-bottom: 18px;
-    }
-
-    .error-code {
-      position: relative;
-      font-size: clamp(4.6rem, 14vw, 10rem);
-      line-height: 0.95;
+      z-index: 2;
       margin: 0;
-      font-weight: 900;
-      letter-spacing: -0.04em;
+      font-size: clamp(4.8rem, 14vw, 9rem);
+      line-height: 0.9;
+      font-weight: 1000;
+      letter-spacing: -0.05em;
       text-transform: uppercase;
-      color: #fff;
-      text-shadow:
-        0 0 10px rgba(255,255,255,0.2),
-        0 0 20px rgba(255,79,216,0.25),
-        0 0 32px rgba(77,252,255,0.25);
-      animation: pulseGlow 3s ease-in-out infinite;
-    }
-
-    .error-code::before,
-    .error-code::after {
-      content: attr(data-text);
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.85;
-    }
-
-    .error-code::before {
-      color: var(--neon-cyan);
-      transform: translate(-3px, 1px);
-      clip-path: polygon(0 0, 100% 0, 100% 42%, 0 55%);
-      animation: glitchA 2.6s infinite linear alternate-reverse;
-    }
-
-    .error-code::after {
-      color: var(--neon-pink);
-      transform: translate(3px, -1px);
-      clip-path: polygon(0 60%, 100% 45%, 100% 100%, 0 100%);
-      animation: glitchB 2.1s infinite linear alternate-reverse;
-    }
-
-    @keyframes glitchA {
-      0% { transform: translate(-3px, 1px); }
-      20% { transform: translate(2px, -2px); }
-      40% { transform: translate(-2px, 2px); }
-      60% { transform: translate(4px, 0); }
-      80% { transform: translate(-1px, -1px); }
-      100% { transform: translate(-3px, 1px); }
-    }
-
-    @keyframes glitchB {
-      0% { transform: translate(3px, -1px); }
-      20% { transform: translate(-2px, 2px); }
-      40% { transform: translate(2px, -2px); }
-      60% { transform: translate(-4px, 0); }
-      80% { transform: translate(1px, 1px); }
-      100% { transform: translate(3px, -1px); }
-    }
-
-    @keyframes pulseGlow {
-      0%, 100% {
-        filter: brightness(1);
-      }
-      50% {
-        filter: brightness(1.15);
-      }
-    }
-
-    h2 {
-      margin: 0 0 14px;
-      font-size: clamp(1.3rem, 3.5vw, 2.1rem);
-      font-weight: 800;
-    }
-
-    .headline-gradient {
-      background: linear-gradient(90deg, var(--neon-yellow), var(--neon-pink), var(--neon-cyan));
+      background: linear-gradient(90deg, var(--yellow-soft), var(--yellow), #ffffff, var(--blue-light));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      text-shadow: 0 0 30px rgba(255, 216, 77, 0.18);
+      animation: pulseGlow 2.8s ease-in-out infinite;
     }
 
-    .subtitle {
-      max-width: 700px;
-      margin: 0 auto 28px;
-      font-size: clamp(1rem, 2vw, 1.2rem);
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); filter: brightness(1); }
+      50% { transform: scale(1.025); filter: brightness(1.1); }
+    }
+
+    .subline {
+      position: relative;
+      z-index: 2;
+      margin: 14px auto 0;
+      max-width: 760px;
+      font-size: clamp(1.1rem, 2.1vw, 1.55rem);
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .text {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      margin: 16px auto 26px;
+      font-size: clamp(1rem, 1.7vw, 1.15rem);
       line-height: 1.7;
-      color: var(--muted);
-    }
-
-    .confetti-icon {
-      display: inline-block;
-      animation: wiggle 2.2s ease-in-out infinite;
-      transform-origin: center bottom;
-    }
-
-    @keyframes wiggle {
-      0%, 100% { transform: rotate(0deg) scale(1); }
-      20% { transform: rotate(-10deg) scale(1.05); }
-      40% { transform: rotate(8deg) scale(1.08); }
-      60% { transform: rotate(-6deg) scale(1.03); }
-      80% { transform: rotate(5deg) scale(1.06); }
+      color: var(--text-muted);
     }
 
     .actions {
+      position: relative;
+      z-index: 2;
       display: flex;
       justify-content: center;
       gap: 14px;
       flex-wrap: wrap;
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
     .btn {
@@ -291,27 +208,27 @@
       padding: 14px 22px;
       border-radius: 16px;
       text-decoration: none;
-      font-weight: 800;
+      font-weight: 900;
       letter-spacing: 0.02em;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
       overflow: hidden;
     }
 
     .btn:hover {
-      transform: translateY(-3px) scale(1.02);
+      transform: translateY(-3px) scale(1.03);
     }
 
     .btn-primary {
-      color: #07101f;
-      background: linear-gradient(90deg, var(--neon-yellow), #fff1a8);
-      box-shadow: 0 10px 30px rgba(255, 230, 109, 0.22);
+      color: #0b1d3d;
+      background: linear-gradient(90deg, var(--yellow), var(--yellow-soft));
+      box-shadow: 0 12px 28px rgba(255, 216, 77, 0.3);
     }
 
     .btn-secondary {
-      color: var(--text);
-      background: rgba(255,255,255,0.06);
+      color: var(--white);
+      background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.18);
-      box-shadow: 0 10px 30px rgba(77, 252, 255, 0.08);
+      box-shadow: 0 12px 28px rgba(98, 179, 255, 0.12);
     }
 
     .btn::after {
@@ -322,92 +239,221 @@
       width: 70%;
       height: 100%;
       transform: skewX(-25deg);
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255,255,255,0.5),
-        transparent
-      );
-      transition: left 0.65s ease;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.45), transparent);
+      transition: left 0.7s ease;
     }
 
     .btn:hover::after {
       left: 140%;
     }
 
-    .tiny-note {
-      margin-top: 22px;
-      font-size: 0.92rem;
-      color: rgba(245,247,255,0.58);
-    }
-
-    .floating-shapes {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
+    .stage {
+      position: relative;
+      width: min(820px, 100%);
+      height: 250px;
+      margin: 10px auto 8px;
+      z-index: 1;
       pointer-events: none;
-      z-index: 0;
     }
 
-    .shape {
+    .floor {
       position: absolute;
-      opacity: 0.6;
-      animation: drift 12s linear infinite;
-    }
-
-    .shape.circle {
-      width: 14px;
-      height: 14px;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      width: 86%;
+      height: 44px;
       border-radius: 50%;
-      background: var(--neon-cyan);
-      box-shadow: 0 0 18px rgba(77,252,255,.55);
+      background: radial-gradient(circle, rgba(255,255,255,0.28), rgba(255,255,255,0.04) 58%, transparent 76%);
+      filter: blur(3px);
     }
 
-    .shape.square {
+    .spotlight {
+      position: absolute;
+      top: -30px;
+      width: 210px;
+      height: 290px;
+      clip-path: polygon(46% 0%, 54% 0%, 100% 100%, 0% 100%);
+      opacity: 0.22;
+      filter: blur(2px);
+      animation: sway 4.8s ease-in-out infinite;
+    }
+
+    .spotlight.left {
+      left: 18%;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.7), rgba(255,216,77,0.18), transparent 88%);
+      transform-origin: top center;
+    }
+
+    .spotlight.right {
+      right: 18%;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.7), rgba(98,179,255,0.2), transparent 88%);
+      transform-origin: top center;
+      animation-delay: 1.4s;
+    }
+
+    @keyframes sway {
+      0%, 100% { transform: rotate(-4deg); }
+      50% { transform: rotate(4deg); }
+    }
+
+    .dancer {
+      position: absolute;
+      bottom: 38px;
+      width: 76px;
+      height: 150px;
+      animation: dance 1.4s ease-in-out infinite;
+      filter: drop-shadow(0 0 16px rgba(255,255,255,0.16));
+    }
+
+    .dancer.left {
+      left: 31%;
+    }
+
+    .dancer.right {
+      right: 31%;
+      animation-delay: 0.7s;
+    }
+
+    @keyframes dance {
+      0%, 100% { transform: translateY(0) rotate(-3deg) scale(1); }
+      25% { transform: translateY(-8px) rotate(5deg) scale(1.02); }
+      50% { transform: translateY(0) rotate(-2deg) scale(0.99); }
+      75% { transform: translateY(-6px) rotate(4deg) scale(1.03); }
+    }
+
+    .head {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 22px;
+      height: 22px;
+      transform: translateX(-50%);
+      border-radius: 50%;
+      background: linear-gradient(180deg, var(--white), #dfeeff);
+      box-shadow: 0 0 14px rgba(255,255,255,0.25);
+    }
+
+    .body {
+      position: absolute;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
       width: 14px;
-      height: 14px;
-      background: var(--neon-pink);
-      transform: rotate(45deg);
-      box-shadow: 0 0 18px rgba(255,79,216,.55);
+      height: 48px;
+      border-radius: 10px;
+      background: linear-gradient(180deg, var(--yellow), var(--blue-light));
     }
 
-    .shape.triangle {
-      width: 0;
-      height: 0;
-      border-left: 10px solid transparent;
-      border-right: 10px solid transparent;
-      border-bottom: 18px solid var(--neon-yellow);
-      filter: drop-shadow(0 0 10px rgba(255,230,109,.55));
+    .arm, .leg {
+      position: absolute;
+      background: linear-gradient(180deg, var(--white), rgba(255,255,255,0.8));
+      border-radius: 10px;
+      transform-origin: top center;
     }
 
-    @keyframes drift {
-      0% {
-        transform: translateY(110vh) rotate(0deg);
-        opacity: 0;
-      }
-      10% {
-        opacity: 0.7;
-      }
-      100% {
-        transform: translateY(-20vh) rotate(360deg);
-        opacity: 0;
-      }
+    .arm {
+      width: 7px;
+      height: 42px;
+      top: 30px;
     }
 
-    canvas#confettiCanvas {
+    .arm.left {
+      left: 22px;
+      transform: rotate(-46deg);
+      animation: armLeft 1.2s ease-in-out infinite;
+    }
+
+    .arm.right {
+      right: 22px;
+      transform: rotate(48deg);
+      animation: armRight 1.2s ease-in-out infinite;
+    }
+
+    .leg {
+      width: 8px;
+      height: 55px;
+      top: 67px;
+    }
+
+    .leg.left {
+      left: 26px;
+      transform: rotate(18deg);
+      animation: legLeft 1.2s ease-in-out infinite;
+    }
+
+    .leg.right {
+      right: 26px;
+      transform: rotate(-18deg);
+      animation: legRight 1.2s ease-in-out infinite;
+    }
+
+    @keyframes armLeft {
+      0%,100% { transform: rotate(-46deg); }
+      50% { transform: rotate(-68deg); }
+    }
+
+    @keyframes armRight {
+      0%,100% { transform: rotate(48deg); }
+      50% { transform: rotate(68deg); }
+    }
+
+    @keyframes legLeft {
+      0%,100% { transform: rotate(18deg); }
+      50% { transform: rotate(35deg); }
+    }
+
+    @keyframes legRight {
+      0%,100% { transform: rotate(-18deg); }
+      50% { transform: rotate(-35deg); }
+    }
+
+    .confetti-front,
+    .confetti-back {
       position: fixed;
       inset: 0;
-      width: 100%;
-      height: 100%;
       pointer-events: none;
-      z-index: 1;
+    }
+
+    .confetti-front { z-index: 6; }
+    .confetti-back { z-index: 1; }
+
+    .tiny-note {
+      position: relative;
+      z-index: 2;
+      margin-top: 18px;
+      font-size: 0.92rem;
+      color: rgba(248, 251, 255, 0.62);
+    }
+
+    @media (max-width: 800px) {
+      .stage {
+        height: 210px;
+      }
+
+      .dancer.left { left: 24%; }
+      .dancer.right { right: 24%; }
+
+      .spotlight.left { left: 10%; }
+      .spotlight.right { right: 10%; }
     }
 
     @media (max-width: 640px) {
       .card {
-        padding: 34px 20px;
-        border-radius: 22px;
+        padding: 34px 18px 30px;
+        border-radius: 24px;
       }
+
+      .stage {
+        height: 180px;
+      }
+
+      .dancer {
+        transform: scale(0.82);
+      }
+
+      .dancer.left { left: 16%; }
+      .dancer.right { right: 16%; }
 
       .btn {
         width: 100%;
@@ -421,26 +467,43 @@
   <div class="orb two"></div>
   <div class="orb three"></div>
 
-  <canvas id="confettiCanvas"></canvas>
+  <canvas class="confetti-back" id="confettiBack"></canvas>
+  <canvas class="confetti-front" id="confettiFront"></canvas>
 
   <div class="wrapper">
     <div class="card">
-      <div class="floating-shapes" id="floatingShapes"></div>
+      <h1 class="headline">Oops!</h1>
 
-      <div class="badge">404 · Not Found</div>
+      <p class="subline">Diese Seite wurde wohl zu Konfetti verarbeitet</p>
 
-      <div class="glitch-wrap">
-        <h1 class="error-code" data-text="404">404</h1>
+      <div class="stage">
+        <div class="spotlight left"></div>
+        <div class="spotlight right"></div>
+
+        <div class="dancer left">
+          <div class="head"></div>
+          <div class="body"></div>
+          <div class="arm left"></div>
+          <div class="arm right"></div>
+          <div class="leg left"></div>
+          <div class="leg right"></div>
+        </div>
+
+        <div class="dancer right">
+          <div class="head"></div>
+          <div class="body"></div>
+          <div class="arm left"></div>
+          <div class="arm right"></div>
+          <div class="leg left"></div>
+          <div class="leg right"></div>
+        </div>
+
+        <div class="floor"></div>
       </div>
 
-      <h2>
-        <span class="headline-gradient">Oops! Diese Seite wurde wohl zu Konfetti verarbeitet</span>
-        <span class="confetti-icon">🎉</span>
-      </h2>
-
-      <p class="subtitle">
-        Offenbar ist hier etwas mit besonders viel Glitzer, Chaos und Zukunftstechnologie schiefgelaufen.
-        Die Seite, die du suchst, ist aktuell nicht auffindbar – vielleicht tanzt sie gerade irgendwo im Cyber-Karneval.
+      <p class="text">
+        Offenbar ist die gesuchte Seite irgendwo zwischen Glitzer, Tanzfläche und digitalem Karneval verloren gegangen.
+        Aber keine Sorge — mit einem Klick findest du schnell wieder zurück ins Getümmel.
       </p>
 
       <div class="actions">
@@ -449,99 +512,100 @@
       </div>
 
       <div class="tiny-note">
-        Fehlercode empfangen. Konfetti-Level kritisch. Neuorientierung empfohlen.
+        Konfetti-Alarm aktiviert.
       </div>
     </div>
   </div>
 
   <script>
-    // Kleine schwebende Neonformen im Hintergrund
-    const floatingShapes = document.getElementById('floatingShapes');
-    const shapeTypes = ['circle', 'square', 'triangle'];
+    function setupConfetti(canvasId, count, speedMultiplier, sizeMultiplier, blurShadow) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
 
-    for (let i = 0; i < 22; i++) {
-      const shape = document.createElement('div');
-      const type = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
-      shape.className = `shape ${type}`;
-      shape.style.left = Math.random() * 100 + '%';
-      shape.style.animationDuration = (8 + Math.random() * 10) + 's';
-      shape.style.animationDelay = (-Math.random() * 12) + 's';
-      shape.style.opacity = 0.35 + Math.random() * 0.4;
-      floatingShapes.appendChild(shape);
-    }
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
 
-    // Konfetti-Canvas
-    const canvas = document.getElementById('confettiCanvas');
-    const ctx = canvas.getContext('2d');
+      const colors = ['#ffd84d', '#fff6cc', '#62b3ff', '#1f6fff', '#ffffff'];
+      const shapes = ['rect', 'circle', 'strip'];
+      const pieces = [];
 
-    let width = canvas.width = window.innerWidth;
-    let height = canvas.height = window.innerHeight;
+      function rand(min, max) {
+        return Math.random() * (max - min) + min;
+      }
 
-    const colors = ['#ff4fd8', '#4dfcff', '#ffe66d', '#9b5cff', '#ffffff'];
-    const confetti = [];
+      function createPiece() {
+        return {
+          x: rand(0, width),
+          y: rand(-height, height),
+          w: rand(5, 14) * sizeMultiplier,
+          h: rand(8, 22) * sizeMultiplier,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          speedY: rand(1.2, 4.2) * speedMultiplier,
+          speedX: rand(-1.6, 1.6) * speedMultiplier,
+          rotation: rand(0, Math.PI * 2),
+          rotationSpeed: rand(-0.08, 0.08),
+          shape: shapes[Math.floor(Math.random() * shapes.length)],
+          sway: rand(0.5, 1.8),
+        };
+      }
 
-    function random(min, max) {
-      return Math.random() * (max - min) + min;
-    }
+      for (let i = 0; i < count; i++) {
+        pieces.push(createPiece());
+      }
 
-    function createConfettiPiece() {
-      return {
-        x: random(0, width),
-        y: random(-height, 0),
-        w: random(6, 12),
-        h: random(8, 18),
-        color: colors[Math.floor(Math.random() * colors.length)],
-        speedY: random(1.2, 4.2),
-        speedX: random(-1.5, 1.5),
-        rotation: random(0, Math.PI * 2),
-        rotationSpeed: random(-0.08, 0.08),
-        tilt: random(-10, 10),
-      };
-    }
+      function draw(piece) {
+        ctx.save();
+        ctx.translate(piece.x, piece.y);
+        ctx.rotate(piece.rotation);
+        ctx.fillStyle = piece.color;
+        ctx.shadowColor = piece.color;
+        ctx.shadowBlur = blurShadow;
 
-    for (let i = 0; i < 130; i++) {
-      confetti.push(createConfettiPiece());
-    }
-
-    function drawConfettiPiece(piece) {
-      ctx.save();
-      ctx.translate(piece.x, piece.y);
-      ctx.rotate(piece.rotation);
-      ctx.fillStyle = piece.color;
-      ctx.shadowColor = piece.color;
-      ctx.shadowBlur = 10;
-      ctx.fillRect(-piece.w / 2, -piece.h / 2, piece.w, piece.h);
-      ctx.restore();
-    }
-
-    function update() {
-      ctx.clearRect(0, 0, width, height);
-
-      confetti.forEach((piece) => {
-        piece.y += piece.speedY;
-        piece.x += piece.speedX + Math.sin(piece.y * 0.01) * 0.5;
-        piece.rotation += piece.rotationSpeed;
-
-        if (piece.y > height + 20) {
-          piece.y = random(-100, -20);
-          piece.x = random(0, width);
+        if (piece.shape === 'rect') {
+          ctx.fillRect(-piece.w / 2, -piece.h / 2, piece.w, piece.h);
+        } else if (piece.shape === 'circle') {
+          ctx.beginPath();
+          ctx.arc(0, 0, piece.w / 2, 0, Math.PI * 2);
+          ctx.fill();
+        } else {
+          ctx.fillRect(-piece.w / 6, -piece.h / 2, piece.w / 3, piece.h);
         }
 
-        if (piece.x > width + 20) piece.x = -20;
-        if (piece.x < -20) piece.x = width + 20;
+        ctx.restore();
+      }
 
-        drawConfettiPiece(piece);
+      function update() {
+        ctx.clearRect(0, 0, width, height);
+
+        for (const piece of pieces) {
+          piece.y += piece.speedY;
+          piece.x += piece.speedX + Math.sin(piece.y * 0.01) * piece.sway;
+          piece.rotation += piece.rotationSpeed;
+
+          if (piece.y > height + 40) {
+            piece.y = rand(-120, -20);
+            piece.x = rand(0, width);
+          }
+
+          if (piece.x > width + 40) piece.x = -40;
+          if (piece.x < -40) piece.x = width + 40;
+
+          draw(piece);
+        }
+
+        requestAnimationFrame(update);
+      }
+
+      update();
+
+      window.addEventListener('resize', () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
       });
-
-      requestAnimationFrame(update);
     }
 
-    update();
-
-    window.addEventListener('resize', () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
-    });
+    setupConfetti('confettiBack', 140, 0.9, 0.9, 6);
+    setupConfetti('confettiFront', 220, 1.35, 1.25, 12);
   </script>
 </body>
 </html>
