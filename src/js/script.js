@@ -102,6 +102,52 @@ function setupHeroCarousel() {
   }, 5000);
 }
 
+function setupSponsorsCarousel() {
+  const track = document.getElementById('sponsors-track');
+  if (!track) return;
+
+  const slides = Array.from(track.querySelectorAll('.sponsor-slide'));
+  if (slides.length === 0) return;
+
+  const carousel = track.closest('.sponsors-carousel');
+  const prevButton = carousel?.querySelector('.sponsors-control--prev');
+  const nextButton = carousel?.querySelector('.sponsors-control--next');
+  let currentIndex = 0;
+  let autoPlayTimer;
+
+  function update() {
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    slides.forEach((slide, index) => {
+      slide.setAttribute('aria-hidden', String(index !== currentIndex));
+    });
+  }
+
+  function move(delta) {
+    currentIndex = (currentIndex + delta + slides.length) % slides.length;
+    update();
+  }
+
+  function restartAutoPlay() {
+    if (autoPlayTimer) {
+      clearInterval(autoPlayTimer);
+    }
+    autoPlayTimer = setInterval(() => move(1), 4000);
+  }
+
+  prevButton?.addEventListener('click', () => {
+    move(-1);
+    restartAutoPlay();
+  });
+
+  nextButton?.addEventListener('click', () => {
+    move(1);
+    restartAutoPlay();
+  });
+
+  update();
+  restartAutoPlay();
+}
+
 function chunkRender({ items, containerId, buttonId, chunkSize, renderItem }) {
   const container = document.getElementById(containerId);
   const button = document.getElementById(buttonId);
@@ -464,12 +510,13 @@ function setupBoardCards() {
 }
 
 async function loadHomeContent() {
-  const [events, news, vorstand, elferrat, royals] = await Promise.all([
+  const [events, news, vorstand, elferrat, royals, sponsors] = await Promise.all([
     fetch('./src/data/events.json').then((r) => r.json()),
     fetch('./src/data/news.json').then((r) => r.json()),
     fetch('./src/data/vorstand.json').then((r) => r.json()),
     fetch('./src/data/elferrat.json').then((r) => r.json()),
     fetch('./src/data/royals.json').then((r) => r.json()),
+    fetch('./src/data/sponsors.json').then((r) => r.json()),
   ]);
 
   chunkRender({
@@ -599,6 +646,20 @@ async function loadHomeContent() {
   });
 
   setupRoyalsLightbox(normalizedRoyals);
+
+  const sponsorsTrack = document.getElementById('sponsors-track');
+  if (sponsorsTrack) {
+    sponsors.forEach((sponsor) => {
+      if (!sponsor?.src) return;
+      sponsorsTrack.insertAdjacentHTML(
+        'beforeend',
+        `<figure class="sponsor-slide">
+          <img class="sponsor-image" src="${sponsor.src}" alt="${sponsor.alt || 'Sponsor'}" loading="lazy" />
+        </figure>`,
+      );
+    });
+    setupSponsorsCarousel();
+  }
 }
 
 async function loadLinktreeContent() {
