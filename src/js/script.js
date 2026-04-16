@@ -102,6 +102,21 @@ function setupHeroCarousel() {
   }, 5000);
 }
 
+function setupSponsorsMarquee() {
+  const track = document.getElementById('sponsors-track');
+  if (!track) return;
+
+  const slides = Array.from(track.querySelectorAll('.sponsor-slide'));
+  if (slides.length <= 1) return;
+
+  const cloneMarkup = slides.map((slide) => slide.outerHTML).join('');
+  track.insertAdjacentHTML('beforeend', cloneMarkup);
+  track.setAttribute('aria-hidden', 'false');
+
+  const durationInSeconds = Math.max(16, slides.length * 3.2);
+  track.style.setProperty('--sponsors-marquee-duration', `${durationInSeconds}s`);
+}
+
 function chunkRender({ items, containerId, buttonId, chunkSize, renderItem }) {
   const container = document.getElementById(containerId);
   const button = document.getElementById(buttonId);
@@ -464,12 +479,13 @@ function setupBoardCards() {
 }
 
 async function loadHomeContent() {
-  const [events, news, vorstand, elferrat, royals] = await Promise.all([
+  const [events, news, vorstand, elferrat, royals, sponsors] = await Promise.all([
     fetch('./src/data/events.json').then((r) => r.json()),
     fetch('./src/data/news.json').then((r) => r.json()),
     fetch('./src/data/vorstand.json').then((r) => r.json()),
     fetch('./src/data/elferrat.json').then((r) => r.json()),
     fetch('./src/data/royals.json').then((r) => r.json()),
+    fetch('./src/data/sponsors.json').then((r) => r.json()),
   ]);
 
   chunkRender({
@@ -599,6 +615,20 @@ async function loadHomeContent() {
   });
 
   setupRoyalsLightbox(normalizedRoyals);
+
+  const sponsorsTrack = document.getElementById('sponsors-track');
+  if (sponsorsTrack) {
+    sponsors.forEach((sponsor) => {
+      if (!sponsor?.src) return;
+      sponsorsTrack.insertAdjacentHTML(
+        'beforeend',
+        `<figure class="sponsor-slide">
+          <img class="sponsor-image" src="${sponsor.src}" alt="${sponsor.alt || 'Sponsor'}" loading="lazy" />
+        </figure>`,
+      );
+    });
+    setupSponsorsMarquee();
+  }
 }
 
 async function loadLinktreeContent() {
