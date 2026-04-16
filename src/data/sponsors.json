@@ -1,0 +1,10 @@
+[
+  {"src": "./src/img/sponsors/blaschkeBau.jpg", "alt":  "Blaschke Bau"},
+  {"src": "./src/img/sponsors/EdekaNiebisch.jpg", "alt":  "Edeka Niebisch"},
+  {"src": "./src/img/sponsors/fbb.png", "alt":  "FBB"},
+  {"src": "./src/img/sponsors/Handelshof.png", "alt": "Handelshof"},
+  {"src": "./src/img/sponsors/Roye.png", "alt":  "Zahnarztpraxis Roye"},
+  {"src": "./src/img/sponsors/StadtSandersdorf.jpg", "alt":  "Stadt Sandersdorf-Brehna"},
+  {"src": "./src/img/sponsors/ubunitel.png", "alt":  "ub.unitel"},
+  {"src": "./src/img/sponsors/vetter.jpg", "alt":  "Vetter Touristik"}
+]

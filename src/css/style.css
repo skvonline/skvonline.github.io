@@ -157,7 +157,7 @@ a {
     font-size: clamp(1rem, 2.4vw, 1.3rem);
 }
 
-.events {
+.section-blue {
     background: linear-gradient(135deg, #14368f, #1f4ed8);
     color: #fff;
 }
@@ -435,7 +435,7 @@ a {
     color: #475569;
 }
 
-.royals-section {
+.section-lightblue {
     background: radial-gradient(circle at 12% 20%, rgba(31, 78, 216, 0.16), transparent 34%),
     radial-gradient(circle at 88% 85%, rgba(14, 43, 125, 0.15), transparent 30%),
     var(--skv-light);
