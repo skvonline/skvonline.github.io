@@ -102,6 +102,29 @@ function setupHeroCarousel() {
   }, 5000);
 }
 
+async function loadHomeGallery() {
+  const galleryContainer = document.getElementById('home-gallery-slides');
+  if (!galleryContainer) return;
+
+  const galleryItems = await fetch('./src/data/home-gallery.json').then((response) => response.json());
+  if (!Array.isArray(galleryItems) || galleryItems.length === 0) {
+    return;
+  }
+
+  galleryItems.forEach((item, index) => {
+    if (!item?.src) {
+      return;
+    }
+
+    const isActiveClass = index === 0 ? ' active' : '';
+    const altText = item.alt || 'Bild aus der Home-Gallery';
+    galleryContainer.insertAdjacentHTML(
+      'beforeend',
+      `<img class="hero-slide${isActiveClass}" src="${item.src}" alt="${altText}" loading="lazy" />`,
+    );
+  });
+}
+
 function setupSponsorsMarquee() {
   const track = document.getElementById('sponsors-track');
   if (!track) return;
@@ -669,6 +692,7 @@ async function loadLinktreeContent() {
     normalizeComponentLinks(page);
     setupMobileMenu();
     setupHeaderSmoothScroll();
+    await loadHomeGallery();
     setupHeroCarousel();
     await loadHomeContent();
     return;
