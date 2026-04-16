@@ -40,7 +40,7 @@ a {
 }
 
 .section {
-    padding: 4rem 0;
+    padding: 2rem 0;
 }
 
 .section-alt {
@@ -207,12 +207,14 @@ a {
     text-align: left;
 }
 
+#sponsors {
+    padding-bottom: 0;
+    background: #fff;
+}
+
 .sponsors-marquee {
     margin-top: 1.5rem;
     overflow: hidden;
-    border-radius: 16px;
-    background: #ffffff;
-    box-shadow: 0 8px 20px rgba(30, 41, 59, 0.13);
 }
 
 .sponsors-track {
@@ -237,10 +239,6 @@ a {
     width: auto;
     height: auto;
     object-fit: contain;
-}
-
-.sponsors-marquee:hover .sponsors-track {
-    animation-play-state: paused;
 }
 
 @keyframes sponsors-marquee {
