@@ -102,50 +102,19 @@ function setupHeroCarousel() {
   }, 5000);
 }
 
-function setupSponsorsCarousel() {
+function setupSponsorsMarquee() {
   const track = document.getElementById('sponsors-track');
   if (!track) return;
 
   const slides = Array.from(track.querySelectorAll('.sponsor-slide'));
-  if (slides.length === 0) return;
+  if (slides.length <= 1) return;
 
-  const carousel = track.closest('.sponsors-carousel');
-  const prevButton = carousel?.querySelector('.sponsors-control--prev');
-  const nextButton = carousel?.querySelector('.sponsors-control--next');
-  let currentIndex = 0;
-  let autoPlayTimer;
+  const cloneMarkup = slides.map((slide) => slide.outerHTML).join('');
+  track.insertAdjacentHTML('beforeend', cloneMarkup);
+  track.setAttribute('aria-hidden', 'false');
 
-  function update() {
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
-    slides.forEach((slide, index) => {
-      slide.setAttribute('aria-hidden', String(index !== currentIndex));
-    });
-  }
-
-  function move(delta) {
-    currentIndex = (currentIndex + delta + slides.length) % slides.length;
-    update();
-  }
-
-  function restartAutoPlay() {
-    if (autoPlayTimer) {
-      clearInterval(autoPlayTimer);
-    }
-    autoPlayTimer = setInterval(() => move(1), 4000);
-  }
-
-  prevButton?.addEventListener('click', () => {
-    move(-1);
-    restartAutoPlay();
-  });
-
-  nextButton?.addEventListener('click', () => {
-    move(1);
-    restartAutoPlay();
-  });
-
-  update();
-  restartAutoPlay();
+  const durationInSeconds = Math.max(16, slides.length * 3.2);
+  track.style.setProperty('--sponsors-marquee-duration', `${durationInSeconds}s`);
 }
 
 function chunkRender({ items, containerId, buttonId, chunkSize, renderItem }) {
@@ -658,7 +627,7 @@ async function loadHomeContent() {
         </figure>`,
       );
     });
-    setupSponsorsCarousel();
+    setupSponsorsMarquee();
   }
 }
 
