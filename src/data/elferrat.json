@@ -10,14 +10,14 @@
     "image": "./src/img/verein/elferrat/ivo-gottloeber.svg"
   },
   {
-    "name": "Wolfram Heide",
-    "role": "Print Medien",
-    "image": "./src/img/verein/elferrat/wolfram-heide.svg"
-  },
-  {
     "name": "Volker Heide",
     "role": "Webminister",
     "image": "./src/img/verein/elferrat/volker-heide.svg"
+  },
+  {
+    "name": "Wolfram Heide",
+    "role": "Print Medien",
+    "image": "./src/img/verein/elferrat/wolfram-heide.svg"
   },
   {
     "name": "Heike Nywelt",
