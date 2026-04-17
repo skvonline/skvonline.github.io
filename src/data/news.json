@@ -5,8 +5,6 @@
     "text": "Heute hat der SKV mit die Stadt geputzt. Es waren ca. 20 Vereinsmitglieder am Start. Auf Facebook und Instagram erhaltet Ihr ein paar Eindrücke vom Frühjahrsputz:",
     "image": "./src/img/news/fruehjahrsputz.jpg",
     "deleteAt": "2027-04-10-23:59",
-    "label": "Facebook",
-    "url": "https://www.facebook.com/share/p/17tCVKRWQL/",
     "links": [
       {
         "label": "Instagram",
@@ -27,11 +25,9 @@
     "text": "Unsere Tanzgruppen Unique und Zuckerpuppen werden euch beim Weinfrühling in Sandersdorf mit Ihren Tänzen verzaubern.",
     "image": "./src/img/news/weinfruehling.png",
     "deleteAt": "2027-04-07-23:59",
-    "label": "Instagram",
-    "url": "https://www.instagram.com/skv_zuckerpuppen",
     "links": [
       {
-        "label": "Mehr",
+        "label": "Mehr erfahren",
         "url": "https://www.sandersdorf-brehna.de/Meine-Stadt/Stadt-Land-Kultur/Veranstaltungen/Weinfr%C3%BChling-",
         "type": "more"
       },
@@ -49,15 +45,13 @@
     "large": true
   },
   {
-    "title": "abc",
+    "title": "Xyz",
     "date": "05.04.2026",
     "text": "BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBla",
     "deleteAt": "2027-04-04-23:59",
-    "label": "E-Mail",
-    "url": "mailto:info@skvonline.de",
     "links": [
       {
-        "label": "Mehr",
+        "label": "Mehr erfahren",
         "url": "https://www.sandersdorf-brehna.de/Meine-Stadt/Stadt-Land-Kultur/Veranstaltungen/Weinfr%C3%BChling-",
         "type": "more"
       },
@@ -74,8 +68,6 @@
     "date": "30.03.2026",
     "text": "BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBla",
     "deleteAt": "2027-03-29-23:59",
-    "label": "E-Mail",
-    "url": "mailto:info@skvonline.de",
     "links": [
       {
         "label": "E-Mail",
@@ -90,8 +82,6 @@
     "date": "22.03.2026",
     "text": "BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBla",
     "deleteAt": "2027-03-21-23:59",
-    "label": "Facebook",
-    "url": "https://www.facebook.com/",
     "links": [
       {
         "label": "Instagram",
