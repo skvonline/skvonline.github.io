@@ -1,6 +1,6 @@
 [
-  {"src": "./src/img/home-gallery/01.JPG", "alt":  "Titelbild"},
-  {"src": "./src/img/home-gallery/02.JPG", "alt":  "Straßenkarneval in Sandersdorf"},
-  {"src": "./src/img/home-gallery/03.JPG", "alt":  "Kannonier Oli"},
-  {"src": "./src/img/home-gallery/04.JPG", "alt":  "Präsident Gerd"}
+  {"src": "./src/img/gallerys/home-gallery/01.JPG", "alt":  "Titelbild"},
+  {"src": "./src/img/gallerys/home-gallery/02.JPG", "alt":  "Straßenkarneval in Sandersdorf"},
+  {"src": "./src/img/gallerys/home-gallery/03.JPG", "alt":  "Kannonier Oli"},
+  {"src": "./src/img/gallerys/home-gallery/04.JPG", "alt":  "Präsident Gerd"}
 ]
