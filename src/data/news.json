@@ -47,17 +47,15 @@
     "large": true
   },
   {
-    "title": "abc",
+    "title": "abs",
     "date": "05.04.2026",
     "text": "BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBla",
     "deleteAt": "2027-04-04-23:59",
-    "label": "E-Mail",
     "url": "mailto:info@skvonline.de",
+    "label": "E-Mail",
     "links": [
       {
-        "label": "Mehr",
-        "url": "https://www.sandersdorf-brehna.de/Meine-Stadt/Stadt-Land-Kultur/Veranstaltungen/Weinfr%C3%BChling-",
-        "type": "more"
+        "url": "https://www.sandersdorf-brehna.de/Meine-Stadt/Stadt-Land-Kultur/Veranstaltungen/Weinfr%C3%BChling-"
       },
       {
         "label": "E-Mail",
