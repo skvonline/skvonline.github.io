@@ -13,7 +13,8 @@
     "icon": "facebook",
     "text": "Facebook",
     "url": "https://www.facebook.com/skvonline"
-  },{
+  },
+  {
     "icon": "download",
     "text": "Anmeldung Umzug",
     "url": "./src/download/AnmeldungUmzugSandersdorf.pdf"
