@@ -3,30 +3,56 @@
     "name": "Gerd Ritter",
     "role": "Präsident",
     "image": "./src/img/verein/vorstand/gerd-ritter.png",
-    "tags": ["Repräsentation", "Vereinsleitung", "Teamführung", "Netzwerk"],
+    "tags": [
+      "Repräsentation",
+      "Vereinsleitung",
+      "Teamführung",
+      "Netzwerk"
+    ],
     "description": "Gerd Ritter verantwortet als Präsident die grundlegende Ausrichtung des Vereins und begleitet wichtige Entscheidungen. Dabei steht er im engen Austausch mit dem gesamten Team.",
     "socials": [
-      { "label": "E-Mail", "href": "mailto:gerd.ritter@skvonline.de", "className": "liEmail", "icon": "@" }
+      {
+        "label": "E-Mail",
+        "href": "mailto:gerd.ritter@skvonline.de",
+        "className": "liEmail",
+        "icon": "@"
+      }
     ]
   },
   {
     "name": "Eva Klupsch",
     "role": "Vizepräsidentin",
     "image": "./src/img/verein/vorstand/eva-klupsch.png",
-    "tags": ["Behörden", "Anträge"],
+    "tags": [
+      "Behörden",
+      "Anträge"
+    ],
     "description": "Als Vizepräsidentin bringt Eva Klupsch eine Fülle von Fachwissen mit. Ihre organisatorischen Fähigkeiten machen sie zu einer unverzichtbaren Kraft im Vorstand.",
     "socials": [
-      { "label": "E-Mail", "href": "mailto:eva.klupsch@skvonline.de", "className": "liEmail", "icon": "@" }
+      {
+        "label": "E-Mail",
+        "href": "mailto:eva.klupsch@skvonline.de",
+        "className": "liEmail",
+        "icon": "@"
+      }
     ]
   },
   {
     "name": "Ramona Richter",
     "role": "Schatzmeisterin",
     "image": "./src/img/verein/vorstand/ramona-richter.png",
-    "tags": ["Finanzen", "Mitglieder"],
+    "tags": [
+      "Finanzen",
+      "Mitglieder"
+    ],
     "description": "Ramona Richter ist unsere Finanzexpertin des Vereins. Mit einem scharfen Auge für Zahlen hält sie unsere Finanzen stabil und transparent.",
     "socials": [
-      { "label": "E-Mail", "href": "mailto:ramona.richter@skvonline.de", "className": "liEmail", "icon": "@" }
+      {
+        "label": "E-Mail",
+        "href": "mailto:ramona.richter@skvonline.de",
+        "className": "liEmail",
+        "icon": "@"
+      }
     ]
   }
 ]
