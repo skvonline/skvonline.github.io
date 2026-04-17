@@ -4,26 +4,46 @@
     "date": "09.05.2026",
     "time": "16:30 Uhr",
     "location": "Platz der Deutschen Einheit",
-    "image": "./src/img/veranstaltungen/weinfruehling.png",
+    "image": "./src/img/events/weinfruehling.png",
     "publishAt": "2026-04-01-00:00",
-    "deleteAt": "2026-05-10-00:00",
+    "label": "Maps",
+    "url": "https://share.google/tL5HyahC52M0jCNGp",
     "links": [
-      { "type": "more", "label": "Mehr erfahren", "url": "https://www.sandersdorf-brehna.de/Meine-Stadt/Stadt-Land-Kultur/Veranstaltungen/Weinfr%C3%BChling-" },
-      { "type": "maps", "label": "Maps", "url": "https://share.google/tL5HyahC52M0jCNGp" }
-    ]
+      {
+        "label": "Mehr",
+        "url": "https://www.sandersdorf-brehna.de/Meine-Stadt/Stadt-Land-Kultur/Veranstaltungen/Weinfr%C3%BChling-",
+        "type": "more"
+      },
+      {
+        "label": "Maps",
+        "url": "https://share.google/tL5HyahC52M0jCNGp",
+        "type": "maps"
+      }
+    ],
+    "deleteAt": "2026-05-09-23:59"
   },
   {
     "title": "Sessions-Eröffnung",
     "date": "11.11.2026",
     "time": "11:11 Uhr",
     "location": "Rathaus Sandersdorf",
-    "image": "./src/img/veranstaltungen/sessionseroeffnung.png",
+    "image": "./src/img/events/sessionseroeffnung.png",
     "publishAt": "2026-04-01-00:00",
-    "deleteAt": "2026-11-12-00:00",
+    "label": "E-Mail",
+    "url": "mailto:info@skvonline.de",
     "links": [
-      { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/vgFrF9jjJLxYL7fg8" },
-      { "type": "mail", "label": "E-Mail", "url": "mailto:info@skvonline.de" }
-    ]
+      {
+        "label": "Maps",
+        "url": "https://maps.app.goo.gl/vgFrF9jjJLxYL7fg8",
+        "type": "maps"
+      },
+      {
+        "label": "E-Mail",
+        "url": "mailto:info@skvonline.de",
+        "type": "mail"
+      }
+    ],
+    "deleteAt": "2026-11-11-23:59"
   },
   {
     "title": "1. Lumpenball",
@@ -33,11 +53,21 @@
     "preis": "19,50 €",
     "location": "Mehrzweckhalle Sandersdorf",
     "publishAt": "2026-04-01-00:00",
-    "deleteAt": "2026-11-15-00:00",
+    "label": "E-Mail",
+    "url": "mailto:info@skvonline.de",
     "links": [
-      { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/tAwJbH2cMwa1GWu1A" },
-      { "type": "mail", "label": "E-Mail", "url": "mailto:info@skvonline.de" }
-    ]
+      {
+        "label": "Maps",
+        "url": "https://maps.app.goo.gl/tAwJbH2cMwa1GWu1A",
+        "type": "maps"
+      },
+      {
+        "label": "E-Mail",
+        "url": "mailto:info@skvonline.de",
+        "type": "mail"
+      }
+    ],
+    "deleteAt": "2026-11-14-23:59"
   },
   {
     "title": "2. Lumpenball",
@@ -47,11 +77,21 @@
     "preis": "19,50 €",
     "location": "Mehrzweckhalle Sandersdorf",
     "publishAt": "2026-04-01-00:00",
-    "deleteAt": "2026-11-21-00:00",
+    "label": "E-Mail",
+    "url": "mailto:info@skvonline.de",
     "links": [
-      { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/tAwJbH2cMwa1GWu1A" },
-      { "type": "mail", "label": "E-Mail", "url": "mailto:info@skvonline.de" }
-    ]
+      {
+        "label": "Maps",
+        "url": "https://maps.app.goo.gl/tAwJbH2cMwa1GWu1A",
+        "type": "maps"
+      },
+      {
+        "label": "E-Mail",
+        "url": "mailto:info@skvonline.de",
+        "type": "mail"
+      }
+    ],
+    "deleteAt": "2026-11-20-23:59"
   },
   {
     "title": "3. Lumpenball",
@@ -61,10 +101,20 @@
     "preis": "19,50 €",
     "location": "Mehrzweckhalle Sandersdorf",
     "publishAt": "2026-04-01-00:00",
-    "deleteAt": "2026-11-22-00:00",
+    "label": "E-Mail",
+    "url": "mailto:info@skvonline.de",
     "links": [
-      { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/tAwJbH2cMwa1GWu1A" },
-      { "type": "mail", "label": "E-Mail", "url": "mailto:info@skvonline.de" }
-    ]
+      {
+        "label": "Maps",
+        "url": "https://maps.app.goo.gl/tAwJbH2cMwa1GWu1A",
+        "type": "maps"
+      },
+      {
+        "label": "E-Mail",
+        "url": "mailto:info@skvonline.de",
+        "type": "mail"
+      }
+    ],
+    "deleteAt": "2026-11-21-23:59"
   }
 ]
