@@ -14,6 +14,8 @@
 {
     "title": "Auftritt beim Weinfrühling in Sandersdorf",
     "date": "11.04.2026",
+    "publishAt": "2026-04-08-08:00",
+    "deleteAt": "2026-05-15-23:59",
     "text": "Unsere Tanzgruppen Unique und Zuckerpuppen werden euch beim Weinfrühling in Sandersdorf mit Ihren Tänzen verzaubern.",
     "image": "./src/img/home-gallery/eröffnung.png",
     "links": [
@@ -23,8 +25,10 @@
       { "type": "tiktok", "label": "TikTok", "url": "https://www.tiktok.com/" },
       { "type": "mail", "label": "E-Mail", "url": "mailto:kontakt@skvonline.de" }
     ]
-  }
+}
 ```
+
+`publishAt` und `deleteAt` steuern die Sichtbarkeit. Format: `jjjj-mm-tt-hh:mm` (z. B. `2026-11-11-12:00`).
 
 # Veranstaltung
 
@@ -32,6 +36,8 @@
 {
     "title": "1. Lumpenball",
     "date": "14.11.2026",
+    "publishAt": "2026-09-01-00:00",
+    "deleteAt": "2026-11-15-00:00",
     "time": "19:11 Uhr",
     "einlass": "18:11 Uhr",
     "preis": "19,50 €",
@@ -45,7 +51,7 @@
       { "type": "maps", "label": "Maps", "url": "https://www.maps.google.com/" },
       { "type": "mail", "label": "E-Mail", "url": "mailto:kontakt@skvonline.de" }
     ]
-  }
+}
 ```
 
 # Vorstand

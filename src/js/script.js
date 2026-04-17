@@ -163,6 +163,35 @@ function chunkRender({ items, containerId, buttonId, chunkSize, renderItem }) {
   }
 }
 
+function parseVisibilityTimestamp(value) {
+  if (!value || typeof value !== 'string') {
+    return null;
+  }
+
+  const match = value.match(/^(\d{4})-(\d{2})-(\d{2})-(\d{2}):(\d{2})$/);
+  if (!match) {
+    return null;
+  }
+
+  const [, year, month, day, hour, minute] = match;
+  return new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute));
+}
+
+function isVisibleByWindow(entry, now = new Date()) {
+  const publishAt = parseVisibilityTimestamp(entry?.publishAt);
+  const deleteAt = parseVisibilityTimestamp(entry?.deleteAt);
+
+  if (publishAt && now < publishAt) {
+    return false;
+  }
+
+  if (deleteAt && now >= deleteAt) {
+    return false;
+  }
+
+  return true;
+}
+
 const NEWS_LINK_ICONS = {
   instagram:
     '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"></rect><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"></circle></svg>',
@@ -502,7 +531,7 @@ function setupBoardCards() {
 }
 
 async function loadHomeContent() {
-  const [events, news, vorstand, elferrat, royals, sponsors] = await Promise.all([
+  const [eventsRaw, newsRaw, vorstand, elferrat, royals, sponsors] = await Promise.all([
     fetch('./src/data/events.json').then((r) => r.json()),
     fetch('./src/data/news.json').then((r) => r.json()),
     fetch('./src/data/vorstand.json').then((r) => r.json()),
@@ -510,6 +539,8 @@ async function loadHomeContent() {
     fetch('./src/data/royals.json').then((r) => r.json()),
     fetch('./src/data/sponsors.json').then((r) => r.json()),
   ]);
+  const events = Array.isArray(eventsRaw) ? eventsRaw.filter((entry) => isVisibleByWindow(entry)) : [];
+  const news = Array.isArray(newsRaw) ? newsRaw.filter((entry) => isVisibleByWindow(entry)) : [];
 
   chunkRender({
     items: events,

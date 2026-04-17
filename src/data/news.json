@@ -4,6 +4,7 @@
     "date": "11.04.2026",
     "text": "Heute hat der SKV mit die Stadt geputzt. Es waren ca. 20 Vereinsmitglieder am Start. Auf Facebook und Instagram erhaltet Ihr ein paar Eindrücke vom Frühjahrsputz:",
     "image": "./src/img/veranstaltungenUndNews/fruehjahrsputz.jpg",
+    "deleteAt": "2026-06-30-23:59",
     "links": [
       {
         "type": "instagram",
@@ -23,6 +24,7 @@
     "date": "08.04.2026",
     "text": "Unsere Tanzgruppen Unique und Zuckerpuppen werden euch beim Weinfrühling in Sandersdorf mit Ihren Tänzen verzaubern.",
     "image": "./src/img/veranstaltungenUndNews/weinfruehling.png",
+    "deleteAt": "2026-05-15-23:59",
     "links": [
       {
         "type": "more",
@@ -46,6 +48,7 @@
     "title": "xyz",
     "date": "05.04.2026",
     "text": "BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBla",
+    "deleteAt": "2026-05-31-23:59",
     "links": [
       {
         "type": "more",
@@ -63,6 +66,7 @@
     "title": "xyz",
     "date": "30.03.2026",
     "text": "BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBla",
+    "deleteAt": "2026-05-15-23:59",
     "links": [
       {
         "type": "mail",
@@ -75,6 +79,7 @@
     "title": "xyz",
     "date": "22.03.2026",
     "text": "BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBla",
+    "deleteAt": "2026-05-01-23:59",
     "links": [
       {
         "type": "instagram",
