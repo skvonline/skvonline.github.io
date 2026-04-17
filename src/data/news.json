@@ -5,16 +5,18 @@
     "text": "Heute hat der SKV mit die Stadt geputzt. Es waren ca. 20 Vereinsmitglieder am Start. Auf Facebook und Instagram erhaltet Ihr ein paar Eindrücke vom Frühjahrsputz:",
     "image": "./src/img/news/fruehjahrsputz.jpg",
     "deleteAt": "2027-04-10-23:59",
+    "label": "Facebook",
+    "url": "https://www.facebook.com/share/p/17tCVKRWQL/",
     "links": [
       {
-        "type": "instagram",
         "label": "Instagram",
-        "url": "https://www.instagram.com/p/DW_hgIDCDfI/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+        "url": "https://www.instagram.com/p/DW_hgIDCDfI/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+        "type": "instagram"
       },
       {
-        "type": "facebook",
         "label": "Facebook",
-        "url": "https://www.facebook.com/share/p/17tCVKRWQL/"
+        "url": "https://www.facebook.com/share/p/17tCVKRWQL/",
+        "type": "facebook"
       }
     ],
     "large": true
@@ -25,72 +27,81 @@
     "text": "Unsere Tanzgruppen Unique und Zuckerpuppen werden euch beim Weinfrühling in Sandersdorf mit Ihren Tänzen verzaubern.",
     "image": "./src/img/news/weinfruehling.png",
     "deleteAt": "2027-04-07-23:59",
+    "url": "https://www.instagram.com/skv_zuckerpuppen",
+    "label": "Instagram",
     "links": [
       {
-        "type": "more",
-        "label": "Mehr erfahren",
         "url": "https://www.sandersdorf-brehna.de/Meine-Stadt/Stadt-Land-Kultur/Veranstaltungen/Weinfr%C3%BChling-"
       },
       {
-        "type": "instagram",
         "label": "Instagram",
-        "url": "https://www.instagram.com/skv_unique"
+        "url": "https://www.instagram.com/skv_unique",
+        "type": "instagram"
       },
       {
-        "type": "instagram",
         "label": "Instagram",
-        "url": "https://www.instagram.com/skv_zuckerpuppen"
+        "url": "https://www.instagram.com/skv_zuckerpuppen",
+        "type": "instagram"
       }
     ],
     "large": true
   },
   {
-    "title": "xyz",
+    "title": "abc",
     "date": "05.04.2026",
     "text": "BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBla",
     "deleteAt": "2027-04-04-23:59",
+    "label": "E-Mail",
+    "url": "mailto:info@skvonline.de",
     "links": [
       {
-        "type": "more",
-        "label": "Mehr erfahren",
-        "url": "https://www.sandersdorf-brehna.de/Meine-Stadt/Stadt-Land-Kultur/Veranstaltungen/Weinfr%C3%BChling-"
+        "label": "Mehr",
+        "url": "https://www.sandersdorf-brehna.de/Meine-Stadt/Stadt-Land-Kultur/Veranstaltungen/Weinfr%C3%BChling-",
+        "type": "more"
       },
       {
-        "type": "mail",
         "label": "E-Mail",
-        "url": "mailto:info@skvonline.de"
+        "url": "mailto:info@skvonline.de",
+        "type": "mail"
       }
-    ]
+    ],
+    "large": false
   },
   {
     "title": "xyz",
     "date": "30.03.2026",
     "text": "BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBla",
     "deleteAt": "2027-03-29-23:59",
+    "label": "E-Mail",
+    "url": "mailto:info@skvonline.de",
     "links": [
       {
-        "type": "mail",
         "label": "E-Mail",
-        "url": "mailto:info@skvonline.de"
+        "url": "mailto:info@skvonline.de",
+        "type": "mail"
       }
-    ]
+    ],
+    "large": false
   },
   {
     "title": "xyz",
     "date": "22.03.2026",
     "text": "BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBla",
     "deleteAt": "2027-03-21-23:59",
+    "label": "Facebook",
+    "url": "https://www.facebook.com/",
     "links": [
       {
-        "type": "instagram",
         "label": "Instagram",
-        "url": "https://www.instagram.com/"
+        "url": "https://www.instagram.com/",
+        "type": "instagram"
       },
       {
-        "type": "facebook",
         "label": "Facebook",
-        "url": "https://www.facebook.com/"
+        "url": "https://www.facebook.com/",
+        "type": "facebook"
       }
-    ]
+    ],
+    "large": false
   }
 ]
