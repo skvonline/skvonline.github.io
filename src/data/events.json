@@ -18,7 +18,7 @@
     "time": "11:11 Uhr",
     "location": "Rathaus Sandersdorf",
     "image": "./src/img/veranstaltungenUndNews/sessionseroeffnung.png",
-    "publishAt": "2026-09-01-00:00",
+    "publishAt": "2026-04-01-00:00",
     "deleteAt": "2026-11-12-00:00",
     "links": [
       { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/vgFrF9jjJLxYL7fg8" },
@@ -32,7 +32,7 @@
     "einlass": "18:11 Uhr",
     "preis": "19,50 €",
     "location": "Mehrzweckhalle Sandersdorf",
-    "publishAt": "2026-09-01-00:00",
+    "publishAt": "2026-04-01-00:00",
     "deleteAt": "2026-11-15-00:00",
     "links": [
       { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/tAwJbH2cMwa1GWu1A" },
@@ -46,7 +46,7 @@
     "einlass": "18:11 Uhr",
     "preis": "19,50 €",
     "location": "Mehrzweckhalle Sandersdorf",
-    "publishAt": "2026-09-01-00:00",
+    "publishAt": "2026-04-01-00:00",
     "deleteAt": "2026-11-21-00:00",
     "links": [
       { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/tAwJbH2cMwa1GWu1A" },
@@ -60,7 +60,7 @@
     "einlass": "18:11 Uhr",
     "preis": "19,50 €",
     "location": "Mehrzweckhalle Sandersdorf",
-    "publishAt": "2026-09-01-00:00",
+    "publishAt": "2026-04-01-00:00",
     "deleteAt": "2026-11-22-00:00",
     "links": [
       { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/tAwJbH2cMwa1GWu1A" },

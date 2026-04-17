@@ -106,7 +106,7 @@ async function loadHomeGallery() {
   const galleryContainer = document.getElementById('home-gallery-slides');
   if (!galleryContainer) return;
 
-  const galleryItems = await fetch('./src/data/home-gallery.json').then((response) => response.json());
+  const galleryItems = await fetch('./src/data/gallerys/home-gallery.json').then((response) => response.json());
   if (!Array.isArray(galleryItems) || galleryItems.length === 0) {
     return;
   }
@@ -543,7 +543,7 @@ async function loadHomeContent() {
     fetch('./src/data/vorstand.json').then((r) => r.json()),
     fetch('./src/data/elferrat.json').then((r) => r.json()),
     fetch('./src/data/royals.json').then((r) => r.json()),
-    fetch('./src/data/sponsors.json').then((r) => r.json()),
+    fetch('./src/data/gallerys/sponsors.json').then((r) => r.json()),
   ]);
   const events = Array.isArray(eventsRaw) ? eventsRaw.filter((entry) => isVisibleByWindow(entry)) : [];
   const news = Array.isArray(newsRaw) ? newsRaw.filter((entry) => isVisibleByWindow(entry)) : [];

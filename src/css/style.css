@@ -303,10 +303,13 @@ a {
 
 .event-card-body {
     flex: 1;
+    text-align: left;
 }
 
-.event-card-body h3 {
+.event-card-body h3,
+.event-card-body p {
     margin-bottom: 0.45rem;
+    text-align: left;
 }
 
 .event-details {
