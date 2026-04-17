@@ -177,9 +177,15 @@ function parseVisibilityTimestamp(value) {
   return new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute));
 }
 
+function getFirstDefinedValue(entry, keys) {
+  return keys.find((key) => entry?.[key] !== undefined && entry?.[key] !== null && String(entry[key]).trim() !== '');
+}
+
 function isVisibleByWindow(entry, now = new Date()) {
-  const publishAt = parseVisibilityTimestamp(entry?.publishAt);
-  const deleteAt = parseVisibilityTimestamp(entry?.deleteAt);
+  const publishKey = getFirstDefinedValue(entry, ['publishAt', 'publicationAt', 'releaseAt', 'veroeffentlichungAb']);
+  const deleteKey = getFirstDefinedValue(entry, ['deleteAt', 'deleteDate', 'removeAt', 'loeschzeitpunkt']);
+  const publishAt = parseVisibilityTimestamp(publishKey ? entry[publishKey] : null);
+  const deleteAt = parseVisibilityTimestamp(deleteKey ? entry[deleteKey] : null);
 
   if (publishAt && now < publishAt) {
     return false;
