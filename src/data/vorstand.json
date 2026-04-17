@@ -4,7 +4,7 @@
     "role": "Präsident",
     "image": "src/img/verein/vorstand/gerd-ritter.png",
     "tags": ["Repräsentation", "Vereinsleitung", "Teamführung", "Netzwerk"],
-    "description": "Gerd Ritter ist der Präsident unseres Vereins. Seine Entschlossenheit und sein Engagement sind inspirierend für uns alle.",
+    "description": "Gerd Ritter verantwortet als Präsident die grundlegende Ausrichtung des Vereins und begleitet wichtige Entscheidungen. Dabei steht er im engen Austausch mit dem gesamten Team.",
     "socials": [
       { "label": "E-Mail", "href": "mailto:gerd.ritter@skvonline.de", "className": "liEmail", "icon": "@" }
     ]
