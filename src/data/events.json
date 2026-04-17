@@ -4,7 +4,7 @@
     "date": "09.05.2026",
     "time": "16:30 Uhr",
     "location": "Platz der Deutschen Einheit",
-    "image": "./src/img/veranstaltungenUndNews/weinfruehling.png",
+    "image": "./src/img/veranstaltungen/weinfruehling.png",
     "publishAt": "2026-04-01-00:00",
     "deleteAt": "2026-05-10-00:00",
     "links": [
@@ -17,7 +17,7 @@
     "date": "11.11.2026",
     "time": "11:11 Uhr",
     "location": "Rathaus Sandersdorf",
-    "image": "./src/img/veranstaltungenUndNews/sessionseroeffnung.png",
+    "image": "./src/img/veranstaltungen/sessionseroeffnung.png",
     "publishAt": "2026-04-01-00:00",
     "deleteAt": "2026-11-12-00:00",
     "links": [

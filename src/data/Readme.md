@@ -8,7 +8,8 @@ Dieses Dokument beschreibt **alle JSON-Dateien** im Projekt, inklusive:
 - vollständige Formatvorlagen,
 - Validierungs- und Pflegehinweise.
 
-> Wichtig: Die Anwendung verarbeitet viele Felder "fehlertolerant". Das heißt: Manche Felder sind technisch optional, aber für sinnvolle Darstellung in der Webseite **fachlich Pflicht**.
+> Wichtig: Die Anwendung verarbeitet viele Felder "fehlertolerant". Das heißt: Manche Felder sind technisch optional,
+> aber für sinnvolle Darstellung in der Webseite **fachlich Pflicht**.
 
 ---
 
@@ -26,12 +27,12 @@ Dieses Dokument beschreibt **alle JSON-Dateien** im Projekt, inklusive:
 Es gibt im Projekt zwei unterschiedliche Datumsformate:
 
 1. **Anzeigeformat** (`date`):
-   - `TT.MM.JJJJ`
-   - Beispiel: `11.04.2026`
+    - `TT.MM.JJJJ`
+    - Beispiel: `11.04.2026`
 
 2. **Sichtbarkeitsfenster** (`publishAt`, `deleteAt`):
-   - `JJJJ-MM-TT-HH:mm`
-   - Beispiel: `2026-11-11-12:00`
+    - `JJJJ-MM-TT-HH:mm`
+    - Beispiel: `2026-11-11-12:00`
 
 ### 1.3 Sichtbarkeitslogik (`publishAt` / `deleteAt`)
 
@@ -74,25 +75,24 @@ Inhalte für den News-Bereich auf der Startseite.
 
 ### 2.2 Felder pro Eintrag
 
-| Feld | Typ | Pflicht | Beschreibung |
-|---|---|---|---|
-| `title` | `string` | Ja (fachlich) | Überschrift der News. |
-| `date` | `string` | Empfohlen | Anzeige-Datum (`TT.MM.JJJJ`). |
-| `text` | `string` | Ja (fachlich) | News-Text. |
-| `image` | `string` | Optional | Bildpfad. |
-| `publishAt` | `string` | Optional | Start der Sichtbarkeit (`JJJJ-MM-TT-HH:mm`). |
-| `deleteAt` | `string` | Optional | Ende der Sichtbarkeit (`JJJJ-MM-TT-HH:mm`). |
-| `links` | `array` | Optional | Liste von Link-Objekten. |
-| `large` | `boolean` | Optional | Größere Karten-Darstellung (`true`/`false`). |
-| `link` | `object` | Optional (Legacy) | Altes Einzel-Linkformat als Fallback. |
+| Feld        | Typ       | Pflicht         | Beschreibung                                                                  |
+|-------------|-----------|-----------------|-------------------------------------------------------------------------------|
+| `title`     | `string`  | Ja (fachlich)   | Überschrift der News.                                                         |
+| `date`      | `string`  | Ja (fachlich)   | Anzeige-Datum (`TT.MM.JJJJ`).                                                 |
+| `text`      | `string`  | Ja (fachlich)   | News-Text.                                                                    |
+| `image`     | `string`  | Optional        | Bildpfad. `./src/img/news/{Dateiname}`                                        |
+| `publishAt` | `string`  | Nicht Empfholen | Start der Sichtbarkeit (`JJJJ-MM-TT-HH:mm`).                                  |
+| `deleteAt`  | `string`  | Ja (Fachlich)   | Ende der Sichtbarkeit (`JJJJ-MM-TT-HH:mm`). 365 Tage nach `date`              |
+| `links`     | `array`   | Optional        | Liste von Link-Objekten.                                                      |
+| `large`     | `boolean` | Optional        | Größere Karten-Darstellung (`true`/`false`). Wenn Bild vorhanden, dann `true` |
 
 ### 2.3 `links`-Objekt
 
-| Feld | Typ | Pflicht | Beschreibung |
-|---|---|---|---|
-| `type` | `string` | Optional | Linktyp (siehe globale Liste). |
-| `label` | `string` | Optional | Beschriftung/Aria-Label. |
-| `url` | `string` | Ja | Ziel-URL (`https://...` oder `mailto:...`). |
+| Feld    | Typ      | Pflicht  | Beschreibung                                |
+|---------|----------|----------|---------------------------------------------|
+| `type`  | `string` | Optional | Linktyp (siehe globale Liste).              |
+| `label` | `string` | Optional | Beschriftung/Aria-Label.                    |
+| `url`   | `string` | Ja       | Ziel-URL (`https://...` oder `mailto:...`). |
 
 ### 2.4 Vorlage
 
@@ -106,9 +106,21 @@ Inhalte für den News-Bereich auf der Startseite.
     "text": "Unsere Tanzgruppen ...",
     "image": "./src/img/veranstaltungenUndNews/weinfruehling.png",
     "links": [
-      { "type": "more", "label": "Mehr erfahren", "url": "https://example.org" },
-      { "type": "instagram", "label": "Instagram", "url": "https://instagram.com/..." },
-      { "type": "mail", "label": "E-Mail", "url": "mailto:info@skvonline.de" }
+      {
+        "type": "more",
+        "label": "Mehr erfahren",
+        "url": "https://example.org"
+      },
+      {
+        "type": "instagram",
+        "label": "Instagram",
+        "url": "https://instagram.com/..."
+      },
+      {
+        "type": "mail",
+        "label": "E-Mail",
+        "url": "mailto:info@skvonline.de"
+      }
     ],
     "large": true
   }
@@ -127,19 +139,19 @@ Veranstaltungen für den Event-Bereich auf der Startseite.
 
 ### 3.2 Felder pro Eintrag
 
-| Feld | Typ | Pflicht | Beschreibung |
-|---|---|---|---|
-| `title` | `string` | Ja (fachlich) | Titel der Veranstaltung. |
-| `date` | `string` | Empfohlen | Datum (`TT.MM.JJJJ`). |
-| `time` | `string` | Optional | Uhrzeit (z. B. `19:11 Uhr`). |
-| `einlass` | `string` | Optional | Einlasszeit. |
-| `preis` | `string` | Optional | Preisangabe. |
-| `location` | `string` | Optional | Veranstaltungsort. |
-| `description` | `string` | Optional | Zusatzbeschreibung. |
-| `image` | `string` | Optional | Bildpfad. |
-| `publishAt` | `string` | Optional | Start Sichtbarkeit (`JJJJ-MM-TT-HH:mm`). |
-| `deleteAt` | `string` | Optional | Ende Sichtbarkeit (`JJJJ-MM-TT-HH:mm`). |
-| `links` | `array` | Optional | Links analog zu News. |
+| Feld          | Typ      | Pflicht       | Beschreibung                                                             |
+|---------------|----------|---------------|--------------------------------------------------------------------------|
+| `title`       | `string` | Ja (fachlich) | Titel der Veranstaltung.                                                 |
+| `date`        | `string` | Ja (fachlich) | Datum (`TT.MM.JJJJ`).                                                    |
+| `time`        | `string` | Empfohlen     | Uhrzeit (z. B. `19:11 Uhr`).                                             |
+| `einlass`     | `string` | Optional      | Einlasszeit.                                                             |
+| `preis`       | `string` | Optional      | Preisangabe.                                                             |
+| `location`    | `string` | Empfohlen     | Veranstaltungsort.                                                       |
+| `description` | `string` | Optional      | Zusatzbeschreibung.                                                      |
+| `image`       | `string` | Optional      | Bildpfad. `./src/img/events/{D-dateiname}`                               |
+| `publishAt`   | `string` | Empfohlen     | Start Sichtbarkeit (`JJJJ-MM-TT-HH:mm`).                                 |
+| `deleteAt`    | `string` | Ja (Fachlich) | Ende Sichtbarkeit (`JJJJ-MM-TT-HH:mm`). Tag der Veranstaltung 23:59 Uhr. |
+| `links`       | `array`  | Optional      | Links analog zu News.                                                    |
 
 ### 3.3 Vorlage
 
@@ -156,8 +168,16 @@ Veranstaltungen für den Event-Bereich auf der Startseite.
     "location": "Mehrzweckhalle Sandersdorf",
     "image": "./src/img/veranstaltungenUndNews/lumpenball.png",
     "links": [
-      { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/..." },
-      { "type": "mail", "label": "E-Mail", "url": "mailto:info@skvonline.de" }
+      {
+        "type": "maps",
+        "label": "Maps",
+        "url": "https://maps.app.goo.gl/..."
+      },
+      {
+        "type": "mail",
+        "label": "E-Mail",
+        "url": "mailto:info@skvonline.de"
+      }
     ]
   }
 ]
@@ -175,23 +195,23 @@ Darstellung der Vorstandskarten.
 
 ### 4.2 Felder pro Eintrag
 
-| Feld | Typ | Pflicht | Beschreibung |
-|---|---|---|---|
-| `name` | `string` | Ja | Name der Person. |
-| `role` | `string` | Ja | Rolle/Funktion. |
-| `image` | `string` | Ja | Bildpfad. |
-| `tags` | `array<string>` | Ja | Schlagworte (mind. 1 empfohlen). |
-| `description` | `string` | Ja | Kurzbeschreibung. |
-| `socials` | `array<object>` | Ja | Kontakt-Links. |
+| Feld          | Typ             | Pflicht | Beschreibung                                      |
+|---------------|-----------------|---------|---------------------------------------------------|
+| `name`        | `string`        | Ja      | Name der Person.                                  |
+| `role`        | `string`        | Ja      | Rolle/Funktion.                                   |
+| `image`       | `string`        | Ja      | Bildpfad. `./src/img/verein/vorstand/{dateiname}` |
+| `tags`        | `array<string>` | Ja      | Schlagworte (mind. 1 empfohlen).                  |
+| `description` | `string`        | Ja      | Kurzbeschreibung.                                 |
+| `socials`     | `array<object>` | Ja      | Kontakt-Links.                                    |
 
 ### 4.3 `socials`-Objekt
 
-| Feld | Typ | Pflicht | Beschreibung |
-|---|---|---|---|
-| `label` | `string` | Ja | Name des Kanals. |
-| `href` | `string` | Ja | Linkziel (`mailto:` oder URL). |
-| `className` | `string` | Ja | CSS-Klasse (z. B. `liEmail`). |
-| `icon` | `string` | Ja | Symboltext (z. B. `@`). |
+| Feld        | Typ      | Pflicht | Beschreibung                   |
+|-------------|----------|---------|--------------------------------|
+| `label`     | `string` | Ja      | Name des Kanals.               |
+| `href`      | `string` | Ja      | Linkziel (`mailto:` oder URL). |
+| `className` | `string` | Ja      | CSS-Klasse (z. B. `liEmail`).  |
+| `icon`      | `string` | Ja      | Symboltext (z. B. `@`).        |
 
 ### 4.4 Vorlage
 
@@ -200,11 +220,19 @@ Darstellung der Vorstandskarten.
   {
     "name": "Gerd Ritter",
     "role": "Präsident",
-    "image": "src/img/verein/vorstand/gerd-ritter.png",
-    "tags": ["Repräsentation", "Vereinsleitung"],
+    "image": "./src/img/verein/vorstand/gerd-ritter.png",
+    "tags": [
+      "Repräsentation",
+      "Vereinsleitung"
+    ],
     "description": "Verantwortet die grundlegende Ausrichtung des Vereins.",
     "socials": [
-      { "label": "E-Mail", "href": "mailto:gerd.ritter@skvonline.de", "className": "liEmail", "icon": "@" }
+      {
+        "label": "E-Mail",
+        "href": "mailto:gerd.ritter@skvonline.de",
+        "className": "liEmail",
+        "icon": "@"
+      }
     ]
   }
 ]
@@ -222,11 +250,11 @@ Mitgliederliste des Elferrats.
 
 ### 5.2 Felder pro Eintrag
 
-| Feld | Typ | Pflicht | Beschreibung |
-|---|---|---|---|
-| `name` | `string` | Ja | Name des Mitglieds. |
-| `role` | `string` | Ja | Funktion/Rolle. |
-| `image` | `string` | Optional | Bildpfad. Wenn leer/`./src/img/dummy.svg`, wird ein Dateiname aus dem Namen erzeugt. |
+| Feld    | Typ      | Pflicht | Beschreibung                     |
+|---------|----------|---------|----------------------------------|
+| `name`  | `string` | Ja      | Name des Mitglieds.              |
+| `role`  | `string` | Ja      | Funktion/Rolle.                  |
+| `image` | `string` | Ja      | Bildpfad.`./src/img/{dateiname}` |
 
 ### 5.3 Vorlage
 
@@ -252,16 +280,16 @@ Prinzenpaare für Galerie + Lightbox.
 
 ### 6.2 Felder pro Eintrag
 
-| Feld | Typ | Pflicht | Beschreibung |
-|---|---|---|---|
-| `session` | `string` | Empfohlen | Session-Text (z. B. `47. Session`). |
-| `year` | `string` | Empfohlen | Jahrgang (z. B. `2025/2026`). |
-| `title` | `string` | Optional | Alternativer Titel für `alt`/Aria. |
-| `image` | `string` | Ja | Bildpfad. |
-| `adultPair` | `array<object>`/`object`/`string` | Empfohlen | Großes Prinzenpaar. |
-| `childPair` | `array<object>`/`object`/`string` | Optional | Kinderprinzenpaar. |
+| Feld        | Typ                               | Pflicht  | Beschreibung                        |
+|-------------|-----------------------------------|----------|-------------------------------------|
+| `session`   | `string`                          | Ja       | Session-Text (z. B. `47. Session`). |
+| `year`      | `string`                          | Ja       | Jahrgang (z. B. `2025/2026`).       |
+| `image`     | `string`                          | Ja       | Bildpfad.                           |
+| `adultPair` | `array<object>`/`object`/`string` | Ja       | Großes Prinzenpaar.                 |
+| `childPair` | `array<object>`/`object`/`string` | Optional | Kinderprinzenpaar.                  |
 
-Zusätzliche Legacy-Felder werden ebenfalls erkannt (`Session`, `jahr`, `grossesPP`, `kleinesPP`, ...), sollten für neue Daten aber nicht verwendet werden.
+Zusätzliche Legacy-Felder werden ebenfalls erkannt (`Session`, `jahr`, `grossesPP`, `kleinesPP`, ...), sollten für neue
+Daten aber nicht verwendet werden.
 
 ### 6.3 Paar-Objekt (empfohlen)
 
@@ -281,10 +309,16 @@ Zusätzliche Legacy-Felder werden ebenfalls erkannt (`Session`, `jahr`, `grosses
     "year": "2025/2026",
     "image": "./src/img/verein/prinzenpaare/pp2526.JPG",
     "adultPair": [
-      { "prince": "Dominik I.", "princess": "Lisa I." }
+      {
+        "prince": "Dominik I.",
+        "princess": "Lisa I."
+      }
     ],
     "childPair": [
-      { "prince": "Til I.", "princess": "Pauline I." }
+      {
+        "prince": "Til I.",
+        "princess": "Pauline I."
+      }
     ]
   }
 ]
@@ -302,11 +336,11 @@ Links für die Linktree-Seite.
 
 ### 7.2 Felder pro Eintrag
 
-| Feld | Typ | Pflicht | Beschreibung |
-|---|---|---|---|
-| `icon` | `string` | Optional | Icon-Key, Standard: `website`. |
-| `text` | `string` | Ja | Sichtbarer Linktext. |
-| `url` | `string` | Ja | Ziel-URL oder relativer Pfad (`./...`). |
+| Feld   | Typ      | Pflicht  | Beschreibung                            |
+|--------|----------|----------|-----------------------------------------|
+| `icon` | `string` | Optional | Icon-Key, Standard: `website`.          |
+| `text` | `string` | Ja       | Sichtbarer Linktext.                    |
+| `url`  | `string` | Ja       | Ziel-URL oder relativer Pfad (`./...`). |
 
 Unterstützte Icons:
 
@@ -334,19 +368,19 @@ Unterstützte Icons:
 
 ---
 
-## 8) Datei: `gallerys/home-gallery.json`
+## 8) Datei: `gallerys/{xyz}.json`
 
-Pfad: `src/data/gallerys/home-gallery.json`
+Pfad: `src/data/gallerys/{xyz}.json`
 
 ### 8.1 Zweck
 
-Slides der Startseiten-Hero-Galerie.
+Bildauflistung für Galerien.
 
 ### 8.2 Felder pro Eintrag
 
-| Feld | Typ | Pflicht | Beschreibung |
-|---|---|---|---|
-| `src` | `string` | Ja | Bildpfad. |
+| Feld  | Typ      | Pflicht  | Beschreibung                                      |
+|-------|----------|----------|---------------------------------------------------|
+| `src` | `string` | Ja       | Bildpfad. `./src/img/{xyz}/{dateiname}`           |
 | `alt` | `string` | Optional | Alt-Text (Fallback: `Bild aus der Home-Gallery`). |
 
 ### 8.3 Vorlage
@@ -356,34 +390,6 @@ Slides der Startseiten-Hero-Galerie.
   {
     "src": "./src/img/home-gallery/01.JPG",
     "alt": "Titelbild"
-  }
-]
-```
-
----
-
-## 9) Datei: `gallerys/sponsors.json`
-
-Pfad: `src/data/gallerys/sponsors.json`
-
-### 9.1 Zweck
-
-Logos für den Sponsor-Marquee.
-
-### 9.2 Felder pro Eintrag
-
-| Feld | Typ | Pflicht | Beschreibung |
-|---|---|---|---|
-| `src` | `string` | Ja | Bildpfad. |
-| `alt` | `string` | Optional | Alt-Text (Fallback: `Sponsor`). |
-
-### 9.3 Vorlage
-
-```json
-[
-  {
-    "src": "./src/img/sponsors/beispiel.png",
-    "alt": "Beispielsponsor"
   }
 ]
 ```
@@ -414,7 +420,13 @@ Logos für den Sponsor-Marquee.
     "text": "Text der News",
     "publishAt": "2026-12-01-00:00",
     "deleteAt": "2027-01-31-23:59",
-    "links": [{ "type": "more", "label": "Mehr", "url": "https://example.org" }]
+    "links": [
+      {
+        "type": "more",
+        "label": "Mehr",
+        "url": "https://example.org"
+      }
+    ]
   }
 ]
 ```
@@ -442,9 +454,18 @@ Logos für den Sponsor-Marquee.
     "name": "Max Mustermann",
     "role": "Präsident",
     "image": "src/img/verein/vorstand/max-mustermann.png",
-    "tags": ["Leitung"],
+    "tags": [
+      "Leitung"
+    ],
     "description": "Kurztext",
-    "socials": [{ "label": "E-Mail", "href": "mailto:max@example.org", "className": "liEmail", "icon": "@" }]
+    "socials": [
+      {
+        "label": "E-Mail",
+        "href": "mailto:max@example.org",
+        "className": "liEmail",
+        "icon": "@"
+      }
+    ]
   }
 ]
 ```
@@ -453,7 +474,11 @@ Logos für den Sponsor-Marquee.
 
 ```json
 [
-  { "name": "Erika Muster", "role": "Programm", "image": "./src/img/verein/elferrat/erika-muster.svg" }
+  {
+    "name": "Erika Muster",
+    "role": "Programm",
+    "image": "./src/img/verein/elferrat/erika-muster.svg"
+  }
 ]
 ```
 
@@ -465,7 +490,12 @@ Logos für den Sponsor-Marquee.
     "session": "48. Session",
     "year": "2026/2027",
     "image": "./src/img/verein/prinzenpaare/pp2627.JPG",
-    "adultPair": [{ "prince": "Max I.", "princess": "Mia I." }]
+    "adultPair": [
+      {
+        "prince": "Max I.",
+        "princess": "Mia I."
+      }
+    ]
   }
 ]
 ```
@@ -474,7 +504,11 @@ Logos für den Sponsor-Marquee.
 
 ```json
 [
-  { "icon": "website", "text": "Webseite", "url": "https://example.org" }
+  {
+    "icon": "website",
+    "text": "Webseite",
+    "url": "https://example.org"
+  }
 ]
 ```
 
@@ -482,7 +516,10 @@ Logos für den Sponsor-Marquee.
 
 ```json
 [
-  { "src": "./src/img/home-gallery/01.JPG", "alt": "Titelbild" }
+  {
+    "src": "./src/img/home-gallery/01.JPG",
+    "alt": "Titelbild"
+  }
 ]
 ```
 
@@ -490,6 +527,9 @@ Logos für den Sponsor-Marquee.
 
 ```json
 [
-  { "src": "./src/img/sponsors/sponsor.png", "alt": "Sponsorname" }
+  {
+    "src": "./src/img/sponsors/sponsor.png",
+    "alt": "Sponsorname"
+  }
 ]
 ```
