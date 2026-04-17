@@ -6,8 +6,6 @@
     "location": "Platz der Deutschen Einheit",
     "image": "./src/img/events/weinfruehling.png",
     "publishAt": "2026-04-01-00:00",
-    "label": "Maps",
-    "url": "https://share.google/tL5HyahC52M0jCNGp",
     "links": [
       {
         "label": "Mehr",
@@ -29,8 +27,6 @@
     "location": "Rathaus Sandersdorf",
     "image": "./src/img/events/sessionseroeffnung.png",
     "publishAt": "2026-04-01-00:00",
-    "label": "E-Mail",
-    "url": "mailto:info@skvonline.de",
     "links": [
       {
         "label": "Maps",
@@ -53,8 +49,6 @@
     "preis": "19,50 €",
     "location": "Mehrzweckhalle Sandersdorf",
     "publishAt": "2026-04-01-00:00",
-    "label": "E-Mail",
-    "url": "mailto:info@skvonline.de",
     "links": [
       {
         "label": "Maps",
@@ -77,8 +71,6 @@
     "preis": "19,50 €",
     "location": "Mehrzweckhalle Sandersdorf",
     "publishAt": "2026-04-01-00:00",
-    "label": "E-Mail",
-    "url": "mailto:info@skvonline.de",
     "links": [
       {
         "label": "Maps",
@@ -101,8 +93,6 @@
     "preis": "19,50 €",
     "location": "Mehrzweckhalle Sandersdorf",
     "publishAt": "2026-04-01-00:00",
-    "label": "E-Mail",
-    "url": "mailto:info@skvonline.de",
     "links": [
       {
         "label": "Maps",
