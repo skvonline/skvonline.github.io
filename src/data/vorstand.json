@@ -2,7 +2,7 @@
   {
     "name": "Gerd Ritter",
     "role": "Präsident",
-    "image": "src/img/verein/vorstand/gerd-ritter.png",
+    "image": "./src/img/verein/vorstand/gerd-ritter.png",
     "tags": ["Repräsentation", "Vereinsleitung", "Teamführung", "Netzwerk"],
     "description": "Gerd Ritter verantwortet als Präsident die grundlegende Ausrichtung des Vereins und begleitet wichtige Entscheidungen. Dabei steht er im engen Austausch mit dem gesamten Team.",
     "socials": [
@@ -12,7 +12,7 @@
   {
     "name": "Eva Klupsch",
     "role": "Vizepräsidentin",
-    "image": "src/img/verein/vorstand/eva-klupsch.png",
+    "image": "./src/img/verein/vorstand/eva-klupsch.png",
     "tags": ["Behörden", "Anträge"],
     "description": "Als Vizepräsidentin bringt Eva Klupsch eine Fülle von Fachwissen mit. Ihre organisatorischen Fähigkeiten machen sie zu einer unverzichtbaren Kraft im Vorstand.",
     "socials": [
@@ -22,7 +22,7 @@
   {
     "name": "Ramona Richter",
     "role": "Schatzmeisterin",
-    "image": "src/img/verein/vorstand/ramona-richter.png",
+    "image": "./src/img/verein/vorstand/ramona-richter.png",
     "tags": ["Finanzen", "Mitglieder"],
     "description": "Ramona Richter ist unsere Finanzexpertin des Vereins. Mit einem scharfen Auge für Zahlen hält sie unsere Finanzen stabil und transparent.",
     "socials": [
