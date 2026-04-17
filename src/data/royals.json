@@ -4,10 +4,16 @@
     "year": "2025/2026",
     "image": "./src/img/verein/prinzenpaare/pp2526.JPG",
     "adultPair": [
-      {"prince": "Dominik I.", "princess":  "Lisa I."}
+      {
+        "prince": "Dominik I.",
+        "princess": "Lisa I."
+      }
     ],
     "childPair": [
-      {"prince": "Til I.", "princess":  "Pauline I."}
+      {
+        "prince": "Til I.",
+        "princess": "Pauline I."
+      }
     ]
   },
   {
@@ -15,10 +21,16 @@
     "year": "2024/2025",
     "image": "./src/img/verein/prinzenpaare/pp2425.JPG",
     "adultPair": [
-      {"prince": "Andreas II.", "princess":  "Anja II."}
+      {
+        "prince": "Andreas II.",
+        "princess": "Anja II."
+      }
     ],
     "childPair": [
-      {"prince": "Bruno I.", "princess":  "Lainy I."}
+      {
+        "prince": "Bruno I.",
+        "princess": "Lainy I."
+      }
     ]
   },
   {
@@ -26,10 +38,16 @@
     "year": "2023/2024",
     "image": "./src/img/verein/prinzenpaare/pp2324.JPG",
     "adultPair": [
-      {"prince": "Robin I.", "princess":  "Jenniefer I."}
+      {
+        "prince": "Robin I.",
+        "princess": "Jenniefer I."
+      }
     ],
     "childPair": [
-      {"prince": "Oskar I.", "princess":  "Fiona I."}
+      {
+        "prince": "Oskar I.",
+        "princess": "Fiona I."
+      }
     ]
   },
   {
@@ -37,10 +55,16 @@
     "year": "2022/2023",
     "image": "./src/img/verein/prinzenpaare/pp2223.JPG",
     "adultPair": [
-      {"prince": "René I.", "princess":  "Anja I."}
+      {
+        "prince": "René I.",
+        "princess": "Anja I."
+      }
     ],
     "childPair": [
-      {"prince": "Lennart I.", "princess":  "Mia I."}
+      {
+        "prince": "Lennart I.",
+        "princess": "Mia I."
+      }
     ]
   }
 ]
