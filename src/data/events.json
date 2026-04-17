@@ -5,6 +5,8 @@
     "time": "16:30 Uhr",
     "location": "Platz der Deutschen Einheit",
     "image": "./src/img/veranstaltungenUndNews/weinfruehling.png",
+    "publishAt": "2026-04-01-00:00",
+    "deleteAt": "2026-05-10-00:00",
     "links": [
       { "type": "more", "label": "Mehr erfahren", "url": "https://www.sandersdorf-brehna.de/Meine-Stadt/Stadt-Land-Kultur/Veranstaltungen/Weinfr%C3%BChling-" },
       { "type": "maps", "label": "Maps", "url": "https://share.google/tL5HyahC52M0jCNGp" }
@@ -16,17 +18,22 @@
     "time": "11:11 Uhr",
     "location": "Rathaus Sandersdorf",
     "image": "./src/img/veranstaltungenUndNews/sessionseroeffnung.png",
+    "publishAt": "2026-04-01-00:00",
+    "deleteAt": "2026-11-12-00:00",
     "links": [
       { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/vgFrF9jjJLxYL7fg8" },
       { "type": "mail", "label": "E-Mail", "url": "mailto:info@skvonline.de" }
     ]
-  },{
+  },
+  {
     "title": "1. Lumpenball",
     "date": "14.11.2026",
     "time": "19:11 Uhr",
     "einlass": "18:11 Uhr",
     "preis": "19,50 €",
     "location": "Mehrzweckhalle Sandersdorf",
+    "publishAt": "2026-04-01-00:00",
+    "deleteAt": "2026-11-15-00:00",
     "links": [
       { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/tAwJbH2cMwa1GWu1A" },
       { "type": "mail", "label": "E-Mail", "url": "mailto:info@skvonline.de" }
@@ -39,6 +46,8 @@
     "einlass": "18:11 Uhr",
     "preis": "19,50 €",
     "location": "Mehrzweckhalle Sandersdorf",
+    "publishAt": "2026-04-01-00:00",
+    "deleteAt": "2026-11-21-00:00",
     "links": [
       { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/tAwJbH2cMwa1GWu1A" },
       { "type": "mail", "label": "E-Mail", "url": "mailto:info@skvonline.de" }
@@ -51,6 +60,8 @@
     "einlass": "18:11 Uhr",
     "preis": "19,50 €",
     "location": "Mehrzweckhalle Sandersdorf",
+    "publishAt": "2026-04-01-00:00",
+    "deleteAt": "2026-11-22-00:00",
     "links": [
       { "type": "maps", "label": "Maps", "url": "https://maps.app.goo.gl/tAwJbH2cMwa1GWu1A" },
       { "type": "mail", "label": "E-Mail", "url": "mailto:info@skvonline.de" }

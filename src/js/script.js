@@ -106,7 +106,7 @@ async function loadHomeGallery() {
   const galleryContainer = document.getElementById('home-gallery-slides');
   if (!galleryContainer) return;
 
-  const galleryItems = await fetch('./src/data/home-gallery.json').then((response) => response.json());
+  const galleryItems = await fetch('./src/data/gallerys/home-gallery.json').then((response) => response.json());
   if (!Array.isArray(galleryItems) || galleryItems.length === 0) {
     return;
   }
@@ -161,6 +161,41 @@ function chunkRender({ items, containerId, buttonId, chunkSize, renderItem }) {
     button.hidden = false;
     button.addEventListener('click', renderNextChunk);
   }
+}
+
+function parseVisibilityTimestamp(value) {
+  if (!value || typeof value !== 'string') {
+    return null;
+  }
+
+  const match = value.match(/^(\d{4})-(\d{2})-(\d{2})-(\d{2}):(\d{2})$/);
+  if (!match) {
+    return null;
+  }
+
+  const [, year, month, day, hour, minute] = match;
+  return new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute));
+}
+
+function getFirstDefinedValue(entry, keys) {
+  return keys.find((key) => entry?.[key] !== undefined && entry?.[key] !== null && String(entry[key]).trim() !== '');
+}
+
+function isVisibleByWindow(entry, now = new Date()) {
+  const publishKey = getFirstDefinedValue(entry, ['publishAt', 'publicationAt', 'releaseAt', 'veroeffentlichungAb']);
+  const deleteKey = getFirstDefinedValue(entry, ['deleteAt', 'deleteDate', 'removeAt', 'loeschzeitpunkt']);
+  const publishAt = parseVisibilityTimestamp(publishKey ? entry[publishKey] : null);
+  const deleteAt = parseVisibilityTimestamp(deleteKey ? entry[deleteKey] : null);
+
+  if (publishAt && now < publishAt) {
+    return false;
+  }
+
+  if (deleteAt && now >= deleteAt) {
+    return false;
+  }
+
+  return true;
 }
 
 const NEWS_LINK_ICONS = {
@@ -502,14 +537,16 @@ function setupBoardCards() {
 }
 
 async function loadHomeContent() {
-  const [events, news, vorstand, elferrat, royals, sponsors] = await Promise.all([
+  const [eventsRaw, newsRaw, vorstand, elferrat, royals, sponsors] = await Promise.all([
     fetch('./src/data/events.json').then((r) => r.json()),
     fetch('./src/data/news.json').then((r) => r.json()),
     fetch('./src/data/vorstand.json').then((r) => r.json()),
     fetch('./src/data/elferrat.json').then((r) => r.json()),
     fetch('./src/data/royals.json').then((r) => r.json()),
-    fetch('./src/data/sponsors.json').then((r) => r.json()),
+    fetch('./src/data/gallerys/sponsors.json').then((r) => r.json()),
   ]);
+  const events = Array.isArray(eventsRaw) ? eventsRaw.filter((entry) => isVisibleByWindow(entry)) : [];
+  const news = Array.isArray(newsRaw) ? newsRaw.filter((entry) => isVisibleByWindow(entry)) : [];
 
   chunkRender({
     items: events,
