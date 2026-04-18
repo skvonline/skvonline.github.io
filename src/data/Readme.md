@@ -129,7 +129,7 @@ Inhalte für den News-Bereich auf der Startseite.
 
 ---
 
-## 4) Datei: `events.json`
+## 3) Datei: `events.json`
 
 Pfad: `src/data/events.json`
 
@@ -185,9 +185,9 @@ Veranstaltungen für den Event-Bereich auf der Startseite.
 
 ---
 
-## 5) Datei: `vorstand.json`
+## 4) Datei: `vorstand.json`
 
-Pfad: `src/data/vorstand.json`
+Pfad: `./src/data/vorstand.json`
 
 ### 4.1 Zweck
 
@@ -240,7 +240,7 @@ Darstellung der Vorstandskarten.
 
 ---
 
-## 6) Datei: `elferrat.json`
+## 5) Datei: `elferrat.json`
 
 Pfad: `src/data/elferrat.json`
 
@@ -270,7 +270,7 @@ Mitgliederliste des Elferrats.
 
 ---
 
-## 7) Datei: `royals.json`
+## 6) Datei: `royals.json`
 
 Pfad: `src/data/royals.json`
 
@@ -326,7 +326,7 @@ Daten aber nicht verwendet werden.
 
 ---
 
-## 8) Datei: `linktree.json`
+## 7) Datei: `linktree.json`
 
 Pfad: `src/data/linktree.json`
 
@@ -368,7 +368,7 @@ Unterstützte Icons:
 
 ---
 
-## 9) Datei: `gallerys/{xyz}.json`
+## 8) Datei: `gallerys/{xyz}.json`
 
 Pfad: `src/data/gallerys/{xyz}.json`
 
@@ -396,27 +396,15 @@ Bildauflistung für Galerien.
 
 ---
 
-## 10) Checkliste vor dem Speichern
+## 9) Datei: `header-notices.json`
 
-1. JSON ist syntaktisch valide.
-2. Top-Level ist ein Array.
-3. Pflichtfelder pro Dateityp sind befüllt.
-4. Datumsformate stimmen (`TT.MM.JJJJ` bzw. `JJJJ-MM-TT-HH:mm`).
-5. Alle Bildpfade/URLs existieren bzw. sind erreichbar.
-6. Bei `links`: Jeder Eintrag hat mindestens `url`.
-7. `publishAt` liegt zeitlich vor `deleteAt` (wenn beide gesetzt).
+Pfad: `./src/data/header-notices.json`
 
----
-
-## 11) Datei: `header-notices.json`
-
-Pfad: `src/data/header-notices.json`
-
-### 11.1 Zweck
+### 9.1 Zweck
 
 Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder Seite).
 
-### 11.2 Felder pro Eintrag
+### 9.2 Felder pro Eintrag
 
 | Feld        | Typ      | Pflicht                                                                 | Beschreibung                                                              |
 |-------------|----------|-------------------------------------------------------------------------|---------------------------------------------------------------------------|
@@ -425,7 +413,7 @@ Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder S
 | `publishAt` | `string` | Optional                                                                | Start Sichtbarkeit (`JJJJ-MM-TT-HH:mm`).                                  |
 | `deleteAt`  | `string` | Wenn `countdown`, dann das Datum vom Countdown, sonst trotzdem Pflicht. | Ende Sichtbarkeit (`JJJJ-MM-TT-HH:mm`).                           |
 
-### 11.3 Countdown-Regeln
+### 9.3 Countdown-Regeln
 
 - Wenn Restzeit **>= 1 Tag**: Anzeige in `Tage`, `Stunden`, `Minuten`
 - Wenn Restzeit **< 1 Tag**: Anzeige in `Stunden`, `Minuten`, `Sekunden`
@@ -433,7 +421,7 @@ Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder S
 - Läuft der Countdown ab, wird der komplette Hinweis sofort entfernt.
 - Hinweise im Band werden visuell durch `+++` getrennt.
 
-### 11.4 Vorlage
+### 9.4 Vorlage
 
 ```json
 [
@@ -448,7 +436,19 @@ Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder S
 
 ---
 
-## 12) Minimale Komplettbeispiele (alle Dateien)
+## 10) Checkliste vor dem Speichern
+
+1. JSON ist syntaktisch valide.
+2. Top-Level ist ein Array.
+3. Pflichtfelder pro Dateityp sind befüllt.
+4. Datumsformate stimmen (`TT.MM.JJJJ` bzw. `JJJJ-MM-TT-HH:mm`).
+5. Alle Bildpfade/URLs existieren bzw. sind erreichbar.
+6. Bei `links`: Jeder Eintrag hat mindestens `url`.
+7. `publishAt` liegt zeitlich vor `deleteAt` (wenn beide gesetzt).
+
+---
+
+## 11) Minimale Komplettbeispiele (alle Dateien)
 
 ### `news.json`
 
