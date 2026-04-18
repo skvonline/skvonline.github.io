@@ -177,6 +177,28 @@ function parseVisibilityTimestamp(value) {
   return new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute));
 }
 
+function formatNoticeCountdown(targetDate, now = new Date()) {
+  const diffMs = targetDate.getTime() - now.getTime();
+  if (diffMs <= 0) {
+    return null;
+  }
+
+  const totalSeconds = Math.floor(diffMs / 1000);
+  const totalMinutes = Math.floor(totalSeconds / 60);
+  const totalHours = Math.floor(totalMinutes / 60);
+  const days = Math.floor(totalHours / 24);
+  const hours = totalHours % 24;
+  const minutes = totalMinutes % 60;
+  const seconds = totalSeconds % 60;
+  const pad = (value) => String(value).padStart(2, '0');
+
+  if (days >= 1) {
+    return `${days} T ${pad(hours)} Std ${pad(minutes)} Min`;
+  }
+
+  return `${pad(totalHours)} Std ${pad(minutes)} Min ${pad(seconds)} Sek`;
+}
+
 function getFirstDefinedValue(entry, keys) {
   return keys.find((key) => entry?.[key] !== undefined && entry?.[key] !== null && String(entry[key]).trim() !== '');
 }
@@ -536,6 +558,182 @@ function setupBoardCards() {
   });
 }
 
+function getNoticeDataPath(page) {
+  const rootPrefix = getRootPrefix(page);
+  return `${rootPrefix}src/data/header-notices.json`;
+}
+
+function normalizeNotices(rawEntries) {
+  if (!Array.isArray(rawEntries)) {
+    return [];
+  }
+
+  return rawEntries
+    .filter((entry) => entry && typeof entry.text === 'string' && entry.text.trim() !== '' && isVisibleByWindow(entry))
+    .map((entry) => {
+      const countdownTarget = parseVisibilityTimestamp(entry.countdown);
+      const deleteAt = parseVisibilityTimestamp(entry.deleteAt);
+      const hasValidCountdown = Boolean(countdownTarget);
+      if (hasValidCountdown && !deleteAt) {
+        return null;
+      }
+
+      return {
+        text: entry.text.trim(),
+        countdownTarget: hasValidCountdown ? countdownTarget : null,
+        deleteAt,
+      };
+    })
+    .filter(Boolean);
+}
+
+function setNoticeTrackDuration(track, noticeCount) {
+  const durationInSeconds = Math.max(18, noticeCount * 8);
+  track.style.setProperty('--notice-duration', `${durationInSeconds}s`);
+}
+
+function renderNoticeEntry(entry) {
+  const noticeEl = document.createElement('span');
+  noticeEl.className = 'header-notice-entry';
+
+  const textEl = document.createElement('span');
+  textEl.className = 'header-notice-text';
+  textEl.textContent = entry.text;
+  noticeEl.append(textEl);
+
+  if (entry.countdownTarget) {
+    const countdownEl = document.createElement('span');
+    countdownEl.className = 'header-notice-countdown';
+    noticeEl.append(countdownEl);
+    if (!Array.isArray(entry.countdownElements)) {
+      entry.countdownElements = [];
+    }
+    entry.countdownElements.push(countdownEl);
+  }
+
+  return noticeEl;
+}
+
+async function setupHeaderNoticeBar(page) {
+  const noticeBar = document.getElementById('header-notice-bar');
+  const noticeTrack = document.getElementById('header-notice-track');
+  if (!noticeBar || !noticeTrack) {
+    return;
+  }
+
+  let rawEntries = [];
+  try {
+    rawEntries = await fetch(getNoticeDataPath(page)).then((response) => (response.ok ? response.json() : []));
+  } catch (error) {
+    rawEntries = [];
+  }
+
+  const notices = normalizeNotices(rawEntries);
+  if (notices.length === 0) {
+    noticeBar.hidden = true;
+    return;
+  }
+
+  let activeNotices = notices;
+  let countdownIntervalId = null;
+
+  function renderNoticeTrack() {
+    noticeTrack.innerHTML = '';
+    if (activeNotices.length === 0) {
+      noticeBar.hidden = true;
+      return;
+    }
+
+    const viewport = noticeBar.querySelector('.header-notice-bar__viewport');
+    const viewportWidth = viewport ? viewport.clientWidth : window.innerWidth;
+    const minHalfWidth = viewportWidth + 60;
+    let repeatsPerHalf = 1;
+    const maxRepeatsPerHalf = 12;
+
+    function renderHalf() {
+      for (let repeatIndex = 0; repeatIndex < repeatsPerHalf; repeatIndex += 1) {
+        activeNotices.forEach((entry) => {
+          noticeTrack.append(renderNoticeEntry(entry));
+        });
+      }
+    }
+
+    activeNotices.forEach((entry) => {
+      entry.countdownElements = [];
+    });
+
+    do {
+      noticeTrack.innerHTML = '';
+      activeNotices.forEach((entry) => {
+        entry.countdownElements = [];
+      });
+      renderHalf();
+
+      if (noticeTrack.scrollWidth >= minHalfWidth) {
+        break;
+      }
+      repeatsPerHalf += 1;
+    } while (repeatsPerHalf <= maxRepeatsPerHalf);
+
+    renderHalf();
+
+    const renderedEntriesCount = activeNotices.length * repeatsPerHalf * 2;
+    setNoticeTrackDuration(noticeTrack, renderedEntriesCount);
+    noticeBar.hidden = false;
+  }
+
+  function bindResizeHandler() {
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      if (resizeTimer) {
+        window.clearTimeout(resizeTimer);
+      }
+      resizeTimer = window.setTimeout(() => {
+        renderNoticeTrack();
+        refreshCountdownsAndPruneExpired();
+      }, 120);
+    });
+  }
+
+  function refreshCountdownsAndPruneExpired() {
+    const now = new Date();
+
+    const remainingNotices = activeNotices.filter((entry) => {
+      if (entry.countdownTarget && now >= entry.countdownTarget) {
+        return false;
+      }
+      return !entry.deleteAt || now < entry.deleteAt;
+    });
+
+    if (remainingNotices.length !== activeNotices.length) {
+      activeNotices = remainingNotices;
+      renderNoticeTrack();
+    }
+
+    activeNotices.forEach((entry) => {
+      if (!entry.countdownTarget || !Array.isArray(entry.countdownElements)) {
+        return;
+      }
+      const formatted = formatNoticeCountdown(entry.countdownTarget, now);
+      entry.countdownElements.forEach((countdownElement) => {
+        countdownElement.textContent = formatted ? `${formatted}` : '';
+      });
+    });
+
+    if (activeNotices.length === 0 && countdownIntervalId) {
+      window.clearInterval(countdownIntervalId);
+      countdownIntervalId = null;
+    }
+  }
+
+  renderNoticeTrack();
+  refreshCountdownsAndPruneExpired();
+  bindResizeHandler();
+  if (activeNotices.some((entry) => entry.countdownTarget)) {
+    countdownIntervalId = window.setInterval(refreshCountdownsAndPruneExpired, 1000);
+  }
+}
+
 async function loadHomeContent() {
   const [eventsRaw, newsRaw, vorstand, elferrat, royals, sponsors] = await Promise.all([
     fetch('./src/data/events.json').then((r) => r.json()),
@@ -727,6 +925,7 @@ async function loadLinktreeContent() {
     await loadComponent('header-component', './components/header.html');
     await loadComponent('footer-component', './components/footer.html');
     normalizeComponentLinks(page);
+    await setupHeaderNoticeBar(page);
     setupMobileMenu();
     setupHeaderSmoothScroll();
     await loadHomeGallery();
@@ -739,6 +938,7 @@ async function loadLinktreeContent() {
     await loadComponent('header-component', '../components/header.html');
     await loadComponent('footer-component', '../components/footer.html');
     normalizeComponentLinks(page);
+    await setupHeaderNoticeBar(page);
     setupMobileMenu();
     setupHeaderSmoothScroll();
     await loadLinktreeContent();
@@ -749,6 +949,7 @@ async function loadLinktreeContent() {
     await loadComponent('header-component', '../../components/header.html');
     await loadComponent('footer-component', '../../components/footer.html');
     normalizeComponentLinks(page);
+    await setupHeaderNoticeBar(page);
     setupMobileMenu();
     setupHeaderSmoothScroll();
     return;
@@ -757,6 +958,7 @@ async function loadLinktreeContent() {
   await loadComponent('header-component', '../components/header.html');
   await loadComponent('footer-component', '../components/footer.html');
   normalizeComponentLinks(page);
+  await setupHeaderNoticeBar(page);
   setupMobileMenu();
   setupHeaderSmoothScroll();
 })();

@@ -187,7 +187,7 @@ Veranstaltungen für den Event-Bereich auf der Startseite.
 
 ## 4) Datei: `vorstand.json`
 
-Pfad: `src/data/vorstand.json`
+Pfad: `./src/data/vorstand.json`
 
 ### 4.1 Zweck
 
@@ -396,6 +396,46 @@ Bildauflistung für Galerien.
 
 ---
 
+## 9) Datei: `header-notices.json`
+
+Pfad: `./src/data/header-notices.json`
+
+### 9.1 Zweck
+
+Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder Seite).
+
+### 9.2 Felder pro Eintrag
+
+| Feld        | Typ      | Pflicht                                                                 | Beschreibung                                                              |
+|-------------|----------|-------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| `text`      | `string` | Ja                                                                      | Hinweistext, der im Band angezeigt wird.                                  |
+| `countdown` | `string` | Optional                                                                | Zielzeitpunkt (`JJJJ-MM-TT-HH:mm`) für einen Live-Countdown hinter `text`. |
+| `publishAt` | `string` | Optional                                                                | Start Sichtbarkeit (`JJJJ-MM-TT-HH:mm`).                                  |
+| `deleteAt`  | `string` | Wenn `countdown`, dann das Datum vom Countdown, sonst trotzdem Pflicht. | Ende Sichtbarkeit (`JJJJ-MM-TT-HH:mm`).                           |
+
+### 9.3 Countdown-Regeln
+
+- Wenn Restzeit **>= 1 Tag**: Anzeige in `Tage`, `Stunden`, `Minuten`
+- Wenn Restzeit **< 1 Tag**: Anzeige in `Stunden`, `Minuten`, `Sekunden`
+- Ist `countdown` gesetzt, sollte `deleteAt` identisch oder später als `countdown` sein.
+- Läuft der Countdown ab, wird der komplette Hinweis sofort entfernt.
+- Hinweise im Band werden visuell durch `+++` getrennt.
+
+### 9.4 Vorlage
+
+```json
+[
+  {
+    "text": "xyz",
+    "countdown": "2026-05-09-16:30",
+    "publishAt": "2026-04-18-15:00",
+    "deleteAt": "2026-05-09-16:30"
+  }
+]
+```
+
+---
+
 ## 10) Checkliste vor dem Speichern
 
 1. JSON ist syntaktisch valide.
@@ -531,5 +571,18 @@ Bildauflistung für Galerien.
     "src": "./src/img/sponsors/sponsor.png",
     "alt": "Sponsorname"
   }
+]
+```
+
+### `header-notices.json`
+
+```json
+[
+   {
+      "text": "Vorverkauf endet in:",
+      "countdown": "2026-04-19-15:18",
+      "publishAt": "2026-01-01-00:00",
+      "deleteAt": "2026-04-19-15:18"
+   }
 ]
 ```
