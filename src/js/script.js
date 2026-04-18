@@ -190,12 +190,13 @@ function formatNoticeCountdown(targetDate, now = new Date()) {
   const hours = totalHours % 24;
   const minutes = totalMinutes % 60;
   const seconds = totalSeconds % 60;
+  const pad = (value) => String(value).padStart(2, '0');
 
   if (days >= 1) {
-    return `${days}T ${hours}Std ${minutes}Min`;
+    return `${days}T ${pad(hours)}Std ${pad(minutes)}Min`;
   }
 
-  return `${totalHours}Std ${minutes}Min ${seconds}Sek`;
+  return `${pad(totalHours)}Std ${pad(minutes)}Min ${pad(seconds)}Sek`;
 }
 
 function getFirstDefinedValue(entry, keys) {
@@ -587,7 +588,7 @@ function normalizeNotices(rawEntries) {
 }
 
 function setNoticeTrackDuration(track, noticeCount) {
-  const durationInSeconds = Math.max(20, noticeCount * 11);
+  const durationInSeconds = Math.max(18, noticeCount * 8);
   track.style.setProperty('--notice-duration', `${durationInSeconds}s`);
 }
 
@@ -604,7 +605,10 @@ function renderNoticeEntry(entry) {
     const countdownEl = document.createElement('span');
     countdownEl.className = 'header-notice-countdown';
     noticeEl.append(countdownEl);
-    entry.countdownElement = countdownEl;
+    if (!Array.isArray(entry.countdownElements)) {
+      entry.countdownElements = [];
+    }
+    entry.countdownElements.push(countdownEl);
   }
 
   return noticeEl;
@@ -630,37 +634,65 @@ async function setupHeaderNoticeBar(page) {
     return;
   }
 
-  noticeTrack.innerHTML = '';
-  notices.forEach((entry) => {
-    noticeTrack.append(renderNoticeEntry(entry));
-  });
+  let activeNotices = notices;
+  let countdownIntervalId = null;
 
-  noticeTrack.classList.remove('header-notice-bar__track--static');
-  if (notices.length > 1) {
-    notices.forEach((entry) => {
-      noticeTrack.append(renderNoticeEntry({ ...entry }));
+  function renderNoticeTrack() {
+    noticeTrack.innerHTML = '';
+    if (activeNotices.length === 0) {
+      noticeBar.hidden = true;
+      return;
+    }
+
+    const repeatCount = activeNotices.length === 1 ? 8 : 2;
+    activeNotices.forEach((entry) => {
+      entry.countdownElements = [];
     });
-  } else {
-    noticeTrack.classList.add('header-notice-bar__track--static');
+    for (let index = 0; index < repeatCount; index += 1) {
+      activeNotices.forEach((entry) => {
+        noticeTrack.append(renderNoticeEntry(entry));
+      });
+    }
+
+    setNoticeTrackDuration(noticeTrack, activeNotices.length * repeatCount);
+    noticeBar.hidden = false;
   }
 
-  setNoticeTrackDuration(noticeTrack, notices.length);
-  noticeBar.hidden = false;
-
-  function refreshCountdowns() {
+  function refreshCountdownsAndPruneExpired() {
     const now = new Date();
-    notices.forEach((entry) => {
-      if (!entry.countdownTarget || !entry.countdownElement) {
+
+    const remainingNotices = activeNotices.filter((entry) => {
+      if (entry.countdownTarget && now >= entry.countdownTarget) {
+        return false;
+      }
+      return !entry.deleteAt || now < entry.deleteAt;
+    });
+
+    if (remainingNotices.length !== activeNotices.length) {
+      activeNotices = remainingNotices;
+      renderNoticeTrack();
+    }
+
+    activeNotices.forEach((entry) => {
+      if (!entry.countdownTarget || !Array.isArray(entry.countdownElements)) {
         return;
       }
       const formatted = formatNoticeCountdown(entry.countdownTarget, now);
-      entry.countdownElement.textContent = formatted ? `(${formatted})` : '(abgelaufen)';
+      entry.countdownElements.forEach((countdownElement) => {
+        countdownElement.textContent = formatted ? `(${formatted})` : '';
+      });
     });
+
+    if (activeNotices.length === 0 && countdownIntervalId) {
+      window.clearInterval(countdownIntervalId);
+      countdownIntervalId = null;
+    }
   }
 
-  refreshCountdowns();
-  if (notices.some((entry) => entry.countdownTarget)) {
-    window.setInterval(refreshCountdowns, 1000);
+  renderNoticeTrack();
+  refreshCountdownsAndPruneExpired();
+  if (activeNotices.some((entry) => entry.countdownTarget)) {
+    countdownIntervalId = window.setInterval(refreshCountdownsAndPruneExpired, 1000);
   }
 }
 

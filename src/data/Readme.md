@@ -87,6 +87,8 @@ Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder S
 - Wenn Restzeit **>= 1 Tag**: Anzeige in `Tage`, `Stunden`, `Minuten`
 - Wenn Restzeit **< 1 Tag**: Anzeige in `Stunden`, `Minuten`, `Sekunden`
 - Ist `countdown` gesetzt, sollte `deleteAt` identisch oder später als `countdown` sein.
+- Läuft der Countdown ab, wird der komplette Hinweis sofort entfernt.
+- Hinweise im Band werden visuell durch `+++` getrennt.
 
 ### 2.4 Vorlage
 
