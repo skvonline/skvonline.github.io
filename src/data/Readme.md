@@ -65,7 +65,45 @@ Unbekannte `type`-Werte werden wie `more` behandelt.
 
 ---
 
-## 2) Datei: `news.json`
+## 2) Datei: `header-notices.json`
+
+Pfad: `src/data/header-notices.json`
+
+### 2.1 Zweck
+
+Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder Seite).
+
+### 2.2 Felder pro Eintrag
+
+| Feld        | Typ      | Pflicht                 | Beschreibung                                                              |
+|-------------|----------|-------------------------|---------------------------------------------------------------------------|
+| `text`      | `string` | Ja                      | Hinweistext, der im Band angezeigt wird.                                  |
+| `countdown` | `string` | Optional                | Zielzeitpunkt (`JJJJ-MM-TT-HH:mm`) für einen Live-Countdown hinter `text`. |
+| `publishAt` | `string` | Optional                | Start Sichtbarkeit (`JJJJ-MM-TT-HH:mm`).                                  |
+| `deleteAt`  | `string` | Ja bei `countdown`, sonst empfohlen | Ende Sichtbarkeit (`JJJJ-MM-TT-HH:mm`).                           |
+
+### 2.3 Countdown-Regeln
+
+- Wenn Restzeit **>= 1 Tag**: Anzeige in `Tage`, `Stunden`, `Minuten`
+- Wenn Restzeit **< 1 Tag**: Anzeige in `Stunden`, `Minuten`, `Sekunden`
+- Ist `countdown` gesetzt, sollte `deleteAt` identisch oder später als `countdown` sein.
+
+### 2.4 Vorlage
+
+```json
+[
+  {
+    "text": "xyz",
+    "countdown": "2026-05-09-16:30",
+    "publishAt": "2026-04-18-15:00",
+    "deleteAt": "2026-05-09-16:30"
+  }
+]
+```
+
+---
+
+## 3) Datei: `news.json`
 
 Pfad: `src/data/news.json`
 
@@ -129,7 +167,7 @@ Inhalte für den News-Bereich auf der Startseite.
 
 ---
 
-## 3) Datei: `events.json`
+## 4) Datei: `events.json`
 
 Pfad: `src/data/events.json`
 
@@ -185,7 +223,7 @@ Veranstaltungen für den Event-Bereich auf der Startseite.
 
 ---
 
-## 4) Datei: `vorstand.json`
+## 5) Datei: `vorstand.json`
 
 Pfad: `src/data/vorstand.json`
 
@@ -240,7 +278,7 @@ Darstellung der Vorstandskarten.
 
 ---
 
-## 5) Datei: `elferrat.json`
+## 6) Datei: `elferrat.json`
 
 Pfad: `src/data/elferrat.json`
 
@@ -270,7 +308,7 @@ Mitgliederliste des Elferrats.
 
 ---
 
-## 6) Datei: `royals.json`
+## 7) Datei: `royals.json`
 
 Pfad: `src/data/royals.json`
 
@@ -326,7 +364,7 @@ Daten aber nicht verwendet werden.
 
 ---
 
-## 7) Datei: `linktree.json`
+## 8) Datei: `linktree.json`
 
 Pfad: `src/data/linktree.json`
 
@@ -368,7 +406,7 @@ Unterstützte Icons:
 
 ---
 
-## 8) Datei: `gallerys/{xyz}.json`
+## 9) Datei: `gallerys/{xyz}.json`
 
 Pfad: `src/data/gallerys/{xyz}.json`
 
