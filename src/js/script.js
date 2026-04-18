@@ -644,18 +644,55 @@ async function setupHeaderNoticeBar(page) {
       return;
     }
 
-    const repeatCount = activeNotices.length === 1 ? 8 : 2;
+    const viewport = noticeBar.querySelector('.header-notice-bar__viewport');
+    const viewportWidth = viewport ? viewport.clientWidth : window.innerWidth;
+    const minHalfWidth = viewportWidth + 60;
+    let repeatsPerHalf = 1;
+    const maxRepeatsPerHalf = 12;
+
+    function renderHalf() {
+      for (let repeatIndex = 0; repeatIndex < repeatsPerHalf; repeatIndex += 1) {
+        activeNotices.forEach((entry) => {
+          noticeTrack.append(renderNoticeEntry(entry));
+        });
+      }
+    }
+
     activeNotices.forEach((entry) => {
       entry.countdownElements = [];
     });
-    for (let index = 0; index < repeatCount; index += 1) {
-      activeNotices.forEach((entry) => {
-        noticeTrack.append(renderNoticeEntry(entry));
-      });
-    }
 
-    setNoticeTrackDuration(noticeTrack, activeNotices.length * repeatCount);
+    do {
+      noticeTrack.innerHTML = '';
+      activeNotices.forEach((entry) => {
+        entry.countdownElements = [];
+      });
+      renderHalf();
+
+      if (noticeTrack.scrollWidth >= minHalfWidth) {
+        break;
+      }
+      repeatsPerHalf += 1;
+    } while (repeatsPerHalf <= maxRepeatsPerHalf);
+
+    renderHalf();
+
+    const renderedEntriesCount = activeNotices.length * repeatsPerHalf * 2;
+    setNoticeTrackDuration(noticeTrack, renderedEntriesCount);
     noticeBar.hidden = false;
+  }
+
+  function bindResizeHandler() {
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      if (resizeTimer) {
+        window.clearTimeout(resizeTimer);
+      }
+      resizeTimer = window.setTimeout(() => {
+        renderNoticeTrack();
+        refreshCountdownsAndPruneExpired();
+      }, 120);
+    });
   }
 
   function refreshCountdownsAndPruneExpired() {
@@ -691,6 +728,7 @@ async function setupHeaderNoticeBar(page) {
 
   renderNoticeTrack();
   refreshCountdownsAndPruneExpired();
+  bindResizeHandler();
   if (activeNotices.some((entry) => entry.countdownTarget)) {
     countdownIntervalId = window.setInterval(refreshCountdownsAndPruneExpired, 1000);
   }
