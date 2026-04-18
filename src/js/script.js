@@ -177,6 +177,27 @@ function parseVisibilityTimestamp(value) {
   return new Date(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute));
 }
 
+function formatNoticeCountdown(targetDate, now = new Date()) {
+  const diffMs = targetDate.getTime() - now.getTime();
+  if (diffMs <= 0) {
+    return null;
+  }
+
+  const totalSeconds = Math.floor(diffMs / 1000);
+  const totalMinutes = Math.floor(totalSeconds / 60);
+  const totalHours = Math.floor(totalMinutes / 60);
+  const days = Math.floor(totalHours / 24);
+  const hours = totalHours % 24;
+  const minutes = totalMinutes % 60;
+  const seconds = totalSeconds % 60;
+
+  if (days >= 1) {
+    return `${days}T ${hours}Std ${minutes}Min`;
+  }
+
+  return `${totalHours}Std ${minutes}Min ${seconds}Sek`;
+}
+
 function getFirstDefinedValue(entry, keys) {
   return keys.find((key) => entry?.[key] !== undefined && entry?.[key] !== null && String(entry[key]).trim() !== '');
 }
@@ -536,6 +557,113 @@ function setupBoardCards() {
   });
 }
 
+function getNoticeDataPath(page) {
+  const rootPrefix = getRootPrefix(page);
+  return `${rootPrefix}src/data/header-notices.json`;
+}
+
+function normalizeNotices(rawEntries) {
+  if (!Array.isArray(rawEntries)) {
+    return [];
+  }
+
+  return rawEntries
+    .filter((entry) => entry && typeof entry.text === 'string' && entry.text.trim() !== '' && isVisibleByWindow(entry))
+    .map((entry) => {
+      const countdownTarget = parseVisibilityTimestamp(entry.countdown);
+      const deleteAt = parseVisibilityTimestamp(entry.deleteAt);
+      const hasValidCountdown = Boolean(countdownTarget);
+      if (hasValidCountdown && !deleteAt) {
+        return null;
+      }
+
+      return {
+        text: entry.text.trim(),
+        countdownTarget: hasValidCountdown ? countdownTarget : null,
+        deleteAt,
+      };
+    })
+    .filter(Boolean);
+}
+
+function setNoticeTrackDuration(track, noticeCount) {
+  const durationInSeconds = Math.max(20, noticeCount * 11);
+  track.style.setProperty('--notice-duration', `${durationInSeconds}s`);
+}
+
+function renderNoticeEntry(entry) {
+  const noticeEl = document.createElement('span');
+  noticeEl.className = 'header-notice-entry';
+
+  const textEl = document.createElement('span');
+  textEl.className = 'header-notice-text';
+  textEl.textContent = entry.text;
+  noticeEl.append(textEl);
+
+  if (entry.countdownTarget) {
+    const countdownEl = document.createElement('span');
+    countdownEl.className = 'header-notice-countdown';
+    noticeEl.append(countdownEl);
+    entry.countdownElement = countdownEl;
+  }
+
+  return noticeEl;
+}
+
+async function setupHeaderNoticeBar(page) {
+  const noticeBar = document.getElementById('header-notice-bar');
+  const noticeTrack = document.getElementById('header-notice-track');
+  if (!noticeBar || !noticeTrack) {
+    return;
+  }
+
+  let rawEntries = [];
+  try {
+    rawEntries = await fetch(getNoticeDataPath(page)).then((response) => (response.ok ? response.json() : []));
+  } catch (error) {
+    rawEntries = [];
+  }
+
+  const notices = normalizeNotices(rawEntries);
+  if (notices.length === 0) {
+    noticeBar.hidden = true;
+    return;
+  }
+
+  noticeTrack.innerHTML = '';
+  notices.forEach((entry) => {
+    noticeTrack.append(renderNoticeEntry(entry));
+  });
+
+  noticeTrack.classList.remove('header-notice-bar__track--static');
+  if (notices.length > 1) {
+    notices.forEach((entry) => {
+      noticeTrack.append(renderNoticeEntry({ ...entry }));
+    });
+  } else {
+    noticeTrack.classList.add('header-notice-bar__track--static');
+  }
+
+  setNoticeTrackDuration(noticeTrack, notices.length);
+  noticeBar.hidden = false;
+
+  function refreshCountdowns() {
+    const now = new Date();
+    notices.forEach((entry) => {
+      if (!entry.countdownTarget || !entry.countdownElement) {
+        return;
+      }
+      const formatted = formatNoticeCountdown(entry.countdownTarget, now);
+      entry.countdownElement.textContent = formatted ? `(${formatted})` : '(abgelaufen)';
+    });
+  }
+
+  refreshCountdowns();
+  if (notices.some((entry) => entry.countdownTarget)) {
+    window.setInterval(refreshCountdowns, 1000);
+  }
+}
+
 async function loadHomeContent() {
   const [eventsRaw, newsRaw, vorstand, elferrat, royals, sponsors] = await Promise.all([
     fetch('./src/data/events.json').then((r) => r.json()),
@@ -727,6 +855,7 @@ async function loadLinktreeContent() {
     await loadComponent('header-component', './components/header.html');
     await loadComponent('footer-component', './components/footer.html');
     normalizeComponentLinks(page);
+    await setupHeaderNoticeBar(page);
     setupMobileMenu();
     setupHeaderSmoothScroll();
     await loadHomeGallery();
@@ -739,6 +868,7 @@ async function loadLinktreeContent() {
     await loadComponent('header-component', '../components/header.html');
     await loadComponent('footer-component', '../components/footer.html');
     normalizeComponentLinks(page);
+    await setupHeaderNoticeBar(page);
     setupMobileMenu();
     setupHeaderSmoothScroll();
     await loadLinktreeContent();
@@ -749,6 +879,7 @@ async function loadLinktreeContent() {
     await loadComponent('header-component', '../../components/header.html');
     await loadComponent('footer-component', '../../components/footer.html');
     normalizeComponentLinks(page);
+    await setupHeaderNoticeBar(page);
     setupMobileMenu();
     setupHeaderSmoothScroll();
     return;
@@ -757,6 +888,7 @@ async function loadLinktreeContent() {
   await loadComponent('header-component', '../components/header.html');
   await loadComponent('footer-component', '../components/footer.html');
   normalizeComponentLinks(page);
+  await setupHeaderNoticeBar(page);
   setupMobileMenu();
   setupHeaderSmoothScroll();
 })();
