@@ -65,47 +65,7 @@ Unbekannte `type`-Werte werden wie `more` behandelt.
 
 ---
 
-## 2) Datei: `header-notices.json`
-
-Pfad: `src/data/header-notices.json`
-
-### 2.1 Zweck
-
-Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder Seite).
-
-### 2.2 Felder pro Eintrag
-
-| Feld        | Typ      | Pflicht                 | Beschreibung                                                              |
-|-------------|----------|-------------------------|---------------------------------------------------------------------------|
-| `text`      | `string` | Ja                      | Hinweistext, der im Band angezeigt wird.                                  |
-| `countdown` | `string` | Optional                | Zielzeitpunkt (`JJJJ-MM-TT-HH:mm`) für einen Live-Countdown hinter `text`. |
-| `publishAt` | `string` | Optional                | Start Sichtbarkeit (`JJJJ-MM-TT-HH:mm`).                                  |
-| `deleteAt`  | `string` | Ja bei `countdown`, sonst empfohlen | Ende Sichtbarkeit (`JJJJ-MM-TT-HH:mm`).                           |
-
-### 2.3 Countdown-Regeln
-
-- Wenn Restzeit **>= 1 Tag**: Anzeige in `Tage`, `Stunden`, `Minuten`
-- Wenn Restzeit **< 1 Tag**: Anzeige in `Stunden`, `Minuten`, `Sekunden`
-- Ist `countdown` gesetzt, sollte `deleteAt` identisch oder später als `countdown` sein.
-- Läuft der Countdown ab, wird der komplette Hinweis sofort entfernt.
-- Hinweise im Band werden visuell durch `+++` getrennt.
-
-### 2.4 Vorlage
-
-```json
-[
-  {
-    "text": "xyz",
-    "countdown": "2026-05-09-16:30",
-    "publishAt": "2026-04-18-15:00",
-    "deleteAt": "2026-05-09-16:30"
-  }
-]
-```
-
----
-
-## 3) Datei: `news.json`
+## 2) Datei: `news.json`
 
 Pfad: `src/data/news.json`
 
@@ -448,7 +408,47 @@ Bildauflistung für Galerien.
 
 ---
 
-## 11) Minimale Komplettbeispiele (alle Dateien)
+## 11) Datei: `header-notices.json`
+
+Pfad: `src/data/header-notices.json`
+
+### 11.1 Zweck
+
+Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder Seite).
+
+### 11.2 Felder pro Eintrag
+
+| Feld        | Typ      | Pflicht                                                                 | Beschreibung                                                              |
+|-------------|----------|-------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| `text`      | `string` | Ja                                                                      | Hinweistext, der im Band angezeigt wird.                                  |
+| `countdown` | `string` | Optional                                                                | Zielzeitpunkt (`JJJJ-MM-TT-HH:mm`) für einen Live-Countdown hinter `text`. |
+| `publishAt` | `string` | Optional                                                                | Start Sichtbarkeit (`JJJJ-MM-TT-HH:mm`).                                  |
+| `deleteAt`  | `string` | Wenn `countdown`, dann das Datum vom Countdown, sonst trotzdem Pflicht. | Ende Sichtbarkeit (`JJJJ-MM-TT-HH:mm`).                           |
+
+### 11.3 Countdown-Regeln
+
+- Wenn Restzeit **>= 1 Tag**: Anzeige in `Tage`, `Stunden`, `Minuten`
+- Wenn Restzeit **< 1 Tag**: Anzeige in `Stunden`, `Minuten`, `Sekunden`
+- Ist `countdown` gesetzt, sollte `deleteAt` identisch oder später als `countdown` sein.
+- Läuft der Countdown ab, wird der komplette Hinweis sofort entfernt.
+- Hinweise im Band werden visuell durch `+++` getrennt.
+
+### 11.4 Vorlage
+
+```json
+[
+  {
+    "text": "xyz",
+    "countdown": "2026-05-09-16:30",
+    "publishAt": "2026-04-18-15:00",
+    "deleteAt": "2026-05-09-16:30"
+  }
+]
+```
+
+---
+
+## 12) Minimale Komplettbeispiele (alle Dateien)
 
 ### `news.json`
 
@@ -571,5 +571,18 @@ Bildauflistung für Galerien.
     "src": "./src/img/sponsors/sponsor.png",
     "alt": "Sponsorname"
   }
+]
+```
+
+### `header-notices.json`
+
+```json
+[
+   {
+      "text": "Vorverkauf endet in:",
+      "countdown": "2026-04-19-15:18",
+      "publishAt": "2026-01-01-00:00",
+      "deleteAt": "2026-04-19-15:18"
+   }
 ]
 ```

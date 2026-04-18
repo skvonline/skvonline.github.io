@@ -193,10 +193,10 @@ function formatNoticeCountdown(targetDate, now = new Date()) {
   const pad = (value) => String(value).padStart(2, '0');
 
   if (days >= 1) {
-    return `${days}T ${pad(hours)}Std ${pad(minutes)}Min`;
+    return `${days} T ${pad(hours)} Std ${pad(minutes)} Min`;
   }
 
-  return `${pad(totalHours)}Std ${pad(minutes)}Min ${pad(seconds)}Sek`;
+  return `${pad(totalHours)} Std ${pad(minutes)} Min ${pad(seconds)} Sek`;
 }
 
 function getFirstDefinedValue(entry, keys) {
@@ -716,7 +716,7 @@ async function setupHeaderNoticeBar(page) {
       }
       const formatted = formatNoticeCountdown(entry.countdownTarget, now);
       entry.countdownElements.forEach((countdownElement) => {
-        countdownElement.textContent = formatted ? `(${formatted})` : '';
+        countdownElement.textContent = formatted ? `${formatted}` : '';
       });
     });
 
