@@ -155,16 +155,16 @@ a {
 
 .submenu {
     position: absolute;
-    top: calc(100% + 0.35rem);
+    top: 100%;
     left: 0;
     display: none;
     min-width: 12rem;
     list-style: none;
     margin: 0;
-    padding: 0.45rem 0;
-    background: rgba(20, 54, 143, 0.98);
-    border-radius: 10px;
-    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.35);
+    padding: 0.25rem 0;
+    background: var(--skv-primary);
+    border-radius: 0;
+    box-shadow: none;
     z-index: 50;
 }
 
@@ -174,7 +174,11 @@ a {
 
 .submenu a {
     width: 100%;
-    padding: 0.45rem 0.9rem;
+    padding: 0.45rem 0.6rem;
+}
+
+.submenu li + li {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .main-menu .has-submenu:hover > .submenu,
