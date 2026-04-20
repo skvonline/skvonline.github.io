@@ -143,6 +143,45 @@ a {
     display: inline-block;
 }
 
+.main-menu > li {
+    position: relative;
+}
+
+.main-menu .has-submenu > a::after {
+    content: '▾';
+    font-size: 0.7rem;
+    margin-left: 0.35rem;
+}
+
+.submenu {
+    position: absolute;
+    top: calc(100% + 0.35rem);
+    left: 0;
+    display: none;
+    min-width: 12rem;
+    list-style: none;
+    margin: 0;
+    padding: 0.45rem 0;
+    background: rgba(20, 54, 143, 0.98);
+    border-radius: 10px;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.35);
+    z-index: 50;
+}
+
+.submenu li {
+    width: 100%;
+}
+
+.submenu a {
+    width: 100%;
+    padding: 0.45rem 0.9rem;
+}
+
+.main-menu .has-submenu:hover > .submenu,
+.main-menu .has-submenu:focus-within > .submenu {
+    display: block;
+}
+
 #menu_button {
     display: none;
     border: 1px solid rgba(255, 255, 255, 0.8);
@@ -1030,6 +1069,21 @@ body.lightbox-open {
 
     .mobile-nav[hidden] {
         display: none;
+    }
+
+    .mobile-nav .submenu {
+        position: static;
+        display: block;
+        min-width: 0;
+        margin-left: 0.65rem;
+        padding: 0.15rem 0 0.25rem;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    .mobile-nav .submenu a {
+        padding: 0.25rem 0;
+        font-weight: 600;
     }
 
     .board-details {
