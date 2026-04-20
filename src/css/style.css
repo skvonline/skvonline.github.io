@@ -174,7 +174,7 @@ a {
 
 .submenu a {
     width: 100%;
-    padding: 0.45rem 0.6rem;
+    padding: 0.45rem 0;
 }
 
 .submenu li + li {
