@@ -180,7 +180,7 @@ a {
 }
 
 .submenu li + li {
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0.1rem;
 }
 
 .main-menu .has-submenu:hover > .submenu,
@@ -1089,8 +1089,9 @@ body.lightbox-open {
     }
 
     .mobile-nav .submenu a {
-        padding: 0.25rem 0;
+        padding: 0.3rem 0;
         font-weight: 600;
+        text-align: left;
     }
 
     .board-details {
