@@ -912,6 +912,43 @@ async function loadHomeContent() {
   }
 }
 
+
+async function loadDownloadsContent() {
+  const downloadsContainer = document.getElementById('downloads-list');
+  if (!downloadsContainer) {
+    return;
+  }
+
+  let entries = [];
+  try {
+    entries = await fetch('../src/data/downloads.json').then((response) => (response.ok ? response.json() : []));
+  } catch (error) {
+    entries = [];
+  }
+
+  const validEntries = Array.isArray(entries)
+    ? entries.filter((entry) => entry && entry.title && entry.file)
+    : [];
+
+  if (validEntries.length === 0) {
+    downloadsContainer.innerHTML = '<p>Aktuell sind keine Downloads verfügbar.</p>';
+    return;
+  }
+
+  validEntries.forEach((entry) => {
+    const description = entry.description ? `<p>${entry.description}</p>` : '';
+    const label = entry.label || 'Download starten';
+    downloadsContainer.insertAdjacentHTML(
+      'beforeend',
+      `<article class="card download-card">
+        <h3>${entry.title}</h3>
+        ${description}
+        <a class="btn" href="${entry.file}" download>${label}</a>
+      </article>`,
+    );
+  });
+}
+
 async function loadLinktreeContent() {
   const linksContainer = document.getElementById('linktree-links');
   if (!linksContainer) {
@@ -975,6 +1012,17 @@ async function loadLinktreeContent() {
     await setupHeaderNoticeBar(page);
     setupMobileMenu();
     setupHeaderSmoothScroll();
+    return;
+  }
+
+  if (page === 'downloads') {
+    await loadComponent('header-component', '../components/header.html');
+    await loadComponent('footer-component', '../components/footer.html');
+    normalizeComponentLinks(page);
+    await setupHeaderNoticeBar(page);
+    setupMobileMenu();
+    setupHeaderSmoothScroll();
+    await loadDownloadsContent();
     return;
   }
 

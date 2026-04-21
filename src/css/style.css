@@ -1052,6 +1052,111 @@ body.lightbox-open {
     box-shadow: 0 8px 20px rgba(30, 41, 59, 0.13);
 }
 
+
+.downloads-page p,
+.download-card,
+.download-card h1,
+.download-card h2,
+.download-card h3,
+.download-card h4,
+.download-card h5,
+.download-card h6,
+.download-card p {
+    text-align: left;
+}
+
+#downloads-list {
+    margin-top: 1.5rem;
+}
+
+.download-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.download-card .btn {
+    align-self: flex-start;
+}
+
+.hymne-stage {
+    background: radial-gradient(circle at top, rgba(31, 78, 216, 0.2), rgba(31, 78, 216, 0.05) 45%, transparent 80%), var(--skv-light);
+}
+
+.hymne-layout {
+    max-width: 860px;
+    display: grid;
+    gap: 1.25rem;
+}
+
+.hymne-hero-card,
+.hymne-lyrics-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+    padding: clamp(1.1rem, 2vw, 1.8rem);
+    text-align: left;
+}
+
+.hymne-kicker {
+    margin: 0;
+    font-weight: 700;
+    color: var(--skv-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.82rem;
+}
+
+.hymne-hero-card {
+    text-align: center;
+}
+
+.hymne-hero-card h1 {
+    text-align: center;
+    margin: 0.5rem 0;
+}
+
+.hymne-intro {
+    margin: 0 auto;
+    color: #334155;
+    max-width: 62ch;
+    text-align: center;
+}
+
+.hymne-lyrics-card {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.hymne-strophe {
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.32);
+    background: #fff;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.hymne-strophe h2 {
+    text-align: left;
+    margin: 0 0 0.45rem;
+    font-size: 1rem;
+    color: var(--skv-dark);
+}
+
+.hymne-strophe p {
+    margin: 0;
+    text-align: left;
+    line-height: 1.75;
+}
+
+.hymne-strophe:hover,
+.hymne-strophe:focus-within {
+    background: linear-gradient(135deg, rgba(31, 78, 216, 0.12), rgba(20, 54, 143, 0.16));
+    border-color: rgba(31, 78, 216, 0.5);
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+    transform: translateY(-2px);
+}
+
 @media (max-width: 960px) {
     nav {
         display: none;
