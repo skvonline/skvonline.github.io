@@ -40,6 +40,29 @@ function setupMobileMenu() {
 
   mobileNav.innerHTML = `<ul class="main-menu">${desktopMenu.innerHTML}</ul>`;
 
+  const mobileSubmenuParents = mobileNav.querySelectorAll('.has-submenu');
+  mobileSubmenuParents.forEach((parent, index) => {
+    const toggle = parent.querySelector(':scope > a');
+    const submenu = parent.querySelector(':scope > .submenu');
+    if (!toggle || !submenu) return;
+
+    const submenuId = `mobile-submenu-${index + 1}`;
+    submenu.id = submenuId;
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-controls', submenuId);
+
+    parent.classList.remove('is-open');
+
+    toggle.addEventListener('click', (event) => {
+      if (window.innerWidth > 960) return;
+      event.preventDefault();
+
+      const isOpen = parent.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      submenu.style.maxHeight = isOpen ? `${submenu.scrollHeight}px` : '0px';
+    });
+  });
+
   button.addEventListener('click', () => {
     const isExpanded = button.getAttribute('aria-expanded') === 'true';
     button.setAttribute('aria-expanded', String(!isExpanded));
