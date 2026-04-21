@@ -1061,10 +1061,7 @@ body.lightbox-open {
 .download-card h4,
 .download-card h5,
 .download-card h6,
-.download-card p,
-.hymne-page,
-.hymne-page h1,
-.hymne-page p {
+.download-card p {
     text-align: left;
 }
 
@@ -1082,13 +1079,74 @@ body.lightbox-open {
     align-self: flex-start;
 }
 
-.hymne-lyrics {
-    max-width: 760px;
+.hymne-stage {
+    background: radial-gradient(circle at top, rgba(31, 78, 216, 0.2), rgba(31, 78, 216, 0.05) 45%, transparent 80%), var(--skv-light);
 }
 
-.hymne-lyrics p {
-    margin-bottom: 1.5rem;
-    line-height: 1.6;
+.hymne-layout {
+    max-width: 860px;
+    display: grid;
+    gap: 1.25rem;
+}
+
+.hymne-hero-card,
+.hymne-lyrics-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+    padding: clamp(1.1rem, 2vw, 1.8rem);
+    text-align: left;
+}
+
+.hymne-kicker {
+    margin: 0;
+    font-weight: 700;
+    color: var(--skv-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.82rem;
+}
+
+.hymne-hero-card h1 {
+    text-align: left;
+    margin: 0.5rem 0;
+}
+
+.hymne-intro {
+    margin: 0;
+    color: #334155;
+    max-width: 62ch;
+}
+
+.hymne-lyrics-card {
+    display: grid;
+    gap: 1rem;
+}
+
+.hymne-verse p,
+.hymne-refrain p,
+.hymne-outro {
+    margin: 0;
+    text-align: left;
+    line-height: 1.75;
+}
+
+.hymne-refrain {
+    background: linear-gradient(135deg, rgba(31, 78, 216, 0.12), rgba(20, 54, 143, 0.18));
+    border-left: 5px solid var(--skv-primary);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.hymne-refrain h2 {
+    text-align: left;
+    margin: 0 0 0.4rem;
+    font-size: 1rem;
+    color: var(--skv-dark);
+}
+
+.hymne-outro {
+    font-size: 1.05rem;
 }
 
 
