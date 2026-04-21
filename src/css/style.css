@@ -1107,46 +1107,59 @@ body.lightbox-open {
     font-size: 0.82rem;
 }
 
+.hymne-hero-card {
+    text-align: center;
+}
+
 .hymne-hero-card h1 {
-    text-align: left;
+    text-align: center;
     margin: 0.5rem 0;
 }
 
 .hymne-intro {
-    margin: 0;
+    margin: 0 auto;
     color: #334155;
     max-width: 62ch;
+    text-align: center;
 }
 
 .hymne-lyrics-card {
     display: grid;
-    gap: 1rem;
+    gap: 0.9rem;
 }
 
-.hymne-verse p,
-.hymne-refrain p,
-.hymne-outro {
+.hymne-strophe {
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.32);
+    background: #fff;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.hymne-strophe h2 {
+    text-align: left;
+    margin: 0 0 0.45rem;
+    font-size: 1rem;
+    color: var(--skv-dark);
+}
+
+.hymne-strophe p {
     margin: 0;
     text-align: left;
     line-height: 1.75;
 }
 
-.hymne-refrain {
-    background: linear-gradient(135deg, rgba(31, 78, 216, 0.12), rgba(20, 54, 143, 0.18));
-    border-left: 5px solid var(--skv-primary);
-    border-radius: 12px;
-    padding: 1rem;
+.hymne-strophe:hover,
+.hymne-strophe:focus-within {
+    background: linear-gradient(135deg, rgba(31, 78, 216, 0.12), rgba(20, 54, 143, 0.16));
+    border-color: rgba(31, 78, 216, 0.5);
+    box-shadow: 0 10px 20px rgba(15, 23, 42, 0.12);
+    transform: translateY(-2px);
 }
 
-.hymne-refrain h2 {
-    text-align: left;
-    margin: 0 0 0.4rem;
-    font-size: 1rem;
-    color: var(--skv-dark);
-}
-
-.hymne-outro {
-    font-size: 1.05rem;
+.hymne-strophe--refrain h2::after {
+    content: ' ★';
+    color: var(--skv-primary);
 }
 
 
