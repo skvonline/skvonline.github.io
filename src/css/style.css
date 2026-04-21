@@ -147,12 +147,6 @@ a {
     position: relative;
 }
 
-.main-menu .has-submenu > a::after {
-    content: '▾';
-    font-size: 0.7rem;
-    margin-left: 0.35rem;
-}
-
 .submenu {
     position: absolute;
     top: 100%;
