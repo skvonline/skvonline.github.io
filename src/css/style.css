@@ -1157,12 +1157,6 @@ body.lightbox-open {
     transform: translateY(-2px);
 }
 
-.hymne-strophe--refrain h2::after {
-    content: ' ★';
-    color: var(--skv-primary);
-}
-
-
 @media (max-width: 960px) {
     nav {
         display: none;
