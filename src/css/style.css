@@ -617,8 +617,8 @@ a {
             rgba(0, 0, 0, 0) 100%
     );
     color: #fff;
-    border-top-left-radius: 42px;
-    border-bottom-left-radius: 100% 82%;
+    border-top-left-radius: min(66vw, 610px);
+    border-bottom-left-radius: 42px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     padding: 1rem 1.1rem 1rem 3.2rem;
