@@ -420,6 +420,22 @@ a {
     margin-top: 0.55rem;
 }
 
+.event-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 0.55rem;
+}
+
+.event-card-actions .news-links {
+    margin-top: 0;
+}
+
+.event-share-button {
+    border: none;
+}
+
 #events-more {
     background: var(--skv-light);
     color: var(--skv-primary);

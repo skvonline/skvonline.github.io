@@ -322,6 +322,103 @@ function getEventDetailsMarkup(event) {
   return `<div class="event-details">${detailRows.join('')}</div>`;
 }
 
+function parseEventDateForShare(dateValue) {
+  if (!dateValue || typeof dateValue !== 'string') {
+    return null;
+  }
+
+  const normalized = dateValue.trim();
+  const match = normalized.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+  if (!match) {
+    return null;
+  }
+
+  const [, day, month, year] = match;
+  return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+}
+
+function parseEventTimeForShare(timeValue) {
+  if (!timeValue || typeof timeValue !== 'string') {
+    return null;
+  }
+
+  const match = timeValue.match(/(\d{1,2}):(\d{2})/);
+  if (!match) {
+    return null;
+  }
+
+  const [, hour, minute] = match;
+  return `${hour.padStart(2, '0')}.${minute}`;
+}
+
+function buildEventShareUrl(event) {
+  const datePart = parseEventDateForShare(event?.date);
+  const timePart = parseEventTimeForShare(event?.time);
+  if (!datePart || !timePart) {
+    return '';
+  }
+
+  return `https://skvonline.de/veranstaltungen/?${datePart}-${timePart}`;
+}
+
+function getEventShareButtonMarkup(event) {
+  const shareUrl = buildEventShareUrl(event);
+  if (!shareUrl) {
+    return '';
+  }
+
+  return `<button type="button" class="news-link news-link--more event-share-button" data-event-share-url="${shareUrl}">Teilen</button>`;
+}
+
+async function writeTextToClipboard(value) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(value);
+    return;
+  }
+
+  const helperField = document.createElement('textarea');
+  helperField.value = value;
+  helperField.setAttribute('readonly', '');
+  helperField.style.position = 'absolute';
+  helperField.style.left = '-9999px';
+  document.body.append(helperField);
+  helperField.select();
+  document.execCommand('copy');
+  helperField.remove();
+}
+
+function setupEventShareButtons() {
+  const eventsGrid = document.getElementById('events-grid');
+  if (!eventsGrid) {
+    return;
+  }
+
+  eventsGrid.addEventListener('click', async (event) => {
+    const shareButton = event.target.closest('[data-event-share-url]');
+    if (!shareButton || !eventsGrid.contains(shareButton)) {
+      return;
+    }
+
+    const shareUrl = shareButton.dataset.eventShareUrl;
+    if (!shareUrl) {
+      return;
+    }
+
+    const defaultLabel = 'Teilen';
+
+    try {
+      await writeTextToClipboard(shareUrl);
+      shareButton.textContent = 'Link kopiert';
+    } catch (error) {
+      shareButton.textContent = 'Kopieren fehlgeschlagen';
+    }
+
+    window.setTimeout(() => {
+      shareButton.textContent = defaultLabel;
+    }, 1800);
+  });
+}
+
 function getElferratImagePath(member) {
   if (member.image && member.image !== './src/img/dummy.svg') {
     return member.image;
@@ -788,13 +885,17 @@ async function loadHomeContent() {
           <div class="event-card-body">
             <h3>${event.title || 'Veranstaltung'}</h3>
             ${getEventDetailsMarkup(event)}
-            ${getNewsLinksMarkup(event)}
+            <div class="event-card-actions">
+              ${getEventShareButtonMarkup(event)}
+              ${getNewsLinksMarkup(event)}
+            </div>
           </div>
         </div>
       </article>
     `;
     },
   });
+  setupEventShareButtons();
 
   chunkRender({
     items: news,
