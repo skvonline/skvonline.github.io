@@ -352,13 +352,23 @@ function parseEventTimeForShare(timeValue) {
 }
 
 function buildEventShareUrl(event) {
+  const eventToken = getEventDetailToken(event);
+  if (!eventToken) {
+    return '';
+  }
+
+  const detailPath = `/veranstaltungen/?${eventToken}`;
+  return new URL(detailPath, window.location.origin).href;
+}
+
+function getEventDetailToken(event) {
   const datePart = parseEventDateForShare(event?.date);
   const timePart = parseEventTimeForShare(event?.time);
   if (!datePart || !timePart) {
     return '';
   }
 
-  return `https://skvonline.de/veranstaltungen/?${datePart}-${timePart}`;
+  return `${datePart}-${timePart}`;
 }
 
 function getEventShareButtonMarkup(event) {
@@ -1050,6 +1060,57 @@ async function loadDownloadsContent() {
   });
 }
 
+async function loadEventDetailContent() {
+  const detailContainer = document.getElementById('event-detail-content');
+  if (!detailContainer) {
+    return;
+  }
+
+  const eventToken = decodeURIComponent(window.location.search.replace(/^\?/, '').trim());
+  if (!eventToken) {
+    detailContainer.innerHTML = '<p>Es wurde keine Veranstaltung ausgewählt.</p>';
+    return;
+  }
+
+  let eventsRaw = [];
+  try {
+    eventsRaw = await fetch('../src/data/events.json').then((response) => (response.ok ? response.json() : []));
+  } catch (error) {
+    eventsRaw = [];
+  }
+
+  const events = Array.isArray(eventsRaw) ? eventsRaw : [];
+  const matchingEvent = events.find((event) => getEventDetailToken(event) === eventToken);
+
+  if (!matchingEvent) {
+    detailContainer.innerHTML = '<p>Die gewünschte Veranstaltung wurde nicht gefunden.</p>';
+    return;
+  }
+
+  const imageMarkup = matchingEvent.image
+    ? `<div class="event-card-media"><img class="event-image" src="${matchingEvent.image}" alt="${matchingEvent.title || 'Veranstaltung'}" loading="lazy" /></div>`
+    : '';
+  const shareButtonMarkup = getEventShareButtonMarkup(matchingEvent);
+  const eventLinksMarkup = getNewsLinksMarkup(matchingEvent);
+
+  detailContainer.innerHTML = `
+    <article class="card event-card ${matchingEvent.image ? 'event-card--image-left' : 'event-card--no-image'}">
+      <div class="event-card-layout">
+        ${imageMarkup}
+        <div class="event-card-body">
+          <h3>${matchingEvent.title || 'Veranstaltung'}</h3>
+          ${getEventDetailsMarkup(matchingEvent)}
+          <div class="event-card-actions">
+            ${shareButtonMarkup}
+            ${eventLinksMarkup}
+          </div>
+        </div>
+      </div>
+    </article>
+  `;
+  setupEventShareButtons();
+}
+
 async function loadLinktreeContent() {
   const linksContainer = document.getElementById('linktree-links');
   if (!linksContainer) {
@@ -1124,6 +1185,17 @@ async function loadLinktreeContent() {
     setupMobileMenu();
     setupHeaderSmoothScroll();
     await loadDownloadsContent();
+    return;
+  }
+
+  if (page === 'events-detail') {
+    await loadComponent('header-component', '../components/header.html');
+    await loadComponent('footer-component', '../components/footer.html');
+    normalizeComponentLinks(page);
+    await setupHeaderNoticeBar(page);
+    setupMobileMenu();
+    setupHeaderSmoothScroll();
+    await loadEventDetailContent();
     return;
   }
 
