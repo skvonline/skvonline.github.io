@@ -1142,7 +1142,6 @@ async function loadEventDetailContent() {
   const imageMarkup = detailImagePath
     ? `<img class="event-detail-image" src="${detailImagePath}" alt="${matchingEvent.title || 'Veranstaltung'}" loading="lazy" />`
     : '';
-  const shareButtonMarkup = getEventShareButtonMarkup(matchingEvent);
   const eventLinksMarkup = getNewsLinksMarkup(matchingEvent);
 
   detailContainer.innerHTML = `
@@ -1154,7 +1153,6 @@ async function loadEventDetailContent() {
         ${getEventDescriptionMarkup(matchingEvent)}
         <div class="event-card-actions">
           ${eventLinksMarkup}
-          ${shareButtonMarkup}
         </div>
       </div>
     </div>

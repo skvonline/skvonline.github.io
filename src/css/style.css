@@ -627,6 +627,13 @@ a {
     flex-direction: column;
     justify-content: flex-end;
     gap: 0.35rem;
+    opacity: 1;
+    transition: opacity 0.25s ease;
+}
+
+.event-detail-shell:hover .event-detail-overlay {
+    opacity: 0;
+    pointer-events: none;
 }
 
 .event-detail-overlay h2 {
