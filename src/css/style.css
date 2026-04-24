@@ -605,15 +605,28 @@ a {
 
 .event-detail-overlay {
     position: absolute;
-    left: 1rem;
-    right: 1rem;
-    bottom: 1rem;
-    background: linear-gradient(140deg, rgba(15, 23, 42, 0.9), rgba(31, 78, 216, 0.78));
+    top: 0.85rem;
+    right: 0.85rem;
+    bottom: 0.85rem;
+    width: min(58%, 520px);
+    background: linear-gradient(
+            to left,
+            rgba(0, 0, 0, 0.82) 0%,
+            rgba(0, 0, 0, 0.72) 42%,
+            rgba(0, 0, 0, 0.24) 78%,
+            rgba(0, 0, 0, 0) 100%
+    );
     color: #fff;
-    border-radius: 28px 52px 28px 52px;
-    padding: 1rem 1.1rem;
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 155px;
+    border-top-right-radius: 26px;
+    border-bottom-right-radius: 26px;
+    clip-path: polygon(26% 0, 100% 0, 100% 100%, 0 100%);
+    padding: 1.1rem 1.15rem 1.15rem 6.4rem;
     text-align: left;
-    backdrop-filter: blur(1px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .event-detail-overlay h2 {
@@ -638,6 +651,10 @@ a {
 .event-detail-shell--no-image .event-detail-overlay {
     position: static;
     border-radius: 22px 38px 22px 38px;
+    clip-path: none;
+    width: 100%;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.45);
 }
 
 @media (max-width: 700px) {
@@ -670,6 +687,17 @@ a {
     .news-card {
         flex-basis: 100%;
         max-width: 100%;
+    }
+
+    .event-detail-overlay {
+        width: calc(100% - 1.2rem);
+        left: 0.6rem;
+        right: 0.6rem;
+        top: auto;
+        padding: 0.9rem 0.95rem;
+        border-radius: 20px;
+        clip-path: none;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.42));
     }
 
     .sponsor-slide {
