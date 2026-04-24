@@ -372,6 +372,18 @@ function getEventDetailToken(event) {
   return `${datePart}-${timePart}`;
 }
 
+function getEventImagePath(event) {
+  if (!event || typeof event !== 'object') {
+    return '';
+  }
+
+  if (event.image && String(event.image).trim() !== '') {
+    return event.image;
+  }
+
+  return '';
+}
+
 function getEventShareButtonMarkup(event) {
   const shareUrl = buildEventShareUrl(event);
   if (!shareUrl) {
@@ -1118,7 +1130,7 @@ async function loadEventDetailContent() {
 
   document.title = `SKV | ${matchingEvent.title || 'Veranstaltungsdetails'}`;
 
-  const detailImagePath = normalizeImagePathForSubpage(matchingEvent.image);
+  const detailImagePath = normalizeImagePathForSubpage(matchingEvent.image) || '../src/img/events/default.png';
   const imageMarkup = detailImagePath
     ? `<img class="event-detail-image" src="${detailImagePath}" alt="${matchingEvent.title || 'Veranstaltung'}" loading="lazy" />`
     : '';
