@@ -323,6 +323,14 @@ function getEventDetailsMarkup(event) {
   return `<div class="event-details">${detailRows.join('')}</div>`;
 }
 
+function getEventDescriptionMarkup(event) {
+  if (!event?.description || String(event.description).trim() === '') {
+    return '';
+  }
+
+  return `<p class="event-detail-description">${event.description}</p>`;
+}
+
 function parseEventDateForShare(dateValue) {
   if (!dateValue || typeof dateValue !== 'string') {
     return null;
@@ -1134,7 +1142,6 @@ async function loadEventDetailContent() {
   const imageMarkup = detailImagePath
     ? `<img class="event-detail-image" src="${detailImagePath}" alt="${matchingEvent.title || 'Veranstaltung'}" loading="lazy" />`
     : '';
-  const shareButtonMarkup = getEventShareButtonMarkup(matchingEvent);
   const eventLinksMarkup = getNewsLinksMarkup(matchingEvent);
 
   detailContainer.innerHTML = `
@@ -1143,9 +1150,9 @@ async function loadEventDetailContent() {
       <div class="event-detail-overlay">
         <h2>${matchingEvent.title || 'Veranstaltung'}</h2>
         ${getEventDetailsMarkup(matchingEvent)}
+        ${getEventDescriptionMarkup(matchingEvent)}
         <div class="event-card-actions">
           ${eventLinksMarkup}
-          ${shareButtonMarkup}
         </div>
       </div>
     </div>
