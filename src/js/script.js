@@ -254,6 +254,8 @@ const NEWS_LINK_ICONS = {
     '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"></rect><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="2"></path></svg>',
   maps:
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2"></path><circle cx="12" cy="10" r="2.8" fill="none" stroke="currentColor" stroke-width="2"></circle></svg>',
+  share:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 8l-6 4 6 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9 12h9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M15 5l3 3-3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 5h6a3 3 0 0 1 3 3v1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M5 19h6a3 3 0 0 0 3-3v-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>',
 };
 
 const LINKTREE_ICONS = {
@@ -377,7 +379,7 @@ function getEventShareButtonMarkup(event) {
     return '';
   }
 
-  return `<button type="button" class="news-link news-link--more event-share-button" data-event-share-url="${shareUrl}">Teilen</button>`;
+  return `<button type="button" class="news-link news-link--icon news-link--share event-share-button" data-event-share-url="${shareUrl}" aria-label="Veranstaltung teilen">${NEWS_LINK_ICONS.share}</button>`;
 }
 
 async function writeTextToClipboard(value) {
@@ -397,15 +399,35 @@ async function writeTextToClipboard(value) {
   helperField.remove();
 }
 
+function showShareToast(message, type = 'success') {
+  const toast = document.getElementById('share-toast') || document.createElement('div');
+  if (!toast.id) {
+    toast.id = 'share-toast';
+    toast.className = 'share-toast';
+    document.body.append(toast);
+  }
+
+  toast.textContent = message;
+  toast.classList.toggle('share-toast--error', type === 'error');
+  toast.classList.add('is-visible');
+
+  if (showShareToast.hideTimerId) {
+    window.clearTimeout(showShareToast.hideTimerId);
+  }
+  showShareToast.hideTimerId = window.setTimeout(() => {
+    toast.classList.remove('is-visible');
+  }, 5000);
+}
+
 function setupEventShareButtons() {
-  const eventsGrid = document.getElementById('events-grid');
-  if (!eventsGrid) {
+  if (setupEventShareButtons.isBound) {
     return;
   }
 
-  eventsGrid.addEventListener('click', async (event) => {
+  setupEventShareButtons.isBound = true;
+  document.addEventListener('click', async (event) => {
     const shareButton = event.target.closest('[data-event-share-url]');
-    if (!shareButton || !eventsGrid.contains(shareButton)) {
+    if (!shareButton) {
       return;
     }
 
@@ -414,18 +436,12 @@ function setupEventShareButtons() {
       return;
     }
 
-    const defaultLabel = 'Teilen';
-
     try {
       await writeTextToClipboard(shareUrl);
-      shareButton.textContent = 'Link kopiert';
+      showShareToast('Link wurde in die Zwischenablage kopiert.');
     } catch (error) {
-      shareButton.textContent = 'Kopieren fehlgeschlagen';
+      showShareToast('Der Link konnte nicht kopiert werden.', 'error');
     }
-
-    window.setTimeout(() => {
-      shareButton.textContent = defaultLabel;
-    }, 1800);
   });
 }
 
@@ -688,6 +704,18 @@ function setupBoardCards() {
   });
 }
 
+function normalizeImagePathForSubpage(imagePath) {
+  if (!imagePath || typeof imagePath !== 'string') {
+    return '';
+  }
+
+  if (imagePath.startsWith('./')) {
+    return `../.${imagePath.slice(1)}`;
+  }
+
+  return imagePath;
+}
+
 function getNoticeDataPath(page) {
   const rootPrefix = getRootPrefix(page);
   return `${rootPrefix}src/data/header-notices.json`;
@@ -896,8 +924,8 @@ async function loadHomeContent() {
             <h3>${event.title || 'Veranstaltung'}</h3>
             ${getEventDetailsMarkup(event)}
             <div class="event-card-actions">
-              ${getEventShareButtonMarkup(event)}
               ${getNewsLinksMarkup(event)}
+              ${getEventShareButtonMarkup(event)}
             </div>
           </div>
         </div>
@@ -1087,26 +1115,23 @@ async function loadEventDetailContent() {
     return;
   }
 
-  const imageMarkup = matchingEvent.image
-    ? `<div class="event-card-media"><img class="event-image" src="${matchingEvent.image}" alt="${matchingEvent.title || 'Veranstaltung'}" loading="lazy" /></div>`
+  const detailImagePath = normalizeImagePathForSubpage(matchingEvent.image);
+  const imageMarkup = detailImagePath
+    ? `<img class="event-detail-image" src="${detailImagePath}" alt="${matchingEvent.title || 'Veranstaltung'}" loading="lazy" />`
     : '';
   const shareButtonMarkup = getEventShareButtonMarkup(matchingEvent);
   const eventLinksMarkup = getNewsLinksMarkup(matchingEvent);
 
   detailContainer.innerHTML = `
-    <article class="card event-card ${matchingEvent.image ? 'event-card--image-left' : 'event-card--no-image'}">
-      <div class="event-card-layout">
-        ${imageMarkup}
-        <div class="event-card-body">
-          <h3>${matchingEvent.title || 'Veranstaltung'}</h3>
-          ${getEventDetailsMarkup(matchingEvent)}
-          <div class="event-card-actions">
-            ${shareButtonMarkup}
-            ${eventLinksMarkup}
-          </div>
-        </div>
+    <div class="event-detail-view">
+      <h2>${matchingEvent.title || 'Veranstaltung'}</h2>
+      ${imageMarkup}
+      ${getEventDetailsMarkup(matchingEvent)}
+      <div class="event-card-actions">
+        ${eventLinksMarkup}
+        ${shareButtonMarkup}
       </div>
-    </article>
+    </div>
   `;
   setupEventShareButtons();
 }
