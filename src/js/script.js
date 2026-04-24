@@ -254,6 +254,8 @@ const NEWS_LINK_ICONS = {
     '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"></rect><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="2"></path></svg>',
   maps:
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2"></path><circle cx="12" cy="10" r="2.8" fill="none" stroke="currentColor" stroke-width="2"></circle></svg>',
+  share:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="2"></circle><circle cx="6" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"></circle><circle cx="18" cy="19" r="3" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M8.7 10.7l6.6-3.4M8.7 13.3l6.6 3.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>',
 };
 
 const LINKTREE_ICONS = {
@@ -312,7 +314,6 @@ function getEventDetailsMarkup(event) {
     event.einlass && `<p><strong>Einlass:</strong> ${event.einlass}</p>`,
     event.preis && `<p><strong>Preis:</strong> ${event.preis}</p>`,
     event.location && `<p><strong>Ort:</strong> ${event.location}</p>`,
-    event.description && `<p>${event.description}</p>`,
   ].filter(Boolean);
 
   if (detailRows.length === 0) {
@@ -320,6 +321,127 @@ function getEventDetailsMarkup(event) {
   }
 
   return `<div class="event-details">${detailRows.join('')}</div>`;
+}
+
+function parseEventDateForShare(dateValue) {
+  if (!dateValue || typeof dateValue !== 'string') {
+    return null;
+  }
+
+  const normalized = dateValue.trim();
+  const match = normalized.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})$/);
+  if (!match) {
+    return null;
+  }
+
+  const [, day, month, year] = match;
+  return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+}
+
+function parseEventTimeForShare(timeValue) {
+  if (!timeValue || typeof timeValue !== 'string') {
+    return null;
+  }
+
+  const match = timeValue.match(/(\d{1,2}):(\d{2})/);
+  if (!match) {
+    return null;
+  }
+
+  const [, hour, minute] = match;
+  return `${hour.padStart(2, '0')}.${minute}`;
+}
+
+function buildEventShareUrl(event) {
+  const eventToken = getEventDetailToken(event);
+  if (!eventToken) {
+    return '';
+  }
+
+  const detailPath = `/veranstaltungen/?${eventToken}`;
+  return new URL(detailPath, window.location.origin).href;
+}
+
+function getEventDetailToken(event) {
+  const datePart = parseEventDateForShare(event?.date);
+  const timePart = parseEventTimeForShare(event?.time);
+  if (!datePart || !timePart) {
+    return '';
+  }
+
+  return `${datePart}-${timePart}`;
+}
+
+function getEventShareButtonMarkup(event) {
+  const shareUrl = buildEventShareUrl(event);
+  if (!shareUrl) {
+    return '';
+  }
+
+  return `<button type="button" class="news-link news-link--icon news-link--share event-share-button" data-event-share-url="${shareUrl}" aria-label="Veranstaltung teilen">${NEWS_LINK_ICONS.share}</button>`;
+}
+
+async function writeTextToClipboard(value) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(value);
+    return;
+  }
+
+  const helperField = document.createElement('textarea');
+  helperField.value = value;
+  helperField.setAttribute('readonly', '');
+  helperField.style.position = 'absolute';
+  helperField.style.left = '-9999px';
+  document.body.append(helperField);
+  helperField.select();
+  document.execCommand('copy');
+  helperField.remove();
+}
+
+function showShareToast(message, type = 'success') {
+  const toast = document.getElementById('share-toast') || document.createElement('div');
+  if (!toast.id) {
+    toast.id = 'share-toast';
+    toast.className = 'share-toast';
+    document.body.append(toast);
+  }
+
+  toast.textContent = message;
+  toast.classList.toggle('share-toast--error', type === 'error');
+  toast.classList.add('is-visible');
+
+  if (showShareToast.hideTimerId) {
+    window.clearTimeout(showShareToast.hideTimerId);
+  }
+  showShareToast.hideTimerId = window.setTimeout(() => {
+    toast.classList.remove('is-visible');
+  }, 5000);
+}
+
+function setupEventShareButtons() {
+  if (setupEventShareButtons.isBound) {
+    return;
+  }
+
+  setupEventShareButtons.isBound = true;
+  document.addEventListener('click', async (event) => {
+    const shareButton = event.target.closest('[data-event-share-url]');
+    if (!shareButton) {
+      return;
+    }
+
+    const shareUrl = shareButton.dataset.eventShareUrl;
+    if (!shareUrl) {
+      return;
+    }
+
+    try {
+      await writeTextToClipboard(shareUrl);
+      showShareToast('Link wurde in die Zwischenablage kopiert.');
+    } catch (error) {
+      showShareToast('Der Link konnte nicht kopiert werden.', 'error');
+    }
+  });
 }
 
 function getElferratImagePath(member) {
@@ -581,6 +703,18 @@ function setupBoardCards() {
   });
 }
 
+function normalizeImagePathForSubpage(imagePath) {
+  if (!imagePath || typeof imagePath !== 'string') {
+    return '';
+  }
+
+  if (imagePath.startsWith('./')) {
+    return `../.${imagePath.slice(1)}`;
+  }
+
+  return imagePath;
+}
+
 function getNoticeDataPath(page) {
   const rootPrefix = getRootPrefix(page);
   return `${rootPrefix}src/data/header-notices.json`;
@@ -788,13 +922,17 @@ async function loadHomeContent() {
           <div class="event-card-body">
             <h3>${event.title || 'Veranstaltung'}</h3>
             ${getEventDetailsMarkup(event)}
-            ${getNewsLinksMarkup(event)}
+            <div class="event-card-actions">
+              ${getNewsLinksMarkup(event)}
+              ${getEventShareButtonMarkup(event)}
+            </div>
           </div>
         </div>
       </article>
     `;
     },
   });
+  setupEventShareButtons();
 
   chunkRender({
     items: news,
@@ -949,6 +1087,59 @@ async function loadDownloadsContent() {
   });
 }
 
+async function loadEventDetailContent() {
+  const detailContainer = document.getElementById('event-detail-content');
+  if (!detailContainer) {
+    return;
+  }
+
+  const eventToken = decodeURIComponent(window.location.search.replace(/^\?/, '').trim());
+  if (!eventToken) {
+    detailContainer.innerHTML = '<p>Es wurde keine Veranstaltung ausgewählt.</p>';
+    return;
+  }
+
+  let eventsRaw = [];
+  try {
+    eventsRaw = await fetch('../src/data/events.json').then((response) => (response.ok ? response.json() : []));
+  } catch (error) {
+    eventsRaw = [];
+  }
+
+  const events = Array.isArray(eventsRaw) ? eventsRaw : [];
+  const matchingEvent = events.find((event) => getEventDetailToken(event) === eventToken);
+
+  if (!matchingEvent) {
+    document.title = 'SKV | Veranstaltungsdetails';
+    detailContainer.innerHTML = '<p>Die gewünschte Veranstaltung wurde nicht gefunden.</p>';
+    return;
+  }
+
+  document.title = `SKV | ${matchingEvent.title || 'Veranstaltungsdetails'}`;
+
+  const detailImagePath = normalizeImagePathForSubpage(matchingEvent.image);
+  const imageMarkup = detailImagePath
+    ? `<img class="event-detail-image" src="${detailImagePath}" alt="${matchingEvent.title || 'Veranstaltung'}" loading="lazy" />`
+    : '';
+  const shareButtonMarkup = getEventShareButtonMarkup(matchingEvent);
+  const eventLinksMarkup = getNewsLinksMarkup(matchingEvent);
+
+  detailContainer.innerHTML = `
+    <div class="event-detail-shell${imageMarkup ? '' : ' event-detail-shell--no-image'}">
+      ${imageMarkup}
+      <div class="event-detail-overlay">
+        <h2>${matchingEvent.title || 'Veranstaltung'}</h2>
+        ${getEventDetailsMarkup(matchingEvent)}
+        <div class="event-card-actions">
+          ${eventLinksMarkup}
+          ${shareButtonMarkup}
+        </div>
+      </div>
+    </div>
+  `;
+  setupEventShareButtons();
+}
+
 async function loadLinktreeContent() {
   const linksContainer = document.getElementById('linktree-links');
   if (!linksContainer) {
@@ -1023,6 +1214,17 @@ async function loadLinktreeContent() {
     setupMobileMenu();
     setupHeaderSmoothScroll();
     await loadDownloadsContent();
+    return;
+  }
+
+  if (page === 'events-detail') {
+    await loadComponent('header-component', '../components/header.html');
+    await loadComponent('footer-component', '../components/footer.html');
+    normalizeComponentLinks(page);
+    await setupHeaderNoticeBar(page);
+    setupMobileMenu();
+    setupHeaderSmoothScroll();
+    await loadEventDetailContent();
     return;
   }
 
