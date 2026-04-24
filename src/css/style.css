@@ -605,9 +605,9 @@ a {
 
 .event-detail-overlay {
     position: absolute;
-    top: 0.85rem;
-    right: 0.85rem;
-    bottom: 0.85rem;
+    top: 0;
+    right: 0;
+    bottom: 0;
     width: min(58%, 520px);
     background: linear-gradient(
             to left,
@@ -617,29 +617,31 @@ a {
             rgba(0, 0, 0, 0) 100%
     );
     color: #fff;
-    border-top-left-radius: 60px;
-    border-bottom-left-radius: 155px;
-    border-top-right-radius: 26px;
-    border-bottom-right-radius: 26px;
+    border-top-left-radius: 160px;
+    border-bottom-left-radius: 160px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
     clip-path: polygon(26% 0, 100% 0, 100% 100%, 0 100%);
     padding: 1.1rem 1.15rem 1.15rem 6.4rem;
-    text-align: left;
+    text-align: right;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
 }
 
 .event-detail-overlay h2 {
-    text-align: left;
+    text-align: right;
     margin: 0 0 0.45rem;
 }
 
 .event-detail-overlay .event-details p {
     color: #fff;
+    text-align: right;
 }
 
 .event-detail-overlay .event-card-actions {
     margin-top: 0.75rem;
+    justify-content: flex-end;
 }
 
 .event-detail-shell--no-image {
@@ -690,12 +692,13 @@ a {
     }
 
     .event-detail-overlay {
-        width: calc(100% - 1.2rem);
-        left: 0.6rem;
-        right: 0.6rem;
+        width: 100%;
+        left: 0;
+        right: 0;
+        bottom: 0;
         top: auto;
         padding: 0.9rem 0.95rem;
-        border-radius: 20px;
+        border-radius: 20px 20px 0 0;
         clip-path: none;
         background: linear-gradient(to top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.42));
     }

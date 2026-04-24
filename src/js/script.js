@@ -1111,9 +1111,12 @@ async function loadEventDetailContent() {
   const matchingEvent = events.find((event) => getEventDetailToken(event) === eventToken);
 
   if (!matchingEvent) {
+    document.title = 'SKV | Veranstaltungsdetails';
     detailContainer.innerHTML = '<p>Die gewünschte Veranstaltung wurde nicht gefunden.</p>';
     return;
   }
+
+  document.title = `SKV | ${matchingEvent.title || 'Veranstaltungsdetails'}`;
 
   const detailImagePath = normalizeImagePathForSubpage(matchingEvent.image);
   const imageMarkup = detailImagePath
