@@ -381,7 +381,7 @@ function getEventImagePath(event) {
     return event.image;
   }
 
-  return './src/img/events/default.png';
+  return '';
 }
 
 function getEventShareButtonMarkup(event) {
@@ -1130,7 +1130,7 @@ async function loadEventDetailContent() {
 
   document.title = `SKV | ${matchingEvent.title || 'Veranstaltungsdetails'}`;
 
-  const detailImagePath = normalizeImagePathForSubpage(matchingEvent.image);
+  const detailImagePath = normalizeImagePathForSubpage(matchingEvent.image) || '../src/img/events/default.png';
   const imageMarkup = detailImagePath
     ? `<img class="event-detail-image" src="${detailImagePath}" alt="${matchingEvent.title || 'Veranstaltung'}" loading="lazy" />`
     : '';
