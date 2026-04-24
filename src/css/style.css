@@ -608,24 +608,25 @@ a {
     top: 0;
     right: 0;
     bottom: 0;
-    width: min(58%, 520px);
+    width: min(66%, 600px);
     background: linear-gradient(
             to left,
-            rgba(0, 0, 0, 0.82) 0%,
-            rgba(0, 0, 0, 0.72) 42%,
-            rgba(0, 0, 0, 0.24) 78%,
+            rgba(0, 0, 0, 0.9) 0%,
+            rgba(0, 0, 0, 0.78) 48%,
+            rgba(0, 0, 0, 0.22) 82%,
             rgba(0, 0, 0, 0) 100%
     );
     color: #fff;
-    border-top-left-radius: 180px;
-    border-bottom-left-radius: 180px;
+    border-top-left-radius: 42px;
+    border-bottom-left-radius: 100% 82%;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    padding: 1.1rem 1.15rem 1.15rem 4.1rem;
+    padding: 1rem 1.1rem 1rem 3.2rem;
     text-align: right;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    gap: 0.35rem;
 }
 
 .event-detail-overlay h2 {
@@ -638,8 +639,15 @@ a {
     text-align: right;
 }
 
+.event-detail-description {
+    margin: 0.25rem 0 0;
+    color: #fff;
+    text-align: right;
+    line-height: 1.45;
+}
+
 .event-detail-overlay .event-card-actions {
-    margin-top: 0.75rem;
+    margin-top: auto;
     justify-content: flex-end;
 }
 
@@ -698,8 +706,8 @@ a {
         top: auto;
         padding: 0.9rem 0.95rem;
         border-radius: 20px 20px 0 0;
-        clip-path: none;
         background: linear-gradient(to top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.42));
+        gap: 0.3rem;
     }
 
     .sponsor-slide {
