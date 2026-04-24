@@ -617,12 +617,11 @@ a {
             rgba(0, 0, 0, 0) 100%
     );
     color: #fff;
-    border-top-left-radius: 160px;
-    border-bottom-left-radius: 160px;
+    border-top-left-radius: 180px;
+    border-bottom-left-radius: 180px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    clip-path: polygon(26% 0, 100% 0, 100% 100%, 0 100%);
-    padding: 1.1rem 1.15rem 1.15rem 6.4rem;
+    padding: 1.1rem 1.15rem 1.15rem 4.1rem;
     text-align: right;
     display: flex;
     flex-direction: column;

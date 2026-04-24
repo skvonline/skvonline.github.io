@@ -909,10 +909,11 @@ async function loadHomeContent() {
     buttonId: 'events-more',
     chunkSize: 3,
     renderItem: (event, index) => {
-      const hasImage = Boolean(event.image);
+      const imagePath = getEventImagePath(event);
+      const hasImage = Boolean(imagePath);
       const imageSideClass = hasImage ? (index % 2 === 0 ? 'event-card--image-left' : 'event-card--image-right') : 'event-card--no-image';
       const imageMarkup = hasImage
-        ? `<div class="event-card-media"><img class="event-image" src="${event.image}" alt="${event.title || 'Veranstaltung'}" loading="lazy" /></div>`
+        ? `<div class="event-card-media"><img class="event-image" src="${imagePath}" alt="${event.title || 'Veranstaltung'}" loading="lazy" /></div>`
         : '';
 
       return `
