@@ -314,7 +314,6 @@ function getEventDetailsMarkup(event) {
     event.einlass && `<p><strong>Einlass:</strong> ${event.einlass}</p>`,
     event.preis && `<p><strong>Preis:</strong> ${event.preis}</p>`,
     event.location && `<p><strong>Ort:</strong> ${event.location}</p>`,
-    event.description && `<p>${event.description}</p>`,
   ].filter(Boolean);
 
   if (detailRows.length === 0) {
