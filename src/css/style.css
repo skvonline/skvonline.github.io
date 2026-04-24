@@ -652,6 +652,7 @@ a {
 .event-detail-shell--no-image .event-detail-overlay {
     position: static;
     border-radius: 22px 38px 22px 38px;
+    clip-path: none;
     width: 100%;
     padding: 1rem;
     background: rgba(0, 0, 0, 0.45);
@@ -697,6 +698,7 @@ a {
         top: auto;
         padding: 0.9rem 0.95rem;
         border-radius: 20px 20px 0 0;
+        clip-path: none;
         background: linear-gradient(to top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.42));
     }
 

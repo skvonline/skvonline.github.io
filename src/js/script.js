@@ -314,7 +314,6 @@ function getEventDetailsMarkup(event) {
     event.einlass && `<p><strong>Einlass:</strong> ${event.einlass}</p>`,
     event.preis && `<p><strong>Preis:</strong> ${event.preis}</p>`,
     event.location && `<p><strong>Ort:</strong> ${event.location}</p>`,
-    event.description && `<p>${event.description}</p>`,
   ].filter(Boolean);
 
   if (detailRows.length === 0) {
@@ -714,15 +713,6 @@ function normalizeImagePathForSubpage(imagePath) {
   }
 
   return imagePath;
-}
-
-function getEventImagePath(event, isSubpage = false) {
-  const fallbackPath = './src/img/events/sessionseroeffnung.png';
-  const rawPath = event?.image || fallbackPath;
-  if (isSubpage) {
-    return normalizeImagePathForSubpage(rawPath);
-  }
-  return rawPath;
 }
 
 function getNoticeDataPath(page) {
@@ -1128,7 +1118,7 @@ async function loadEventDetailContent() {
 
   document.title = `SKV | ${matchingEvent.title || 'Veranstaltungsdetails'}`;
 
-  const detailImagePath = getEventImagePath(matchingEvent, true);
+  const detailImagePath = normalizeImagePathForSubpage(matchingEvent.image);
   const imageMarkup = detailImagePath
     ? `<img class="event-detail-image" src="${detailImagePath}" alt="${matchingEvent.title || 'Veranstaltung'}" loading="lazy" />`
     : '';
