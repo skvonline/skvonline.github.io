@@ -372,6 +372,18 @@ function getEventDetailToken(event) {
   return `${datePart}-${timePart}`;
 }
 
+function getEventImagePath(event) {
+  if (!event || typeof event !== 'object') {
+    return '';
+  }
+
+  if (event.image && String(event.image).trim() !== '') {
+    return event.image;
+  }
+
+  return './src/img/events/default.png';
+}
+
 function getEventShareButtonMarkup(event) {
   const shareUrl = buildEventShareUrl(event);
   if (!shareUrl) {
