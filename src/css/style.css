@@ -617,15 +617,15 @@ a {
             rgba(0, 0, 0, 0) 100%
     );
     color: #fff;
-    border-top-left-radius: min(66vw, 610px);
-    border-bottom-left-radius: 42px;
+    border-top-left-radius: min(62vw, 560px);
+    border-bottom-left-radius: min(62vw, 560px);
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     padding: 1rem 1.1rem 1rem 3.2rem;
     text-align: right;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: flex-end;
     gap: 0.35rem;
 }
 
@@ -647,7 +647,7 @@ a {
 }
 
 .event-detail-overlay .event-card-actions {
-    margin-top: auto;
+    margin-top: 0.75rem;
     justify-content: flex-end;
 }
 
