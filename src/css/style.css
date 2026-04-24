@@ -586,25 +586,58 @@ a {
     background: #b91c1c;
 }
 
-.event-detail-view {
-    display: grid;
-    gap: 0.75rem;
-    text-align: left;
-    max-width: 820px;
+.event-detail-shell {
+    position: relative;
+    max-width: 920px;
     margin: 0 auto;
-}
-
-.event-detail-view h2 {
-    margin-bottom: 0.2rem;
-    text-align: left;
+    border-radius: 34px;
+    overflow: hidden;
+    box-shadow: 0 16px 38px rgba(15, 23, 42, 0.22);
 }
 
 .event-detail-image {
     width: 100%;
-    max-height: 430px;
+    height: clamp(300px, 62vw, 540px);
     object-fit: cover;
-    border-radius: 14px;
-    background: #e2e8f0;
+    background: #dbe6ff;
+    display: block;
+}
+
+.event-detail-overlay {
+    position: absolute;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    background: linear-gradient(140deg, rgba(15, 23, 42, 0.9), rgba(31, 78, 216, 0.78));
+    color: #fff;
+    border-radius: 28px 52px 28px 52px;
+    padding: 1rem 1.1rem;
+    text-align: left;
+    backdrop-filter: blur(1px);
+}
+
+.event-detail-overlay h2 {
+    text-align: left;
+    margin: 0 0 0.45rem;
+}
+
+.event-detail-overlay .event-details p {
+    color: #fff;
+}
+
+.event-detail-overlay .event-card-actions {
+    margin-top: 0.75rem;
+}
+
+.event-detail-shell--no-image {
+    border-radius: 26px;
+    background: #1e3a8a;
+    padding: 1rem;
+}
+
+.event-detail-shell--no-image .event-detail-overlay {
+    position: static;
+    border-radius: 22px 38px 22px 38px;
 }
 
 @media (max-width: 700px) {

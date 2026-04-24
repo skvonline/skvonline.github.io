@@ -255,7 +255,7 @@ const NEWS_LINK_ICONS = {
   maps:
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z" fill="none" stroke="currentColor" stroke-width="2"></path><circle cx="12" cy="10" r="2.8" fill="none" stroke="currentColor" stroke-width="2"></circle></svg>',
   share:
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 8l-6 4 6 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M9 12h9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M15 5l3 3-3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M5 5h6a3 3 0 0 1 3 3v1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path><path d="M5 19h6a3 3 0 0 0 3-3v-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3" fill="none" stroke="currentColor" stroke-width="2"></circle><circle cx="6" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="2"></circle><circle cx="18" cy="19" r="3" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M8.7 10.7l6.6-3.4M8.7 13.3l6.6 3.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path></svg>',
 };
 
 const LINKTREE_ICONS = {
@@ -1123,13 +1123,15 @@ async function loadEventDetailContent() {
   const eventLinksMarkup = getNewsLinksMarkup(matchingEvent);
 
   detailContainer.innerHTML = `
-    <div class="event-detail-view">
-      <h2>${matchingEvent.title || 'Veranstaltung'}</h2>
+    <div class="event-detail-shell${imageMarkup ? '' : ' event-detail-shell--no-image'}">
       ${imageMarkup}
-      ${getEventDetailsMarkup(matchingEvent)}
-      <div class="event-card-actions">
-        ${eventLinksMarkup}
-        ${shareButtonMarkup}
+      <div class="event-detail-overlay">
+        <h2>${matchingEvent.title || 'Veranstaltung'}</h2>
+        ${getEventDetailsMarkup(matchingEvent)}
+        <div class="event-card-actions">
+          ${eventLinksMarkup}
+          ${shareButtonMarkup}
+        </div>
       </div>
     </div>
   `;
