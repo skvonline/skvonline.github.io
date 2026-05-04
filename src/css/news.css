@@ -1,0 +1,131 @@
+#news-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.news-card--large {
+    min-height: 360px;
+}
+
+.news-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex: 1 1 460px;
+    max-width: 460px;
+}
+
+.news-header {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.news-media {
+    position: relative;
+}
+
+.news-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #e2e8f0;
+}
+
+.news-date {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.45rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    background: rgba(15, 23, 42, 0.78);
+    color: #fff;
+}
+
+.news-media .news-date {
+    position: absolute;
+    top: 0.45rem;
+    right: 0.45rem;
+}
+
+.news-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.35rem;
+}
+
+.news-link {
+    text-decoration: none;
+}
+
+.news-link--more {
+    display: inline-block;
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    background: var(--skv-primary);
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.news-link--icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #fff;
+}
+
+.news-link--icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.news-link--instagram {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%);
+}
+
+.news-link--facebook {
+    background: #1877f2;
+}
+
+.news-link--tiktok {
+    background: #000000;
+}
+
+.news-link--mail {
+    background: #ea4335;
+}
+
+.news-link--maps {
+    background: #0f9d58;
+}
+
+.news-link--share {
+    background: var(--skv-primary);
+    border: none;
+    cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    #news-grid {
+        gap: 0.8rem;
+    }
+
+    .news-card--large {
+        min-height: 0;
+    }
+
+    .news-card {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+}

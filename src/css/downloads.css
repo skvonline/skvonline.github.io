@@ -1,0 +1,12 @@
+.downloads-page p,
+.download-card,
+.download-card h1,
+.download-card h2,
+.download-card h3,
+.download-card h4,
+.download-card h5,
+.download-card h6,
+.download-card p { text-align: left; }
+#downloads-list { margin-top: 1.5rem; }
+.download-card { display: flex; flex-direction: column; gap: 0.9rem; }
+.download-card .btn { align-self: flex-start; }
