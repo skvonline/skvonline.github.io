@@ -56,13 +56,13 @@
     );
 
     entriesWithPreviews.forEach(({ entry, preview }) => {
-      const imageMarkup = preview
-        ? `<img class="gallery-overview-image" src="${preview.src}" alt="${preview.alt}" loading="lazy" />`
-        : '';
+      const mediaMarkup = preview
+        ? `<div class="gallery-overview-media"><img class="gallery-overview-image" src="${preview.src}" alt="${preview.alt}" loading="lazy" /><h3 class="gallery-overview-title">${entry.name}</h3></div>`
+        : `<h3 class="gallery-overview-title gallery-overview-title--plain">${entry.name}</h3>`;
 
       overviewContainer.insertAdjacentHTML(
         'beforeend',
-        `<article class="card gallery-overview-card">${imageMarkup}<h3>${entry.name}</h3>${entry.description ? `<p>${entry.description}</p>` : ''}<a class="btn" href="../galerie/${entry.directory}/">Zur Galerie</a></article>`,
+        `<article class="card gallery-overview-card">${mediaMarkup}${entry.description ? `<p>${entry.description}</p>` : ''}<a class="btn" href="../galerie/${entry.directory}/">Zur Galerie</a></article>`,
       );
     });
   }
