@@ -1,0 +1,19 @@
+.gallery-overview-page p,
+.gallery-overview-card,
+.gallery-overview-card h1,
+.gallery-overview-card h2,
+.gallery-overview-card h3,
+.gallery-overview-card h4,
+.gallery-overview-card h5,
+.gallery-overview-card h6,
+.gallery-overview-card p { text-align: left; }
+
+#gallery-overview-list { margin-top: 1.5rem; }
+
+.gallery-overview-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.gallery-overview-card .btn { align-self: flex-start; }

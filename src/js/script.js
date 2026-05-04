@@ -1237,6 +1237,19 @@ async function loadLinktreeContent() {
     return;
   }
 
+  if (page === 'galerie-overview') {
+    await loadComponent('header-component', '../components/header.html');
+    await loadComponent('footer-component', '../components/footer.html');
+    normalizeComponentLinks(page);
+    await setupHeaderNoticeBar(page);
+    setupMobileMenu();
+    setupHeaderSmoothScroll();
+    if (window.SKV?.galleryOverview?.loadGalleryOverview) {
+      await window.SKV.galleryOverview.loadGalleryOverview();
+    }
+    return;
+  }
+
   if (page === 'events-detail') {
     await loadComponent('header-component', '../components/header.html');
     await loadComponent('footer-component', '../components/footer.html');
