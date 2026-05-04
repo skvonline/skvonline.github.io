@@ -1,10 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>SKV | Fasching 2026</title>
+    <meta name="description" content="Galerie vom Fasching 2026 des Sandersdorfer Karnevalsverein e.V."/>
+    <link rel="stylesheet" href="../../src/css/style.css"/>
+    <link rel="icon" href="../../src/img/logo.png"/>
 </head>
-<body>
+<body data-page="fasching26-gallery">
+<div id="header-component"></div>
 
+<main class="section legal-page">
+    <section class="container legal-card">
+        <h1>Fasching 2026</h1>
+        <p>Die Bildlinks für diese Seite werden aus der Datei <code>../../src/data/gallerys/fasching26.json</code> geladen.</p>
+        <div id="gallery-grid" class="grid cards-3" data-gallery-json="../../src/data/gallerys/fasching26.json" aria-live="polite"></div>
+    </section>
+</main>
+
+<div id="footer-component"></div>
+
+<script>
+  (async function () {
+    const gallery = document.getElementById('gallery-grid');
+    if (!gallery) return;
+
+    const jsonPath = gallery.dataset.galleryJson;
+    if (!jsonPath) return;
+
+    try {
+      const response = await fetch(jsonPath);
+      const images = response.ok ? await response.json() : [];
+
+      if (!Array.isArray(images) || images.length === 0) {
+        gallery.innerHTML = '<p>Zurzeit sind keine Bilder verfügbar.</p>';
+        return;
+      }
+
+      images.forEach((image) => {
+        if (!image?.src) return;
+        gallery.insertAdjacentHTML(
+          'beforeend',
+          `<article class="card"><img src="${image.src}" alt="${image.alt || 'Bild Fasching 2026'}" loading="lazy"></article>`,
+        );
+      });
+    } catch (error) {
+      gallery.innerHTML = '<p>Die Galerie konnte nicht geladen werden.</p>';
+    }
+  })();
+</script>
+<script src="../../src/js/script.js"></script>
 </body>
 </html>
