@@ -13,14 +13,13 @@
       .fasching-gallery-card { display: flex; flex-direction: column; gap: 0.6rem; }
       .fasching-gallery-button { border: 0; padding: 0; background: transparent; cursor: pointer; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 20px rgba(30,41,59,.13); }
       .fasching-gallery-image { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
-      .fasching-gallery-caption { margin: 0; font-size: .95rem; text-align: left; color: #334155; }
       .fasching-lightbox { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; }
       .fasching-lightbox.is-open { display: flex; }
       .fasching-lightbox-backdrop { position: absolute; inset: 0; background: rgba(2,6,23,.75); border: 0; }
-      .fasching-lightbox-dialog { position: relative; z-index: 2; background: #fff; border-radius: 14px; padding: 1rem; max-width: min(92vw, 980px); width: 100%; display: grid; gap: .8rem; }
-      .fasching-lightbox-image { width: 100%; max-height: 75vh; object-fit: contain; background: #e2e8f0; border-radius: 10px; }
-      .fasching-lightbox-caption { margin: 0; text-align: left; }
-      .fasching-lightbox-close, .fasching-lightbox-nav { border: 0; background: var(--skv-primary); color: #fff; border-radius: 10px; padding: .5rem .8rem; cursor: pointer; }
+      .fasching-lightbox-dialog { position: relative; z-index: 2; background: rgba(15, 23, 42, 0.88); border: 1px solid rgba(255,255,255,.16); border-radius: 14px; padding: 1rem; max-width: min(92vw, 980px); width: 100%; display: grid; gap: .8rem; backdrop-filter: blur(3px); }
+      .fasching-lightbox-image { width: 100%; max-height: 75vh; object-fit: contain; background: rgba(0,0,0,.35); border-radius: 10px; }
+      .fasching-lightbox-caption { margin: 0; text-align: left; color: #f8fafc; background: rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.14); border-radius: 8px; padding: .55rem .7rem; }
+      .fasching-lightbox-close, .fasching-lightbox-nav { border: 1px solid rgba(255,255,255,.2); background: rgba(0,0,0,.45); color: #fff; border-radius: 10px; padding: .5rem .8rem; cursor: pointer; }
       .fasching-lightbox-controls { display: flex; gap: .6rem; justify-content: space-between; }
     </style>
 </head>
@@ -114,7 +113,7 @@
       images.forEach((image, index) => {
         if (!image?.src) return;
         const altText = image.alt || 'Bild Fasching 2026';
-        gallery.insertAdjacentHTML('beforeend', `<article class="fasching-gallery-card"><button type="button" class="fasching-gallery-button" data-index="${index}" aria-label="Vorschau öffnen: ${altText}"><img class="fasching-gallery-image" src="${image.src}" alt="${altText}" loading="lazy"></button><p class="fasching-gallery-caption">${altText}</p></article>`);
+        gallery.insertAdjacentHTML('beforeend', `<article class="fasching-gallery-card"><button type="button" class="fasching-gallery-button" data-index="${index}" aria-label="Vorschau öffnen: ${altText}"><img class="fasching-gallery-image" src="${image.src}" alt="${altText}" loading="lazy"></button></article>`);
       });
 
       gallery.addEventListener('click', (event) => {
