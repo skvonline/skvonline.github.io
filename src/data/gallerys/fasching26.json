@@ -4,6 +4,7 @@
     "text": "Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla",
     "publishAt": "2026-05-05-12:00",
     "deleteAt": "2027-05-05-12:00",
+    "header": true,
     "images": [
       {
         "src": "./src/img/gallerys/fasching26/02.JPG",
