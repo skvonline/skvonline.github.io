@@ -16,4 +16,11 @@
   gap: 0.8rem;
 }
 
+.gallery-overview-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
 .gallery-overview-card .btn { align-self: flex-start; }

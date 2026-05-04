@@ -18,6 +18,16 @@
     return true;
   }
 
+  async function loadGalleryPreview(entry) {
+    try {
+      const items = await fetch(`../src/data/gallerys/${entry.directory}.json`).then((response) => (response.ok ? response.json() : []));
+      if (!Array.isArray(items) || !items[0]?.src) return null;
+      return { src: items[0].src, alt: items[0].alt || `Titelbild ${entry.name}` };
+    } catch {
+      return null;
+    }
+  }
+
   async function loadGalleryOverview() {
     const overviewContainer = document.getElementById('gallery-overview-list');
     if (!overviewContainer) return;
@@ -38,10 +48,21 @@
       return;
     }
 
-    validEntries.forEach((entry) => {
+    const entriesWithPreviews = await Promise.all(
+      validEntries.map(async (entry) => ({
+        entry,
+        preview: await loadGalleryPreview(entry),
+      })),
+    );
+
+    entriesWithPreviews.forEach(({ entry, preview }) => {
+      const imageMarkup = preview
+        ? `<img class="gallery-overview-image" src="${preview.src}" alt="${preview.alt}" loading="lazy" />`
+        : '';
+
       overviewContainer.insertAdjacentHTML(
         'beforeend',
-        `<article class="card gallery-overview-card"><h3>${entry.name}</h3>${entry.description ? `<p>${entry.description}</p>` : ''}<a class="btn" href="../galerie/${entry.directory}/">Zur Galerie</a></article>`,
+        `<article class="card gallery-overview-card">${imageMarkup}<h3>${entry.name}</h3>${entry.description ? `<p>${entry.description}</p>` : ''}<a class="btn" href="../galerie/${entry.directory}/">Zur Galerie</a></article>`,
       );
     });
   }
