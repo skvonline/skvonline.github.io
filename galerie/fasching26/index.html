@@ -1,10 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>SKV | Fasching 2026</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SKV | Galerie</title>
+    <meta name="description" content="Galerieansicht des Sandersdorfer Karnevalsverein e.V."/>
+    <link rel="stylesheet" href="../../src/css/style.css"/>
+    <link rel="stylesheet" href="../../src/css/gallerys.css"/>
+    <link rel="icon" href="../../src/img/logo.png">
 </head>
-<body>
+<body data-page="gallery-detail">
+<div id="header-component"></div>
 
+<main>
+    <section class="section section-alt">
+        <div class="container">
+            <h1 id="gallery-title">Galerie</h1>
+            <p id="gallery-description"></p>
+            <div id="gallery-detail-grid" class="grid cards-3" aria-live="polite"></div>
+        </div>
+    </section>
+</main>
+
+<div id="gallery-lightbox" class="gallery-lightbox" aria-hidden="true" hidden>
+    <button class="gallery-lightbox-backdrop" type="button" aria-label="Vollbildansicht schließen" data-gallery-lightbox-close></button>
+    <div class="gallery-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Galerie Vollbildansicht">
+        <button id="gallery-lightbox-close" class="gallery-lightbox-close" type="button" aria-label="Vollbildansicht schließen">×</button>
+        <button id="gallery-lightbox-prev" class="gallery-lightbox-nav gallery-lightbox-nav--prev" type="button" aria-label="Vorheriges Bild">‹</button>
+        <figure class="gallery-lightbox-content">
+            <img id="gallery-lightbox-image" class="gallery-lightbox-image" src="" alt="" loading="lazy"/>
+            <figcaption id="gallery-lightbox-caption" class="gallery-lightbox-caption"></figcaption>
+        </figure>
+        <button id="gallery-lightbox-next" class="gallery-lightbox-nav gallery-lightbox-nav--next" type="button" aria-label="Nächstes Bild">›</button>
+    </div>
+</div>
+
+<div id="footer-component"></div>
+
+<script src="../../src/js/news.js" defer></script>
+<script src="../../src/js/events.js" defer></script>
+<script src="../../src/js/royals.js" defer></script>
+<script src="../../src/js/elferrat.js" defer></script>
+<script src="../../src/js/vorstand.js" defer></script>
+<script src="../../src/js/header-notices.js" defer></script>
+<script src="../../src/js/downloads.js" defer></script>
+<script src="../../src/js/linktree.js" defer></script>
+<script src="../../src/js/gallerys.js" defer></script>
+<script src="../../src/js/script.js" defer></script>
 </body>
 </html>

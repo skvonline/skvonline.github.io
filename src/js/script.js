@@ -1189,6 +1189,168 @@ async function loadLinktreeContent() {
   });
 }
 
+
+async function loadGalleryDirectoryEntries() {
+  const candidates = ['fasching26', 'home-gallery', 'sponsors'];
+  const entries = [];
+
+  await Promise.all(
+    candidates.map(async (slug) => {
+      try {
+        const data = await fetch(`../src/data/gallerys/${slug}.json`).then((response) => (response.ok ? response.json() : null));
+        const item = Array.isArray(data) ? data[0] : data;
+        if (item && typeof item === 'object') {
+          entries.push({ slug, ...item });
+        }
+      } catch (error) {
+      }
+    }),
+  );
+
+  return entries;
+}
+
+function isGalleryHeaderVisible(gallery, now = new Date()) {
+  if (!gallery?.header) return false;
+  const publishAt = parseVisibilityTimestamp(gallery.publishAt);
+  if (!publishAt) return false;
+  const months = Number(window.SKV?.galleryHeaderVisibilityMonths ?? 6);
+  const visibleUntil = new Date(publishAt);
+  visibleUntil.setMonth(visibleUntil.getMonth() + months);
+  return now >= publishAt && now <= visibleUntil;
+}
+
+async function injectGalleryHeaderNavigation(page) {
+  const galleriesMenu = document.getElementById('header-galleries-menu');
+  if (!galleriesMenu) return;
+
+  const entries = await loadGalleryDirectoryEntries();
+  const visibleEntries = entries
+    .filter((entry) => entry.slug !== 'home-gallery' && entry.slug !== 'sponsors' && isVisibleByWindow(entry))
+    .filter((entry) => isGalleryHeaderVisible(entry))
+    .sort((a, b) => String(a.name || a.slug).localeCompare(String(b.name || b.slug), 'de'));
+
+  if (visibleEntries.length === 0) return;
+
+  const rootPrefix = getRootPrefix(page);
+  const linksMarkup = visibleEntries
+    .map((entry) => `<li><a href="${rootPrefix}galerie/${entry.slug}/">${entry.name || entry.slug}</a></li>`)
+    .join('');
+  galleriesMenu.insertAdjacentHTML('beforeend', linksMarkup);
+}
+
+async function loadGalleryOverviewContent() {
+  const container = document.getElementById('gallery-overview-list');
+  if (!container) return;
+
+  const entries = await loadGalleryDirectoryEntries();
+  const galleryEntries = entries
+    .filter((entry) => entry.slug !== 'home-gallery' && entry.slug !== 'sponsors')
+    .filter((entry) => isVisibleByWindow(entry));
+
+  if (galleryEntries.length === 0) {
+    container.innerHTML = '<p>Aktuell sind keine Galerien verfügbar.</p>';
+    return;
+  }
+
+  galleryEntries
+    .sort((a, b) => String(b.publishAt || '').localeCompare(String(a.publishAt || '')))
+    .forEach((entry) => {
+      const firstImage = Array.isArray(entry.images) ? entry.images[0] : null;
+      container.insertAdjacentHTML('beforeend', `
+        <article class="card gallery-overview-card">
+          ${firstImage?.src ? `<img class="gallery-overview-image" src="..${firstImage.src.slice(1)}" alt="${firstImage.alt || entry.name || 'Galerie'}" loading="lazy"/>` : ''}
+          <h3>${entry.name || entry.slug}</h3>
+          <p>${entry.text || ''}</p>
+          <a class="btn" href="../galerie/${entry.slug}/">Galerie öffnen</a>
+        </article>
+      `);
+    });
+}
+
+async function loadGalleryDetailContent() {
+  const grid = document.getElementById('gallery-detail-grid');
+  if (!grid) return;
+
+  const pathSegments = window.location.pathname.split('/').filter(Boolean);
+  const slug = pathSegments[pathSegments.length - 1];
+  if (!slug) return;
+
+  const galleryData = await fetch(`../../src/data/gallerys/${slug}.json`).then((response) => (response.ok ? response.json() : null));
+  const gallery = Array.isArray(galleryData) ? galleryData[0] : galleryData;
+
+  if (!gallery || !isVisibleByWindow(gallery)) {
+    grid.innerHTML = '<p>Diese Galerie ist nicht verfügbar.</p>';
+    return;
+  }
+
+  document.getElementById('gallery-title').textContent = gallery.name || slug;
+  document.getElementById('gallery-description').textContent = gallery.text || '';
+  document.title = `SKV | ${gallery.name || slug}`;
+
+  const images = Array.isArray(gallery.images) ? gallery.images : [];
+  images.forEach((image, index) => {
+    if (!image?.src) return;
+    const src = `../..${image.src.slice(1)}`;
+    grid.insertAdjacentHTML('beforeend', `
+      <article class="card gallery-item" role="button" tabindex="0" data-gallery-index="${index}">
+        <img class="gallery-item-image" src="${src}" alt="${image.alt || gallery.name || 'Galeriebild'}" loading="lazy"/>
+      </article>
+    `);
+  });
+
+  setupGalleryLightbox(images.map((image) => ({ src: `../..${image.src.slice(1)}`, alt: image.alt || '' })));
+}
+
+function setupGalleryLightbox(images) {
+  const lightbox = document.getElementById('gallery-lightbox');
+  const imageEl = document.getElementById('gallery-lightbox-image');
+  const captionEl = document.getElementById('gallery-lightbox-caption');
+  const closeButton = document.getElementById('gallery-lightbox-close');
+  const prevButton = document.getElementById('gallery-lightbox-prev');
+  const nextButton = document.getElementById('gallery-lightbox-next');
+  const backdrop = lightbox?.querySelector('[data-gallery-lightbox-close]');
+  const gallery = document.getElementById('gallery-detail-grid');
+  if (!lightbox || !imageEl || !captionEl || !closeButton || !prevButton || !nextButton || !backdrop || !gallery || images.length === 0) return;
+  let currentIndex = 0;
+
+  const render = () => {
+    const item = images[currentIndex];
+    imageEl.src = item.src;
+    imageEl.alt = item.alt || 'Galeriebild';
+    captionEl.textContent = item.alt || '';
+  };
+  const open = (index) => { currentIndex = index; render(); lightbox.hidden = false; lightbox.setAttribute('aria-hidden', 'false'); };
+  const close = () => { lightbox.hidden = true; lightbox.setAttribute('aria-hidden', 'true'); };
+  const next = () => { currentIndex = (currentIndex + 1) % images.length; render(); };
+  const prev = () => { currentIndex = (currentIndex - 1 + images.length) % images.length; render(); };
+
+  gallery.addEventListener('click', (event) => {
+    const item = event.target.closest('.gallery-item');
+    if (!item) return;
+    open(Number(item.dataset.galleryIndex || 0));
+  });
+  gallery.addEventListener('keydown', (event) => {
+    const item = event.target.closest('.gallery-item');
+    if (!item) return;
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      open(Number(item.dataset.galleryIndex || 0));
+    }
+  });
+
+  closeButton.addEventListener('click', close);
+  backdrop.addEventListener('click', close);
+  nextButton.addEventListener('click', next);
+  prevButton.addEventListener('click', prev);
+  document.addEventListener('keydown', (event) => {
+    if (lightbox.hidden) return;
+    if (event.key === 'Escape') close();
+    if (event.key === 'ArrowRight') next();
+    if (event.key === 'ArrowLeft') prev();
+  });
+}
+
 (async function init() {
   const page = document.body.dataset.page;
 
@@ -1196,6 +1358,9 @@ async function loadLinktreeContent() {
     await loadComponent('header-component', './components/header.html');
     await loadComponent('footer-component', './components/footer.html');
     normalizeComponentLinks(page);
+    window.SKV = window.SKV || {};
+    window.SKV.galleryHeaderVisibilityMonths = (await fetch('./src/data/gallerys/config.json').then((r) => r.json()).catch(() => ({ headerVisibilityMonths: 6 }))).headerVisibilityMonths || 6;
+    await injectGalleryHeaderNavigation(page);
     await setupHeaderNoticeBar(page);
     setupMobileMenu();
     setupHeaderSmoothScroll();
@@ -1209,6 +1374,9 @@ async function loadLinktreeContent() {
     await loadComponent('header-component', '../components/header.html');
     await loadComponent('footer-component', '../components/footer.html');
     normalizeComponentLinks(page);
+    window.SKV = window.SKV || {};
+    window.SKV.galleryHeaderVisibilityMonths = (await fetch('../src/data/gallerys/config.json').then((r) => r.json()).catch(() => ({ headerVisibilityMonths: 6 }))).headerVisibilityMonths || 6;
+    await injectGalleryHeaderNavigation(page);
     await setupHeaderNoticeBar(page);
     setupMobileMenu();
     setupHeaderSmoothScroll();
@@ -1220,6 +1388,9 @@ async function loadLinktreeContent() {
     await loadComponent('header-component', '../../components/header.html');
     await loadComponent('footer-component', '../../components/footer.html');
     normalizeComponentLinks(page);
+    window.SKV = window.SKV || {};
+    window.SKV.galleryHeaderVisibilityMonths = (await fetch('../../src/data/gallerys/config.json').then((r) => r.json()).catch(() => ({ headerVisibilityMonths: 6 }))).headerVisibilityMonths || 6;
+    await injectGalleryHeaderNavigation(page);
     await setupHeaderNoticeBar(page);
     setupMobileMenu();
     setupHeaderSmoothScroll();
@@ -1230,6 +1401,9 @@ async function loadLinktreeContent() {
     await loadComponent('header-component', '../components/header.html');
     await loadComponent('footer-component', '../components/footer.html');
     normalizeComponentLinks(page);
+    window.SKV = window.SKV || {};
+    window.SKV.galleryHeaderVisibilityMonths = (await fetch('../src/data/gallerys/config.json').then((r) => r.json()).catch(() => ({ headerVisibilityMonths: 6 }))).headerVisibilityMonths || 6;
+    await injectGalleryHeaderNavigation(page);
     await setupHeaderNoticeBar(page);
     setupMobileMenu();
     setupHeaderSmoothScroll();
@@ -1237,10 +1411,41 @@ async function loadLinktreeContent() {
     return;
   }
 
+  if (page === 'gallery-overview') {
+    await loadComponent('header-component', '../components/header.html');
+    await loadComponent('footer-component', '../components/footer.html');
+    normalizeComponentLinks(page);
+    window.SKV = window.SKV || {};
+    window.SKV.galleryHeaderVisibilityMonths = (await fetch('../src/data/gallerys/config.json').then((r) => r.json()).catch(() => ({ headerVisibilityMonths: 6 }))).headerVisibilityMonths || 6;
+    await injectGalleryHeaderNavigation(page);
+    await setupHeaderNoticeBar(page);
+    setupMobileMenu();
+    setupHeaderSmoothScroll();
+    await loadGalleryOverviewContent();
+    return;
+  }
+
+  if (page === 'gallery-detail') {
+    await loadComponent('header-component', '../../components/header.html');
+    await loadComponent('footer-component', '../../components/footer.html');
+    normalizeComponentLinks(page);
+    window.SKV = window.SKV || {};
+    window.SKV.galleryHeaderVisibilityMonths = (await fetch('../../src/data/gallerys/config.json').then((r) => r.json()).catch(() => ({ headerVisibilityMonths: 6 }))).headerVisibilityMonths || 6;
+    await injectGalleryHeaderNavigation(page);
+    await setupHeaderNoticeBar(page);
+    setupMobileMenu();
+    setupHeaderSmoothScroll();
+    await loadGalleryDetailContent();
+    return;
+  }
+
   if (page === 'events-detail') {
     await loadComponent('header-component', '../components/header.html');
     await loadComponent('footer-component', '../components/footer.html');
     normalizeComponentLinks(page);
+    window.SKV = window.SKV || {};
+    window.SKV.galleryHeaderVisibilityMonths = (await fetch('../src/data/gallerys/config.json').then((r) => r.json()).catch(() => ({ headerVisibilityMonths: 6 }))).headerVisibilityMonths || 6;
+    await injectGalleryHeaderNavigation(page);
     await setupHeaderNoticeBar(page);
     setupMobileMenu();
     setupHeaderSmoothScroll();
@@ -1251,6 +1456,9 @@ async function loadLinktreeContent() {
   await loadComponent('header-component', '../components/header.html');
   await loadComponent('footer-component', '../components/footer.html');
   normalizeComponentLinks(page);
+  window.SKV = window.SKV || {};
+  window.SKV.galleryHeaderVisibilityMonths = (await fetch('../src/data/gallerys/config.json').then((r) => r.json()).catch(() => ({ headerVisibilityMonths: 6 }))).headerVisibilityMonths || 6;
+  await injectGalleryHeaderNavigation(page);
   await setupHeaderNoticeBar(page);
   setupMobileMenu();
   setupHeaderSmoothScroll();
