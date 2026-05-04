@@ -10,17 +10,24 @@
     <link rel="icon" href="../../src/img/logo.png"/>
     <style>
       .fasching-gallery-grid { margin-top: 1.5rem; }
-      .fasching-gallery-card { display: flex; flex-direction: column; gap: 0.6rem; }
-      .fasching-gallery-button { border: 0; padding: 0; background: transparent; cursor: pointer; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 20px rgba(30,41,59,.13); }
+      .fasching-gallery-card { display: flex; }
+      .fasching-gallery-button { border: 0; padding: 0; background: transparent; cursor: pointer; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 28px rgba(15,23,42,.18); transition: transform .2s ease, box-shadow .2s ease; }
+      .fasching-gallery-button:hover { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(15,23,42,.25); }
       .fasching-gallery-image { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
-      .fasching-lightbox { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; }
+      .fasching-lightbox { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; padding: 1rem; }
       .fasching-lightbox.is-open { display: flex; }
-      .fasching-lightbox-backdrop { position: absolute; inset: 0; background: rgba(2,6,23,.75); border: 0; }
-      .fasching-lightbox-dialog { position: relative; z-index: 2; background: rgba(15, 23, 42, 0.88); border: 1px solid rgba(255,255,255,.16); border-radius: 14px; padding: 1rem; max-width: min(92vw, 980px); width: 100%; display: grid; gap: .8rem; backdrop-filter: blur(3px); }
-      .fasching-lightbox-image { width: 100%; max-height: 75vh; object-fit: contain; background: rgba(0,0,0,.35); border-radius: 10px; }
-      .fasching-lightbox-caption { margin: 0; text-align: left; color: #f8fafc; background: rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.14); border-radius: 8px; padding: .55rem .7rem; }
-      .fasching-lightbox-close, .fasching-lightbox-nav { border: 1px solid rgba(255,255,255,.2); background: rgba(0,0,0,.45); color: #fff; border-radius: 10px; padding: .5rem .8rem; cursor: pointer; }
-      .fasching-lightbox-controls { display: flex; gap: .6rem; justify-content: space-between; }
+      .fasching-lightbox-backdrop { position: absolute; inset: 0; background: radial-gradient(circle at top, rgba(30,41,59,.65), rgba(2,6,23,.9)); border: 0; }
+      .fasching-lightbox-dialog { position: relative; z-index: 2; width: 100%; max-width: min(94vw, 1040px); display: grid; gap: .75rem; }
+      .fasching-lightbox-frame { position: relative; border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,255,255,.16); background: rgba(15,23,42,.78); box-shadow: 0 24px 50px rgba(0,0,0,.5); backdrop-filter: blur(10px); }
+      .fasching-lightbox-image { width: 100%; max-height: min(76vh, 820px); object-fit: contain; background: rgba(0,0,0,.2); display: block; }
+      .fasching-lightbox-caption { margin: 0; color: #e2e8f0; font-size: .95rem; line-height: 1.45; padding: .85rem 1rem; background: linear-gradient(180deg, rgba(15,23,42,.1), rgba(15,23,42,.72)); }
+      .fasching-lightbox-controls { display: flex; align-items: center; justify-content: space-between; gap: .6rem; }
+      .fasching-lightbox-close, .fasching-lightbox-nav { border: 1px solid rgba(255,255,255,.2); background: rgba(15,23,42,.72); color: #fff; border-radius: 999px; height: 42px; min-width: 42px; padding: 0 .95rem; cursor: pointer; font-weight: 600; }
+      .fasching-lightbox-close:hover, .fasching-lightbox-nav:hover { background: rgba(30,41,59,.92); }
+      @media (max-width: 640px) {
+        .fasching-lightbox-controls { position: absolute; inset: auto .5rem .5rem .5rem; z-index: 3; }
+        .fasching-lightbox-close { margin: 0 auto; }
+      }
     </style>
 </head>
 <body data-page="legal">
@@ -38,8 +45,10 @@
 <div id="fasching-lightbox" class="fasching-lightbox" aria-hidden="true">
     <button type="button" class="fasching-lightbox-backdrop" id="fasching-lightbox-backdrop" aria-label="Vorschau schließen"></button>
     <div class="fasching-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Bildvorschau Fasching 2026">
-        <img id="fasching-lightbox-image" class="fasching-lightbox-image" src="" alt=""/>
-        <p id="fasching-lightbox-caption" class="fasching-lightbox-caption"></p>
+        <div class="fasching-lightbox-frame">
+            <img id="fasching-lightbox-image" class="fasching-lightbox-image" src="" alt=""/>
+            <p id="fasching-lightbox-caption" class="fasching-lightbox-caption"></p>
+        </div>
         <div class="fasching-lightbox-controls">
             <button type="button" class="fasching-lightbox-nav" id="fasching-lightbox-prev" aria-label="Vorheriges Bild">◀</button>
             <button type="button" class="fasching-lightbox-close" id="fasching-lightbox-close" aria-label="Vorschau schließen">Schließen</button>
