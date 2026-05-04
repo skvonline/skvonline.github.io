@@ -63,7 +63,7 @@
 
       overviewContainer.insertAdjacentHTML(
         'beforeend',
-        `<article class="card gallery-overview-card">${mediaMarkup}${entry.description ? `<p>${entry.description}</p>` : ''}</article>`,
+        `<article class="gallery-overview-card">${mediaMarkup}${entry.description ? `<p>${entry.description}</p>` : ''}</article>`,
       );
     });
   }
