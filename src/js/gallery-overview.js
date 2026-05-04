@@ -56,13 +56,14 @@
     );
 
     entriesWithPreviews.forEach(({ entry, preview }) => {
+      const galleryHref = `../galerie/${entry.directory}/`;
       const mediaMarkup = preview
-        ? `<div class="gallery-overview-media"><img class="gallery-overview-image" src="${preview.src}" alt="${preview.alt}" loading="lazy" /><h3 class="gallery-overview-title">${entry.name}</h3></div>`
+        ? `<a class="gallery-overview-link" href="${galleryHref}" aria-label="Galerie ${entry.name} öffnen"><div class="gallery-overview-media"><img class="gallery-overview-image" src="${preview.src}" alt="${preview.alt}" loading="lazy" /><h3 class="gallery-overview-title">${entry.name}</h3></div></a>`
         : `<h3 class="gallery-overview-title gallery-overview-title--plain">${entry.name}</h3>`;
 
       overviewContainer.insertAdjacentHTML(
         'beforeend',
-        `<article class="card gallery-overview-card">${mediaMarkup}${entry.description ? `<p>${entry.description}</p>` : ''}<a class="btn" href="../galerie/${entry.directory}/">Zur Galerie</a></article>`,
+        `<article class="card gallery-overview-card">${mediaMarkup}${entry.description ? `<p>${entry.description}</p>` : ''}</article>`,
       );
     });
   }
