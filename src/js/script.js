@@ -1191,13 +1191,40 @@ async function loadLinktreeContent() {
 
 
 async function loadGalleryDirectoryEntries() {
-  const candidates = ['fasching26', 'home-gallery', 'sponsors'];
-  const entries = [];
+  const page = document.body?.dataset?.page || '';
+  const basePathByPage = {
+    home: './src/data/gallerys/',
+    linktree: '../src/data/gallerys/',
+    downloads: '../src/data/gallerys/',
+    'events-detail': '../src/data/gallerys/',
+    'gallery-overview': '../src/data/gallerys/',
+    'gallery-detail': '../../src/data/gallerys/',
+    legal: '../../src/data/gallerys/',
+  };
+  const basePath = basePathByPage[page] || '../src/data/gallerys/';
 
+  let jsonFiles = [];
+  try {
+    const directoryHtml = await fetch(basePath).then((response) => (response.ok ? response.text() : ''));
+    const matches = Array.from(directoryHtml.matchAll(/href=["']([^"']+\.json)["']/gi));
+    jsonFiles = matches
+      .map((match) => match[1].split('/').pop())
+      .filter(Boolean)
+      .filter((name) => name !== 'home-gallery.json' && name !== 'sponsors.json' && name !== 'config.json');
+  } catch (error) {
+  }
+
+  if (jsonFiles.length === 0) {
+    const fallbackFiles = ['fasching26.json'];
+    jsonFiles = fallbackFiles;
+  }
+
+  const entries = [];
   await Promise.all(
-    candidates.map(async (slug) => {
+    jsonFiles.map(async (fileName) => {
+      const slug = fileName.replace(/\.json$/i, '');
       try {
-        const data = await fetch(`../src/data/gallerys/${slug}.json`).then((response) => (response.ok ? response.json() : null));
+        const data = await fetch(`${basePath}${fileName}`).then((response) => (response.ok ? response.json() : null));
         const item = Array.isArray(data) ? data[0] : data;
         if (item && typeof item === 'object') {
           entries.push({ slug, ...item });
