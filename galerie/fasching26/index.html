@@ -5,45 +5,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>SKV | Fasching 2026</title>
     <meta name="description" content="Galerie vom Fasching 2026 des Sandersdorfer Karnevalsverein e.V."/>
+    <meta name="gallery-source" content="../../src/data/gallerys/fasching26.json"/>
     <link rel="stylesheet" href="../../src/css/style.css"/>
     <link rel="icon" href="../../src/img/logo.png"/>
+    <style>
+      .fasching-gallery-grid { margin-top: 1.5rem; }
+      .fasching-gallery-card { display: flex; flex-direction: column; gap: 0.6rem; }
+      .fasching-gallery-button { border: 0; padding: 0; background: transparent; cursor: pointer; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 20px rgba(30,41,59,.13); }
+      .fasching-gallery-image { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+      .fasching-gallery-caption { margin: 0; font-size: .95rem; text-align: left; color: #334155; }
+      .fasching-lightbox { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; }
+      .fasching-lightbox.is-open { display: flex; }
+      .fasching-lightbox-backdrop { position: absolute; inset: 0; background: rgba(2,6,23,.75); border: 0; }
+      .fasching-lightbox-dialog { position: relative; z-index: 2; background: #fff; border-radius: 14px; padding: 1rem; max-width: min(92vw, 980px); width: 100%; display: grid; gap: .8rem; }
+      .fasching-lightbox-image { width: 100%; max-height: 75vh; object-fit: contain; background: #e2e8f0; border-radius: 10px; }
+      .fasching-lightbox-caption { margin: 0; text-align: left; }
+      .fasching-lightbox-close, .fasching-lightbox-nav { border: 0; background: var(--skv-primary); color: #fff; border-radius: 10px; padding: .5rem .8rem; cursor: pointer; }
+      .fasching-lightbox-controls { display: flex; gap: .6rem; justify-content: space-between; }
+    </style>
 </head>
-<body data-page="fasching26-gallery">
+<body data-page="legal">
 <div id="header-component"></div>
 
 <main class="section legal-page">
     <section class="container legal-card">
         <h1>Fasching 2026</h1>
-        <p>Die Bildlinks für diese Seite werden aus der Datei <code>../../src/data/gallerys/fasching26.json</code> geladen.</p>
-        <div id="gallery-grid" class="grid cards-3" data-gallery-json="../../src/data/gallerys/fasching26.json" aria-live="polite"></div>
+        <div id="gallery-grid" class="grid cards-3 fasching-gallery-grid" aria-live="polite"></div>
     </section>
 </main>
 
 <div id="footer-component"></div>
 
+<div id="fasching-lightbox" class="fasching-lightbox" aria-hidden="true">
+    <button type="button" class="fasching-lightbox-backdrop" id="fasching-lightbox-backdrop" aria-label="Vorschau schließen"></button>
+    <div class="fasching-lightbox-dialog" role="dialog" aria-modal="true" aria-label="Bildvorschau Fasching 2026">
+        <img id="fasching-lightbox-image" class="fasching-lightbox-image" src="" alt=""/>
+        <p id="fasching-lightbox-caption" class="fasching-lightbox-caption"></p>
+        <div class="fasching-lightbox-controls">
+            <button type="button" class="fasching-lightbox-nav" id="fasching-lightbox-prev" aria-label="Vorheriges Bild">◀</button>
+            <button type="button" class="fasching-lightbox-close" id="fasching-lightbox-close" aria-label="Vorschau schließen">Schließen</button>
+            <button type="button" class="fasching-lightbox-nav" id="fasching-lightbox-next" aria-label="Nächstes Bild">▶</button>
+        </div>
+    </div>
+</div>
+
 <script>
   (async function () {
     const gallery = document.getElementById('gallery-grid');
-    if (!gallery) return;
+    const sourceMeta = document.querySelector('meta[name="gallery-source"]');
+    const lightbox = document.getElementById('fasching-lightbox');
+    const lightboxImage = document.getElementById('fasching-lightbox-image');
+    const lightboxCaption = document.getElementById('fasching-lightbox-caption');
+    const closeButton = document.getElementById('fasching-lightbox-close');
+    const backdrop = document.getElementById('fasching-lightbox-backdrop');
+    const prevButton = document.getElementById('fasching-lightbox-prev');
+    const nextButton = document.getElementById('fasching-lightbox-next');
+    if (!gallery || !sourceMeta || !lightbox || !lightboxImage || !lightboxCaption || !closeButton || !backdrop || !prevButton || !nextButton) return;
 
-    const jsonPath = gallery.dataset.galleryJson;
-    if (!jsonPath) return;
+    const jsonPath = sourceMeta.content;
+    let images = [];
+    let activeIndex = 0;
+
+    function renderLightbox(index) {
+      if (!images[index]) return;
+      activeIndex = index;
+      lightboxImage.src = images[index].src;
+      lightboxImage.alt = images[index].alt || 'Bild Fasching 2026';
+      lightboxCaption.textContent = images[index].alt || 'Keine Bildbeschreibung vorhanden';
+    }
+
+    function openLightbox(index) {
+      renderLightbox(index);
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+    }
+
+    function move(delta) {
+      const nextIndex = (activeIndex + delta + images.length) % images.length;
+      renderLightbox(nextIndex);
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (!lightbox.classList.contains('is-open')) return;
+      if (event.key === 'ArrowLeft') move(-1);
+      if (event.key === 'ArrowRight') move(1);
+      if (event.key === 'Escape') closeLightbox();
+    });
+
+    closeButton.addEventListener('click', closeLightbox);
+    backdrop.addEventListener('click', closeLightbox);
+    prevButton.addEventListener('click', () => move(-1));
+    nextButton.addEventListener('click', () => move(1));
 
     try {
       const response = await fetch(jsonPath);
-      const images = response.ok ? await response.json() : [];
+      images = response.ok ? await response.json() : [];
 
       if (!Array.isArray(images) || images.length === 0) {
         gallery.innerHTML = '<p>Zurzeit sind keine Bilder verfügbar.</p>';
         return;
       }
 
-      images.forEach((image) => {
+      images.forEach((image, index) => {
         if (!image?.src) return;
-        gallery.insertAdjacentHTML(
-          'beforeend',
-          `<article class="card"><img src="${image.src}" alt="${image.alt || 'Bild Fasching 2026'}" loading="lazy"></article>`,
-        );
+        const altText = image.alt || 'Bild Fasching 2026';
+        gallery.insertAdjacentHTML('beforeend', `<article class="fasching-gallery-card"><button type="button" class="fasching-gallery-button" data-index="${index}" aria-label="Vorschau öffnen: ${altText}"><img class="fasching-gallery-image" src="${image.src}" alt="${altText}" loading="lazy"></button><p class="fasching-gallery-caption">${altText}</p></article>`);
+      });
+
+      gallery.addEventListener('click', (event) => {
+        const button = event.target.closest('.fasching-gallery-button');
+        if (!button) return;
+        const index = Number(button.dataset.index);
+        if (Number.isNaN(index)) return;
+        openLightbox(index);
       });
     } catch (error) {
       gallery.innerHTML = '<p>Die Galerie konnte nicht geladen werden.</p>';
