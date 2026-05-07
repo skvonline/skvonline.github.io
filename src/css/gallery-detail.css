@@ -1,0 +1,20 @@
+.gallery-grid { margin-top: 1.5rem; }
+.gallery-card { display: flex; }
+.gallery-button { border: 0; padding: 0; background: transparent; cursor: pointer; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 28px rgba(15,23,42,.18); transition: transform .2s ease, box-shadow .2s ease; }
+.gallery-button:hover { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(15,23,42,.25); }
+.gallery-image { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+.gallery-lightbox { position: fixed; inset: 0; z-index: 1000; display: none; align-items: center; justify-content: center; padding: 1rem; }
+.gallery-lightbox.is-open { display: flex; }
+.gallery-lightbox-backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.78); border: 0; }
+.gallery-lightbox-dialog { position: relative; z-index: 2; width: 100%; max-width: 100vw; min-height: 100vh; display: grid; align-content: center; gap: .75rem; padding: 1rem; }
+.gallery-lightbox-frame { position: relative; border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,255,255,.12); background: rgba(0, 0, 0, 0.36); box-shadow: 0 24px 50px rgba(0,0,0,.6); backdrop-filter: blur(4px); max-width: min(94vw, 1140px); margin: 0 auto; }
+.gallery-lightbox-image { width: 100%; max-height: min(76vh, 820px); object-fit: contain; background: rgba(0,0,0,.2); display: block; }
+.gallery-lightbox-caption { margin: 0; color: #e2e8f0; font-size: .95rem; line-height: 1.45; padding: .85rem 1rem; background: rgba(0, 0, 0, 0.48); }
+.gallery-lightbox-controls { display: flex; align-items: center; justify-content: space-between; gap: .6rem; }
+.gallery-lightbox-close, .gallery-lightbox-nav { border: 1px solid rgba(255,255,255,.2); background: rgba(0,0,0,.55); color: #fff; border-radius: 999px; height: 42px; min-width: 42px; padding: 0 .95rem; cursor: pointer; font-weight: 600; }
+.gallery-lightbox-close:hover, .gallery-lightbox-nav:hover { background: rgba(30,41,59,.92); }
+
+@media (max-width: 640px) {
+  .gallery-lightbox-controls { position: absolute; inset: auto .5rem .5rem .5rem; z-index: 3; }
+  .gallery-lightbox-close { margin: 0 auto; }
+}
