@@ -40,6 +40,13 @@ function setupMobileMenu() {
 
   mobileNav.innerHTML = `<ul class="main-menu">${desktopMenu.innerHTML}</ul>`;
 
+  const desktopSocial = document.querySelector('.header .header-social');
+  if (desktopSocial) {
+    const mobileSocial = desktopSocial.cloneNode(true);
+    mobileSocial.classList.add('header-social--mobile');
+    mobileNav.appendChild(mobileSocial);
+  }
+
   const mobileSubmenuParents = mobileNav.querySelectorAll('.has-submenu');
   mobileSubmenuParents.forEach((parent, index) => {
     const toggle = parent.querySelector(':scope > a');
