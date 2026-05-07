@@ -43,57 +43,5 @@
       }
     ],
     "large": true
-  },
-  {
-    "title": "Xyz",
-    "date": "05.04.2026",
-    "text": "BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBla",
-    "deleteAt": "2027-04-04-23:59",
-    "links": [
-      {
-        "label": "Mehr erfahren",
-        "url": "https://www.sandersdorf-brehna.de/Meine-Stadt/Stadt-Land-Kultur/Veranstaltungen/Weinfr%C3%BChling-",
-        "type": "more"
-      },
-      {
-        "label": "E-Mail",
-        "url": "mailto:info@skvonline.de",
-        "type": "mail"
-      }
-    ],
-    "large": false
-  },
-  {
-    "title": "xyz",
-    "date": "30.03.2026",
-    "text": "BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBla",
-    "deleteAt": "2027-03-29-23:59",
-    "links": [
-      {
-        "label": "E-Mail",
-        "url": "mailto:info@skvonline.de",
-        "type": "mail"
-      }
-    ],
-    "large": false
-  },
-  {
-    "title": "xyz",
-    "date": "22.03.2026",
-    "text": "BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBlaBla BlaBlaBla",
-    "deleteAt": "2027-03-21-23:59",
-    "links": [
-      {
-        "label": "Instagram",
-        "url": "https://www.instagram.com/",
-        "type": "instagram"
-      },
-      {
-        "label": "Facebook",
-        "url": "https://www.facebook.com/",
-        "type": "facebook"
-      }
-    ],
-    "large": false
   }
 ]
