@@ -332,10 +332,13 @@ a {
 
 .sponsor-image {
     max-width: 180px;
-    max-height: 120px;
     width: auto;
-    height: auto;
+    height: 100px;
     object-fit: contain;
+    border-radius: 8px;
+    border: 2px solid #4169e1;
+    box-shadow: 0 0 10px rgba(65, 105, 225, 0.45);
+    background: #fff;
 }
 
 @keyframes sponsors-marquee {
