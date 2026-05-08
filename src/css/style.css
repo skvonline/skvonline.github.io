@@ -108,7 +108,7 @@ a {
     }
 
     to {
-        transform: translateX(var(--sponsors-marquee-distance));
+        transform: translateX(var(--notice-distance, -50%));
     }
 }
 
