@@ -1,34 +1,78 @@
 [
   {
-    "src": "./src/img/gallerys/sponsors/blaschkeBau.jpg",
-    "alt": "Blaschke Bau"
+    "src": "https://www.autolackiererei-latuszek.de/static/img/logo_home.png",
+    "alt": "Autolackiererei Latuszek"
   },
   {
-    "src": "./src/img/gallerys/sponsors/EdekaNiebisch.jpg",
-    "alt": "Edeka Niebisch"
+    "src": "https://fbb-bitterfeld.de/wp-content/uploads/2022/12/FBB_LOGO_lang.jpg",
+    "alt": "FBB GmbH"
   },
   {
-    "src": "./src/img/gallerys/sponsors/fbb.png",
-    "alt": "FBB"
+    "src": "https://www.unfall-instandsetzung.de/images/Logos.jpg",
+    "alt": "Firma Kindermann"
   },
   {
-    "src": "./src/img/gallerys/sponsors/Handelshof.png",
-    "alt": "Handelshof"
+    "src": "./src/img/gallerys/sponsors/PhysioEschke.png",
+    "alt": "Physiotherapie Kathrin Eschke"
   },
   {
-    "src": "./src/img/gallerys/sponsors/Roye.png",
-    "alt": "Zahnarztpraxis Roye"
+    "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrddM1m6i7fRU638tr9KW9HQWGMeExSmmFsg&s",
+    "alt": "SIT IN Events"
   },
   {
-    "src": "./src/img/gallerys/sponsors/StadtSandersdorf.jpg",
+    "src": "https://www.vfb-graefenhainichen.de/assets/img_sponsors/large/150.webp",
+    "alt": "Allianz Nitz & Syring"
+  },
+  {
+    "src": "./src/img/gallerys/sponsors/Pfuhl.jpg",
+    "alt": "Auto-Center Pfuhl GmbH"
+  },
+  {
+    "src": "https://gruenpflege.eu/wp-content/uploads/2025/03/Muehlbauer-Logo_Kontur-224x300.png",
+    "alt": "Mühlbauer Baum- und Grünpflege"
+  },
+  {
+    "src": "https://malv-service-gmbh.de/.cm4all/mediadb/.Logo%20MALV1.jpg/picture-2600",
+    "alt": "MALV Service GmbH"
+  },
+  {
+    "src": "./src/img/gallerys/sponsors/Manina.png",
+    "alt": "Manina Verkehrs GmbH"
+  },
+  {
+    "src": "https://www.ubsysteme.de/images/logo_ub.png",
+    "alt": "ub.unitel GmbH"
+  },
+  {
+    "src": "https://www.rothkegel-baufachhandel.de/fileadmin/user_upload/Rothkegel/allgemein/logo-rothkegel_400px.png",
+    "alt": "Rothkegel Bitterfeld"
+  },
+  {
+    "src": "./src/img/gallerys/sponsors/Niebisch.jpg",
+    "alt": "EDEKA Niebisch"
+  },
+  {
+    "src": "./src/img/gallerys/sponsors/EDEKA Moex.png",
+    "alt": "EDEKA Moex"
+  },
+  {
+    "src": "https://www.total-lokal.de/custom/image_files/photo_1562697.jpg",
+    "alt": "Pirl Transporte Landsberg"
+  },
+  {
+    "src": "https://www.splitter-veranstaltungstechnik.de/Logo_SplitterVT.png",
+    "alt": "Splitter Veranstaltungstechnik"
+  },
+  {
+    "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdjYtif3NGHcV_4Pr6Qucnuen9xg-900evDw&s",
+    "alt": "Sporti´s"
+  },
+  {
+    "src": "https://www.ksk-anhalt-bitterfeld.de/content/dam/myif/ksk-anhalt-bitterfeld/work/bilder/nbf-logos/logo_rot.svg",
+    "alt": "Kreissparkasse Anhalt-Bitterfeld"
+  },
+  {
+    "src": "./src/img/gallerys/sponsors/Stadt.png",
     "alt": "Stadt Sandersdorf-Brehna"
-  },
-  {
-    "src": "./src/img/gallerys/sponsors/ubunitel.png",
-    "alt": "ub.unitel"
-  },
-  {
-    "src": "./src/img/gallerys/sponsors/vetter.jpg",
-    "alt": "Vetter Touristik"
   }
 ]
