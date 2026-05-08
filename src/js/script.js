@@ -157,9 +157,12 @@ function setupSponsorsMarquee() {
 
   const cloneMarkup = slides.map((slide) => slide.outerHTML).join('');
   track.insertAdjacentHTML('beforeend', cloneMarkup);
-  track.setAttribute('aria-hidden', 'false');
 
-  const durationInSeconds = Math.max(16, slides.length * 3.2);
+  const baseDistance = track.scrollWidth / 2;
+  const speedInPixelsPerSecond = 90;
+  const durationInSeconds = Math.max(14, baseDistance / speedInPixelsPerSecond);
+
+  track.style.setProperty('--sponsors-marquee-distance', `-${baseDistance}px`);
   track.style.setProperty('--sponsors-marquee-duration', `${durationInSeconds}s`);
 }
 

@@ -108,7 +108,7 @@ a {
     }
 
     to {
-        transform: translateX(-50%);
+        transform: translateX(var(--sponsors-marquee-distance));
     }
 }
 
@@ -314,8 +314,10 @@ a {
 
 .sponsors-track {
     --sponsors-marquee-duration: 24s;
+    --sponsors-marquee-distance: -50%;
     display: flex;
-    width: fit-content;
+    width: max-content;
+    will-change: transform;
     animation: sponsors-marquee var(--sponsors-marquee-duration) linear infinite;
 }
 
@@ -342,7 +344,7 @@ a {
     }
 
     to {
-        transform: translateX(-50%);
+        transform: translateX(var(--sponsors-marquee-distance));
     }
 }
 
