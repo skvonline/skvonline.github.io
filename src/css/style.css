@@ -316,18 +316,19 @@ a {
     --sponsors-marquee-duration: 24s;
     --sponsors-marquee-distance: -50%;
     display: flex;
+    gap: 1rem;
     width: max-content;
     will-change: transform;
     animation: sponsors-marquee var(--sponsors-marquee-duration) linear infinite;
 }
 
 .sponsor-slide {
-    flex: 0 0 220px;
+    flex: 0 0 auto;
     margin: 0;
     height: 100px;
     display: grid;
     place-items: center;
-    padding: 1rem;
+    padding: 0;
 }
 
 .sponsor-image {
@@ -723,13 +724,15 @@ a {
     }
 
     .sponsor-slide {
-        flex-basis: 180px;
-        min-height: 140px;
+        flex-basis: auto;
+        min-height: 100px;
     }
 
     .sponsor-image {
-        max-width: 150px;
-        max-height: 95px;
+        height: 100px;
+        width: auto;
+        max-width: none;
+        max-height: none;
     }
 }
 
