@@ -171,6 +171,7 @@ async function setupSponsorsMarquee() {
     ),
   );
 
+  const baseSlidesMarkup = slides.map((slide) => slide.outerHTML).join('');
   const baseTrackWidth = Math.ceil(
     slides.reduce((totalWidth, slide) => totalWidth + slide.getBoundingClientRect().width, 0),
   );
@@ -179,20 +180,23 @@ async function setupSponsorsMarquee() {
 
   const marquee = track.parentElement;
   const viewportWidth = marquee ? marquee.getBoundingClientRect().width : 0;
-  const duplicateCount = Math.max(1, Math.ceil(viewportWidth / baseTrackWidth) + 1);
-  const cloneMarkup = slides.map((slide) => slide.outerHTML).join('');
+  const cycleRepeatCount = Math.max(1, Math.ceil(viewportWidth / baseTrackWidth));
+  const cycleMarkup = Array.from({ length: cycleRepeatCount }, () => baseSlidesMarkup).join('');
 
-  for (let index = 0; index < duplicateCount; index += 1) {
-    track.insertAdjacentHTML('beforeend', cloneMarkup);
-  }
+  track.innerHTML = `<div class="sponsors-cycle">${cycleMarkup}</div><div class="sponsors-cycle" aria-hidden="true">${cycleMarkup}</div>`;
 
-  track.setAttribute('aria-hidden', 'false');
+  const cycleElement = track.querySelector('.sponsors-cycle');
+  if (!cycleElement) return;
+
+  const cycleWidth = Math.ceil(cycleElement.getBoundingClientRect().width);
+  if (cycleWidth === 0) return;
 
   const pixelsPerSecond = 90;
-  const durationInSeconds = Math.max(16, Math.round(baseTrackWidth / pixelsPerSecond));
+  const durationInSeconds = Math.max(16, Math.round(cycleWidth / pixelsPerSecond));
   track.style.setProperty('--sponsors-marquee-duration', `${durationInSeconds}s`);
-  track.style.setProperty('--sponsors-marquee-distance', `-${baseTrackWidth}px`);
+  track.style.setProperty('--sponsors-marquee-distance', `-${cycleWidth}px`);
 }
+
 
 function chunkRender({ items, containerId, buttonId, chunkSize, renderItem }) {
   const container = document.getElementById(containerId);

@@ -320,6 +320,11 @@ a {
     animation: sponsors-marquee var(--sponsors-marquee-duration) linear infinite;
 }
 
+
+.sponsors-cycle {
+    display: flex;
+}
+
 .sponsor-slide {
     flex: 0 0 220px;
     margin: 0;
