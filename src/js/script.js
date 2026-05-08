@@ -800,9 +800,14 @@ function normalizeNotices(rawEntries) {
     .filter(Boolean);
 }
 
-function setNoticeTrackDuration(track, noticeCount) {
+function setNoticeTrackAnimation(track, noticeCount) {
   const durationInSeconds = Math.max(18, noticeCount * 8);
   track.style.setProperty('--notice-duration', `${durationInSeconds}s`);
+
+  const halfDistance = track.scrollWidth / 2;
+  if (Number.isFinite(halfDistance) && halfDistance > 0) {
+    track.style.setProperty('--notice-distance', `-${halfDistance}px`);
+  }
 }
 
 function renderNoticeEntry(entry) {
@@ -891,7 +896,7 @@ async function setupHeaderNoticeBar(page) {
     renderHalf();
 
     const renderedEntriesCount = activeNotices.length * repeatsPerHalf * 2;
-    setNoticeTrackDuration(noticeTrack, renderedEntriesCount);
+    setNoticeTrackAnimation(noticeTrack, renderedEntriesCount);
     noticeBar.hidden = false;
   }
 
