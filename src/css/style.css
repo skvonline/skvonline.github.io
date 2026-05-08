@@ -325,7 +325,7 @@ a {
 .sponsor-slide {
     flex: 0 0 auto;
     margin: 0;
-    height: 100px;
+    height: 150px;
     display: grid;
     place-items: center;
     padding: 0;
