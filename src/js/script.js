@@ -152,8 +152,8 @@ async function setupSponsorsMarquee() {
   const track = document.getElementById('sponsors-track');
   if (!track) return;
 
-  const slides = Array.from(track.querySelectorAll('.sponsor-slide'));
-  if (slides.length <= 1) return;
+  const originalSlides = Array.from(track.querySelectorAll('.sponsor-slide'));
+  if (originalSlides.length <= 1) return;
 
   const images = Array.from(track.querySelectorAll('.sponsor-image'));
   await Promise.all(
@@ -171,19 +171,24 @@ async function setupSponsorsMarquee() {
     ),
   );
 
-  const baseSlidesMarkup = slides.map((slide) => slide.outerHTML).join('');
-  const baseTrackWidth = Math.ceil(
-    slides.reduce((totalWidth, slide) => totalWidth + slide.getBoundingClientRect().width, 0),
+  const baseSlidesMarkup = originalSlides.map((slide) => slide.outerHTML).join('');
+  const baseSequenceWidth = Math.ceil(
+    originalSlides.reduce((totalWidth, slide) => totalWidth + slide.getBoundingClientRect().width, 0),
   );
-
-  if (baseTrackWidth === 0) return;
+  if (baseSequenceWidth === 0) return;
 
   const marquee = track.parentElement;
-  const viewportWidth = marquee ? marquee.getBoundingClientRect().width : 0;
-  const cycleRepeatCount = Math.max(1, Math.ceil(viewportWidth / baseTrackWidth));
-  const cycleMarkup = Array.from({ length: cycleRepeatCount }, () => baseSlidesMarkup).join('');
+  const viewportWidth = marquee ? Math.ceil(marquee.getBoundingClientRect().width) : 0;
 
-  track.innerHTML = `<div class="sponsors-cycle">${cycleMarkup}</div><div class="sponsors-cycle" aria-hidden="true">${cycleMarkup}</div>`;
+  let sequenceMarkup = baseSlidesMarkup;
+  let sequenceWidth = baseSequenceWidth;
+
+  while (sequenceWidth < viewportWidth + baseSequenceWidth) {
+    sequenceMarkup += baseSlidesMarkup;
+    sequenceWidth += baseSequenceWidth;
+  }
+
+  track.innerHTML = `<div class="sponsors-cycle">${sequenceMarkup}</div><div class="sponsors-cycle" aria-hidden="true">${sequenceMarkup}</div>`;
 
   const cycleElement = track.querySelector('.sponsors-cycle');
   if (!cycleElement) return;
