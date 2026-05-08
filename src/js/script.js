@@ -36,9 +36,13 @@ function setupMobileMenu() {
   const button = document.getElementById('menu_button');
   const mobileNav = document.getElementById('mobile-nav');
   const desktopMenu = document.querySelector('.header nav .main-menu');
+  const desktopSocials = document.querySelector('.header .header-socials');
   if (!button || !mobileNav || !desktopMenu) return;
 
   mobileNav.innerHTML = `<ul class="main-menu">${desktopMenu.innerHTML}</ul>`;
+  if (desktopSocials) {
+    mobileNav.insertAdjacentHTML('beforeend', desktopSocials.outerHTML);
+  }
 
   const mobileSubmenuParents = mobileNav.querySelectorAll('.has-submenu');
   mobileSubmenuParents.forEach((parent, index) => {

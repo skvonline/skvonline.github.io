@@ -205,7 +205,18 @@ a {
 .social-link svg {
     width: 18px;
     height: 18px;
+}
+
+.social-link--facebook svg {
     fill: currentColor;
+}
+
+.social-link--instagram svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 .social-link:hover,
@@ -1362,7 +1373,16 @@ body.lightbox-open {
     }
 
     .header-socials {
-        margin-left: auto;
+        display: none;
+    }
+
+    .mobile-nav .header-socials {
+        display: flex;
+        justify-content: center;
+        gap: 0.7rem;
+        padding: 1rem 4vw 1.2rem;
+        margin-top: 0.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     #menu_button {
