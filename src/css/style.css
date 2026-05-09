@@ -1255,7 +1255,8 @@ body.lightbox-open {
 }
 
 .footer-logo {
-    height: 40px;
+    height: 150px;
+    margin: 0 2rem;
     width: auto;
     max-width: min(120px, 28vw);
     object-fit: contain;
