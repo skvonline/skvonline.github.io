@@ -1246,32 +1246,20 @@ body.lightbox-open {
 }
 
 .footer-logos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
     align-items: center;
+    justify-content: center;
     margin-bottom: 0.5rem;
 }
 
-.footer-logo,
-.footer-logo-slot {
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 12px;
-    min-height: 84px;
-    width: 100%;
-    padding: 0.8rem;
-}
-
 .footer-logo {
+    height: 40px;
+    width: auto;
+    max-width: min(120px, 28vw);
     object-fit: contain;
-}
-
-.footer-logo-slot {
-    display: grid;
-    place-items: center;
-    text-align: center;
-    font-size: 0.85rem;
+    object-position: center;
 }
 
 .footer-links {
