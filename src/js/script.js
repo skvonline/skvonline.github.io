@@ -1240,9 +1240,11 @@ function setupLinktreeHeaderMode() {
     return;
   }
 
+  header.classList.add('header--notice-only');
+
   const headerInner = header.querySelector('.header-inner');
   if (headerInner) {
-    headerInner.hidden = true;
+    headerInner.remove();
   }
 
   const noticeBar = header.querySelector('#header-notice-bar');

@@ -56,6 +56,15 @@ a {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
+.header.header--notice-only {
+    background: transparent;
+    box-shadow: none;
+}
+
+.header.header--notice-only .header-notice-bar {
+    border-bottom: none;
+}
+
 .header-notice-bar {
     background: #b30000;
     color: #fff;
