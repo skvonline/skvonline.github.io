@@ -56,6 +56,15 @@ a {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
+.header.header--notice-only {
+    background: transparent;
+    box-shadow: none;
+}
+
+.header.header--notice-only .header-notice-bar {
+    border-bottom: none;
+}
+
 .header-notice-bar {
     background: #b30000;
     color: #fff;
@@ -1243,6 +1252,24 @@ body.lightbox-open {
 .footer-content {
     display: grid;
     gap: 0.5rem;
+}
+
+.footer-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.footer-logo {
+    height: 150px;
+    margin: 0 2rem;
+    width: auto;
+    max-width: min(120px, 28vw);
+    object-fit: contain;
+    object-position: center;
 }
 
 .footer-links {
