@@ -1234,6 +1234,38 @@ async function loadLinktreeContent() {
   });
 }
 
+function setupLinktreeHeaderMode() {
+  const header = document.querySelector('.header');
+  if (!header) {
+    return;
+  }
+
+  header.classList.add('header--notice-only');
+
+  const headerInner = header.querySelector('.header-inner');
+  if (headerInner) {
+    headerInner.remove();
+  }
+
+  const noticeBar = header.querySelector('#header-notice-bar');
+  if (!noticeBar) {
+    header.hidden = true;
+    return;
+  }
+
+  const syncHeaderVisibility = () => {
+    header.hidden = noticeBar.hidden;
+  };
+
+  syncHeaderVisibility();
+
+  const observer = new MutationObserver(syncHeaderVisibility);
+  observer.observe(noticeBar, {
+    attributes: true,
+    attributeFilter: ['hidden'],
+  });
+}
+
 (async function init() {
   const page = document.body.dataset.page;
 
@@ -1255,8 +1287,7 @@ async function loadLinktreeContent() {
     await loadComponent('footer-component', '../components/footer.html');
     normalizeComponentLinks(page);
     await setupHeaderNoticeBar(page);
-    setupMobileMenu();
-    setupHeaderSmoothScroll();
+    setupLinktreeHeaderMode();
     await loadLinktreeContent();
     return;
   }
