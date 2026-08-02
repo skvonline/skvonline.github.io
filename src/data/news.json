@@ -1,5 +1,20 @@
 [
   {
+    "title": "Beginn des Kartenverkaufs für die 48. Session",
+    "date": "01.09.2026",
+    "text": "Bald geht es wieder los. Der Vorverkauf der Karten für die Lumpenbälle startet auch bald. Alle Informationen dazu findet ihr hier:",
+    "publishAt": "2026-08-01-00:00",
+    "deleteAt": "2026-11-23-23:59",
+    "links": [
+      {
+        "label": "Mehr erfahren",
+        "url": "./faq/kartenverkauf",
+        "type": "more"
+      }
+    ],
+    "large": false
+  },
+  {
     "title": "Sommerfest des Sandersdorfer Karnevalsvereins",
     "date": "27.06.2026",
     "text": "Heute stand wieder der Sessions-Abschluss des SKV an. Auf dem Vereinsgelände der Segler wurde ausgiebig gefeiert und auf die erfolgreiche vergangene Session angestoßen. Die Förstergrube sorgte auch für eine erfrischende Abkühlung an diesem Abend. Sandoria Hellau.",
