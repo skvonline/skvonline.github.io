@@ -8,7 +8,7 @@
     "links": [
       {
         "label": "Mehr erfahren",
-        "url": "skvonline.de/kartenverkauf",
+        "url": "./faq/kartenverkauf",
         "type": "more"
       }
     ],
