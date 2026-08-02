@@ -28,16 +28,19 @@
             <h2 id="ticket-dates-title">Aktuelle Termine zum Kartenverkauf</h2>
             <div class="ticket-dates-list">
                 <article class="ticket-date">
+                    <span class="ticket-date-step" aria-hidden="true">1</span>
                     <h3>Beginn der Kartenvorbestellung</h3>
                     <p data-todo="Datum und Uhrzeit aktualisieren"><time datetime="2026-09-23T15:00">23.09.2026 ab 15 Uhr</time></p>
                 </article>
                 <article class="ticket-date">
+                    <span class="ticket-date-step" aria-hidden="true">2</span>
                     <h3>Termine zur Abholung</h3>
                     <ul data-todo="Abholtermine aktualisieren; weitere Termine als Listeneintrag ergänzen">
                         <li><time datetime="2026-10-01T15:00">01.10.2026 von 15 bis 20 Uhr</time></li>
                     </ul>
                 </article>
                 <article class="ticket-date">
+                    <span class="ticket-date-step" aria-hidden="true">3</span>
                     <h3>Beginn des freien Verkaufs</h3>
                     <p data-todo="Datum und Uhrzeit aktualisieren"><time datetime="2026-10-01T20:00">01.10.2026 ab 20 Uhr</time></p>
                 </article>
@@ -101,8 +104,18 @@
             <strong>Wichtiger Hinweis</strong>
             <p>Die aktuellen Termine für Vorbestellung, Kartenabholung und freien Verkauf veröffentlichen wir rechtzeitig auf unserer Webseite sowie auf unseren Social-Media-Kanälen.</p>
             <nav class="faq-social-links" aria-label="Social-Media-Kanäle">
-                <a href="https://www.facebook.com/skvonline" target="_blank" rel="noopener noreferrer">Facebook</a>
-                <a href="https://www.instagram.com/skv_sandoria" target="_blank" rel="noopener noreferrer">Instagram</a>
+                <a class="faq-social-link faq-social-link--facebook" href="https://www.facebook.com/skvonline" target="_blank" rel="noopener noreferrer" aria-label="SKV auf Facebook">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M13.5 22v-8.2h2.8l.4-3.2h-3.2V8.6c0-.9.3-1.6 1.6-1.6h1.7V4.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.3v2.4H8v3.2h2.7V22h2.8Z"/>
+                    </svg>
+                </a>
+                <a class="faq-social-link faq-social-link--instagram" href="https://www.instagram.com/skv_sandoria" target="_blank" rel="noopener noreferrer" aria-label="SKV auf Instagram">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <rect x="3.25" y="3.25" width="17.5" height="17.5" rx="5"/>
+                        <circle cx="12" cy="12" r="4.2"/>
+                        <circle cx="17.3" cy="6.7" r="1.1"/>
+                    </svg>
+                </a>
             </nav>
         </aside>
     </section>
