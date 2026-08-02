@@ -1663,6 +1663,55 @@ body.lightbox-open {
     font-size: 1.08rem;
 }
 
+.ticket-dates {
+    margin-bottom: 2rem;
+    padding: 1.4rem;
+    border-radius: 14px;
+    background: var(--skv-primary);
+    color: #fff;
+}
+
+.ticket-dates h2 {
+    margin-top: 0;
+    color: #fff;
+}
+
+.ticket-dates-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.ticket-date {
+    padding: 1rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.ticket-date h3 {
+    margin: 0 0 0.45rem;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.ticket-date p,
+.ticket-date ul {
+    margin: 0;
+}
+
+.ticket-date ul {
+    padding-left: 1.2rem;
+}
+
+.ticket-date time {
+    font-weight: 700;
+}
+
+.ticket-dates-location {
+    margin: 1rem 0 0;
+    font-weight: 650;
+}
+
 .faq-list {
     display: grid;
     gap: 0.75rem;
@@ -1729,4 +1778,30 @@ body.lightbox-open {
 
 .faq-notice p {
     margin: 0;
+}
+
+.faq-social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 0.9rem;
+}
+
+.faq-social-links a {
+    padding: 0.45rem 0.8rem;
+    border-radius: 8px;
+    background: var(--skv-primary);
+    color: #fff;
+    font-weight: 700;
+}
+
+.faq-social-links a:hover,
+.faq-social-links a:focus-visible {
+    background: var(--skv-dark);
+}
+
+@media (max-width: 760px) {
+    .ticket-dates-list {
+        grid-template-columns: 1fr;
+    }
 }
