@@ -1749,6 +1749,17 @@ body.lightbox-open {
     gap: 0.75rem;
 }
 
+.faq-section + .faq-section {
+    margin-top: 2.25rem;
+}
+
+.faq-section h2 {
+    margin: 0 0 1rem;
+    color: var(--skv-primary);
+    font-size: clamp(1.35rem, 3vw, 1.7rem);
+    text-align: left;
+}
+
 .faq-list details {
     overflow: hidden;
     border: 1px solid #dbe4f3;
@@ -1788,9 +1799,33 @@ body.lightbox-open {
     content: "−";
 }
 
-.faq-list details p {
+.faq-list details p,
+.faq-list details ul {
     margin: 0;
     padding: 0.2rem 1.15rem 1.15rem;
+}
+
+.faq-list details p + p {
+    padding-top: 0;
+}
+
+.faq-list details ul {
+    padding-left: 2.5rem;
+}
+
+.faq-list details li + li {
+    margin-top: 0.35rem;
+}
+
+.faq-list a {
+    color: var(--skv-primary);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+}
+
+.faq-card > .faq-notice:last-child {
+    text-align: center;
 }
 
 .faq-notice {
