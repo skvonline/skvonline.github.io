@@ -117,6 +117,22 @@ function setupHeaderSmoothScroll() {
   });
 }
 
+function setupTicketDatesVisibility() {
+  const ticketDates = document.querySelector('.ticket-dates[data-publish-at][data-delete-at]');
+  if (!ticketDates) return;
+
+  const publishAt = Date.parse(ticketDates.dataset.publishAt);
+  const deleteAt = Date.parse(ticketDates.dataset.deleteAt);
+  const now = Date.now();
+
+  if (!Number.isFinite(publishAt) || !Number.isFinite(deleteAt) || publishAt >= deleteAt) {
+    console.warn('Terminblock ausgeblendet: publishAt und deleteAt müssen gültige Datumsangaben in zeitlich korrekter Reihenfolge sein.');
+    return;
+  }
+
+  ticketDates.hidden = now < publishAt || now >= deleteAt;
+}
+
 function setupHeroCarousel() {
   const slides = Array.from(document.querySelectorAll('.hero-slide'));
   if (slides.length <= 1) return;
@@ -1299,6 +1315,7 @@ function setupLinktreeHeaderMode() {
     await setupHeaderNoticeBar(page);
     setupMobileMenu();
     setupHeaderSmoothScroll();
+    setupTicketDatesVisibility();
     return;
   }
 

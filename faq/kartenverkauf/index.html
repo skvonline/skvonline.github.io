@@ -23,8 +23,14 @@
             freien Verkauf unserer Karten.
         </p>
 
-        <!-- TODO START: Diesen optionalen Terminblock bei Bedarf vollständig auskommentieren. -->
-        <section class="ticket-dates" aria-labelledby="ticket-dates-title">
+        <!-- TODO START: publishAt und deleteAt aktualisieren. Der Block wird nur innerhalb dieses Zeitraums angezeigt. -->
+        <section
+                class="ticket-dates"
+                aria-labelledby="ticket-dates-title"
+                data-publish-at="2026-08-01T00:00:00+02:00"
+                data-delete-at="2026-10-02T00:00:00+02:00"
+                hidden
+        >
             <h2 id="ticket-dates-title">Aktuelle Termine zum Kartenverkauf</h2>
             <div class="ticket-dates-list">
                 <article class="ticket-date">
