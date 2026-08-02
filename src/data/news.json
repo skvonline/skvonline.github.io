@@ -1,5 +1,26 @@
 [
   {
+    "title": "Sommerfest des Sandersdorfer Karnevalsvereins",
+    "date": "27.06.2026",
+    "text": "Heute stand wieder der Sessions-Abschluss des SKV an. Auf dem Vereinsgelände der Segler wurde ausgiebig gefeiert und auf die erfolgreiche vergangene Session angestoßen. Die Förstergrube sorgte auch für eine erfrischende Abkühlung an diesem Abend. Sandoria Hellau.",
+    "image": "./src/img/news/BildSommerfest.jpg",
+    "publishAt": "2026-06-28-00:00",
+    "deleteAt": "2027-06-28-23:59",
+    "links": [
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/reel/DaYFig-oaJn/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
+        "type": "instagram"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/reel/27270034479334962",
+        "type": "facebook"
+      }
+    ],
+    "large": true
+  },
+  {
     "title": "Frühjahrsputz in Sandersdorf - Der SKV war dabei",
     "date": "11.04.2026",
     "text": "Heute hat der SKV mit die Stadt geputzt. Es waren ca. 20 Vereinsmitglieder am Start. Auf Facebook und Instagram erhaltet Ihr ein paar Eindrücke vom Frühjahrsputz:",

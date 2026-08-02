@@ -1,26 +1,5 @@
 [
   {
-    "title": "Weinfrühling Sandersdorf",
-    "date": "09.05.2026",
-    "time": "16:30 Uhr",
-    "location": "Platz der Deutschen Einheit",
-    "image": "./src/img/events/weinfruehling.png",
-    "publishAt": "2026-04-01-00:00",
-    "links": [
-      {
-        "label": "Mehr erfahren",
-        "url": "https://www.sandersdorf-brehna.de/index.php?ModID=11&FID=3722.491.1&object=tx%2C3722.4.1",
-        "type": "more"
-      },
-      {
-        "label": "Maps",
-        "url": "https://share.google/tL5HyahC52M0jCNGp",
-        "type": "maps"
-      }
-    ],
-    "deleteAt": "2026-05-09-23:59"
-  },
-  {
     "title": "Sessions-Eröffnung",
     "date": "11.11.2026",
     "time": "11:11 Uhr",
