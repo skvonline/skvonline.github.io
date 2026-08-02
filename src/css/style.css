@@ -1659,8 +1659,11 @@ body.lightbox-open {
 
 .faq-intro {
     max-width: 720px;
+    margin-right: auto;
     margin-bottom: 2rem;
+    margin-left: auto;
     font-size: 1.08rem;
+    text-align: center;
 }
 
 .ticket-dates {
