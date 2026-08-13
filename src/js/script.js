@@ -1282,6 +1282,125 @@ function setupLinktreeHeaderMode() {
   });
 }
 
+function setupFaqSearch() {
+  const searchInput = document.getElementById('faq-search');
+  const categoryButtons = document.getElementById('faq-category-buttons');
+  if (!searchInput || !categoryButtons) return;
+
+  const sections = Array.from(document.querySelectorAll('.faq-section'));
+  const questions = sections.flatMap((section) => Array.from(section.querySelectorAll('details')));
+  const status = document.getElementById('faq-results-status');
+  const noResults = document.getElementById('faq-no-results');
+  const clearButton = document.querySelector('.faq-search-clear');
+  const resetButton = document.querySelector('.faq-reset');
+  let activeCategory = 'all';
+
+  const keywordRules = [
+    ['Muttizettel', /muttizettel|erziehungsbeauftragung|minderjährig|begleitperson/i],
+    ['Einlass', /einlass|zutritt|wiedereinlass|kontroll/i],
+    ['Jugendschutz', /alter|jugendschutz|minderjährig|alkohol/i],
+    ['Tickets', /karte|kartenverkauf|kartenabholung|abendkasse/i],
+    ['Programm', /programm|clubnacht|lumpenball|fasching/i],
+    ['Kinder & Familie', /kinder|familie|jugendliche/i],
+    ['Essen & Trinken', /speisen|essen|getränke|alkohol|ausschank/i],
+    ['Anreise & Parken', /anreise|park|adresse|veranstaltungsort/i],
+    ['Barrierefreiheit', /barrierefrei|unterstützung|hilfe/i],
+    ['Fotos & Videos', /foto|video|aufnahme|fotografiert/i],
+    ['Karnevalsumzug', /umzug|umzugsstrecke|straße|süßigkeiten/i],
+    ['Verein & Mitgliedschaft', /verein|mitglied|gruppen|mitmachen|unterstützen/i],
+    ['Kontakt', /kontakt|informationen|antwort/i],
+  ];
+  const normalize = (value) => value.toLocaleLowerCase('de').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+  sections.forEach((section) => {
+    const heading = section.querySelector('h2');
+    const category = heading?.textContent.trim() || 'Weitere Fragen';
+    section.dataset.category = category;
+    section.querySelectorAll('details').forEach((question) => {
+      const text = question.textContent;
+      const tags = keywordRules.filter(([, pattern]) => pattern.test(text)).map(([tag]) => tag).slice(0, 3);
+      if (!tags.length) tags.push(category);
+      question.dataset.tags = tags.join(' ');
+      const tagList = document.createElement('div');
+      tagList.className = 'faq-tags';
+      tagList.setAttribute('aria-label', 'Stichwörter');
+      tags.forEach((tag) => {
+        const item = document.createElement('span');
+        item.className = 'faq-tag';
+        item.textContent = tag;
+        tagList.append(item);
+      });
+      question.append(tagList);
+    });
+  });
+
+  const addCategoryButton = (label, value, count) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'faq-category-button';
+    button.dataset.category = value;
+    button.setAttribute('aria-pressed', String(value === 'all'));
+    button.innerHTML = `<span>${label}</span><span class="faq-category-count">${count}</span>`;
+    categoryButtons.append(button);
+  };
+  addCategoryButton('Alle Fragen', 'all', questions.length);
+  sections.forEach((section) => {
+    addCategoryButton(section.dataset.category, section.dataset.category, section.querySelectorAll('details').length);
+  });
+
+  const applyFilters = () => {
+    const term = normalize(searchInput.value.trim());
+    let visibleCount = 0;
+    sections.forEach((section) => {
+      let sectionCount = 0;
+      section.querySelectorAll('details').forEach((question) => {
+        const categoryMatches = activeCategory === 'all' || section.dataset.category === activeCategory;
+        const searchMatches = !term || normalize(`${question.textContent} ${question.dataset.tags}`).includes(term);
+        question.hidden = !(categoryMatches && searchMatches);
+        if (!question.hidden) sectionCount += 1;
+      });
+      section.hidden = sectionCount === 0;
+      visibleCount += sectionCount;
+    });
+    clearButton.hidden = !searchInput.value;
+    noResults.hidden = visibleCount !== 0;
+    status.textContent = visibleCount === 1 ? '1 passende Frage' : `${visibleCount} passende Fragen`;
+  };
+
+  categoryButtons.addEventListener('click', (event) => {
+    const button = event.target.closest('button[data-category]');
+    if (!button) return;
+    activeCategory = button.dataset.category;
+    categoryButtons.querySelectorAll('button').forEach((item) => {
+      item.setAttribute('aria-pressed', String(item === button));
+    });
+    applyFilters();
+  });
+  searchInput.addEventListener('input', applyFilters);
+  clearButton.addEventListener('click', () => {
+    searchInput.value = '';
+    searchInput.focus();
+    applyFilters();
+  });
+  resetButton.addEventListener('click', () => {
+    searchInput.value = '';
+    activeCategory = 'all';
+    categoryButtons.querySelectorAll('button').forEach((item) => {
+      item.setAttribute('aria-pressed', String(item.dataset.category === 'all'));
+    });
+    applyFilters();
+    searchInput.focus();
+  });
+
+  const rawQuery = window.location.search.slice(1);
+  if (rawQuery) {
+    const params = new URLSearchParams(rawQuery);
+    const initialTerm = params.get('q') || (rawQuery.includes('=') ? '' : decodeURIComponent(rawQuery.replace(/\+/g, ' ')));
+    if (initialTerm) searchInput.value = initialTerm;
+  }
+  applyFilters();
+}
+
 (async function init() {
   const page = document.body.dataset.page;
 
@@ -1316,6 +1435,7 @@ function setupLinktreeHeaderMode() {
     setupMobileMenu();
     setupHeaderSmoothScroll();
     setupTicketDatesVisibility();
+    setupFaqSearch();
     return;
   }
 
