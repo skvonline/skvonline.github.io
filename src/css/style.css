@@ -1831,6 +1831,11 @@ body.lightbox-open {
     gap: 0.75rem;
 }
 
+/* Author styles override the browser's default [hidden] rule when they set display. */
+.faq-list[hidden] {
+    display: none;
+}
+
 .faq-section + .faq-section {
     margin-top: 2.25rem;
 }
