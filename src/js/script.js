@@ -1284,17 +1284,13 @@ function setupLinktreeHeaderMode() {
 
 function setupFaqSearch() {
   const searchInput = document.getElementById('faq-search');
-  const categoryButtons = document.getElementById('faq-category-buttons');
-  if (!searchInput || !categoryButtons) return;
+  if (!searchInput) return;
 
   const sections = Array.from(document.querySelectorAll('.faq-section'));
-  const questions = sections.flatMap((section) => Array.from(section.querySelectorAll('details')));
   const status = document.getElementById('faq-results-status');
   const noResults = document.getElementById('faq-no-results');
   const clearButton = document.querySelector('.faq-search-clear');
   const resetButton = document.querySelector('.faq-reset');
-  let activeCategory = 'all';
-
   const keywordRules = [
     ['Muttizettel', /muttizettel|erziehungsbeauftragung|minderjährig|begleitperson/i],
     ['Einlass', /einlass|zutritt|wiedereinlass|kontroll/i],
@@ -1314,38 +1310,27 @@ function setupFaqSearch() {
 
   sections.forEach((section) => {
     const heading = section.querySelector('h2');
+    const list = section.querySelector('.faq-list');
+    if (!heading || !list) return;
     const category = heading?.textContent.trim() || 'Weitere Fragen';
-    section.dataset.category = category;
+    const listId = `${heading.id}-questions`;
+    list.id = listId;
+    list.hidden = true;
+    heading.innerHTML = `<button class="faq-section-toggle" type="button" aria-expanded="false" aria-controls="${listId}">
+      <span>${category}</span><span class="faq-section-icon" aria-hidden="true"></span>
+    </button>`;
+    heading.querySelector('button').addEventListener('click', (event) => {
+      const button = event.currentTarget;
+      const shouldOpen = button.getAttribute('aria-expanded') !== 'true';
+      button.setAttribute('aria-expanded', String(shouldOpen));
+      list.hidden = !shouldOpen;
+    });
     section.querySelectorAll('details').forEach((question) => {
       const text = question.textContent;
       const tags = keywordRules.filter(([, pattern]) => pattern.test(text)).map(([tag]) => tag).slice(0, 3);
       if (!tags.length) tags.push(category);
       question.dataset.tags = tags.join(' ');
-      const tagList = document.createElement('div');
-      tagList.className = 'faq-tags';
-      tagList.setAttribute('aria-label', 'Stichwörter');
-      tags.forEach((tag) => {
-        const item = document.createElement('span');
-        item.className = 'faq-tag';
-        item.textContent = tag;
-        tagList.append(item);
-      });
-      question.append(tagList);
     });
-  });
-
-  const addCategoryButton = (label, value, count) => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'faq-category-button';
-    button.dataset.category = value;
-    button.setAttribute('aria-pressed', String(value === 'all'));
-    button.innerHTML = `<span>${label}</span><span class="faq-category-count">${count}</span>`;
-    categoryButtons.append(button);
-  };
-  addCategoryButton('Alle Fragen', 'all', questions.length);
-  sections.forEach((section) => {
-    addCategoryButton(section.dataset.category, section.dataset.category, section.querySelectorAll('details').length);
   });
 
   const applyFilters = () => {
@@ -1354,28 +1339,22 @@ function setupFaqSearch() {
     sections.forEach((section) => {
       let sectionCount = 0;
       section.querySelectorAll('details').forEach((question) => {
-        const categoryMatches = activeCategory === 'all' || section.dataset.category === activeCategory;
         const searchMatches = !term || normalize(`${question.textContent} ${question.dataset.tags}`).includes(term);
-        question.hidden = !(categoryMatches && searchMatches);
+        question.hidden = !searchMatches;
         if (!question.hidden) sectionCount += 1;
       });
       section.hidden = sectionCount === 0;
+      const list = section.querySelector('.faq-list');
+      const toggle = section.querySelector('.faq-section-toggle');
+      list.hidden = !term;
+      toggle.setAttribute('aria-expanded', String(Boolean(term)));
       visibleCount += sectionCount;
     });
     clearButton.hidden = !searchInput.value;
     noResults.hidden = visibleCount !== 0;
-    status.textContent = visibleCount === 1 ? '1 passende Frage' : `${visibleCount} passende Fragen`;
+    status.hidden = !term;
+    status.textContent = term ? (visibleCount === 1 ? '1 passende Frage' : `${visibleCount} passende Fragen`) : '';
   };
-
-  categoryButtons.addEventListener('click', (event) => {
-    const button = event.target.closest('button[data-category]');
-    if (!button) return;
-    activeCategory = button.dataset.category;
-    categoryButtons.querySelectorAll('button').forEach((item) => {
-      item.setAttribute('aria-pressed', String(item === button));
-    });
-    applyFilters();
-  });
   searchInput.addEventListener('input', applyFilters);
   clearButton.addEventListener('click', () => {
     searchInput.value = '';
@@ -1384,10 +1363,6 @@ function setupFaqSearch() {
   });
   resetButton.addEventListener('click', () => {
     searchInput.value = '';
-    activeCategory = 'all';
-    categoryButtons.querySelectorAll('button').forEach((item) => {
-      item.setAttribute('aria-pressed', String(item.dataset.category === 'all'));
-    });
     applyFilters();
     searchInput.focus();
   });
