@@ -19,6 +19,28 @@
         <p class="faq-intro">Hier findest du Antworten auf die häufigsten Fragen rund um unsere Veranstaltungen und den
             Sandersdorfer Karnevalsverein. Deine Frage ist nicht dabei? Dann nimm gerne Kontakt mit uns auf.</p>
 
+        <section class="faq-tools" aria-label="FAQ durchsuchen">
+            <div class="faq-search-field">
+                <label for="faq-search">Wonach suchst du?</label>
+                <div class="faq-search-input-wrap">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m21 21-4.4-4.4m2.4-5.1a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"/>
+                    </svg>
+                    <input id="faq-search" type="search" placeholder="z. B. Muttizettel, Parken oder Getränke"
+                           autocomplete="off" aria-describedby="faq-search-hint faq-results-status">
+                    <button class="faq-search-clear" type="button" aria-label="Suche leeren" hidden>×</button>
+                </div>
+                <p id="faq-search-hint" class="faq-search-hint">Durchsuche die Fragen und Antworten.</p>
+            </div>
+            <p id="faq-results-status" class="faq-results-status" role="status" aria-live="polite"></p>
+        </section>
+
+        <div id="faq-no-results" class="faq-no-results" hidden>
+            <strong>Leider keine passende Antwort gefunden.</strong>
+            <p>Versuche es mit einem anderen Stichwort oder lösche die Suche.</p>
+            <button class="btn faq-reset" type="button">Alle Fragen anzeigen</button>
+        </div>
+
         <section class="faq-section" aria-labelledby="faq-tickets">
             <h2 id="faq-tickets">Kartenverkauf</h2>
             <div class="faq-list">
