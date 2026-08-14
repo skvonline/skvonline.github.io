@@ -1188,7 +1188,7 @@ async function loadEventDetailContent() {
     eventsRaw = [];
   }
 
-  const events = Array.isArray(eventsRaw) ? eventsRaw : [];
+  const events = Array.isArray(eventsRaw) ? eventsRaw.filter((event) => isVisibleByWindow(event)) : [];
   const matchingEvent = events.find((event) => getEventDetailToken(event) === eventToken);
 
   if (!matchingEvent) {
