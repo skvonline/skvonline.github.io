@@ -436,7 +436,49 @@ Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder S
 
 ---
 
-## 10) Checkliste vor dem Speichern
+## 10) Datei: `faq.json`
+
+Pfad: `./src/data/faq.json`
+
+### 10.1 Zweck
+
+Kategorien, Fragen, Antworten und Stichwörter für das allgemeine FAQ. Die Reihenfolge der Kategorien und Fragen in der
+Datei entspricht der Reihenfolge auf der FAQ-Seite. Antworten dürfen HTML für Absätze, Listen, Hervorhebungen und Links
+enthalten.
+
+### 10.2 Felder
+
+| Feld            | Typ             | Pflicht | Beschreibung                                      |
+|-----------------|-----------------|----------|---------------------------------------------------|
+| `kategorie`     | `string`        | Ja       | Sichtbare Überschrift der Kategorie.              |
+| `fragen`        | `array<object>` | Ja       | Fragen innerhalb dieser Kategorie.                |
+| `frage`         | `string`        | Ja       | Text der Frage.                                   |
+| `antwort`       | `string`        | Ja       | Antworttext; einfache HTML-Auszeichnung ist möglich. |
+| `stichwoerter`  | `array<string>` | Ja       | Zusätzliche Begriffe für die FAQ-Suche.           |
+
+### 10.3 Vorlage
+
+```json
+[
+  {
+    "kategorie": "Beispielkategorie",
+    "fragen": [
+      {
+        "frage": "Wie lautet die Beispielfrage?",
+        "antwort": "<p>Hier steht die Antwort.</p>",
+        "stichwoerter": [
+          "Beispiel",
+          "Suche"
+        ]
+      }
+    ]
+  }
+]
+```
+
+---
+
+## 11) Checkliste vor dem Speichern
 
 1. JSON ist syntaktisch valide.
 2. Top-Level ist ein Array.
@@ -448,7 +490,7 @@ Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder S
 
 ---
 
-## 11) Minimale Komplettbeispiele (alle Dateien)
+## 12) Minimale Komplettbeispiele (alle Dateien)
 
 ### `news.json`
 

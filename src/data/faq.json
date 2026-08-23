@@ -1,0 +1,476 @@
+[
+  {
+    "kategorie": "Kartenverkauf",
+    "fragen": [
+      {
+        "frage": "Wo finde ich Informationen zum Kartenverkauf?",
+        "antwort": "<p>Alle Informationen zur Kartenvorbestellung, Bezahlung, Kartenabholung, Rückgabe und möglichen Abendkasse findest du in unserem separaten FAQ zum Kartenverkauf.</p><p><a href=\"./kartenverkauf/\">Zum FAQ Kartenverkauf</a></p>",
+        "stichwoerter": [
+          "Tickets",
+          "Kontakt"
+        ]
+      }
+    ]
+  },
+  {
+    "kategorie": "Unsere Veranstaltungen",
+    "fragen": [
+      {
+        "frage": "Wo finden eure Veranstaltungen statt?",
+        "antwort": "<p>Unsere Veranstaltungen finden überwiegend in der Narrhalla zu Sandersdorf (Mehrzweckhalle) statt. Den genauen Veranstaltungsort findest du immer in der jeweiligen Veranstaltungsankündigung und auf deiner Eintrittskarte.</p>",
+        "stichwoerter": [
+          "Tickets",
+          "Anreise & Parken"
+        ]
+      },
+      {
+        "frage": "Wann ist Einlass und wann beginnt das Programm?",
+        "antwort": "<p>Die Einlass- und Beginnzeiten können je nach Veranstaltung unterschiedlich sein. Die verbindlichen Zeiten veröffentlichen wir in der jeweiligen Veranstaltungsankündigung und auf der Eintrittskarte.</p>",
+        "stichwoerter": [
+          "Einlass",
+          "Tickets",
+          "Programm"
+        ]
+      },
+      {
+        "frage": "Welche Veranstaltungen bietet der SKV an?",
+        "antwort": "<p>Zu unseren Veranstaltungen gehören unter anderem die traditionellen Lumpenbälle und Faschingsveranstaltungen , der Familienfasching, der Kinderfasching und der große Karnevalsumzug durch Sandersdorf. Außerdem sind wir regelmäßig bei Veranstaltungen und bei weiteren Aktionen in Sandersdorf und Umgebung dabei.</p>",
+        "stichwoerter": [
+          "Programm",
+          "Kinder & Familie",
+          "Karnevalsumzug"
+        ]
+      },
+      {
+        "frage": "Was erwartet mich bei einem Lumpenball?",
+        "antwort": "<p>Beim Lumpenball erwartet dich ein abwechslungsreiches närrisches Abendprogramm mit Tänzen und weiteren Programmpunkten. Im Anschluss wird gemeinsam weitergefeiert. Eine Verkleidung ist gerne gesehen.</p>",
+        "stichwoerter": [
+          "Programm"
+        ]
+      },
+      {
+        "frage": "Was erwartet mich bei einem Hauptfasching?",
+        "antwort": "<p>Beim Hauptfasching erwartet dich ein abwechslungsreiches närrisches Abendprogramm mit Tänzen und weiteren Programmpunkten. Im Anschluss wird gemeinsam weitergefeiert. Unsere Faschingsveranstaltungen werden jedes Jahr mit einem Motto gefeiert. Das aktuelle Motto findet ihr immer auf unseren Social-Media-Kanälen und auf unserer Webseite. Eine Verkleidung ist gerne gesehen.</p>",
+        "stichwoerter": [
+          "Programm"
+        ]
+      },
+      {
+        "frage": "Was ist die Närrische Clubnacht?",
+        "antwort": "<p>Die Närrische Clubnacht verbindet unser närrisches Abendprogramm mit einer anschließenden Party. Nach dem Programm sorgen moderne Hits und nice Beats für Clubstimmung in der Narrhalla.</p>",
+        "stichwoerter": [
+          "Programm"
+        ]
+      },
+      {
+        "frage": "Was erwartet mich beim Familienfasching?",
+        "antwort": "<p>Unser Familienfasching bietet ein buntes Programm für kleine und große Karnevalsfans. Neben Tänzen und weiteren närrischen Programmpunkten gibt es viel Gelegenheit zum gemeinsamen Feiern.</p>",
+        "stichwoerter": [
+          "Programm",
+          "Kinder & Familie"
+        ]
+      },
+      {
+        "frage": "Was erwartet mich beim Kinderfasching?",
+        "antwort": "<p>Beim Kinderfasching stehen unsere jüngsten Gäste im Mittelpunkt. Es gibt Musik, Tanz, Spiele und jede Menge närrischen Spaß. Der Eintritt zu unserem Kinderfasching ist immer frei.</p>",
+        "stichwoerter": [
+          "Programm",
+          "Kinder & Familie"
+        ]
+      },
+      {
+        "frage": "Muss ich verkleidet kommen?",
+        "antwort": "<p>Närrische, kreative und ausgefallene Kostüme sind bei unseren Veranstaltungen herzlich willkommen.</p>",
+        "stichwoerter": [
+          "Unsere Veranstaltungen"
+        ]
+      },
+      {
+        "frage": "Gibt es feste Sitzplätze?",
+        "antwort": "<p>Bei unseren Veranstaltungen sind Eure Karten meisten an einen Tisch gebunden. Frühes kommen sichert aber die Plätze ganz vorne am Tisch.</p>",
+        "stichwoerter": [
+          "Tickets"
+        ]
+      },
+      {
+        "frage": "Wie lange dauern eure Veranstaltungen?",
+        "antwort": "<p>Das hängt von der jeweiligen Veranstaltung ab. Bei unseren Abendveranstaltungen folgt auf das Bühnenprogramm in der Regel eine gemeinsame Party. Familien- und Kinderveranstaltungen enden entsprechend früher.</p>",
+        "stichwoerter": [
+          "Programm",
+          "Kinder & Familie"
+        ]
+      },
+      {
+        "frage": "Kann sich das angekündigte Programm ändern?",
+        "antwort": "<p>Ja. Kurzfristige Änderungen am Programm oder im Ablauf können leider nicht immer ausgeschlossen werden. Aktuelle Informationen veröffentlichen wir auf unserer Webseite und über unsere Social-Media-Kanäle.</p>",
+        "stichwoerter": [
+          "Programm",
+          "Kontakt"
+        ]
+      }
+    ]
+  },
+  {
+    "kategorie": "Einlass und Altersregelung",
+    "fragen": [
+      {
+        "frage": "Ab welchem Alter darf ich eure Abendveranstaltungen besuchen?",
+        "antwort": "<p>Der Zutritt zu unseren Abendveranstaltungen ist grundsätzlich ab 16 Jahren möglich. Minderjährige Gäste benötigen entsprechend unseren Einlassbedingungen einen vollständig ausgefüllten Muttizettel und eine volljährige erziehungsbeauftragte Begleitperson. Einen Vorlage für einen Muttizettel findet ihr auf unserer Webseite.</p><p>Zusätzlich gelten die Bestimmungen des Jugendschutzgesetzes und die jeweiligen Einlassbedingungen der Veranstaltung.</p>",
+        "stichwoerter": [
+          "Muttizettel",
+          "Einlass",
+          "Jugendschutz"
+        ]
+      },
+      {
+        "frage": "Was ist ein Muttizettel?",
+        "antwort": "<p>Der sogenannte Muttizettel ist eine schriftliche Erziehungsbeauftragung. Damit übertragen die Erziehungsberechtigten die Aufsicht während des Veranstaltungsbesuchs auf eine volljährige Person.</p>",
+        "stichwoerter": [
+          "Muttizettel"
+        ]
+      },
+      {
+        "frage": "Was muss ich als minderjähriger Gast mitbringen?",
+        "antwort": "<p>Bitte bring folgende Unterlagen mit:</p><ul><li>deine Eintrittskarte,</li><li>einen gültigen Lichtbildausweis,</li><li>den vollständig ausgefüllten und unterschriebenen Muttizettel in zweifacher Ausführung (eine Vorlage findet ihr auf unserer Webseite unter <a href=\"./../downloads/\">Downloads</a>. </li></ul><p>Auch die erziehungsbeauftragte Begleitperson muss einen gültigen Lichtbildausweis vorzeigen können.</p>",
+        "stichwoerter": [
+          "Muttizettel",
+          "Jugendschutz",
+          "Tickets"
+        ]
+      },
+      {
+        "frage": "Reicht ein Foto des Muttizettels auf dem Handy aus?",
+        "antwort": "<p>Nein. Der Muttizettel muss vollständig ausgefüllt und ausgedruckt mitgebracht werden. Digitale Versionen oder Fotos auf dem Smartphone werden nicht akzeptiert.</p>",
+        "stichwoerter": [
+          "Muttizettel",
+          "Fotos & Videos"
+        ]
+      },
+      {
+        "frage": "Muss die Begleitperson während der gesamten Veranstaltung anwesend sein?",
+        "antwort": "<p>Ja. Die erziehungsbeauftragte Person übernimmt die Aufsicht und muss deshalb während des gesamten Aufenthalts bei der Veranstaltung anwesend sein. Verlässt die Begleitperson die Veranstaltung, muss auch die minderjährige Person die Veranstaltung verlassen.</p>",
+        "stichwoerter": [
+          "Muttizettel",
+          "Jugendschutz"
+        ]
+      },
+      {
+        "frage": "Darf eine volljährige Person mehrere Minderjährige begleiten?",
+        "antwort": "<p>Die Begleitperson muss ihrer Aufsichtspflicht jederzeit zuverlässig nachkommen können. Ob und wie viele minderjährige Personen durch eine Person begleitet werden dürfen, richtet sich nach unseren jeweils geltenden Einlassbedingungen.</p>",
+        "stichwoerter": [
+          "Muttizettel",
+          "Einlass",
+          "Jugendschutz"
+        ]
+      },
+      {
+        "frage": "Gibt es Kontrollen am Einlass?",
+        "antwort": "<p>Ja. Eintrittskarten, Lichtbildausweise und gegebenenfalls die Unterlagen zur Erziehungsbeauftragung werden am Einlass kontrolliert. Bei fehlenden oder unvollständigen Unterlagen kann der Zutritt verweigert werden.</p><p>Es ist ebenfalls nicht erlaubt Speisen oder Getränke mitzubringen.</p>",
+        "stichwoerter": [
+          "Muttizettel",
+          "Einlass",
+          "Tickets"
+        ]
+      },
+      {
+        "frage": "Gibt es einen Wiedereinlass?",
+        "antwort": "<p>Ein Wiedereinlass ist bei allen Veranstaltungen möglich.</p>",
+        "stichwoerter": [
+          "Einlass"
+        ]
+      },
+      {
+        "frage": "Kann mir der Einlass trotz gültiger Eintrittskarte verweigert werden?",
+        "antwort": "<p>Ja. Bei stark alkoholisierten Personen, aggressivem Verhalten, fehlenden Unterlagen, Verstößen gegen die Einlassbedingungen oder aus vergleichbaren Gründen kann der Zutritt verweigert werden. Den Anweisungen unseres Einlass- und Sicherheitspersonals ist Folge zu leisten.</p>",
+        "stichwoerter": [
+          "Einlass",
+          "Jugendschutz",
+          "Tickets"
+        ]
+      }
+    ]
+  },
+  {
+    "kategorie": "Speisen und Getränke",
+    "fragen": [
+      {
+        "frage": "Gibt es während der Veranstaltung Speisen und Getränke?",
+        "antwort": "<p>In der Regel bieten wir bei unseren Veranstaltungen verschiedene Getränke und ein kleines Speisenangebot an. Das genaue Angebot kann je nach Veranstaltung variieren.</p>",
+        "stichwoerter": [
+          "Essen & Trinken"
+        ]
+      },
+      {
+        "frage": "Darf ich eigene Speisen oder Getränke mitbringen?",
+        "antwort": "<p>Das Mitbringen eigener Speisen und Getränke ist grundsätzlich nicht gestattet. Wenn du aus medizinischen Gründen auf bestimmte Lebensmittel oder Getränke angewiesen bist, sprich uns bitte möglichst vor der Veranstaltung an.</p>",
+        "stichwoerter": [
+          "Essen & Trinken"
+        ]
+      },
+      {
+        "frage": "Werden auch alkoholfreie Getränke angeboten?",
+        "antwort": "<p>Ja. Bei unseren Veranstaltungen stehen selbstverständlich verschiedene alkoholfreie Getränke zur Auswahl.</p>",
+        "stichwoerter": [
+          "Jugendschutz",
+          "Essen & Trinken"
+        ]
+      },
+      {
+        "frage": "Werden alkoholische Getränke an Minderjährige ausgegeben?",
+        "antwort": "<p>Für die Abgabe alkoholischer Getränke gelten die gesetzlichen Bestimmungen des Jugendschutzes. Unser Ausschankpersonal ist berechtigt, einen Altersnachweis zu verlangen und die Ausgabe von Alkohol zu verweigern.</p>",
+        "stichwoerter": [
+          "Muttizettel",
+          "Jugendschutz",
+          "Essen & Trinken"
+        ]
+      },
+      {
+        "frage": "Welche Zahlungsmöglichkeiten gibt es während der Veranstaltung?",
+        "antwort": "<p>Nur Bares ist Wahres.</p>",
+        "stichwoerter": [
+          "Speisen und Getränke"
+        ]
+      }
+    ]
+  },
+  {
+    "kategorie": "Anreise und Aufenthalt",
+    "fragen": [
+      {
+        "frage": "Wie erreiche ich den Veranstaltungsort?",
+        "antwort": "<p>Die genaue Adresse des Veranstaltungsortes findest du in der jeweiligen Veranstaltungsankündigung.</p>",
+        "stichwoerter": [
+          "Anreise & Parken"
+        ]
+      },
+      {
+        "frage": "Gibt es Parkplätze?",
+        "antwort": "<p>In der Umgebung unserer Veranstaltungsorte stehen nur begrenzt öffentliche Parkmöglichkeiten zur Verfügung. Bitte beachte die örtliche Beschilderung und halte Einfahrten, Rettungswege sowie private Grundstücke frei.</p><p>Wenn möglich, empfehlen wir die Anreise zu Fuß oder in Fahrgemeinschaften.</p>",
+        "stichwoerter": [
+          "Anreise & Parken"
+        ]
+      },
+      {
+        "frage": "Ist die Narrhalla barrierefrei zugänglich?",
+        "antwort": "<p>Wenn du für deinen Besuch einen barrierefreien Zugang, einen geeigneten Sitzplatz oder anderweitige Unterstützung benötigst, nimm bitte rechtzeitig vor der Veranstaltung Kontakt mit uns auf. So können wir gemeinsam klären, welche Möglichkeiten vor Ort bestehen.</p><p>Während des Familienfaschings stehen immer Barrierefreie Plätze zu Verfügung. Auch ohne vorherige Absprache.</p>",
+        "stichwoerter": [
+          "Programm",
+          "Kinder & Familie",
+          "Barrierefreiheit"
+        ]
+      },
+      {
+        "frage": "Was mache ich, wenn ich während der Veranstaltung Hilfe benötige?",
+        "antwort": "<p>Wende dich bitte jederzeit an unsere Vereinsmitglieder, das Personal am Einlass, den Ausschank oder das Sicherheitspersonal. In einem medizinischen Notfall informiere bitte sofort eine anwesende Person.</p>",
+        "stichwoerter": [
+          "Einlass",
+          "Essen & Trinken",
+          "Barrierefreiheit"
+        ]
+      },
+      {
+        "frage": "Gibt es ein Fundbüro?",
+        "antwort": "<p>Fundsachen werden nach der Veranstaltung von uns gesammelt und für eine begrenzte Zeit aufbewahrt. Wenn du etwas verloren hast, melde dich bitte mit einer möglichst genauen Beschreibung des Gegenstands bei uns.</p><p>Fundstücke werden nach der Veranstaltung auch über unsere Social-Media-Kanäle verbreitet.</p>",
+        "stichwoerter": [
+          "Anreise und Aufenthalt"
+        ]
+      }
+    ]
+  },
+  {
+    "kategorie": "Foto- und Videoaufnahmen",
+    "fragen": [
+      {
+        "frage": "Werden bei euren Veranstaltungen Fotos und Videos gemacht?",
+        "antwort": "<p>Ja. Bei unseren Veranstaltungen können Foto- und Videoaufnahmen entstehen. Diese verwenden wir unter anderem für unsere Webseite, unsere Social-Media-Kanäle, Presseberichte und die Dokumentation unseres Vereinslebens.</p>",
+        "stichwoerter": [
+          "Fotos & Videos",
+          "Verein & Mitgliedschaft"
+        ]
+      },
+      {
+        "frage": "Was kann ich tun, wenn ich nicht fotografiert werden möchte?",
+        "antwort": "<p>Wenn du nicht fotografiert oder gefilmt werden möchtest, sprich bitte direkt vor Ort unser Foto- oder Veranstaltungsteam an. Wir versuchen, deinen Wunsch bei Einzel- und Gruppenaufnahmen entsprechend zu berücksichtigen.</p><p>Bei Übersichtsaufnahmen des Veranstaltungsgeschehens kann eine vollständige Vermeidung einer Abbildung nicht immer gewährleistet werden. Es gelten unsere Fotohinweise gemäß Webseite.</p>",
+        "stichwoerter": [
+          "Fotos & Videos",
+          "Verein & Mitgliedschaft"
+        ]
+      },
+      {
+        "frage": "Darf ich selbst Fotos und Videos aufnehmen?",
+        "antwort": "<p>Private Foto- und Videoaufnahmen sind grundsätzlich möglich, sofern dadurch weder andere Gäste noch das Programm gestört werden. Bitte respektiere die Persönlichkeitsrechte der abgebildeten Personen.</p><p>Professionelle Aufnahmen, umfangreiche Videoaufzeichnungen sowie eine gewerbliche Nutzung müssen vorher mit uns abgestimmt werden.</p>",
+        "stichwoerter": [
+          "Programm",
+          "Fotos & Videos"
+        ]
+      }
+    ]
+  },
+  {
+    "kategorie": "Karnevalsumzug",
+    "fragen": [
+      {
+        "frage": "Wann findet der Sandersdorfer Karnevalsumzug statt?",
+        "antwort": "<p>Der genaue Termin und die Startzeit werden rechtzeitig auf unserer Webseite und über unsere Social-Media-Kanäle veröffentlicht.</p>",
+        "stichwoerter": [
+          "Karnevalsumzug"
+        ]
+      },
+      {
+        "frage": "Wo verläuft die Umzugsstrecke?",
+        "antwort": "<p>Die Umzugsstrecke beginnt am ehemaligen Thüringer Hof (Kreuzung Bitterfelder Straße und Am Sportzentrum), führt über den Kreisverkehr vorbei am Nah & Gut. Danach geht es über die Bahnhofstraße weiter Richtung Rathaus und schlussendlich zurück zum Thüringer Hof.</p><p>Am Kreisverkehr in Sandersdorf gibt es eine kleine Anmoderation der einzelnen Teilnehmer.</p>",
+        "stichwoerter": [
+          "Karnevalsumzug"
+        ]
+      },
+      {
+        "frage": "Kommt es während des Umzugs zu Straßensperrungen?",
+        "antwort": "<p>Ja. Für den Karnevalsumzug werden Teile der Ortsdurchfahrt und angrenzende Straßen zeitweise gesperrt. Bitte beachte die aktuelle Beschilderung und die vorab veröffentlichten Hinweise.</p>",
+        "stichwoerter": [
+          "Karnevalsumzug"
+        ]
+      },
+      {
+        "frage": "Darf ich mich dem Umzug anschließen?",
+        "antwort": "<p>Eine spontane Teilnahme innerhalb des Umzugs ist nicht möglich. Gruppen und Vereine, die am Umzug teilnehmen möchten, müssen sich im Vorfeld bei uns anmelden.</p><p>Entsprechende Anmeldeformulare werden vorab auf unserer Webseite veröffentlicht.</p>",
+        "stichwoerter": [
+          "Karnevalsumzug",
+          "Verein & Mitgliedschaft"
+        ]
+      },
+      {
+        "frage": "Was ist beim Zuschauen zu beachten?",
+        "antwort": "<p>Bitte halte ausreichend Abstand zu den Fahrzeugen und bleibe hinter den vorgesehenen Absperrungen beziehungsweise am Straßenrand. Kinder sollten während des gesamten Umzugs beaufsichtigt werden. Den Anweisungen der Ordner und Einsatzkräfte ist unbedingt Folge zu leisten.</p>",
+        "stichwoerter": [
+          "Kinder & Familie",
+          "Karnevalsumzug"
+        ]
+      },
+      {
+        "frage": "Darf ich auf die Straße laufen, um Süßigkeiten einzusammeln?",
+        "antwort": "<p>Ja aber: Bitte betrete während des laufenden Umzugs die Fahrbahn nur, wenn Ihr ausreichend Abstand zu Teilnehmenden Fahrzeugen habt. Besonders bei größeren Fahrzeugen bestehen eingeschränkte Sichtbereiche. Die Sicherheit aller Teilnehmenden und Gäste hat Vorrang.</p>",
+        "stichwoerter": [
+          "Karnevalsumzug"
+        ]
+      }
+    ]
+  },
+  {
+    "kategorie": "Der Sandersdorfer Karnevalsverein",
+    "fragen": [
+      {
+        "frage": "Wer ist der Sandersdorfer Karnevalsverein?",
+        "antwort": "<p>Der Sandersdorfer Karnevalsverein e. V., kurz SKV, steht für Karneval, Gemeinschaft und ehrenamtliches Engagement in Sandersdorf. Gemeinsam gestalten unsere Mitglieder Veranstaltungen, Tänze, Programme und zahlreiche weitere Aktionen.</p><p>Unser Motto lautet stets: Aus Spaß an der Freude.</p>",
+        "stichwoerter": [
+          "Programm",
+          "Verein & Mitgliedschaft"
+        ]
+      },
+      {
+        "frage": "Wie lautet euer Schlachtruf?",
+        "antwort": "<p>Unser Schlachtruf lautet: <strong>Sandoria Hellau!</strong></p>",
+        "stichwoerter": [
+          "Der Sandersdorfer Karnevalsverein"
+        ]
+      },
+      {
+        "frage": "Wer ist „Es“?",
+        "antwort": "<p>„Es“ ist das Maskottchen des Sandersdorfer Karnevalsvereins. Bei Veranstaltungen, Aktionen und auf unseren Social-Media-Kanälen begegnet dir „Es“ immer wieder in den Vereinsfarben Blau und Weiß.</p>",
+        "stichwoerter": [
+          "Verein & Mitgliedschaft"
+        ]
+      },
+      {
+        "frage": "Kann ich Mitglied im Verein werden?",
+        "antwort": "<p>Ja, wir freuen uns immer über neue Mitglieder. Dabei ist es ganz egal, ob du auf der Bühne stehen, tanzen, organisieren, beim Auf- und Abbau helfen oder dich hinter den Kulissen einbringen möchtest.</p><p>Wenn du Interesse hast, wende dich gerne direkt an uns.</p>",
+        "stichwoerter": [
+          "Verein & Mitgliedschaft"
+        ]
+      },
+      {
+        "frage": "Muss ich Karnevalserfahrung haben?",
+        "antwort": "<p>Nein. Vorerfahrung ist nicht notwendig. Viel wichtiger sind Freude am Vereinsleben, Interesse am Karneval und die Bereitschaft, sich gemeinsam mit anderen einzubringen.</p>",
+        "stichwoerter": [
+          "Verein & Mitgliedschaft"
+        ]
+      },
+      {
+        "frage": "Kann ich erst einmal unverbindlich vorbeikommen?",
+        "antwort": "<p>Natürlich. Wenn du unseren Verein oder eine bestimmte Gruppe kennenlernen möchtest, kannst du dich bei uns melden. Wir besprechen dann gemeinsam, wann und wo ein unverbindliches Kennenlernen möglich ist.</p>",
+        "stichwoerter": [
+          "Verein & Mitgliedschaft"
+        ]
+      },
+      {
+        "frage": "Welche Gruppen gibt es im Verein?",
+        "antwort": "<p>Unser Verein besteht aus verschiedenen Tanz- und Vereinsgruppen für unterschiedliche Altersklassen und Interessen. Eine aktuelle Übersicht gibt es im Moment leider nicht. Aber sprich uns gerne einfach darauf an.</p>",
+        "stichwoerter": [
+          "Jugendschutz",
+          "Essen & Trinken",
+          "Verein & Mitgliedschaft"
+        ]
+      },
+      {
+        "frage": "Können Kinder und Jugendliche bei euch mitmachen?",
+        "antwort": "<p>Ja. Kinder und Jugendliche sind ein wichtiger Teil unseres Vereinslebens und können sich je nach Alter und Interesse in verschiedenen Gruppen engagieren. Informationen zu den Gruppen und möglichen Trainingszeiten erhältst du direkt bei uns.</p>",
+        "stichwoerter": [
+          "Jugendschutz",
+          "Kinder & Familie",
+          "Verein & Mitgliedschaft"
+        ]
+      },
+      {
+        "frage": "Kann ich den SKV für eine Veranstaltung anfragen?",
+        "antwort": "<p>Grundsätzlich sind Auftritte einzelner Gruppen oder unseres Vereins auch bei externen Veranstaltungen möglich. Ob eine Anfrage umgesetzt werden kann, hängt unter anderem vom Termin, dem gewünschten Programmpunkt und der Verfügbarkeit unserer Mitglieder ab.</p>",
+        "stichwoerter": [
+          "Programm",
+          "Verein & Mitgliedschaft"
+        ]
+      },
+      {
+        "frage": "Kann ich euren Verein unterstützen?",
+        "antwort": "<p>Ja. Du kannst uns beispielsweise durch eine Mitgliedschaft, eine Spende, Sponsoring, tatkräftige Hilfe oder den Besuch unserer Veranstaltungen unterstützen. Bei Interesse kannst du gerne Kontakt mit uns aufnehmen.</p>",
+        "stichwoerter": [
+          "Barrierefreiheit",
+          "Verein & Mitgliedschaft",
+          "Kontakt"
+        ]
+      }
+    ]
+  },
+  {
+    "kategorie": "Kontakt und aktuelle Informationen",
+    "fragen": [
+      {
+        "frage": "Wie kann ich Kontakt mit euch aufnehmen?",
+        "antwort": "<p>Unsere aktuellen Kontaktmöglichkeiten findest du im Bereich Kontakt auf unserer Webseite. Für eine schnelle Zuordnung deiner Anfrage gib bitte einen kurzen Betreff und alle wichtigen Informationen an.</p><p><a href=\"mailto:info@skvonline.de\">Kontakt aufnehmen</a></p><p>Alternativ kannst du uns auch über unser Social-Media-Kanäle erreichen.</p>",
+        "stichwoerter": [
+          "Jugendschutz",
+          "Kontakt"
+        ]
+      },
+      {
+        "frage": "Wo finde ich aktuelle Informationen?",
+        "antwort": "<p>Aktuelle Termine, Änderungen und Hinweise veröffentlichen wir auf unserer Webseite sowie über unsere offiziellen Social-Media-Kanäle.</p>",
+        "stichwoerter": [
+          "Kontakt"
+        ]
+      },
+      {
+        "frage": "Wie schnell erhalte ich eine Antwort?",
+        "antwort": "<p>Unser Verein wird ehrenamtlich geführt. Deshalb kann die Beantwortung einer Anfrage manchmal etwas Zeit in Anspruch nehmen. Wir bemühen uns, dir so schnell wie möglich zu antworten.</p>",
+        "stichwoerter": [
+          "Verein & Mitgliedschaft",
+          "Kontakt"
+        ]
+      },
+      {
+        "frage": "Meine Frage wurde hier nicht beantwortet. Was kann ich tun?",
+        "antwort": "<p>Wenn deine Frage nicht im FAQ beantwortet wurde, kannst du dich gerne direkt an uns wenden. Wir helfen dir weiter.</p>",
+        "stichwoerter": [
+          "Kontakt"
+        ]
+      }
+    ]
+  }
+]
