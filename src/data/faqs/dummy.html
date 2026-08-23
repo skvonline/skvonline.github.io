@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+    Vorlage für ein weiteres Spezial-FAQ.
+    Diese Datei nach faq/NAME/index.html kopieren und Titel, Einleitung sowie den
+    Wert von data-faq-source anpassen. Die JSON-Datei wird unter
+    src/data/faqs/NAME.json abgelegt und enthält nur "frage" und "antwort".
+-->
+<html lang="de">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>SKV | FAQ-Titel</title>
+    <meta name="description" content="Antworten auf häufig gestellte Fragen."/>
+    <link rel="stylesheet" href="../../css/style.css"/>
+    <link rel="icon" href="../../img/logo.png">
+</head>
+<body data-page="legal">
+<div id="header-component"></div>
+
+<main class="section legal-page faq-page">
+    <section class="container legal-card faq-card" aria-labelledby="faq-title">
+        <p class="faq-eyebrow">Kurze Überschrift</p>
+        <h1 id="faq-title">FAQ-Titel</h1>
+        <p class="faq-intro">Einleitung für das Spezial-FAQ.</p>
+
+        <!-- FAQ-Datenquelle: ../../src/data/faqs/NAME.json -->
+        <div id="faq-content" class="faq-list" data-faq-source="../../src/data/faqs/NAME.json" aria-live="polite">
+            <p class="faq-loading">FAQ wird geladen …</p>
+        </div>
+
+        <aside class="faq-notice" aria-label="Abschluss Überschrift">
+            <strong>Abschluss Überschrift</strong>
+            <p>Abschluss Text</p>
+            <nav class="faq-social-links" aria-label="Social-Media-Kanäle">
+                <a class="faq-social-link faq-social-link--facebook" href="https://www.facebook.com/skvonline"
+                   target="_blank" rel="noopener noreferrer" aria-label="SKV auf Facebook">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <path d="M13.5 22v-8.2h2.8l.4-3.2h-3.2V8.6c0-.9.3-1.6 1.6-1.6h1.7V4.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.3v2.4H8v3.2h2.7V22h2.8Z"/>
+                    </svg>
+                </a>
+                <a class="faq-social-link faq-social-link--instagram" href="https://www.instagram.com/skv_sandoria"
+                   target="_blank" rel="noopener noreferrer" aria-label="SKV auf Instagram">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                        <rect x="3.25" y="3.25" width="17.5" height="17.5" rx="5"/>
+                        <circle cx="12" cy="12" r="4.2"/>
+                        <circle cx="17.3" cy="6.7" r="1.1"/>
+                    </svg>
+                </a>
+            </nav>
+        </aside>
+    </section>
+</main>
+
+<div id="footer-component"></div>
+<script src="../../js/script.js" defer></script>
+</body>
+</html>

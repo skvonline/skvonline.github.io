@@ -64,60 +64,9 @@
         </section>
         <!-- TODO ENDE: Terminblock -->
 
-        <div class="faq-list">
-            <details>
-                <summary>Wie bekomme ich Karten für eure Veranstaltungen?</summary>
-                <p>Ihr könnt Karten zunächst bei unserem angekündigten Termin vorbestellen. Restkarten gehen später in
-                    den freien Verkauf – immer nur, solange der Vorrat reicht.</p>
-            </details>
-            <details>
-                <summary>Wie funktioniert die Kartenvorbestellung?</summary>
-                <p>Kommt zum veröffentlichten Vorbestellungstermin ins Sportis Sandersdorf oder ruft im Sportis an (03493 81479) und reserviert dort eure
-                    gewünschten Karten. Abgeholt und bezahlt werden sie an einem der bekanntgegebenen Abholtermine.</p>
-            </details>
-            <details>
-                <summary>Wo findet die Vorbestellung statt?</summary>
-                <p>Die Kartenvorbestellung findet im Sportis Sandersdorf statt. Oder telfonisch unter 03493 81479.</p>
-            </details>
-            <details>
-                <summary>Muss ich meine Karten persönlich abholen?</summary>
-                <p>Nein. Wenn ihr selbst verhindert seid, kann auch jemand anderes eure vorbestellten Karten
-                    abholen.</p>
-            </details>
-            <details>
-                <summary>Kann jemand anderes meine Karten für mich abholen?</summary>
-                <p>Ja, das ist möglich. Die Person sollte bei der Abholung alle Angaben zur Vorbestellung nennen
-                    können.</p>
-            </details>
-            <details>
-                <summary>Was passiert, wenn ich meine vorbestellten Karten nicht abhole?</summary>
-                <p>Nach Ablauf der Abholfrist verfällt die Vorbestellung und die Karten gehen zurück in den freien
-                    Verkauf.</p>
-            </details>
-            <details>
-                <summary>Wann beginnt der freie Kartenverkauf?</summary>
-                <p>Der freie Verkauf der Restkarten beginnt unmittelbar nach dem letzten Abholtermin der
-                    Vorbestellungen.</p>
-            </details>
-            <details>
-                <summary>Welche Zahlungsmöglichkeiten gibt es?</summary>
-                <p>Bei der Abholung vorbestellter Karten könnt ihr bar oder mit Karte zahlen. Im freien Verkauf ist
-                    ausschließlich Barzahlung möglich.</p>
-            </details>
-            <details>
-                <summary>Gibt es eine Abendkasse?</summary>
-                <p>Eine Abendkasse kann es nur geben, wenn nach dem Vorverkauf noch Karten verfügbar sind. Zum Familienfasching
-                gibt es fast immer eine Abendkasse. Bei den restlichen Veranstaltungen solltet ihr euch nicht darauf verlassen.</p>
-            </details>
-            <details>
-                <summary>Wo erfahre ich die aktuellen Termine?</summary>
-                <p>Alle Termine veröffentlichen wir rechtzeitig hier auf unserer Webseite sowie auf unseren
-                    Social-Media-Kanälen.</p>
-            </details>
-            <details>
-                <summary>Können Veranstaltungen ausverkauft sein?</summary>
-                <p>Ja. Unsere Karten sind nur erhältlich, solange der Vorrat reicht – früh sein lohnt sich!</p>
-            </details>
+        <!-- FAQ-Datenquelle: ../../src/data/faqs/kartenverkauf.json -->
+        <div id="faq-content" class="faq-list" data-faq-source="../../src/data/faqs/kartenverkauf.json" aria-live="polite">
+            <p class="faq-loading">FAQ wird geladen …</p>
         </div>
 
         <aside class="faq-notice" aria-label="Wichtiger Hinweis">

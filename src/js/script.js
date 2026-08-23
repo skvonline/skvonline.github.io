@@ -1282,6 +1282,71 @@ function setupLinktreeHeaderMode() {
   });
 }
 
+async function loadFaqContent() {
+  const container = document.getElementById('faq-content');
+  if (!container) return;
+
+  try {
+    const source = container.dataset.faqSource;
+    if (!source) throw new Error('Für das FAQ wurde keine Datenquelle angegeben.');
+    const response = await fetch(source);
+    if (!response.ok) throw new Error(`FAQ konnte nicht geladen werden (${response.status})`);
+
+    const categories = await response.json();
+    if (!Array.isArray(categories)) throw new Error('Das FAQ-JSON muss ein Array enthalten.');
+
+    container.replaceChildren();
+    if (categories.every((entry) => entry?.frage && typeof entry.antwort === 'string')) {
+      categories.forEach((entry) => {
+        const details = document.createElement('details');
+        const summary = document.createElement('summary');
+        summary.textContent = entry.frage;
+        const answer = document.createElement('div');
+        answer.className = 'faq-answer';
+        answer.innerHTML = entry.antwort;
+        details.append(summary, answer);
+        container.append(details);
+      });
+      return;
+    }
+
+    categories.forEach((category, categoryIndex) => {
+      if (!category?.kategorie || !Array.isArray(category.fragen)) return;
+
+      const headingId = `faq-category-${categoryIndex + 1}`;
+      const section = document.createElement('section');
+      section.className = 'faq-section';
+      section.setAttribute('aria-labelledby', headingId);
+
+      const heading = document.createElement('h2');
+      heading.id = headingId;
+      heading.textContent = category.kategorie;
+
+      const list = document.createElement('div');
+      list.className = 'faq-list';
+      category.fragen.forEach((entry) => {
+        if (!entry?.frage || typeof entry.antwort !== 'string') return;
+
+        const details = document.createElement('details');
+        details.dataset.tags = Array.isArray(entry.stichwoerter) ? entry.stichwoerter.join(' ') : '';
+        const summary = document.createElement('summary');
+        summary.textContent = entry.frage;
+        const answer = document.createElement('div');
+        answer.className = 'faq-answer';
+        answer.innerHTML = entry.antwort;
+        details.append(summary, answer);
+        list.append(details);
+      });
+
+      section.append(heading, list);
+      container.append(section);
+    });
+  } catch (error) {
+    console.error(error);
+    container.innerHTML = '<p class="faq-loading">Das FAQ konnte leider nicht geladen werden. Bitte versuche es später erneut.</p>';
+  }
+}
+
 function setupFaqSearch() {
   const searchInput = document.getElementById('faq-search');
   if (!searchInput) return;
@@ -1325,11 +1390,9 @@ function setupFaqSearch() {
       button.setAttribute('aria-expanded', String(shouldOpen));
       list.hidden = !shouldOpen;
     });
-    section.querySelectorAll('details').forEach((question) => {
-      const text = question.textContent;
-      const tags = keywordRules.filter(([, pattern]) => pattern.test(text)).map(([tag]) => tag).slice(0, 3);
-      if (!tags.length) tags.push(category);
-      question.dataset.tags = tags.join(' ');
+    section.querySelectorAll('details:not([data-tags])').forEach((question) => {
+      const tags = keywordRules.filter(([, pattern]) => pattern.test(question.textContent)).map(([tag]) => tag).slice(0, 3);
+      question.dataset.tags = (tags.length ? tags : [category]).join(' ');
     });
   });
 
@@ -1410,6 +1473,7 @@ function setupFaqSearch() {
     setupMobileMenu();
     setupHeaderSmoothScroll();
     setupTicketDatesVisibility();
+    await loadFaqContent();
     setupFaqSearch();
     return;
   }
