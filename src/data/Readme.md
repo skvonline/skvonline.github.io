@@ -476,6 +476,21 @@ enthalten.
 ]
 ```
 
+### 10.4 Spezial-FAQs
+
+Spezial-FAQs ohne Kategorien und Stichwörter liegen unter `./src/data/faqs/`. Jeder Eintrag besteht ausschließlich aus
+einer Frage und einer Antwort. `kartenverkauf.json` versorgt das FAQ zum Kartenverkauf. Für weitere Spezial-FAQs steht
+mit `./src/data/faqs/dummy.html` eine kopierbare Seitenvorlage bereit.
+
+```json
+[
+  {
+    "frage": "Wie lautet die Beispielfrage?",
+    "antwort": "<p>Hier steht die Antwort.</p>"
+  }
+]
+```
+
 ---
 
 ## 11) Checkliste vor dem Speichern

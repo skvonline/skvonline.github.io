@@ -1287,13 +1287,29 @@ async function loadFaqContent() {
   if (!container) return;
 
   try {
-    const response = await fetch('../../src/data/faq.json');
+    const source = container.dataset.faqSource;
+    if (!source) throw new Error('Für das FAQ wurde keine Datenquelle angegeben.');
+    const response = await fetch(source);
     if (!response.ok) throw new Error(`FAQ konnte nicht geladen werden (${response.status})`);
 
     const categories = await response.json();
     if (!Array.isArray(categories)) throw new Error('Das FAQ-JSON muss ein Array enthalten.');
 
     container.replaceChildren();
+    if (categories.every((entry) => entry?.frage && typeof entry.antwort === 'string')) {
+      categories.forEach((entry) => {
+        const details = document.createElement('details');
+        const summary = document.createElement('summary');
+        summary.textContent = entry.frage;
+        const answer = document.createElement('div');
+        answer.className = 'faq-answer';
+        answer.innerHTML = entry.antwort;
+        details.append(summary, answer);
+        container.append(details);
+      });
+      return;
+    }
+
     categories.forEach((category, categoryIndex) => {
       if (!category?.kategorie || !Array.isArray(category.fragen)) return;
 
