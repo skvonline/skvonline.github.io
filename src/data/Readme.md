@@ -81,7 +81,7 @@ Alle Bildreferenzen verwenden ein `image`-Objekt mit `src`, `ki`, `teilweiseKi` 
 - `ki` und `teilweiseKi` dürfen niemals gleichzeitig `true` sein; beide dürfen `false` sein.
 - Sobald eines der beiden Felder `true` ist, ist `theme` mit `black` oder `white` verpflichtend.
 - Wenn beide Felder `false` sind, ist `theme` optional.
-- Gekennzeichnete Bilder erhalten rechts oben das passende Label und werden gegen Kontextmenü und Drag-and-drop geschützt.
+- Gekennzeichnete Bilder erhalten links oben das passende Label und werden gegen Kontextmenü und Drag-and-drop geschützt.
 
 ## 2) Datei: `news.json`
 
