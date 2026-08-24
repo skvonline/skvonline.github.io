@@ -292,18 +292,45 @@ a {
     z-index: -2;
 }
 
-.hero-slide {
+.hero-slide-wrapper {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    display: block;
     opacity: 0;
     transition: opacity 0.8s ease;
 }
 
-.hero-slide.active {
+.hero-slide {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-slide-wrapper.active {
     opacity: 1;
+}
+
+.image-with-label {
+    position: relative;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.ai-label {
+    position: absolute;
+    z-index: 5;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: clamp(70px, 22%, 150px);
+    height: auto;
+    pointer-events: none;
+    user-select: none;
+}
+
+.ai-protected-media,
+.ai-protected-media img {
+    -webkit-user-drag: none;
+    user-select: none;
 }
 
 .hero h1 {
@@ -454,6 +481,14 @@ a {
 
 .event-card-media {
     flex: 0 0 min(36%, 270px);
+}
+
+.event-card-media .image-with-label,
+.news-media .image-with-label,
+.royal-gallery-item .image-with-label {
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .event-image {
@@ -670,6 +705,11 @@ a {
     object-fit: cover;
     background: #dbe6ff;
     display: block;
+}
+
+.event-detail-shell > .image-with-label {
+    display: block;
+    width: 100%;
 }
 
 .event-detail-overlay {
@@ -946,6 +986,10 @@ body.lightbox-open {
     box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45);
 }
 
+.royals-lightbox-media {
+    line-height: 0;
+}
+
 .royals-lightbox-details {
     width: 100%;
     color: #f8fafc;
@@ -1098,16 +1142,21 @@ body.lightbox-open {
     bottom: 0;
 }
 
-.board-poster img {
+.board-poster .image-with-label {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.board-poster .board-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: 0.3s;
 }
 
-.board-card:hover .board-poster img {
+.board-card:hover .board-poster .board-image {
     transform: scale(1.1);
 }
 

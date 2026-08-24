@@ -134,7 +134,7 @@ function setupTicketDatesVisibility() {
 }
 
 function setupHeroCarousel() {
-  const slides = Array.from(document.querySelectorAll('.hero-slide'));
+  const slides = Array.from(document.querySelectorAll('.hero-slide-wrapper'));
   if (slides.length <= 1) return;
 
   let index = 0;
@@ -155,7 +155,8 @@ async function loadHomeGallery() {
   }
 
   galleryItems.forEach((item, index) => {
-    if (!item?.src) {
+    const image = normalizeImage(item?.image);
+    if (!image.src) {
       return;
     }
 
@@ -163,8 +164,52 @@ async function loadHomeGallery() {
     const altText = item.alt || 'Bild aus der Home-Gallery';
     galleryContainer.insertAdjacentHTML(
       'beforeend',
-      `<img class="hero-slide${isActiveClass}" src="${item.src}" alt="${altText}" loading="lazy" />`,
+      createImageMarkup(image, altText, 'hero-slide', { wrapperClass: `hero-slide-wrapper${isActiveClass}` }),
     );
+  });
+}
+
+function normalizeImage(image) {
+  if (!image || typeof image !== 'object') {
+    return { src: '', ki: false, teilweiseKi: false, theme: '' };
+  }
+
+  const ki = image.ki === true;
+  const teilweiseKi = image.teilweiseKi === true;
+  const theme = image.theme === 'black' || image.theme === 'white' ? image.theme : '';
+  const hasValidLabel = Boolean(theme) && ki !== teilweiseKi && (ki || teilweiseKi);
+
+  return {
+    src: typeof image.src === 'string' ? image.src.trim() : '',
+    ki: hasValidLabel && ki,
+    teilweiseKi: hasValidLabel && teilweiseKi,
+    theme,
+  };
+}
+
+function createImageMarkup(imageData, alt, imageClass, options = {}) {
+  const image = normalizeImage(imageData);
+  if (!image.src) return '';
+
+  const { wrapperClass = '', pathPrefix = './' } = options;
+  const protectedClass = image.ki || image.teilweiseKi ? ' ai-protected-media' : '';
+  const labelName = image.ki ? 'ki' : image.teilweiseKi ? 'teilweise_ki' : '';
+  const labelMarkup = labelName
+    ? `<img class="ai-label" src="${pathPrefix}src/img/ki_labels/${labelName}_${image.theme}.png" alt="${image.ki ? 'KI-generiert' : 'Teilweise KI-generiert'}" draggable="false" />`
+    : '';
+
+  return `<span class="image-with-label ${wrapperClass}${protectedClass}">
+    <img class="${imageClass}" src="${image.src}" alt="${alt}" loading="lazy" draggable="${labelName ? 'false' : 'true'}" />
+    ${labelMarkup}
+  </span>`;
+}
+
+function setupProtectedImages() {
+  document.addEventListener('contextmenu', (event) => {
+    if (event.target.closest('.ai-protected-media, .ai-label')) event.preventDefault();
+  });
+  document.addEventListener('dragstart', (event) => {
+    if (event.target.closest('.ai-protected-media, .ai-label')) event.preventDefault();
   });
 }
 
@@ -441,11 +486,7 @@ function getEventImagePath(event) {
     return '';
   }
 
-  if (event.image && String(event.image).trim() !== '') {
-    return event.image;
-  }
-
-  return '';
+  return normalizeImage(event.image).src;
 }
 
 function getEventShareButtonMarkup(event) {
@@ -521,8 +562,9 @@ function setupEventShareButtons() {
 }
 
 function getElferratImagePath(member) {
-  if (member.image && member.image !== './src/img/dummy.svg') {
-    return member.image;
+  const image = normalizeImage(member.image);
+  if (image.src && image.src !== './src/img/dummy.svg') {
+    return image.src;
   }
 
   const slug = member.name
@@ -633,7 +675,7 @@ function normalizeRoyalEntry(entry) {
     year,
     largePair: formatPairText(largePair),
     smallPair: formatPairText(smallPair),
-    image: entry.image || '',
+    image: normalizeImage(entry.image),
     title: entry.title || session || 'Prinzenpaar',
   };
 }
@@ -641,6 +683,7 @@ function normalizeRoyalEntry(entry) {
 function setupRoyalsLightbox(royals) {
   const lightbox = document.getElementById('royals-lightbox');
   const image = document.getElementById('royals-lightbox-image');
+  const imageWrapper = image?.closest('.image-with-label');
   const details = document.getElementById('royals-lightbox-details');
   const closeButton = document.getElementById('royals-lightbox-close');
   const prevButton = document.getElementById('royals-lightbox-prev');
@@ -648,7 +691,7 @@ function setupRoyalsLightbox(royals) {
   const backdrop = lightbox?.querySelector('[data-lightbox-close]');
   const gallery = document.getElementById('royals-grid');
 
-  if (!lightbox || !image || !details || !closeButton || !prevButton || !nextButton || !backdrop || !gallery) {
+  if (!lightbox || !image || !imageWrapper || !details || !closeButton || !prevButton || !nextButton || !backdrop || !gallery) {
     return;
   }
 
@@ -659,8 +702,14 @@ function setupRoyalsLightbox(royals) {
     const pair = royals[safeIndex];
     currentIndex = safeIndex;
 
-    image.src = pair.image || '';
+    image.src = pair.image.src || '';
     image.alt = pair.title || pair.session || 'Prinzenpaar';
+    image.draggable = !(pair.image.ki || pair.image.teilweiseKi);
+    imageWrapper.classList.toggle('ai-protected-media', pair.image.ki || pair.image.teilweiseKi);
+    imageWrapper.querySelector('.ai-label')?.remove();
+    if (pair.image.ki || pair.image.teilweiseKi) {
+      imageWrapper.insertAdjacentHTML('beforeend', `<img class="ai-label" src="./src/img/ki_labels/${pair.image.ki ? 'ki' : 'teilweise_ki'}_${pair.image.theme}.png" alt="${pair.image.ki ? 'KI-generiert' : 'Teilweise KI-generiert'}" draggable="false" />`);
+    }
     const sessionText = formatLightboxInlineText(pair.session);
     const yearText = formatLightboxInlineText(pair.year);
     const largePairText = formatTitledPairText(pair.largePair, 'Prinz', 'Prinzessin');
@@ -994,7 +1043,7 @@ async function loadHomeContent() {
       const hasImage = Boolean(imagePath);
       const imageSideClass = hasImage ? (index % 2 === 0 ? 'event-card--image-left' : 'event-card--image-right') : 'event-card--no-image';
       const imageMarkup = hasImage
-        ? `<div class="event-card-media"><img class="event-image" src="${imagePath}" alt="${event.title || 'Veranstaltung'}" loading="lazy" /></div>`
+        ? `<div class="event-card-media">${createImageMarkup(event.image, event.title || 'Veranstaltung', 'event-image')}</div>`
         : '';
 
       return `
@@ -1023,14 +1072,14 @@ async function loadHomeContent() {
     chunkSize: 3,
     renderItem: (entry) => {
       const dateMarkup = getNewsDateMarkup(entry);
-      const imageMarkup = entry.image
+      const imageMarkup = normalizeImage(entry.image).src
         ? `<div class="news-media">
-            <img class="news-image" src="${entry.image}" alt="${entry.title}" loading="lazy" />
+            ${createImageMarkup(entry.image, entry.title, 'news-image')}
             ${dateMarkup}
           </div>`
         : '';
       const newsSizeClass = entry.large ? ' news-card--large' : '';
-      const headerMarkup = !entry.image && dateMarkup ? `<div class="news-header">${dateMarkup}</div>` : '';
+      const headerMarkup = !normalizeImage(entry.image).src && dateMarkup ? `<div class="news-header">${dateMarkup}</div>` : '';
 
       return `
         <article class="card news-card${newsSizeClass}">
@@ -1051,7 +1100,7 @@ async function loadHomeContent() {
         'beforeend',
         `<article class="board-card">
           <button type="button" class="board-poster" aria-expanded="false" aria-controls="board-details-${index}">
-            <img src="${person.image}" alt="${person.name}" loading="lazy" />
+            ${createImageMarkup(person.image, person.name, 'board-image')}
           </button>
           <div class="board-details" id="board-details-${index}">
             <h3>${person.name}</h3>
@@ -1087,7 +1136,7 @@ async function loadHomeContent() {
       elferratGrid.insertAdjacentHTML(
         'beforeend',
         `<article class="elferrat-card">
-          <img class="elferrat-image" src="${imagePath}" alt="${member.name}" loading="lazy" />
+          ${createImageMarkup({ ...member.image, src: imagePath }, member.name, 'elferrat-image')}
           <h3 class="elferrat-name">${member.name}</h3>
           <p class="elferrat-role">${member.role}</p>
         </article>`,
@@ -1105,7 +1154,7 @@ async function loadHomeContent() {
     renderItem: (pair, index) => {
       return `
         <article class="royal-gallery-item" aria-label="${pair.title || pair.session}" role="button" tabindex="0" data-royal-index="${index}">
-          <img class="royal-gallery-image" src="${pair.image}" alt="${pair.title || pair.session}" loading="lazy" />
+          ${createImageMarkup(pair.image, pair.title || pair.session, 'royal-gallery-image')}
           ${createRoyalOverlayText(pair.session, 'top-left')}
           ${createRoyalOverlayText(pair.year, 'top-right')}
           ${createRoyalOverlayText(pair.largePair, 'bottom-left')}
@@ -1120,11 +1169,11 @@ async function loadHomeContent() {
   const sponsorsTrack = document.getElementById('sponsors-track');
   if (sponsorsTrack) {
     sponsors.forEach((sponsor) => {
-      if (!sponsor?.src) return;
+      if (!normalizeImage(sponsor?.image).src) return;
       sponsorsTrack.insertAdjacentHTML(
         'beforeend',
         `<figure class="sponsor-slide">
-          <img class="sponsor-image" src="${sponsor.src}" alt="${sponsor.alt || 'Sponsor'}" loading="lazy" />
+          ${createImageMarkup(sponsor.image, sponsor.alt || 'Sponsor', 'sponsor-image')}
         </figure>`,
       );
     });
@@ -1199,9 +1248,11 @@ async function loadEventDetailContent() {
 
   document.title = `SKV | ${matchingEvent.title || 'Veranstaltungsdetails'}`;
 
-  const detailImagePath = normalizeImagePathForSubpage(matchingEvent.image) || '../src/img/events/default.png';
+  const detailImage = normalizeImage(matchingEvent.image);
+  detailImage.src = normalizeImagePathForSubpage(detailImage.src) || '../src/img/events/default.png';
+  const detailImagePath = detailImage.src;
   const imageMarkup = detailImagePath
-    ? `<img class="event-detail-image" src="${detailImagePath}" alt="${matchingEvent.title || 'Veranstaltung'}" loading="lazy" />`
+    ? createImageMarkup(detailImage, matchingEvent.title || 'Veranstaltung', 'event-detail-image', { pathPrefix: '../' })
     : '';
   const eventLinksMarkup = getNewsLinksMarkup(matchingEvent);
 
@@ -1441,6 +1492,7 @@ function setupFaqSearch() {
 
 (async function init() {
   const page = document.body.dataset.page;
+  setupProtectedImages();
 
   if (page === 'home') {
     await loadComponent('header-component', './components/header.html');
