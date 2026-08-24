@@ -1,78 +1,154 @@
 [
   {
-    "src": "https://www.autolackiererei-latuszek.de/static/img/logo_home.png",
-    "alt": "Autolackiererei Latuszek"
+    "alt": "Autolackiererei Latuszek",
+    "image": {
+      "src": "https://www.autolackiererei-latuszek.de/static/img/logo_home.png",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "https://fbb-bitterfeld.de/wp-content/uploads/2022/12/FBB_LOGO_lang.jpg",
-    "alt": "FBB GmbH"
+    "alt": "FBB GmbH",
+    "image": {
+      "src": "https://fbb-bitterfeld.de/wp-content/uploads/2022/12/FBB_LOGO_lang.jpg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "https://www.unfall-instandsetzung.de/images/Logos.jpg",
-    "alt": "Firma Kindermann"
+    "alt": "Firma Kindermann",
+    "image": {
+      "src": "https://www.unfall-instandsetzung.de/images/Logos.jpg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "./src/img/gallerys/sponsors/PhysioEschke.png",
-    "alt": "Physiotherapie Kathrin Eschke"
+    "alt": "Physiotherapie Kathrin Eschke",
+    "image": {
+      "src": "./src/img/gallerys/sponsors/PhysioEschke.png",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrddM1m6i7fRU638tr9KW9HQWGMeExSmmFsg&s",
-    "alt": "SIT IN Events"
+    "alt": "SIT IN Events",
+    "image": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrddM1m6i7fRU638tr9KW9HQWGMeExSmmFsg&s",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "https://www.vfb-graefenhainichen.de/assets/img_sponsors/large/150.webp",
-    "alt": "Allianz Nitz & Syring"
+    "alt": "Allianz Nitz & Syring",
+    "image": {
+      "src": "https://www.vfb-graefenhainichen.de/assets/img_sponsors/large/150.webp",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "./src/img/gallerys/sponsors/Pfuhl.jpg",
-    "alt": "Auto-Center Pfuhl GmbH"
+    "alt": "Auto-Center Pfuhl GmbH",
+    "image": {
+      "src": "./src/img/gallerys/sponsors/Pfuhl.jpg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "https://gruenpflege.eu/wp-content/uploads/2025/03/Muehlbauer-Logo_Kontur-224x300.png",
-    "alt": "Mühlbauer Baum- und Grünpflege"
+    "alt": "Mühlbauer Baum- und Grünpflege",
+    "image": {
+      "src": "https://gruenpflege.eu/wp-content/uploads/2025/03/Muehlbauer-Logo_Kontur-224x300.png",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "https://malv-service-gmbh.de/.cm4all/mediadb/.Logo%20MALV1.jpg/picture-2600",
-    "alt": "MALV Service GmbH"
+    "alt": "MALV Service GmbH",
+    "image": {
+      "src": "https://malv-service-gmbh.de/.cm4all/mediadb/.Logo%20MALV1.jpg/picture-2600",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "./src/img/gallerys/sponsors/Manina.png",
-    "alt": "Manina Verkehrs GmbH"
+    "alt": "Manina Verkehrs GmbH",
+    "image": {
+      "src": "./src/img/gallerys/sponsors/Manina.png",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "https://www.ubsysteme.de/images/logo_ub.png",
-    "alt": "ub.unitel GmbH"
+    "alt": "ub.unitel GmbH",
+    "image": {
+      "src": "https://www.ubsysteme.de/images/logo_ub.png",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "https://www.rothkegel-baufachhandel.de/fileadmin/user_upload/Rothkegel/allgemein/logo-rothkegel_400px.png",
-    "alt": "Rothkegel Bitterfeld"
+    "alt": "Rothkegel Bitterfeld",
+    "image": {
+      "src": "https://www.rothkegel-baufachhandel.de/fileadmin/user_upload/Rothkegel/allgemein/logo-rothkegel_400px.png",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "./src/img/gallerys/sponsors/Niebisch.jpg",
-    "alt": "EDEKA Niebisch"
+    "alt": "EDEKA Niebisch",
+    "image": {
+      "src": "./src/img/gallerys/sponsors/Niebisch.jpg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "./src/img/gallerys/sponsors/EDEKA Moex.png",
-    "alt": "EDEKA Moex"
+    "alt": "EDEKA Moex",
+    "image": {
+      "src": "./src/img/gallerys/sponsors/EDEKA Moex.png",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "https://www.total-lokal.de/custom/image_files/photo_1562697.jpg",
-    "alt": "Pirl Transporte Landsberg"
+    "alt": "Pirl Transporte Landsberg",
+    "image": {
+      "src": "https://www.total-lokal.de/custom/image_files/photo_1562697.jpg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "https://storage.e.jimdo.com/cdn-cgi/image/quality=85,fit=scale-down,format=auto,trim=0;0;0;0,width=2560,height=787/image/550239670/a569dcd4-29bd-4f06-9ece-f66288f55ff7.png",
-    "alt": "Splitter Veranstaltungstechnik"
+    "alt": "Splitter Veranstaltungstechnik",
+    "image": {
+      "src": "https://storage.e.jimdo.com/cdn-cgi/image/quality=85,fit=scale-down,format=auto,trim=0;0;0;0,width=2560,height=787/image/550239670/a569dcd4-29bd-4f06-9ece-f66288f55ff7.png",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdjYtif3NGHcV_4Pr6Qucnuen9xg-900evDw&s",
-    "alt": "Sporti´s"
+    "alt": "Sporti´s",
+    "image": {
+      "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdjYtif3NGHcV_4Pr6Qucnuen9xg-900evDw&s",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "https://www.ksk-anhalt-bitterfeld.de/content/dam/myif/ksk-anhalt-bitterfeld/work/bilder/nbf-logos/logo_rot.svg",
-    "alt": "Kreissparkasse Anhalt-Bitterfeld"
+    "alt": "Kreissparkasse Anhalt-Bitterfeld",
+    "image": {
+      "src": "https://www.ksk-anhalt-bitterfeld.de/content/dam/myif/ksk-anhalt-bitterfeld/work/bilder/nbf-logos/logo_rot.svg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
-    "src": "./src/img/gallerys/sponsors/Stadt.png",
-    "alt": "Stadt Sandersdorf-Brehna"
+    "alt": "Stadt Sandersdorf-Brehna",
+    "image": {
+      "src": "./src/img/gallerys/sponsors/Stadt.png",
+      "ki": false,
+      "teilweiseKi": false
+    }
   }
 ]

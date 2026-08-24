@@ -18,7 +18,11 @@
     "title": "Sommerfest des Sandersdorfer Karnevalsvereins",
     "date": "27.06.2026",
     "text": "Heute stand wieder der Sessions-Abschluss des SKV an. Auf dem Vereinsgelände der Segler wurde ausgiebig gefeiert und auf die erfolgreiche vergangene Session angestoßen. Die Förstergrube sorgte auch für eine erfrischende Abkühlung an diesem Abend. Sandoria Hellau.",
-    "image": "./src/img/news/BildSommerfest.jpg",
+    "image": {
+      "src": "./src/img/news/BildSommerfest.jpg",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "publishAt": "2026-06-28-00:00",
     "deleteAt": "2027-06-28-23:59",
     "links": [
@@ -39,7 +43,11 @@
     "title": "Frühjahrsputz in Sandersdorf - Der SKV war dabei",
     "date": "11.04.2026",
     "text": "Heute hat der SKV mit die Stadt geputzt. Es waren ca. 20 Vereinsmitglieder am Start. Auf Facebook und Instagram erhaltet Ihr ein paar Eindrücke vom Frühjahrsputz:",
-    "image": "./src/img/news/fruehjahrsputz.jpg",
+    "image": {
+      "src": "./src/img/news/fruehjahrsputz.jpg",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "deleteAt": "2027-04-10-23:59",
     "links": [
       {
@@ -59,7 +67,11 @@
     "title": "Auftritt beim Weinfrühling in Sandersdorf",
     "date": "08.04.2026",
     "text": "Unsere Tanzgruppen Unique und Zuckerpuppen werden euch beim Weinfrühling in Sandersdorf mit Ihren Tänzen verzaubern.",
-    "image": "./src/img/news/weinfruehling.png",
+    "image": {
+      "src": "./src/img/news/weinfruehling.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "deleteAt": "2027-04-07-23:59",
     "links": [
       {

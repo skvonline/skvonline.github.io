@@ -4,7 +4,11 @@
     "date": "11.11.2026",
     "time": "11:11 Uhr",
     "location": "Rathaus Sandersdorf",
-    "image": "./src/img/events/sessionseroeffnung.png",
+    "image": {
+      "src": "./src/img/events/sessionseroeffnung.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "publishAt": "2026-04-01-00:00",
     "links": [
       {
@@ -28,7 +32,11 @@
     "preis": "23,00 €",
     "location": "Mehrzweckhalle Sandersdorf",
     "description": "Es geht wieder los!!! Endlich wird wieder Karneval gefeiert und wir lachen und tanzen wieder zusammen. Alle Infos zum Kartenverkauf findet Ihr auf unseren Social-Media-Kanälen oder in unseren FAQ.",
-    "image": "./src/img/events/lumpenball.png",
+    "image": {
+      "src": "./src/img/events/lumpenball.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "publishAt": "2026-09-04-00:00",
     "links": [
       {
@@ -52,7 +60,11 @@
     "preis": "23,00 €",
     "location": "Mehrzweckhalle Sandersdorf",
     "description": "Es geht wieder los!!! Endlich wird wieder Karneval gefeiert und wir lachen und tanzen wieder zusammen. Die Närrische Clubnacht bietet Euch nach unserem Programm nice Beats und eine coole Clubstimmung. Alle Infos zum Kartenverkauf findet Ihr auf unseren Social-Media-Kanälen oder in unseren FAQ.",
-    "image": "./src/img/events/clubnacht.png",
+    "image": {
+      "src": "./src/img/events/clubnacht.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "publishAt": "2026-09-04-00:00",
     "links": [
       {
@@ -76,7 +88,11 @@
     "preis": "23,00 €",
     "location": "Mehrzweckhalle Sandersdorf",
     "description": "Es geht wieder los!!! Endlich wird wieder Karneval gefeiert und wir lachen und tanzen wieder zusammen. Alle Infos zum Kartenverkauf findet Ihr auf unseren Social-Media-Kanälen oder in unseren FAQ.",
-    "image": "./src/img/events/lumpenball.png",
+    "image": {
+      "src": "./src/img/events/lumpenball.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "publishAt": "2026-09-04-00:00",
     "links": [
       {

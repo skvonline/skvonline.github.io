@@ -2,7 +2,11 @@
   {
     "name": "Gerd Ritter",
     "role": "Präsident",
-    "image": "./src/img/verein/vorstand/gerd-ritter.png",
+    "image": {
+      "src": "./src/img/verein/vorstand/gerd-ritter.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "tags": [
       "Repräsentation",
       "Vereinsleitung",
@@ -22,7 +26,11 @@
   {
     "name": "Eva Klupsch",
     "role": "Vizepräsidentin",
-    "image": "./src/img/verein/vorstand/eva-klupsch.png",
+    "image": {
+      "src": "./src/img/verein/vorstand/eva-klupsch.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "tags": [
       "Behörden",
       "Anträge"
@@ -40,7 +48,11 @@
   {
     "name": "Ramona Richter",
     "role": "Schatzmeisterin",
-    "image": "./src/img/verein/vorstand/ramona-richter.png",
+    "image": {
+      "src": "./src/img/verein/vorstand/ramona-richter.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "tags": [
       "Finanzen",
       "Mitglieder"
