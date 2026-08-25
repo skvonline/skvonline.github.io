@@ -2,56 +2,100 @@
   {
     "name": "Stephan Brühl",
     "role": "Umzugsminister",
-    "image": "./src/img/verein/elferrat/stephan-bruehl.svg"
+    "image": {
+      "src": "./src/img/verein/elferrat/stephan-bruehl.svg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
     "name": "Ivo Gottlöber",
     "role": "Verpflegungsminister",
-    "image": "./src/img/verein/elferrat/ivo-gottloeber.svg"
+    "image": {
+      "src": "./src/img/verein/elferrat/ivo-gottloeber.svg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
     "name": "Volker Heide",
     "role": "Webminister",
-    "image": "./src/img/verein/elferrat/volker-heide.svg"
+    "image": {
+      "src": "./src/img/verein/elferrat/volker-heide.svg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
     "name": "Wolfram Heide",
     "role": "Print Medien",
-    "image": "./src/img/verein/elferrat/wolfram-heide.svg"
+    "image": {
+      "src": "./src/img/verein/elferrat/wolfram-heide.svg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
     "name": "Heike Nywelt",
     "role": "Programmministerin",
-    "image": "./src/img/verein/elferrat/heike-nywelt.svg"
+    "image": {
+      "src": "./src/img/verein/elferrat/heike-nywelt.svg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
     "name": "Anja Richter",
     "role": "Protokollführerin",
-    "image": "./src/img/verein/elferrat/anja-richter.svg"
+    "image": {
+      "src": "./src/img/verein/elferrat/anja-richter.svg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
     "name": "Dominik Richter",
     "role": "Soziale Medien",
-    "image": "./src/img/verein/elferrat/dominik-richter.svg"
+    "image": {
+      "src": "./src/img/verein/elferrat/dominik-richter.svg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
     "name": "Elke Ritter",
     "role": "Prinzenpaarministerin",
-    "image": "./src/img/verein/elferrat/elke-ritter.svg"
+    "image": {
+      "src": "./src/img/verein/elferrat/elke-ritter.svg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
     "name": "David Roth",
     "role": "Sponsoring",
-    "image": "./src/img/verein/elferrat/david-roth.svg"
+    "image": {
+      "src": "./src/img/verein/elferrat/david-roth.svg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
     "name": "Dirk Schilling",
     "role": "Sicherheitsminister",
-    "image": "./src/img/verein/elferrat/dirk-schilling.svg"
+    "image": {
+      "src": "./src/img/verein/elferrat/dirk-schilling.svg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   },
   {
     "name": "Simon Zachrau",
     "role": "Jugendminister",
-    "image": "./src/img/verein/elferrat/simon-zachrau.svg"
+    "image": {
+      "src": "./src/img/verein/elferrat/simon-zachrau.svg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   }
 ]

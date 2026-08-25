@@ -2,7 +2,11 @@
   {
     "session": "47. Session",
     "year": "2025/2026",
-    "image": "./src/img/verein/prinzenpaare/pp2526.JPG",
+    "image": {
+      "src": "./src/img/verein/prinzenpaare/pp2526.JPG",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "adultPair": [
       {
         "prince": "Dominik I.",
@@ -19,7 +23,11 @@
   {
     "session": "46. Session",
     "year": "2024/2025",
-    "image": "./src/img/verein/prinzenpaare/pp2425.JPG",
+    "image": {
+      "src": "./src/img/verein/prinzenpaare/pp2425.JPG",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "adultPair": [
       {
         "prince": "Andreas II.",
@@ -36,7 +44,11 @@
   {
     "session": "45. Session",
     "year": "2023/2024",
-    "image": "./src/img/verein/prinzenpaare/pp2324.JPG",
+    "image": {
+      "src": "./src/img/verein/prinzenpaare/pp2324.JPG",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "adultPair": [
       {
         "prince": "Robin I.",
@@ -53,7 +65,11 @@
   {
     "session": "44. Session",
     "year": "2022/2023",
-    "image": "./src/img/verein/prinzenpaare/pp2223.JPG",
+    "image": {
+      "src": "./src/img/verein/prinzenpaare/pp2223.JPG",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "adultPair": [
       {
         "prince": "René I.",

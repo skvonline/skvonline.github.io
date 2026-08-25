@@ -117,8 +117,24 @@ function setupHeaderSmoothScroll() {
   });
 }
 
+function setupTicketDatesVisibility() {
+  const ticketDates = document.querySelector('.ticket-dates[data-publish-at][data-delete-at]');
+  if (!ticketDates) return;
+
+  const publishAt = Date.parse(ticketDates.dataset.publishAt);
+  const deleteAt = Date.parse(ticketDates.dataset.deleteAt);
+  const now = Date.now();
+
+  if (!Number.isFinite(publishAt) || !Number.isFinite(deleteAt) || publishAt >= deleteAt) {
+    console.warn('Terminblock ausgeblendet: publishAt und deleteAt müssen gültige Datumsangaben in zeitlich korrekter Reihenfolge sein.');
+    return;
+  }
+
+  ticketDates.hidden = now < publishAt || now >= deleteAt;
+}
+
 function setupHeroCarousel() {
-  const slides = Array.from(document.querySelectorAll('.hero-slide'));
+  const slides = Array.from(document.querySelectorAll('.hero-slide-wrapper'));
   if (slides.length <= 1) return;
 
   let index = 0;
@@ -139,7 +155,8 @@ async function loadHomeGallery() {
   }
 
   galleryItems.forEach((item, index) => {
-    if (!item?.src) {
+    const image = normalizeImage(item?.image);
+    if (!image.src) {
       return;
     }
 
@@ -147,8 +164,63 @@ async function loadHomeGallery() {
     const altText = item.alt || 'Bild aus der Home-Gallery';
     galleryContainer.insertAdjacentHTML(
       'beforeend',
-      `<img class="hero-slide${isActiveClass}" src="${item.src}" alt="${altText}" loading="lazy" />`,
+      createImageMarkup(image, altText, 'hero-slide', { wrapperClass: `hero-slide-wrapper${isActiveClass}` }),
     );
+  });
+}
+
+function normalizeImage(image) {
+  if (!image || typeof image !== 'object') {
+    return { src: '', ki: false, teilweiseKi: false, theme: '' };
+  }
+
+  const ki = image.ki === true;
+  const teilweiseKi = image.teilweiseKi === true;
+  const theme = image.theme === 'black' || image.theme === 'white' ? image.theme : '';
+  const hasValidLabel = Boolean(theme) && ki !== teilweiseKi && (ki || teilweiseKi);
+
+  return {
+    src: typeof image.src === 'string' ? image.src.trim() : '',
+    ki: hasValidLabel && ki,
+    teilweiseKi: hasValidLabel && teilweiseKi,
+    theme,
+  };
+}
+
+function createImageMarkup(imageData, alt, imageClass, options = {}) {
+  const image = normalizeImage(imageData);
+  if (!image.src) return '';
+
+  const { wrapperClass = '', pathPrefix = './' } = options;
+  const protectedClass = ` media-protected${image.ki || image.teilweiseKi ? ' ai-protected-media' : ''}`;
+  const labelName = image.ki ? 'ki' : image.teilweiseKi ? 'teilweise_ki' : '';
+  const labelMarkup = labelName
+    ? `<img class="ai-label" src="${pathPrefix}src/img/ki_labels/${labelName}_${image.theme}.png" alt="${image.ki ? 'KI-generiert' : 'Teilweise KI-generiert'}" draggable="false" />`
+    : '';
+
+  return `<span class="image-with-label ${wrapperClass}${protectedClass}">
+    <img class="${imageClass}" src="${image.src}" alt="${alt}" loading="lazy" draggable="false" />
+    ${labelMarkup}
+  </span>`;
+}
+
+function setupProtectedImages() {
+  const protectImageElement = (image) => {
+    if (!(image instanceof HTMLImageElement)) return;
+    image.setAttribute('draggable', 'false');
+    image.classList.add('media-protected-image');
+  };
+
+  document.querySelectorAll('img').forEach(protectImageElement);
+  document.addEventListener('load', (event) => {
+    protectImageElement(event.target);
+  }, true);
+
+  document.addEventListener('contextmenu', (event) => {
+    if (event.target.closest('img, .media-protected, .ai-label')) event.preventDefault();
+  });
+  document.addEventListener('dragstart', (event) => {
+    if (event.target.closest('img, .media-protected, .ai-label')) event.preventDefault();
   });
 }
 
@@ -425,11 +497,7 @@ function getEventImagePath(event) {
     return '';
   }
 
-  if (event.image && String(event.image).trim() !== '') {
-    return event.image;
-  }
-
-  return '';
+  return normalizeImage(event.image).src;
 }
 
 function getEventShareButtonMarkup(event) {
@@ -505,8 +573,9 @@ function setupEventShareButtons() {
 }
 
 function getElferratImagePath(member) {
-  if (member.image && member.image !== './src/img/dummy.svg') {
-    return member.image;
+  const image = normalizeImage(member.image);
+  if (image.src && image.src !== './src/img/dummy.svg') {
+    return image.src;
   }
 
   const slug = member.name
@@ -610,6 +679,7 @@ function normalizeRoyalEntry(entry) {
   const year = getRoyalField(entry, ['year', 'jahr', 'Jahr']) || session;
   const largePair = getRoyalField(entry, ['adultPair', 'grossesPP', 'großesPP', 'Grosses PP', 'Großes PP', 'text']);
   const smallPair = getRoyalField(entry, ['childPair', 'kleinesPP', 'Kleines PP']);
+  const image = normalizeImage(entry.image);
 
   return {
     ...entry,
@@ -617,22 +687,243 @@ function normalizeRoyalEntry(entry) {
     year,
     largePair: formatPairText(largePair),
     smallPair: formatPairText(smallPair),
-    image: entry.image || '',
+    image,
+    hasImage: Boolean(image.src),
     title: entry.title || session || 'Prinzenpaar',
   };
+}
+
+function createRoyalFallbackMarkup(pair, options = {}) {
+  const ariaHidden = options.ariaHidden !== false ? ' aria-hidden="true"' : '';
+
+  return `
+    <div class="royal-gallery-placeholder"${ariaHidden}>
+      <div class="royal-gallery-fallback-header">
+        <h3 class="royal-gallery-fallback-session">${pair.session || 'Nicht hinterlegt'}</h3>
+        <p class="royal-gallery-fallback-year">${pair.year || 'Jahr unbekannt'}</p>
+      </div>
+      <div class="royal-gallery-fallback-body">
+        <section class="royal-gallery-fallback-panel">
+          <span class="royal-gallery-fallback-label">Großes Prinzenpaar</span>
+          <p class="royal-gallery-fallback-value">${pair.largePair || 'Nicht hinterlegt'}</p>
+        </section>
+        <section class="royal-gallery-fallback-panel">
+          <span class="royal-gallery-fallback-label">Kleines Prinzenpaar</span>
+          <p class="royal-gallery-fallback-value">${pair.smallPair || 'Nicht hinterlegt'}</p>
+        </section>
+      </div>
+    </div>`;
+}
+
+function createRoyalLightboxDetailsMarkup(pair) {
+  const headingText = [pair.session, pair.year].filter(Boolean).join(' · ') || 'Prinzenpaar';
+
+  return `
+    <div class="royals-lightbox-detail-shell">
+      <p class="royals-lightbox-detail-heading">${headingText}</p>
+      <div class="royals-lightbox-detail-grid">
+        <section class="royals-lightbox-detail-card">
+          <span class="royals-lightbox-detail-label">Großes Prinzenpaar</span>
+          <p class="royals-lightbox-detail-value">${pair.largePair || 'Nicht hinterlegt'}</p>
+        </section>
+        <section class="royals-lightbox-detail-card">
+          <span class="royals-lightbox-detail-label">Kleines Prinzenpaar</span>
+          <p class="royals-lightbox-detail-value">${pair.smallPair || 'Nicht hinterlegt'}</p>
+        </section>
+      </div>
+    </div>`;
+}
+
+function sanitizeFileNamePart(value) {
+  if (!value || typeof value !== 'string') return '';
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .toLowerCase();
+}
+
+function loadImageAsset(src) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => resolve(image);
+    image.onerror = () => reject(new Error(`Image could not be loaded: ${src}`));
+    image.src = src;
+  });
+}
+
+function wrapRoyalDownloadText(context, text, maxWidth) {
+  const rawLines = String(text || '')
+    .split(/<br\s*\/?>/gi)
+    .map((line) => line.trim())
+    .filter(Boolean);
+  const wrappedLines = [];
+
+  rawLines.forEach((rawLine) => {
+    const words = rawLine.split(/\s+/).filter(Boolean);
+    let currentLine = '';
+
+    words.forEach((word) => {
+      const nextLine = currentLine ? `${currentLine} ${word}` : word;
+      if (context.measureText(nextLine).width <= maxWidth || !currentLine) {
+        currentLine = nextLine;
+      } else {
+        wrappedLines.push(currentLine);
+        currentLine = word;
+      }
+    });
+
+    if (currentLine) wrappedLines.push(currentLine);
+  });
+
+  return wrappedLines.length > 0 ? wrappedLines : ['Nicht hinterlegt'];
+}
+
+function drawRoyalDownloadLabel(context, canvasWidth, canvasHeight, options) {
+  const { title = '', text = '', position, variant = 'panel' } = options;
+  if (!text && !title) return;
+  const alignRight = position.includes('right');
+
+  const paddingX = Math.max(16, canvasWidth * 0.016);
+  const paddingY = Math.max(12, canvasHeight * 0.013);
+  const bodyFontSize = Math.max(20, canvasWidth * 0.019);
+  const bodyLineHeight = bodyFontSize * 1.28;
+  const titleFontSize = Math.max(13, canvasWidth * 0.0115);
+  const titleGap = Math.max(10, canvasHeight * 0.01);
+  const maxTextWidth = variant === 'compact'
+    ? Math.max(130, canvasWidth * 0.18)
+    : Math.max(210, canvasWidth * 0.27);
+
+  context.save();
+  context.textBaseline = 'top';
+
+  context.font = `600 ${bodyFontSize}px Poppins, sans-serif`;
+  const bodyLines = wrapRoyalDownloadText(context, text, maxTextWidth);
+  const textWidth = bodyLines.reduce((max, line) => Math.max(max, context.measureText(line).width), 0);
+
+  let titleHeight = 0;
+  let titleWidth = 0;
+  if (title) {
+    context.font = `700 ${titleFontSize}px Poppins, sans-serif`;
+    titleWidth = context.measureText(title).width;
+    titleHeight = titleFontSize + titleGap;
+  }
+
+  const contentWidth = Math.max(textWidth, titleWidth);
+  const finalBoxWidth = contentWidth + paddingX * 2;
+  const finalBoxHeight = titleHeight + bodyLines.length * bodyLineHeight + paddingY * 2;
+  const margin = Math.max(18, canvasWidth * 0.02);
+
+  let x = margin;
+  let y = margin;
+
+  if (position.includes('right')) x = canvasWidth - finalBoxWidth - margin;
+  if (position.includes('bottom')) y = canvasHeight - finalBoxHeight - margin;
+
+  context.fillStyle = 'rgba(2, 6, 23, 0.64)';
+  context.strokeStyle = 'rgba(255, 255, 255, 0.28)';
+  context.lineWidth = Math.max(1.5, canvasWidth * 0.0012);
+  context.beginPath();
+  context.roundRect(x, y, finalBoxWidth, finalBoxHeight, Math.max(16, canvasWidth * 0.012));
+  context.fill();
+  context.stroke();
+
+  let cursorY = y + paddingY;
+  if (title) {
+    context.font = `700 ${titleFontSize}px Poppins, sans-serif`;
+    context.fillStyle = '#bfdbfe';
+    context.textAlign = alignRight ? 'right' : 'left';
+    context.fillText(title, alignRight ? x + finalBoxWidth - paddingX : x + paddingX, cursorY);
+    cursorY += titleHeight;
+  }
+
+  context.font = `600 ${bodyFontSize}px Poppins, sans-serif`;
+  context.fillStyle = '#ffffff';
+  context.textAlign = alignRight ? 'right' : 'left';
+  bodyLines.forEach((line, index) => {
+    context.fillText(line, alignRight ? x + finalBoxWidth - paddingX : x + paddingX, cursorY + index * bodyLineHeight);
+  });
+  context.restore();
+}
+
+async function downloadRoyalImageWithOverlay(pair) {
+  if (!pair?.hasImage || !pair.image?.src) return;
+
+  const [baseImage, labelImage] = await Promise.all([
+    loadImageAsset(pair.image.src),
+    pair.image.ki || pair.image.teilweiseKi
+      ? loadImageAsset(`./src/img/ki_labels/${pair.image.ki ? 'ki' : 'teilweise_ki'}_${pair.image.theme}.png`)
+      : Promise.resolve(null),
+  ]);
+
+  const canvas = document.createElement('canvas');
+  canvas.width = baseImage.naturalWidth || baseImage.width;
+  canvas.height = baseImage.naturalHeight || baseImage.height;
+
+  const context = canvas.getContext('2d');
+  if (!context) return;
+
+  context.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
+
+  drawRoyalDownloadLabel(context, canvas.width, canvas.height, {
+    text: pair.session || 'Nicht hinterlegt',
+    position: 'top-left',
+    variant: 'compact',
+  });
+  drawRoyalDownloadLabel(context, canvas.width, canvas.height, {
+    text: pair.year || 'Nicht hinterlegt',
+    position: 'top-right',
+    variant: 'compact',
+  });
+  drawRoyalDownloadLabel(context, canvas.width, canvas.height, {
+    title: 'Grosses Prinzenpaar',
+    text: pair.largePair || 'Nicht hinterlegt',
+    position: 'bottom-left',
+  });
+  drawRoyalDownloadLabel(context, canvas.width, canvas.height, {
+    title: 'Kleines Prinzenpaar',
+    text: pair.smallPair || 'Nicht hinterlegt',
+    position: 'bottom-right',
+  });
+
+  if (labelImage) {
+    const labelWidth = Math.min(canvas.width * 0.29, 340);
+    const labelHeight = (labelImage.height / labelImage.width) * labelWidth;
+    const margin = Math.max(18, canvas.width * 0.02);
+    const sessionOffset = Math.max(54, canvas.height * 0.06);
+    context.drawImage(labelImage, margin, margin + sessionOffset, labelWidth, labelHeight);
+  }
+
+  const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+  if (!blob) return;
+
+  const sessionPart = sanitizeFileNamePart(pair.session);
+  const yearPart = sanitizeFileNamePart(pair.year);
+  const fileName = `prinzenpaar-${sessionPart || 'unbekannt'}${yearPart ? `-${yearPart}` : ''}.png`;
+  const downloadUrl = URL.createObjectURL(blob);
+  const anchor = document.createElement('a');
+  anchor.href = downloadUrl;
+  anchor.download = fileName;
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(downloadUrl);
 }
 
 function setupRoyalsLightbox(royals) {
   const lightbox = document.getElementById('royals-lightbox');
   const image = document.getElementById('royals-lightbox-image');
+  const imageWrapper = image?.closest('.image-with-label');
   const details = document.getElementById('royals-lightbox-details');
+  const downloadButton = document.getElementById('royals-lightbox-download');
   const closeButton = document.getElementById('royals-lightbox-close');
   const prevButton = document.getElementById('royals-lightbox-prev');
   const nextButton = document.getElementById('royals-lightbox-next');
   const backdrop = lightbox?.querySelector('[data-lightbox-close]');
   const gallery = document.getElementById('royals-grid');
 
-  if (!lightbox || !image || !details || !closeButton || !prevButton || !nextButton || !backdrop || !gallery) {
+  if (!lightbox || !image || !imageWrapper || !details || !downloadButton || !closeButton || !prevButton || !nextButton || !backdrop || !gallery) {
     return;
   }
 
@@ -642,17 +933,46 @@ function setupRoyalsLightbox(royals) {
     const safeIndex = ((index % royals.length) + royals.length) % royals.length;
     const pair = royals[safeIndex];
     currentIndex = safeIndex;
+    imageWrapper.querySelector('.ai-label')?.remove();
+    imageWrapper.querySelector('.royals-lightbox-fallback')?.remove();
 
-    image.src = pair.image || '';
-    image.alt = pair.title || pair.session || 'Prinzenpaar';
-    const sessionText = formatLightboxInlineText(pair.session);
-    const yearText = formatLightboxInlineText(pair.year);
-    const largePairText = formatTitledPairText(pair.largePair, 'Prinz', 'Prinzessin');
-    const smallPairText = formatTitledPairText(pair.smallPair, 'Kinderprinz', 'Kinderprinzessin');
+    if (pair.hasImage) {
+      image.hidden = false;
+      image.src = pair.image.src || '';
+      image.alt = pair.title || pair.session || 'Prinzenpaar';
+      image.draggable = false;
+      imageWrapper.classList.toggle('ai-protected-media', pair.image.ki || pair.image.teilweiseKi);
+      downloadButton.hidden = false;
+      downloadButton.disabled = false;
+    } else {
+      image.hidden = true;
+      image.removeAttribute('src');
+      image.alt = '';
+      image.draggable = false;
+      imageWrapper.classList.remove('ai-protected-media');
+      imageWrapper.insertAdjacentHTML('beforeend', `<div class="royals-lightbox-fallback">${createRoyalFallbackMarkup(pair, { ariaHidden: false })}</div>`);
+      downloadButton.hidden = true;
+      downloadButton.disabled = true;
+    }
 
-    const headingText = sessionText && yearText ? `${sessionText} (${yearText})` : sessionText || yearText;
-    const detailParts = [headingText, largePairText, smallPairText].filter(Boolean);
-    details.textContent = detailParts.join(' - ');
+    if (pair.hasImage && (pair.image.ki || pair.image.teilweiseKi)) {
+      imageWrapper.insertAdjacentHTML('beforeend', `<img class="ai-label" src="./src/img/ki_labels/${pair.image.ki ? 'ki' : 'teilweise_ki'}_${pair.image.theme}.png" alt="${pair.image.ki ? 'KI-generiert' : 'Teilweise KI-generiert'}" draggable="false" />`);
+    }
+
+    if (pair.hasImage) {
+      const sessionText = formatLightboxInlineText(pair.session);
+      const yearText = formatLightboxInlineText(pair.year);
+      const largePairText = formatTitledPairText(pair.largePair, 'Prinz', 'Prinzessin');
+      const smallPairText = formatTitledPairText(pair.smallPair, 'Kinderprinz', 'Kinderprinzessin');
+      const headingText = sessionText && yearText ? `${sessionText} (${yearText})` : sessionText || yearText;
+      const detailParts = [headingText, largePairText, smallPairText].filter(Boolean);
+      details.hidden = false;
+      details.textContent = detailParts.join(' - ');
+    } else {
+      details.hidden = true;
+      details.textContent = '';
+    }
+    return true;
   }
 
   function openLightbox(index) {
@@ -700,6 +1020,22 @@ function setupRoyalsLightbox(royals) {
 
   nextButton.addEventListener('click', goNext);
   prevButton.addEventListener('click', goPrev);
+  downloadButton.addEventListener('click', async () => {
+    const pair = royals[currentIndex];
+    if (!pair?.hasImage) return;
+
+    downloadButton.disabled = true;
+
+    try {
+      await downloadRoyalImageWithOverlay(pair);
+    } catch (error) {
+      console.error('Royal download failed', error);
+      downloadButton.disabled = false;
+      return;
+    }
+
+    downloadButton.disabled = false;
+  });
   closeButton.addEventListener('click', closeLightbox);
   backdrop.addEventListener('click', closeLightbox);
 
@@ -978,7 +1314,7 @@ async function loadHomeContent() {
       const hasImage = Boolean(imagePath);
       const imageSideClass = hasImage ? (index % 2 === 0 ? 'event-card--image-left' : 'event-card--image-right') : 'event-card--no-image';
       const imageMarkup = hasImage
-        ? `<div class="event-card-media"><img class="event-image" src="${imagePath}" alt="${event.title || 'Veranstaltung'}" loading="lazy" /></div>`
+        ? `<div class="event-card-media">${createImageMarkup(event.image, event.title || 'Veranstaltung', 'event-image')}</div>`
         : '';
 
       return `
@@ -1007,14 +1343,14 @@ async function loadHomeContent() {
     chunkSize: 3,
     renderItem: (entry) => {
       const dateMarkup = getNewsDateMarkup(entry);
-      const imageMarkup = entry.image
+      const imageMarkup = normalizeImage(entry.image).src
         ? `<div class="news-media">
-            <img class="news-image" src="${entry.image}" alt="${entry.title}" loading="lazy" />
+            ${createImageMarkup(entry.image, entry.title, 'news-image')}
             ${dateMarkup}
           </div>`
         : '';
       const newsSizeClass = entry.large ? ' news-card--large' : '';
-      const headerMarkup = !entry.image && dateMarkup ? `<div class="news-header">${dateMarkup}</div>` : '';
+      const headerMarkup = !normalizeImage(entry.image).src && dateMarkup ? `<div class="news-header">${dateMarkup}</div>` : '';
 
       return `
         <article class="card news-card${newsSizeClass}">
@@ -1035,7 +1371,7 @@ async function loadHomeContent() {
         'beforeend',
         `<article class="board-card">
           <button type="button" class="board-poster" aria-expanded="false" aria-controls="board-details-${index}">
-            <img src="${person.image}" alt="${person.name}" loading="lazy" />
+            ${createImageMarkup(person.image, person.name, 'board-image')}
           </button>
           <div class="board-details" id="board-details-${index}">
             <h3>${person.name}</h3>
@@ -1071,7 +1407,7 @@ async function loadHomeContent() {
       elferratGrid.insertAdjacentHTML(
         'beforeend',
         `<article class="elferrat-card">
-          <img class="elferrat-image" src="${imagePath}" alt="${member.name}" loading="lazy" />
+          ${createImageMarkup({ ...member.image, src: imagePath }, member.name, 'elferrat-image')}
           <h3 class="elferrat-name">${member.name}</h3>
           <p class="elferrat-role">${member.role}</p>
         </article>`,
@@ -1087,13 +1423,39 @@ async function loadHomeContent() {
     buttonId: 'royals-more',
     chunkSize: 3,
     renderItem: (pair, index) => {
-      return `
-        <article class="royal-gallery-item" aria-label="${pair.title || pair.session}" role="button" tabindex="0" data-royal-index="${index}">
-          <img class="royal-gallery-image" src="${pair.image}" alt="${pair.title || pair.session}" loading="lazy" />
+      const interactiveAttributes = `aria-label="${pair.title || pair.session || 'Prinzenpaar'}" role="button" tabindex="0"`;
+      const imageMarkup = pair.hasImage
+        ? createImageMarkup(pair.image, pair.title || pair.session, 'royal-gallery-image')
+        : `
+          <div class="royal-gallery-placeholder" aria-hidden="true">
+            <div class="royal-gallery-fallback-header">
+              <h3 class="royal-gallery-fallback-session">${pair.session || 'Nicht hinterlegt'}</h3>
+              <p class="royal-gallery-fallback-year">${pair.year || 'Jahr unbekannt'}</p>
+            </div>
+            <div class="royal-gallery-fallback-body">
+              <section class="royal-gallery-fallback-panel">
+                <span class="royal-gallery-fallback-label">Großes Prinzenpaar</span>
+                <p class="royal-gallery-fallback-value">${pair.largePair || 'Nicht hinterlegt'}</p>
+              </section>
+              <section class="royal-gallery-fallback-panel">
+                <span class="royal-gallery-fallback-label">Kleines Prinzenpaar</span>
+                <p class="royal-gallery-fallback-value">${pair.smallPair || 'Nicht hinterlegt'}</p>
+              </section>
+            </div>
+          </div>`;
+      const detailsMarkup = pair.hasImage
+        ? `
           ${createRoyalOverlayText(pair.session, 'top-left')}
           ${createRoyalOverlayText(pair.year, 'top-right')}
           ${createRoyalOverlayText(pair.largePair, 'bottom-left')}
           ${createRoyalOverlayText(pair.smallPair, 'bottom-right')}
+        `
+        : '';
+
+      return `
+        <article class="royal-gallery-item${pair.hasImage ? '' : ' royal-gallery-item--no-image'}" ${interactiveAttributes} data-royal-index="${index}" data-has-image="${pair.hasImage}">
+          ${imageMarkup}
+          ${detailsMarkup}
         </article>
       `;
     },
@@ -1104,11 +1466,11 @@ async function loadHomeContent() {
   const sponsorsTrack = document.getElementById('sponsors-track');
   if (sponsorsTrack) {
     sponsors.forEach((sponsor) => {
-      if (!sponsor?.src) return;
+      if (!normalizeImage(sponsor?.image).src) return;
       sponsorsTrack.insertAdjacentHTML(
         'beforeend',
         `<figure class="sponsor-slide">
-          <img class="sponsor-image" src="${sponsor.src}" alt="${sponsor.alt || 'Sponsor'}" loading="lazy" />
+          ${createImageMarkup(sponsor.image, sponsor.alt || 'Sponsor', 'sponsor-image')}
         </figure>`,
       );
     });
@@ -1172,7 +1534,7 @@ async function loadEventDetailContent() {
     eventsRaw = [];
   }
 
-  const events = Array.isArray(eventsRaw) ? eventsRaw : [];
+  const events = Array.isArray(eventsRaw) ? eventsRaw.filter((event) => isVisibleByWindow(event)) : [];
   const matchingEvent = events.find((event) => getEventDetailToken(event) === eventToken);
 
   if (!matchingEvent) {
@@ -1183,9 +1545,11 @@ async function loadEventDetailContent() {
 
   document.title = `SKV | ${matchingEvent.title || 'Veranstaltungsdetails'}`;
 
-  const detailImagePath = normalizeImagePathForSubpage(matchingEvent.image) || '../src/img/events/default.png';
+  const detailImage = normalizeImage(matchingEvent.image);
+  detailImage.src = normalizeImagePathForSubpage(detailImage.src) || '../src/img/events/default.png';
+  const detailImagePath = detailImage.src;
   const imageMarkup = detailImagePath
-    ? `<img class="event-detail-image" src="${detailImagePath}" alt="${matchingEvent.title || 'Veranstaltung'}" loading="lazy" />`
+    ? createImageMarkup(detailImage, matchingEvent.title || 'Veranstaltung', 'event-detail-image', { pathPrefix: '../' })
     : '';
   const eventLinksMarkup = getNewsLinksMarkup(matchingEvent);
 
@@ -1266,8 +1630,166 @@ function setupLinktreeHeaderMode() {
   });
 }
 
+async function loadFaqContent() {
+  const container = document.getElementById('faq-content');
+  if (!container) return;
+
+  try {
+    const source = container.dataset.faqSource;
+    if (!source) throw new Error('Für das FAQ wurde keine Datenquelle angegeben.');
+    const response = await fetch(source);
+    if (!response.ok) throw new Error(`FAQ konnte nicht geladen werden (${response.status})`);
+
+    const categories = await response.json();
+    if (!Array.isArray(categories)) throw new Error('Das FAQ-JSON muss ein Array enthalten.');
+
+    container.replaceChildren();
+    if (categories.every((entry) => entry?.frage && typeof entry.antwort === 'string')) {
+      categories.forEach((entry) => {
+        const details = document.createElement('details');
+        const summary = document.createElement('summary');
+        summary.textContent = entry.frage;
+        const answer = document.createElement('div');
+        answer.className = 'faq-answer';
+        answer.innerHTML = entry.antwort;
+        details.append(summary, answer);
+        container.append(details);
+      });
+      return;
+    }
+
+    categories.forEach((category, categoryIndex) => {
+      if (!category?.kategorie || !Array.isArray(category.fragen)) return;
+
+      const headingId = `faq-category-${categoryIndex + 1}`;
+      const section = document.createElement('section');
+      section.className = 'faq-section';
+      section.setAttribute('aria-labelledby', headingId);
+
+      const heading = document.createElement('h2');
+      heading.id = headingId;
+      heading.textContent = category.kategorie;
+
+      const list = document.createElement('div');
+      list.className = 'faq-list';
+      category.fragen.forEach((entry) => {
+        if (!entry?.frage || typeof entry.antwort !== 'string') return;
+
+        const details = document.createElement('details');
+        details.dataset.tags = Array.isArray(entry.stichwoerter) ? entry.stichwoerter.join(' ') : '';
+        const summary = document.createElement('summary');
+        summary.textContent = entry.frage;
+        const answer = document.createElement('div');
+        answer.className = 'faq-answer';
+        answer.innerHTML = entry.antwort;
+        details.append(summary, answer);
+        list.append(details);
+      });
+
+      section.append(heading, list);
+      container.append(section);
+    });
+  } catch (error) {
+    console.error(error);
+    container.innerHTML = '<p class="faq-loading">Das FAQ konnte leider nicht geladen werden. Bitte versuche es später erneut.</p>';
+  }
+}
+
+function setupFaqSearch() {
+  const searchInput = document.getElementById('faq-search');
+  if (!searchInput) return;
+
+  const sections = Array.from(document.querySelectorAll('.faq-section'));
+  const status = document.getElementById('faq-results-status');
+  const noResults = document.getElementById('faq-no-results');
+  const clearButton = document.querySelector('.faq-search-clear');
+  const resetButton = document.querySelector('.faq-reset');
+  const keywordRules = [
+    ['Muttizettel', /muttizettel|erziehungsbeauftragung|minderjährig|begleitperson/i],
+    ['Einlass', /einlass|zutritt|wiedereinlass|kontroll/i],
+    ['Jugendschutz', /alter|jugendschutz|minderjährig|alkohol/i],
+    ['Tickets', /karte|kartenverkauf|kartenabholung|abendkasse/i],
+    ['Programm', /programm|clubnacht|lumpenball|fasching/i],
+    ['Kinder & Familie', /kinder|familie|jugendliche/i],
+    ['Essen & Trinken', /speisen|essen|getränke|alkohol|ausschank/i],
+    ['Anreise & Parken', /anreise|park|adresse|veranstaltungsort/i],
+    ['Barrierefreiheit', /barrierefrei|unterstützung|hilfe/i],
+    ['Fotos & Videos', /foto|video|aufnahme|fotografiert/i],
+    ['Karnevalsumzug', /umzug|umzugsstrecke|straße|süßigkeiten/i],
+    ['Verein & Mitgliedschaft', /verein|mitglied|gruppen|mitmachen|unterstützen/i],
+    ['Kontakt', /kontakt|informationen|antwort/i],
+  ];
+  const normalize = (value) => value.toLocaleLowerCase('de').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+  sections.forEach((section) => {
+    const heading = section.querySelector('h2');
+    const list = section.querySelector('.faq-list');
+    if (!heading || !list) return;
+    const category = heading?.textContent.trim() || 'Weitere Fragen';
+    const listId = `${heading.id}-questions`;
+    list.id = listId;
+    list.hidden = true;
+    heading.innerHTML = `<button class="faq-section-toggle" type="button" aria-expanded="false" aria-controls="${listId}">
+      <span>${category}</span><span class="faq-section-icon" aria-hidden="true"></span>
+    </button>`;
+    heading.querySelector('button').addEventListener('click', (event) => {
+      const button = event.currentTarget;
+      const shouldOpen = button.getAttribute('aria-expanded') !== 'true';
+      button.setAttribute('aria-expanded', String(shouldOpen));
+      list.hidden = !shouldOpen;
+    });
+    section.querySelectorAll('details:not([data-tags])').forEach((question) => {
+      const tags = keywordRules.filter(([, pattern]) => pattern.test(question.textContent)).map(([tag]) => tag).slice(0, 3);
+      question.dataset.tags = (tags.length ? tags : [category]).join(' ');
+    });
+  });
+
+  const applyFilters = () => {
+    const term = normalize(searchInput.value.trim());
+    let visibleCount = 0;
+    sections.forEach((section) => {
+      let sectionCount = 0;
+      section.querySelectorAll('details').forEach((question) => {
+        const searchMatches = !term || normalize(`${question.textContent} ${question.dataset.tags}`).includes(term);
+        question.hidden = !searchMatches;
+        if (!question.hidden) sectionCount += 1;
+      });
+      section.hidden = sectionCount === 0;
+      const list = section.querySelector('.faq-list');
+      const toggle = section.querySelector('.faq-section-toggle');
+      list.hidden = !term;
+      toggle.setAttribute('aria-expanded', String(Boolean(term)));
+      visibleCount += sectionCount;
+    });
+    clearButton.hidden = !searchInput.value;
+    noResults.hidden = visibleCount !== 0;
+    status.hidden = !term;
+    status.textContent = term ? (visibleCount === 1 ? '1 passende Frage' : `${visibleCount} passende Fragen`) : '';
+  };
+  searchInput.addEventListener('input', applyFilters);
+  clearButton.addEventListener('click', () => {
+    searchInput.value = '';
+    searchInput.focus();
+    applyFilters();
+  });
+  resetButton.addEventListener('click', () => {
+    searchInput.value = '';
+    applyFilters();
+    searchInput.focus();
+  });
+
+  const rawQuery = window.location.search.slice(1);
+  if (rawQuery) {
+    const params = new URLSearchParams(rawQuery);
+    const initialTerm = params.get('q') || (rawQuery.includes('=') ? '' : decodeURIComponent(rawQuery.replace(/\+/g, ' ')));
+    if (initialTerm) searchInput.value = initialTerm;
+  }
+  applyFilters();
+}
+
 (async function init() {
   const page = document.body.dataset.page;
+  setupProtectedImages();
 
   if (page === 'home') {
     await loadComponent('header-component', './components/header.html');
@@ -1299,6 +1821,9 @@ function setupLinktreeHeaderMode() {
     await setupHeaderNoticeBar(page);
     setupMobileMenu();
     setupHeaderSmoothScroll();
+    setupTicketDatesVisibility();
+    await loadFaqContent();
+    setupFaqSearch();
     return;
   }
 

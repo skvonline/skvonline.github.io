@@ -65,6 +65,24 @@ Unbekannte `type`-Werte werden wie `more` behandelt.
 
 ---
 
+### 1.5 Bildobjekte
+
+Alle Bildreferenzen verwenden ein `image`-Objekt mit `src`, `ki`, `teilweiseKi` und optional `theme`:
+
+```json
+"image": {
+  "src": "./src/img/beispiel.png",
+  "ki": true,
+  "teilweiseKi": false,
+  "theme": "black"
+}
+```
+
+- `ki` und `teilweiseKi` dürfen niemals gleichzeitig `true` sein; beide dürfen `false` sein.
+- Sobald eines der beiden Felder `true` ist, ist `theme` mit `black` oder `white` verpflichtend.
+- Wenn beide Felder `false` sind, ist `theme` optional.
+- Gekennzeichnete Bilder erhalten links oben das passende Label und werden gegen Kontextmenü und Drag-and-drop geschützt.
+
 ## 2) Datei: `news.json`
 
 Pfad: `src/data/news.json`
@@ -80,7 +98,7 @@ Inhalte für den News-Bereich auf der Startseite.
 | `title`     | `string`  | Ja (fachlich)   | Überschrift der News.                                                         |
 | `date`      | `string`  | Ja (fachlich)   | Anzeige-Datum (`TT.MM.JJJJ`).                                                 |
 | `text`      | `string`  | Ja (fachlich)   | News-Text.                                                                    |
-| `image`     | `string`  | Optional        | Bildpfad. `./src/img/news/{Dateiname}`                                        |
+| `image`     | `object`  | Optional        | Bildobjekt (siehe globale Bildregeln).                                        |
 | `publishAt` | `string`  | Nicht Empfholen | Start der Sichtbarkeit (`JJJJ-MM-TT-HH:mm`).                                  |
 | `deleteAt`  | `string`  | Ja (Fachlich)   | Ende der Sichtbarkeit (`JJJJ-MM-TT-HH:mm`). 365 Tage nach `date`              |
 | `links`     | `array`   | Optional        | Liste von Link-Objekten.                                                      |
@@ -104,7 +122,11 @@ Inhalte für den News-Bereich auf der Startseite.
     "publishAt": "2026-04-08-08:00",
     "deleteAt": "2026-05-15-23:59",
     "text": "Unsere Tanzgruppen ...",
-    "image": "./src/img/veranstaltungenUndNews/weinfruehling.png",
+    "image": {
+      "src": "./src/img/veranstaltungenUndNews/weinfruehling.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "links": [
       {
         "type": "more",
@@ -148,7 +170,7 @@ Veranstaltungen für den Event-Bereich auf der Startseite.
 | `preis`       | `string` | Optional      | Preisangabe.                                                             |
 | `location`    | `string` | Empfohlen     | Veranstaltungsort.                                                       |
 | `description` | `string` | Optional      | Zusatzbeschreibung.                                                      |
-| `image`       | `string` | Optional      | Bildpfad. `./src/img/events/{D-dateiname}`                               |
+| `image`       | `object` | Optional      | Bildobjekt (siehe globale Bildregeln).                               |
 | `publishAt`   | `string` | Empfohlen     | Start Sichtbarkeit (`JJJJ-MM-TT-HH:mm`).                                 |
 | `deleteAt`    | `string` | Ja (Fachlich) | Ende Sichtbarkeit (`JJJJ-MM-TT-HH:mm`). Tag der Veranstaltung 23:59 Uhr. |
 | `links`       | `array`  | Optional      | Links analog zu News.                                                    |
@@ -166,7 +188,11 @@ Veranstaltungen für den Event-Bereich auf der Startseite.
     "einlass": "18:11 Uhr",
     "preis": "19,50 €",
     "location": "Mehrzweckhalle Sandersdorf",
-    "image": "./src/img/veranstaltungenUndNews/lumpenball.png",
+    "image": {
+      "src": "./src/img/veranstaltungenUndNews/lumpenball.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "links": [
       {
         "type": "maps",
@@ -199,7 +225,7 @@ Darstellung der Vorstandskarten.
 |---------------|-----------------|---------|---------------------------------------------------|
 | `name`        | `string`        | Ja      | Name der Person.                                  |
 | `role`        | `string`        | Ja      | Rolle/Funktion.                                   |
-| `image`       | `string`        | Ja      | Bildpfad. `./src/img/verein/vorstand/{dateiname}` |
+| `image`       | `object`        | Ja      | Bildobjekt (siehe globale Bildregeln).                 |
 | `tags`        | `array<string>` | Ja      | Schlagworte (mind. 1 empfohlen).                  |
 | `description` | `string`        | Ja      | Kurzbeschreibung.                                 |
 | `socials`     | `array<object>` | Ja      | Kontakt-Links.                                    |
@@ -220,7 +246,11 @@ Darstellung der Vorstandskarten.
   {
     "name": "Gerd Ritter",
     "role": "Präsident",
-    "image": "./src/img/verein/vorstand/gerd-ritter.png",
+    "image": {
+      "src": "./src/img/verein/vorstand/gerd-ritter.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "tags": [
       "Repräsentation",
       "Vereinsleitung"
@@ -254,7 +284,7 @@ Mitgliederliste des Elferrats.
 |---------|----------|---------|----------------------------------|
 | `name`  | `string` | Ja      | Name des Mitglieds.              |
 | `role`  | `string` | Ja      | Funktion/Rolle.                  |
-| `image` | `string` | Ja      | Bildpfad.`./src/img/{dateiname}` |
+| `image` | `object` | Ja      | Bildobjekt (siehe globale Bildregeln). |
 
 ### 5.3 Vorlage
 
@@ -263,7 +293,11 @@ Mitgliederliste des Elferrats.
   {
     "name": "Stephan Brühl",
     "role": "Umzugsminister",
-    "image": "./src/img/verein/elferrat/stephan-bruehl.svg"
+    "image": {
+      "src": "./src/img/verein/elferrat/stephan-bruehl.svg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   }
 ]
 ```
@@ -284,12 +318,15 @@ Prinzenpaare für Galerie + Lightbox.
 |-------------|-----------------------------------|----------|-------------------------------------|
 | `session`   | `string`                          | Ja       | Session-Text (z. B. `47. Session`). |
 | `year`      | `string`                          | Ja       | Jahrgang (z. B. `2025/2026`).       |
-| `image`     | `string`                          | Ja       | Bildpfad.                           |
+| `image`     | `object`                          | Optional | Bildobjekt (siehe globale Bildregeln). Ohne Bild bleibt der Eintrag sichtbar, aber ohne Lightbox. |
 | `adultPair` | `array<object>`/`object`/`string` | Ja       | Großes Prinzenpaar.                 |
 | `childPair` | `array<object>`/`object`/`string` | Optional | Kinderprinzenpaar.                  |
 
 Zusätzliche Legacy-Felder werden ebenfalls erkannt (`Session`, `jahr`, `grossesPP`, `kleinesPP`, ...), sollten für neue
 Daten aber nicht verwendet werden.
+
+`image` darf bei Royals komplett fehlen. Alternativ darf ein `image`-Objekt ohne `src` verwendet werden. In beiden Fällen
+wird das Prinzenpaar als Karte ohne Foto dargestellt.
 
 ### 6.3 Paar-Objekt (empfohlen)
 
@@ -307,7 +344,11 @@ Daten aber nicht verwendet werden.
   {
     "session": "47. Session",
     "year": "2025/2026",
-    "image": "./src/img/verein/prinzenpaare/pp2526.JPG",
+    "image": {
+      "src": "./src/img/verein/prinzenpaare/pp2526.JPG",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "adultPair": [
       {
         "prince": "Dominik I.",
@@ -318,6 +359,29 @@ Daten aber nicht verwendet werden.
       {
         "prince": "Til I.",
         "princess": "Pauline I."
+      }
+    ]
+  }
+]
+```
+
+### 6.5 Vorlage ohne Bild
+
+```json
+[
+  {
+    "session": "12. Session",
+    "year": "1990/1991",
+    "adultPair": [
+      {
+        "prince": "Max I.",
+        "princess": "Maria I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Tom I.",
+        "princess": "Julia I."
       }
     ]
   }
@@ -380,7 +444,7 @@ Bildauflistung für Galerien.
 
 | Feld  | Typ      | Pflicht  | Beschreibung                                      |
 |-------|----------|----------|---------------------------------------------------|
-| `src` | `string` | Ja       | Bildpfad. `./src/img/{xyz}/{dateiname}`           |
+| `image` | `object` | Ja       | Bildobjekt (siehe globale Bildregeln).              |
 | `alt` | `string` | Optional | Alt-Text (Fallback: `Bild aus der Home-Gallery`). |
 
 ### 8.3 Vorlage
@@ -388,7 +452,11 @@ Bildauflistung für Galerien.
 ```json
 [
   {
-    "src": "./src/img/home-gallery/01.JPG",
+    "image": {
+      "src": "./src/img/home-gallery/01.JPG",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "alt": "Titelbild"
   }
 ]
@@ -436,7 +504,64 @@ Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder S
 
 ---
 
-## 10) Checkliste vor dem Speichern
+## 10) Datei: `faq.json`
+
+Pfad: `./src/data/faq.json`
+
+### 10.1 Zweck
+
+Kategorien, Fragen, Antworten und Stichwörter für das allgemeine FAQ. Die Reihenfolge der Kategorien und Fragen in der
+Datei entspricht der Reihenfolge auf der FAQ-Seite. Antworten dürfen HTML für Absätze, Listen, Hervorhebungen und Links
+enthalten.
+
+### 10.2 Felder
+
+| Feld            | Typ             | Pflicht | Beschreibung                                      |
+|-----------------|-----------------|----------|---------------------------------------------------|
+| `kategorie`     | `string`        | Ja       | Sichtbare Überschrift der Kategorie.              |
+| `fragen`        | `array<object>` | Ja       | Fragen innerhalb dieser Kategorie.                |
+| `frage`         | `string`        | Ja       | Text der Frage.                                   |
+| `antwort`       | `string`        | Ja       | Antworttext; einfache HTML-Auszeichnung ist möglich. |
+| `stichwoerter`  | `array<string>` | Ja       | Zusätzliche Begriffe für die FAQ-Suche.           |
+
+### 10.3 Vorlage
+
+```json
+[
+  {
+    "kategorie": "Beispielkategorie",
+    "fragen": [
+      {
+        "frage": "Wie lautet die Beispielfrage?",
+        "antwort": "<p>Hier steht die Antwort.</p>",
+        "stichwoerter": [
+          "Beispiel",
+          "Suche"
+        ]
+      }
+    ]
+  }
+]
+```
+
+### 10.4 Spezial-FAQs
+
+Spezial-FAQs ohne Kategorien und Stichwörter liegen unter `./src/data/faqs/`. Jeder Eintrag besteht ausschließlich aus
+einer Frage und einer Antwort. `kartenverkauf.json` versorgt das FAQ zum Kartenverkauf. Für weitere Spezial-FAQs steht
+mit `./src/data/faqs/dummy.html` eine kopierbare Seitenvorlage bereit.
+
+```json
+[
+  {
+    "frage": "Wie lautet die Beispielfrage?",
+    "antwort": "<p>Hier steht die Antwort.</p>"
+  }
+]
+```
+
+---
+
+## 11) Checkliste vor dem Speichern
 
 1. JSON ist syntaktisch valide.
 2. Top-Level ist ein Array.
@@ -448,7 +573,7 @@ Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder S
 
 ---
 
-## 11) Minimale Komplettbeispiele (alle Dateien)
+## 12) Minimale Komplettbeispiele (alle Dateien)
 
 ### `news.json`
 
@@ -493,7 +618,11 @@ Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder S
   {
     "name": "Max Mustermann",
     "role": "Präsident",
-    "image": "src/img/verein/vorstand/max-mustermann.png",
+    "image": {
+      "src": "src/img/verein/vorstand/max-mustermann.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "tags": [
       "Leitung"
     ],
@@ -517,7 +646,11 @@ Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder S
   {
     "name": "Erika Muster",
     "role": "Programm",
-    "image": "./src/img/verein/elferrat/erika-muster.svg"
+    "image": {
+      "src": "./src/img/verein/elferrat/erika-muster.svg",
+      "ki": false,
+      "teilweiseKi": false
+    }
   }
 ]
 ```
@@ -529,7 +662,11 @@ Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder S
   {
     "session": "48. Session",
     "year": "2026/2027",
-    "image": "./src/img/verein/prinzenpaare/pp2627.JPG",
+    "image": {
+      "src": "./src/img/verein/prinzenpaare/pp2627.JPG",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "adultPair": [
       {
         "prince": "Max I.",
@@ -557,7 +694,11 @@ Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder S
 ```json
 [
   {
-    "src": "./src/img/home-gallery/01.JPG",
+    "image": {
+      "src": "./src/img/home-gallery/01.JPG",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "alt": "Titelbild"
   }
 ]
@@ -568,7 +709,11 @@ Wichtige Hinweise für das **rote Hinweisband im Header** (ganz oben auf jeder S
 ```json
 [
   {
-    "src": "./src/img/sponsors/sponsor.png",
+    "image": {
+      "src": "./src/img/sponsors/sponsor.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "alt": "Sponsorname"
   }
 ]
