@@ -336,6 +336,13 @@ a {
     user-select: none;
 }
 
+.media-protected,
+.media-protected img,
+.media-protected-image {
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
 .hero h1 {
     font-size: clamp(1.8rem, 5vw, 3rem);
     margin-bottom: 1rem;

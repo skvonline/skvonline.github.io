@@ -192,24 +192,35 @@ function createImageMarkup(imageData, alt, imageClass, options = {}) {
   if (!image.src) return '';
 
   const { wrapperClass = '', pathPrefix = './' } = options;
-  const protectedClass = image.ki || image.teilweiseKi ? ' ai-protected-media' : '';
+  const protectedClass = ` media-protected${image.ki || image.teilweiseKi ? ' ai-protected-media' : ''}`;
   const labelName = image.ki ? 'ki' : image.teilweiseKi ? 'teilweise_ki' : '';
   const labelMarkup = labelName
     ? `<img class="ai-label" src="${pathPrefix}src/img/ki_labels/${labelName}_${image.theme}.png" alt="${image.ki ? 'KI-generiert' : 'Teilweise KI-generiert'}" draggable="false" />`
     : '';
 
   return `<span class="image-with-label ${wrapperClass}${protectedClass}">
-    <img class="${imageClass}" src="${image.src}" alt="${alt}" loading="lazy" draggable="${labelName ? 'false' : 'true'}" />
+    <img class="${imageClass}" src="${image.src}" alt="${alt}" loading="lazy" draggable="false" />
     ${labelMarkup}
   </span>`;
 }
 
 function setupProtectedImages() {
+  const protectImageElement = (image) => {
+    if (!(image instanceof HTMLImageElement)) return;
+    image.setAttribute('draggable', 'false');
+    image.classList.add('media-protected-image');
+  };
+
+  document.querySelectorAll('img').forEach(protectImageElement);
+  document.addEventListener('load', (event) => {
+    protectImageElement(event.target);
+  }, true);
+
   document.addEventListener('contextmenu', (event) => {
-    if (event.target.closest('.ai-protected-media, .ai-label')) event.preventDefault();
+    if (event.target.closest('img, .media-protected, .ai-label')) event.preventDefault();
   });
   document.addEventListener('dragstart', (event) => {
-    if (event.target.closest('.ai-protected-media, .ai-label')) event.preventDefault();
+    if (event.target.closest('img, .media-protected, .ai-label')) event.preventDefault();
   });
 }
 
