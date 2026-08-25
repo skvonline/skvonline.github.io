@@ -1103,6 +1103,50 @@ body.lightbox-open {
     font-weight: 600;
 }
 
+.royals-lightbox-download {
+    position: absolute;
+    top: -0.15rem;
+    right: 3.1rem;
+    z-index: 2;
+    width: 42px;
+    height: 42px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(2, 6, 23, 0.18);
+}
+
+.royals-lightbox-download[hidden] {
+    display: none;
+}
+
+.royals-lightbox-download:disabled {
+    opacity: 0.72;
+    cursor: wait;
+}
+
+.royals-lightbox-download:hover,
+.royals-lightbox-download:focus-visible {
+    background: rgba(30, 41, 59, 0.82);
+    border-color: rgba(255, 255, 255, 0.24);
+}
+
+.royals-lightbox-download-icon {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
 .royals-lightbox-detail-shell {
     display: grid;
     gap: 0.9rem;

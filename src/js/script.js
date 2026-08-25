@@ -734,18 +734,196 @@ function createRoyalLightboxDetailsMarkup(pair) {
     </div>`;
 }
 
+function sanitizeFileNamePart(value) {
+  if (!value || typeof value !== 'string') return '';
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .toLowerCase();
+}
+
+function loadImageAsset(src) {
+  return new Promise((resolve, reject) => {
+    const image = new Image();
+    image.onload = () => resolve(image);
+    image.onerror = () => reject(new Error(`Image could not be loaded: ${src}`));
+    image.src = src;
+  });
+}
+
+function wrapRoyalDownloadText(context, text, maxWidth) {
+  const rawLines = String(text || '')
+    .split(/<br\s*\/?>/gi)
+    .map((line) => line.trim())
+    .filter(Boolean);
+  const wrappedLines = [];
+
+  rawLines.forEach((rawLine) => {
+    const words = rawLine.split(/\s+/).filter(Boolean);
+    let currentLine = '';
+
+    words.forEach((word) => {
+      const nextLine = currentLine ? `${currentLine} ${word}` : word;
+      if (context.measureText(nextLine).width <= maxWidth || !currentLine) {
+        currentLine = nextLine;
+      } else {
+        wrappedLines.push(currentLine);
+        currentLine = word;
+      }
+    });
+
+    if (currentLine) wrappedLines.push(currentLine);
+  });
+
+  return wrappedLines.length > 0 ? wrappedLines : ['Nicht hinterlegt'];
+}
+
+function drawRoyalDownloadLabel(context, canvasWidth, canvasHeight, options) {
+  const { title = '', text = '', position, variant = 'panel' } = options;
+  if (!text && !title) return;
+  const alignRight = position.includes('right');
+
+  const paddingX = Math.max(16, canvasWidth * 0.016);
+  const paddingY = Math.max(12, canvasHeight * 0.013);
+  const bodyFontSize = Math.max(20, canvasWidth * 0.019);
+  const bodyLineHeight = bodyFontSize * 1.28;
+  const titleFontSize = Math.max(13, canvasWidth * 0.0115);
+  const titleGap = Math.max(10, canvasHeight * 0.01);
+  const maxTextWidth = variant === 'compact'
+    ? Math.max(130, canvasWidth * 0.18)
+    : Math.max(210, canvasWidth * 0.27);
+
+  context.save();
+  context.textBaseline = 'top';
+
+  context.font = `600 ${bodyFontSize}px Poppins, sans-serif`;
+  const bodyLines = wrapRoyalDownloadText(context, text, maxTextWidth);
+  const textWidth = bodyLines.reduce((max, line) => Math.max(max, context.measureText(line).width), 0);
+
+  let titleHeight = 0;
+  let titleWidth = 0;
+  if (title) {
+    context.font = `700 ${titleFontSize}px Poppins, sans-serif`;
+    titleWidth = context.measureText(title).width;
+    titleHeight = titleFontSize + titleGap;
+  }
+
+  const contentWidth = Math.max(textWidth, titleWidth);
+  const finalBoxWidth = contentWidth + paddingX * 2;
+  const finalBoxHeight = titleHeight + bodyLines.length * bodyLineHeight + paddingY * 2;
+  const margin = Math.max(18, canvasWidth * 0.02);
+
+  let x = margin;
+  let y = margin;
+
+  if (position.includes('right')) x = canvasWidth - finalBoxWidth - margin;
+  if (position.includes('bottom')) y = canvasHeight - finalBoxHeight - margin;
+
+  context.fillStyle = 'rgba(2, 6, 23, 0.64)';
+  context.strokeStyle = 'rgba(255, 255, 255, 0.28)';
+  context.lineWidth = Math.max(1.5, canvasWidth * 0.0012);
+  context.beginPath();
+  context.roundRect(x, y, finalBoxWidth, finalBoxHeight, Math.max(16, canvasWidth * 0.012));
+  context.fill();
+  context.stroke();
+
+  let cursorY = y + paddingY;
+  if (title) {
+    context.font = `700 ${titleFontSize}px Poppins, sans-serif`;
+    context.fillStyle = '#bfdbfe';
+    context.textAlign = alignRight ? 'right' : 'left';
+    context.fillText(title, alignRight ? x + finalBoxWidth - paddingX : x + paddingX, cursorY);
+    cursorY += titleHeight;
+  }
+
+  context.font = `600 ${bodyFontSize}px Poppins, sans-serif`;
+  context.fillStyle = '#ffffff';
+  context.textAlign = alignRight ? 'right' : 'left';
+  bodyLines.forEach((line, index) => {
+    context.fillText(line, alignRight ? x + finalBoxWidth - paddingX : x + paddingX, cursorY + index * bodyLineHeight);
+  });
+  context.restore();
+}
+
+async function downloadRoyalImageWithOverlay(pair) {
+  if (!pair?.hasImage || !pair.image?.src) return;
+
+  const [baseImage, labelImage] = await Promise.all([
+    loadImageAsset(pair.image.src),
+    pair.image.ki || pair.image.teilweiseKi
+      ? loadImageAsset(`./src/img/ki_labels/${pair.image.ki ? 'ki' : 'teilweise_ki'}_${pair.image.theme}.png`)
+      : Promise.resolve(null),
+  ]);
+
+  const canvas = document.createElement('canvas');
+  canvas.width = baseImage.naturalWidth || baseImage.width;
+  canvas.height = baseImage.naturalHeight || baseImage.height;
+
+  const context = canvas.getContext('2d');
+  if (!context) return;
+
+  context.drawImage(baseImage, 0, 0, canvas.width, canvas.height);
+
+  drawRoyalDownloadLabel(context, canvas.width, canvas.height, {
+    text: pair.session || 'Nicht hinterlegt',
+    position: 'top-left',
+    variant: 'compact',
+  });
+  drawRoyalDownloadLabel(context, canvas.width, canvas.height, {
+    text: pair.year || 'Nicht hinterlegt',
+    position: 'top-right',
+    variant: 'compact',
+  });
+  drawRoyalDownloadLabel(context, canvas.width, canvas.height, {
+    title: 'Grosses Prinzenpaar',
+    text: pair.largePair || 'Nicht hinterlegt',
+    position: 'bottom-left',
+  });
+  drawRoyalDownloadLabel(context, canvas.width, canvas.height, {
+    title: 'Kleines Prinzenpaar',
+    text: pair.smallPair || 'Nicht hinterlegt',
+    position: 'bottom-right',
+  });
+
+  if (labelImage) {
+    const labelWidth = Math.min(canvas.width * 0.29, 340);
+    const labelHeight = (labelImage.height / labelImage.width) * labelWidth;
+    const margin = Math.max(18, canvas.width * 0.02);
+    const sessionOffset = Math.max(54, canvas.height * 0.06);
+    context.drawImage(labelImage, margin, margin + sessionOffset, labelWidth, labelHeight);
+  }
+
+  const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
+  if (!blob) return;
+
+  const sessionPart = sanitizeFileNamePart(pair.session);
+  const yearPart = sanitizeFileNamePart(pair.year);
+  const fileName = `prinzenpaar-${sessionPart || 'unbekannt'}${yearPart ? `-${yearPart}` : ''}.png`;
+  const downloadUrl = URL.createObjectURL(blob);
+  const anchor = document.createElement('a');
+  anchor.href = downloadUrl;
+  anchor.download = fileName;
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(downloadUrl);
+}
+
 function setupRoyalsLightbox(royals) {
   const lightbox = document.getElementById('royals-lightbox');
   const image = document.getElementById('royals-lightbox-image');
   const imageWrapper = image?.closest('.image-with-label');
   const details = document.getElementById('royals-lightbox-details');
+  const downloadButton = document.getElementById('royals-lightbox-download');
   const closeButton = document.getElementById('royals-lightbox-close');
   const prevButton = document.getElementById('royals-lightbox-prev');
   const nextButton = document.getElementById('royals-lightbox-next');
   const backdrop = lightbox?.querySelector('[data-lightbox-close]');
   const gallery = document.getElementById('royals-grid');
 
-  if (!lightbox || !image || !imageWrapper || !details || !closeButton || !prevButton || !nextButton || !backdrop || !gallery) {
+  if (!lightbox || !image || !imageWrapper || !details || !downloadButton || !closeButton || !prevButton || !nextButton || !backdrop || !gallery) {
     return;
   }
 
@@ -762,8 +940,10 @@ function setupRoyalsLightbox(royals) {
       image.hidden = false;
       image.src = pair.image.src || '';
       image.alt = pair.title || pair.session || 'Prinzenpaar';
-      image.draggable = !(pair.image.ki || pair.image.teilweiseKi);
+      image.draggable = false;
       imageWrapper.classList.toggle('ai-protected-media', pair.image.ki || pair.image.teilweiseKi);
+      downloadButton.hidden = false;
+      downloadButton.disabled = false;
     } else {
       image.hidden = true;
       image.removeAttribute('src');
@@ -771,6 +951,8 @@ function setupRoyalsLightbox(royals) {
       image.draggable = false;
       imageWrapper.classList.remove('ai-protected-media');
       imageWrapper.insertAdjacentHTML('beforeend', `<div class="royals-lightbox-fallback">${createRoyalFallbackMarkup(pair, { ariaHidden: false })}</div>`);
+      downloadButton.hidden = true;
+      downloadButton.disabled = true;
     }
 
     if (pair.hasImage && (pair.image.ki || pair.image.teilweiseKi)) {
@@ -838,6 +1020,22 @@ function setupRoyalsLightbox(royals) {
 
   nextButton.addEventListener('click', goNext);
   prevButton.addEventListener('click', goPrev);
+  downloadButton.addEventListener('click', async () => {
+    const pair = royals[currentIndex];
+    if (!pair?.hasImage) return;
+
+    downloadButton.disabled = true;
+
+    try {
+      await downloadRoyalImageWithOverlay(pair);
+    } catch (error) {
+      console.error('Royal download failed', error);
+      downloadButton.disabled = false;
+      return;
+    }
+
+    downloadButton.disabled = false;
+  });
   closeButton.addEventListener('click', closeLightbox);
   backdrop.addEventListener('click', closeLightbox);
 
