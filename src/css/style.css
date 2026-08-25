@@ -872,6 +872,14 @@ a {
     cursor: pointer;
 }
 
+.royal-gallery-item--no-image {
+    background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.2), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.16), transparent 34%),
+        linear-gradient(155deg, #0f172a 0%, #173a8f 58%, #1d4ed8 100%);
+    cursor: pointer;
+}
+
 .royal-gallery-item:hover,
 .royal-gallery-item:focus-visible {
     transform: translateY(-3px);
@@ -885,6 +893,65 @@ a {
     min-height: 240px;
     object-fit: cover;
     display: block;
+}
+
+.royal-gallery-placeholder {
+    width: 100%;
+    min-height: 240px;
+    height: 100%;
+    display: grid;
+    align-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem;
+    color: #f8fafc;
+}
+
+.royal-gallery-fallback-header {
+    display: grid;
+    gap: 0.35rem;
+}
+
+.royal-gallery-fallback-session {
+    margin: 0;
+    font-size: 1.4rem;
+    line-height: 1.1;
+    text-wrap: balance;
+}
+
+.royal-gallery-fallback-year {
+    margin: 0;
+    color: rgba(248, 250, 252, 0.78);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.royal-gallery-fallback-body {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.royal-gallery-fallback-panel {
+    padding: 0.85rem 0.9rem;
+    border-radius: 12px;
+    background: rgba(15, 23, 42, 0.34);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(6px);
+}
+
+.royal-gallery-fallback-label {
+    display: block;
+    margin-bottom: 0.35rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(191, 219, 254, 0.86);
+    font-weight: 700;
+}
+
+.royal-gallery-fallback-value {
+    margin: 0;
+    font-size: 0.94rem;
+    line-height: 1.45;
 }
 
 .royal-gallery-overlay {
@@ -935,6 +1002,11 @@ a {
 .royal-gallery-item:hover .royal-gallery-overlay,
 .royal-gallery-item:focus-visible .royal-gallery-overlay {
     opacity: 0;
+}
+
+.royal-gallery-item--no-image:hover .royal-gallery-overlay,
+.royal-gallery-item--no-image:focus-visible .royal-gallery-overlay {
+    opacity: 1;
 }
 
 body.lightbox-open {
@@ -990,7 +1062,24 @@ body.lightbox-open {
 }
 
 .royals-lightbox-media {
+    display: block;
     line-height: 0;
+}
+
+.royals-lightbox-fallback {
+    display: block;
+    width: min(92vw, 680px);
+}
+
+.royals-lightbox-fallback .royal-gallery-placeholder {
+    min-height: 0;
+    padding: 1.35rem;
+    border-radius: 14px;
+    background:
+        radial-gradient(circle at top left, rgba(255, 255, 255, 0.2), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(56, 189, 248, 0.16), transparent 34%),
+        linear-gradient(155deg, #0f172a 0%, #173a8f 58%, #1d4ed8 100%);
+    box-shadow: 0 16px 45px rgba(0, 0, 0, 0.28);
 }
 
 .royals-lightbox-details {
@@ -1001,8 +1090,43 @@ body.lightbox-open {
     font-weight: 600;
 }
 
-.royals-lightbox-details p {
-    margin: 0.2rem 0;
+.royals-lightbox-detail-shell {
+    display: grid;
+    gap: 0.9rem;
+}
+
+.royals-lightbox-detail-heading {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.royals-lightbox-detail-grid {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.royals-lightbox-detail-card {
+    padding: 0.95rem 1rem;
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.48);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.royals-lightbox-detail-label {
+    display: block;
+    margin-bottom: 0.35rem;
+    color: #bfdbfe;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.royals-lightbox-detail-value {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
 .royals-lightbox-close,

@@ -318,12 +318,15 @@ Prinzenpaare für Galerie + Lightbox.
 |-------------|-----------------------------------|----------|-------------------------------------|
 | `session`   | `string`                          | Ja       | Session-Text (z. B. `47. Session`). |
 | `year`      | `string`                          | Ja       | Jahrgang (z. B. `2025/2026`).       |
-| `image`     | `object`                          | Ja       | Bildobjekt (siehe globale Bildregeln).    |
+| `image`     | `object`                          | Optional | Bildobjekt (siehe globale Bildregeln). Ohne Bild bleibt der Eintrag sichtbar, aber ohne Lightbox. |
 | `adultPair` | `array<object>`/`object`/`string` | Ja       | Großes Prinzenpaar.                 |
 | `childPair` | `array<object>`/`object`/`string` | Optional | Kinderprinzenpaar.                  |
 
 Zusätzliche Legacy-Felder werden ebenfalls erkannt (`Session`, `jahr`, `grossesPP`, `kleinesPP`, ...), sollten für neue
 Daten aber nicht verwendet werden.
+
+`image` darf bei Royals komplett fehlen. Alternativ darf ein `image`-Objekt ohne `src` verwendet werden. In beiden Fällen
+wird das Prinzenpaar als Karte ohne Foto dargestellt.
 
 ### 6.3 Paar-Objekt (empfohlen)
 
@@ -356,6 +359,29 @@ Daten aber nicht verwendet werden.
       {
         "prince": "Til I.",
         "princess": "Pauline I."
+      }
+    ]
+  }
+]
+```
+
+### 6.5 Vorlage ohne Bild
+
+```json
+[
+  {
+    "session": "12. Session",
+    "year": "1990/1991",
+    "adultPair": [
+      {
+        "prince": "Max I.",
+        "princess": "Maria I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Tom I.",
+        "princess": "Julia I."
       }
     ]
   }

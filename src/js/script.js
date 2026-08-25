@@ -668,6 +668,7 @@ function normalizeRoyalEntry(entry) {
   const year = getRoyalField(entry, ['year', 'jahr', 'Jahr']) || session;
   const largePair = getRoyalField(entry, ['adultPair', 'grossesPP', 'großesPP', 'Grosses PP', 'Großes PP', 'text']);
   const smallPair = getRoyalField(entry, ['childPair', 'kleinesPP', 'Kleines PP']);
+  const image = normalizeImage(entry.image);
 
   return {
     ...entry,
@@ -675,9 +676,51 @@ function normalizeRoyalEntry(entry) {
     year,
     largePair: formatPairText(largePair),
     smallPair: formatPairText(smallPair),
-    image: normalizeImage(entry.image),
+    image,
+    hasImage: Boolean(image.src),
     title: entry.title || session || 'Prinzenpaar',
   };
+}
+
+function createRoyalFallbackMarkup(pair, options = {}) {
+  const ariaHidden = options.ariaHidden !== false ? ' aria-hidden="true"' : '';
+
+  return `
+    <div class="royal-gallery-placeholder"${ariaHidden}>
+      <div class="royal-gallery-fallback-header">
+        <h3 class="royal-gallery-fallback-session">${pair.session || 'Nicht hinterlegt'}</h3>
+        <p class="royal-gallery-fallback-year">${pair.year || 'Jahr unbekannt'}</p>
+      </div>
+      <div class="royal-gallery-fallback-body">
+        <section class="royal-gallery-fallback-panel">
+          <span class="royal-gallery-fallback-label">Großes Prinzenpaar</span>
+          <p class="royal-gallery-fallback-value">${pair.largePair || 'Nicht hinterlegt'}</p>
+        </section>
+        <section class="royal-gallery-fallback-panel">
+          <span class="royal-gallery-fallback-label">Kleines Prinzenpaar</span>
+          <p class="royal-gallery-fallback-value">${pair.smallPair || 'Nicht hinterlegt'}</p>
+        </section>
+      </div>
+    </div>`;
+}
+
+function createRoyalLightboxDetailsMarkup(pair) {
+  const headingText = [pair.session, pair.year].filter(Boolean).join(' · ') || 'Prinzenpaar';
+
+  return `
+    <div class="royals-lightbox-detail-shell">
+      <p class="royals-lightbox-detail-heading">${headingText}</p>
+      <div class="royals-lightbox-detail-grid">
+        <section class="royals-lightbox-detail-card">
+          <span class="royals-lightbox-detail-label">Großes Prinzenpaar</span>
+          <p class="royals-lightbox-detail-value">${pair.largePair || 'Nicht hinterlegt'}</p>
+        </section>
+        <section class="royals-lightbox-detail-card">
+          <span class="royals-lightbox-detail-label">Kleines Prinzenpaar</span>
+          <p class="royals-lightbox-detail-value">${pair.smallPair || 'Nicht hinterlegt'}</p>
+        </section>
+      </div>
+    </div>`;
 }
 
 function setupRoyalsLightbox(royals) {
@@ -701,23 +744,42 @@ function setupRoyalsLightbox(royals) {
     const safeIndex = ((index % royals.length) + royals.length) % royals.length;
     const pair = royals[safeIndex];
     currentIndex = safeIndex;
-
-    image.src = pair.image.src || '';
-    image.alt = pair.title || pair.session || 'Prinzenpaar';
-    image.draggable = !(pair.image.ki || pair.image.teilweiseKi);
-    imageWrapper.classList.toggle('ai-protected-media', pair.image.ki || pair.image.teilweiseKi);
     imageWrapper.querySelector('.ai-label')?.remove();
-    if (pair.image.ki || pair.image.teilweiseKi) {
+    imageWrapper.querySelector('.royals-lightbox-fallback')?.remove();
+
+    if (pair.hasImage) {
+      image.hidden = false;
+      image.src = pair.image.src || '';
+      image.alt = pair.title || pair.session || 'Prinzenpaar';
+      image.draggable = !(pair.image.ki || pair.image.teilweiseKi);
+      imageWrapper.classList.toggle('ai-protected-media', pair.image.ki || pair.image.teilweiseKi);
+    } else {
+      image.hidden = true;
+      image.removeAttribute('src');
+      image.alt = '';
+      image.draggable = false;
+      imageWrapper.classList.remove('ai-protected-media');
+      imageWrapper.insertAdjacentHTML('beforeend', `<div class="royals-lightbox-fallback">${createRoyalFallbackMarkup(pair, { ariaHidden: false })}</div>`);
+    }
+
+    if (pair.hasImage && (pair.image.ki || pair.image.teilweiseKi)) {
       imageWrapper.insertAdjacentHTML('beforeend', `<img class="ai-label" src="./src/img/ki_labels/${pair.image.ki ? 'ki' : 'teilweise_ki'}_${pair.image.theme}.png" alt="${pair.image.ki ? 'KI-generiert' : 'Teilweise KI-generiert'}" draggable="false" />`);
     }
-    const sessionText = formatLightboxInlineText(pair.session);
-    const yearText = formatLightboxInlineText(pair.year);
-    const largePairText = formatTitledPairText(pair.largePair, 'Prinz', 'Prinzessin');
-    const smallPairText = formatTitledPairText(pair.smallPair, 'Kinderprinz', 'Kinderprinzessin');
 
-    const headingText = sessionText && yearText ? `${sessionText} (${yearText})` : sessionText || yearText;
-    const detailParts = [headingText, largePairText, smallPairText].filter(Boolean);
-    details.textContent = detailParts.join(' - ');
+    if (pair.hasImage) {
+      const sessionText = formatLightboxInlineText(pair.session);
+      const yearText = formatLightboxInlineText(pair.year);
+      const largePairText = formatTitledPairText(pair.largePair, 'Prinz', 'Prinzessin');
+      const smallPairText = formatTitledPairText(pair.smallPair, 'Kinderprinz', 'Kinderprinzessin');
+      const headingText = sessionText && yearText ? `${sessionText} (${yearText})` : sessionText || yearText;
+      const detailParts = [headingText, largePairText, smallPairText].filter(Boolean);
+      details.hidden = false;
+      details.textContent = detailParts.join(' - ');
+    } else {
+      details.hidden = true;
+      details.textContent = '';
+    }
+    return true;
   }
 
   function openLightbox(index) {
@@ -1152,13 +1214,39 @@ async function loadHomeContent() {
     buttonId: 'royals-more',
     chunkSize: 3,
     renderItem: (pair, index) => {
-      return `
-        <article class="royal-gallery-item" aria-label="${pair.title || pair.session}" role="button" tabindex="0" data-royal-index="${index}">
-          ${createImageMarkup(pair.image, pair.title || pair.session, 'royal-gallery-image')}
+      const interactiveAttributes = `aria-label="${pair.title || pair.session || 'Prinzenpaar'}" role="button" tabindex="0"`;
+      const imageMarkup = pair.hasImage
+        ? createImageMarkup(pair.image, pair.title || pair.session, 'royal-gallery-image')
+        : `
+          <div class="royal-gallery-placeholder" aria-hidden="true">
+            <div class="royal-gallery-fallback-header">
+              <h3 class="royal-gallery-fallback-session">${pair.session || 'Nicht hinterlegt'}</h3>
+              <p class="royal-gallery-fallback-year">${pair.year || 'Jahr unbekannt'}</p>
+            </div>
+            <div class="royal-gallery-fallback-body">
+              <section class="royal-gallery-fallback-panel">
+                <span class="royal-gallery-fallback-label">Großes Prinzenpaar</span>
+                <p class="royal-gallery-fallback-value">${pair.largePair || 'Nicht hinterlegt'}</p>
+              </section>
+              <section class="royal-gallery-fallback-panel">
+                <span class="royal-gallery-fallback-label">Kleines Prinzenpaar</span>
+                <p class="royal-gallery-fallback-value">${pair.smallPair || 'Nicht hinterlegt'}</p>
+              </section>
+            </div>
+          </div>`;
+      const detailsMarkup = pair.hasImage
+        ? `
           ${createRoyalOverlayText(pair.session, 'top-left')}
           ${createRoyalOverlayText(pair.year, 'top-right')}
           ${createRoyalOverlayText(pair.largePair, 'bottom-left')}
           ${createRoyalOverlayText(pair.smallPair, 'bottom-right')}
+        `
+        : '';
+
+      return `
+        <article class="royal-gallery-item${pair.hasImage ? '' : ' royal-gallery-item--no-image'}" ${interactiveAttributes} data-royal-index="${index}" data-has-image="${pair.hasImage}">
+          ${imageMarkup}
+          ${detailsMarkup}
         </article>
       `;
     },
