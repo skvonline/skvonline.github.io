@@ -1,3 +1,8 @@
 [
-
+  {
+    "title": "muttizettel",
+    "description": "Der offizielle Muttizettel des Sandersdorfer Karnevalsverein e. V. Alle Minderjährigen Gäste unserer Veranstaltungen benötigen diesen ausgefüllt am Eingang.",
+    "file": "./src/downloads/Muttizettel.pdf",
+    "label": "Muttizettel"
+  }
 ]
