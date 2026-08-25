@@ -13,5 +13,15 @@
     "icon": "facebook",
     "text": "Facebook",
     "url": "https://www.facebook.com/skvonline"
+  },
+  {
+    "icon": "website",
+    "text": "Informationen zum Kartenverkauf",
+    "url": "https://www.skvonline.de/faq/kartenverkauf"
+  },
+  {
+    "icon": "website",
+    "text": "Informationen zum Muttizettel",
+    "url": "https://www.skvonline.de/faq/?Muttizettel"
   }
 ]
