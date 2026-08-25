@@ -1,13 +1,13 @@
 [
   {
     "title": "Beginn des Kartenverkaufs für die 48. Session",
-    "date": "01.09.2026",
+    "date": "04.09.2026",
     "text": "Bald geht es wieder los. Der Vorverkauf der Karten für die Lumpenbälle startet auch bald. Alle Informationen dazu findet ihr hier:",
-    "publishAt": "2026-09-01-00:00",
-    "deleteAt": "2026-11-23-23:59",
+    "publishAt": "2026-09-04-00:00",
+    "deleteAt": "2027-09-03-23:59",
     "links": [
       {
-        "label": "Mehr erfahren",
+        "label": "Infos zum Kartenverkauf",
         "url": "./faq/kartenverkauf",
         "type": "more"
       }
