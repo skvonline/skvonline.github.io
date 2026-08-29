@@ -1,5 +1,35 @@
 [
   {
+    "title": "Sommerausflug der Kindergruppen",
+    "date": "29.08.2026",
+    "text": "Unsere Wild Kidz, Unique und die Funkengarde waren zum gemeinsamen Sommerausflug in Beelitz unterwegs. Auf dem Baumkronen- und Barfußpfad standen Spaß und gemeinsame Erlebnisse im Mittelpunkt. Ein großes Dankeschön an alle Trainer und Betreuer, die diesen schönen Tag möglich gemacht haben!",
+    "image": {
+      "src": "./src/img/news/21206.jpg",
+      "ki": false,
+      "teilweiseKi": false
+    },
+    "publishAt": "2026-08-29-22:00",
+    "deleteAt": "2027-08-29-23:59",
+    "links": [
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/p/DcolIkkCJV1/?igsi=MTczbW93bWM1Z2tqdA==",
+        "type": "instagram"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/share/p/1BwEuRzz69/",
+        "type": "facebook"
+      },
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/reel/DcoK5BzoKl7/?igsi=dHE5am9rN3JkNQ==",
+        "type": "instagram"
+      }
+    ],
+    "large": true
+  },
+  {
     "title": "Beginn des Kartenverkaufs für die 48. Session",
     "date": "04.09.2026",
     "text": "Bald geht es wieder los. Der Vorverkauf der Karten für die Lumpenbälle startet auch bald. Alle Informationen dazu findet ihr hier:",
@@ -7,7 +37,7 @@
     "deleteAt": "2027-09-03-23:59",
     "links": [
       {
-        "label": "Infos zum Kartenverkauf",
+        "label": "Mehr erfahren",
         "url": "./faq/kartenverkauf",
         "type": "more"
       }
