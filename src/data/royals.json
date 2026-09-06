@@ -1,5 +1,136 @@
 [
   {
+    "session": "47. Session",
+    "year": "2025/2026",
+    "image": {
+      "src": "./src/img/verein/prinzenpaare/pp2526.JPG",
+      "ki": false,
+      "teilweiseKi": false
+    },
+    "adultPair": [
+      {
+        "prince": "Dominik I.",
+        "princess": "Lisa I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Til I.",
+        "princess": "Pauline I."
+      }
+    ]
+  },
+  {
+    "session": "46. Session",
+    "year": "2024/2025",
+    "image": {
+      "src": "./src/img/verein/prinzenpaare/pp2425.JPG",
+      "ki": false,
+      "teilweiseKi": false
+    },
+    "adultPair": [
+      {
+        "prince": "Andreas II.",
+        "princess": "Anja III."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Bruno I.",
+        "princess": "Lainy I."
+      }
+    ]
+  },
+  {
+    "session": "45. Session",
+    "year": "2023/2024",
+    "image": {
+      "src": "./src/img/verein/prinzenpaare/pp2324.JPG",
+      "ki": false,
+      "teilweiseKi": false
+    },
+    "adultPair": [
+      {
+        "prince": "Robin I.",
+        "princess": "Jennifer I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Oskar I.",
+        "princess": "Fiona I."
+      }
+    ]
+  },
+  {
+    "session": "44. Session",
+    "year": "2022/2023",
+    "image": {
+      "src": "./src/img/verein/prinzenpaare/pp2223.JPG",
+      "ki": false,
+      "teilweiseKi": false
+    },
+    "adultPair": [
+      {
+        "prince": "Renè II.",
+        "princess": "Anja II."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Lennart I.",
+        "princess": "Mia I."
+      }
+    ]
+  },
+  {
+    "session": "43. Session",
+    "year": "2021/2022",
+    "image": {
+      "src": "./src/img/verein/prinzenpaare/pp2223.JPG",
+      "ki": false,
+      "teilweiseKi": false
+    },
+    "adultPair": [
+      {
+        "prince": "Renè II.",
+        "princess": "Anja II."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Lennart I.",
+        "princess": "Mia I."
+      }
+    ]
+  },
+  {
+    "session": "42. Session",
+    "year": "2020/2021",
+    "adultPair": [
+      {
+        "prince": "Ausgefallen wegen",
+        "princess": "Corona"
+      }
+    ]
+  },
+  {
+    "session": "41. Session",
+    "year": "2019/2020",
+    "adultPair": [
+      {
+        "prince": "Dirk II:",
+        "princess": "Corinna I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Dean I.",
+        "princess": "Mila I."
+      }
+    ]
+  },
+  {
     "session": "40. Session",
     "year": "2018/2019",
     "adultPair": [
