@@ -1,5 +1,85 @@
 [
   {
+    "session": "30. Session",
+    "year": "2009/2010",
+    "adultPair": [
+      {
+        "prince": "Peter I.",
+        "princess": "Maike I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Eric I.",
+        "princess": "Maike II."
+      }
+    ]
+  },
+  {
+    "session": "29. Session",
+    "year": "2008/2009",
+    "adultPair": [
+      {
+        "prince": "Alexander I.",
+        "princess": "Victoria I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Carl I.",
+        "princess": "Anna Lena I."
+      }
+    ]
+  },
+  {
+    "session": "28. Session",
+    "year": "2007/2008",
+    "adultPair": [
+      {
+        "prince": "Matthias I.",
+        "princess": "St. Neumann I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Robert II.",
+        "princess": "Henriette I."
+      }
+    ]
+  },
+  {
+    "session": "27. Session",
+    "year": "2006/2007",
+    "adultPair": [
+      {
+        "prince": "Sebastian I.",
+        "princess": "Marie II."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Philip I.",
+        "princess": "Mara-Jane I."
+      }
+    ]
+  },
+  {
+    "session": "26. Session",
+    "year": "2005/2006",
+    "adultPair": [
+      {
+        "prince": "Andrè I.",
+        "princess": "Kathrin I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Oscar I.",
+        "princess": "Emmi I."
+      }
+    ]
+  },
+  {
     "session": "25. Session",
     "year": "2004/2005",
     "adultPair": [
