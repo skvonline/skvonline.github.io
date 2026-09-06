@@ -1,5 +1,85 @@
 [
   {
+    "session": "35. Session",
+    "year": "2014/2015",
+    "adultPair": [
+      {
+        "prince": "Renè I.",
+        "princess": "Anika I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Dominik I.",
+        "princess": "Lisa I."
+      }
+    ]
+  },
+  {
+    "session": "34. Session",
+    "year": "2013/2014",
+    "adultPair": [
+      {
+        "prince": "David I.",
+        "princess": "Nancy I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Tom I.",
+        "princess": "Michelle I."
+      }
+    ]
+  },
+  {
+    "session": "33. Session",
+    "year": "2012/2013",
+    "adultPair": [
+      {
+        "prince": "Stefan III.",
+        "princess": "Lena I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Anton I.",
+        "princess": "Vivian I."
+      }
+    ]
+  },
+  {
+    "session": "32. Session",
+    "year": "2011/2012",
+    "adultPair": [
+      {
+        "prince": "Patrick I.",
+        "princess": "Jessica I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Daniel I.",
+        "princess": "Alina I."
+      }
+    ]
+  },
+  {
+    "session": "31. Session",
+    "year": "2010/2011",
+    "adultPair": [
+      {
+        "prince": "Stefan II.",
+        "princess": "Katarina I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Otto I.",
+        "princess": "Charlotte I."
+      }
+    ]
+  },
+  {
     "session": "30. Session",
     "year": "2009/2010",
     "adultPair": [
