@@ -1,5 +1,85 @@
 [
   {
+    "session": "25. Session",
+    "year": "2004/2005",
+    "adultPair": [
+      {
+        "prince": "Marcus II.",
+        "princess": "Stefanie I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Jonas I.",
+        "princess": "Alexandra I."
+      }
+    ]
+  },
+  {
+    "session": "24. Session",
+    "year": "2003/2004",
+    "adultPair": [
+      {
+        "prince": "Marcel I.",
+        "princess": "Doreen I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Philipp I.",
+        "princess": "Luise I."
+      }
+    ]
+  },
+  {
+    "session": "23. Session",
+    "year": "2002/2003",
+    "adultPair": [
+      {
+        "prince": "Uwe I.",
+        "princess": "Bärbel I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Leonl I.",
+        "princess": "Svenja I."
+      }
+    ]
+  },
+  {
+    "session": "22. Session",
+    "year": "2001/2002",
+    "adultPair": [
+      {
+        "prince": "Bernd II.",
+        "princess": "Waltraud I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Kevin I.",
+        "princess": "Vivien I."
+      }
+    ]
+  },
+  {
+    "session": "21. Session",
+    "year": "2000/2001",
+    "adultPair": [
+      {
+        "prince": "Norbert I.",
+        "princess": "R. Stihler I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Toni I.",
+        "princess": "Marie I."
+      }
+    ]
+  },
+  {
     "session": "20. Session",
     "year": "1999/2000",
     "adultPair": [
