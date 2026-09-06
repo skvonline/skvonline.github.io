@@ -1,5 +1,85 @@
 [
   {
+    "session": "20. Session",
+    "year": "1999/2000",
+    "adultPair": [
+      {
+        "prince": "Ivo I.",
+        "princess": "J. Tennert I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Sandro I.",
+        "princess": "N. Erxleben I."
+      }
+    ]
+  },
+  {
+    "session": "19. Session",
+    "year": "1998/1999",
+    "adultPair": [
+      {
+        "prince": "Oli I.",
+        "princess": "Tina I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Sandro I.",
+        "princess": "N. Erxleben I."
+      }
+    ]
+  },
+  {
+    "session": "18. Session",
+    "year": "1997/1998",
+    "adultPair": [
+      {
+        "prince": "Gerd II.",
+        "princess": "Helga I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Martin I.",
+        "princess": "Elisa I."
+      }
+    ]
+  },
+  {
+    "session": "17. Session",
+    "year": "1996/1997",
+    "adultPair": [
+      {
+        "prince": "Jochen I.",
+        "princess": "Doris I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Chris I.",
+        "princess": "Betty I."
+      }
+    ]
+  },
+  {
+    "session": "16. Session",
+    "year": "1995/1996",
+    "adultPair": [
+      {
+        "prince": "Michael II.",
+        "princess": "Elisabeth I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Chris I.",
+        "princess": "Betty I."
+      }
+    ]
+  },
+  {
     "session": "15. Session",
     "year": "1994/1995",
     "adultPair": [
@@ -11,7 +91,7 @@
     "childPair": [
       {
         "prince": "Tobias I.",
-        "princess": "C. I."
+        "princess": "C. Hohenberger I."
       }
     ]
   },
@@ -27,7 +107,7 @@
     "childPair": [
       {
         "prince": "Robert I.",
-        "princess": "B. I."
+        "princess": "B. Reisenbichler I."
       }
     ]
   },
@@ -37,7 +117,7 @@
     "adultPair": [
       {
         "prince": "Andy I.",
-        "princess": "D. I."
+        "princess": "D. Lattauschke I."
       }
     ],
     "childPair": [
