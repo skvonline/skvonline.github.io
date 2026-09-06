@@ -1,5 +1,85 @@
 [
   {
+    "session": "15. Session",
+    "year": "1994/1995",
+    "adultPair": [
+      {
+        "prince": "Gerd I.",
+        "princess": "Birgit I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Tobias I.",
+        "princess": "C. I."
+      }
+    ]
+  },
+  {
+    "session": "14. Session",
+    "year": "1993/1994",
+    "adultPair": [
+      {
+        "prince": "Holger I.",
+        "princess": "Heike II."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Robert I.",
+        "princess": "B. I."
+      }
+    ]
+  },
+  {
+    "session": "13. Session",
+    "year": "1992/1993",
+    "adultPair": [
+      {
+        "prince": "Andy I.",
+        "princess": "D. I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Maximilian I.",
+        "princess": "Ulrike I."
+      }
+    ]
+  },
+  {
+    "session": "12. Session",
+    "year": "1991/1992",
+    "adultPair": [
+      {
+        "prince": "Torsten I.",
+        "princess": "Kathleen I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Tino I.",
+        "princess": "Ariane I."
+      }
+    ]
+  },
+  {
+    "session": "11. Session",
+    "year": "1990/1991",
+    "adultPair": [
+      {
+        "prince": "Thomas II.",
+        "princess": "Heike I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Mathias I.",
+        "princess": "Judith I."
+      }
+    ]
+  },
+  {
     "session": "10. Session",
     "year": "1989/1990",
     "adultPair": [
