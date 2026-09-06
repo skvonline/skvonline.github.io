@@ -1,5 +1,69 @@
 [
   {
+    "session": "39. Session",
+    "year": "2018/2019",
+    "adultPair": [
+      {
+        "prince": "Christian I.",
+        "princess": "Claudia I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Kilian I.",
+        "princess": "Alexa I."
+      }
+    ]
+  },
+  {
+    "session": "38. Session",
+    "year": "2017/2018",
+    "adultPair": [
+      {
+        "prince": "Dirk I.",
+        "princess": "Simone I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Felix I.",
+        "princess": "Isabell I."
+      }
+    ]
+  },
+  {
+    "session": "37. Session",
+    "year": "2016/2017",
+    "adultPair": [
+      {
+        "prince": "Dirk I.",
+        "princess": "Simone I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Adrian I.",
+        "princess": "Lucy I."
+      }
+    ]
+  },
+  {
+    "session": "36. Session",
+    "year": "2015/2016",
+    "adultPair": [
+      {
+        "prince": "Leon I.",
+        "princess": "Lisa II."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Julien I.",
+        "princess": "Josie I."
+      }
+    ]
+  },
+  {
     "session": "35. Session",
     "year": "2014/2015",
     "adultPair": [
