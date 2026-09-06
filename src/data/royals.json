@@ -1,85 +1,125 @@
 [
   {
-    "session": "47. Session",
-    "year": "2025/2026",
-    "image": {
-      "src": "./src/img/verein/prinzenpaare/pp2526.JPG",
-      "ki": false,
-      "teilweiseKi": false
-    },
+    "session": "10. Session",
+    "year": "1989/1990",
     "adultPair": [
       {
-        "prince": "Dominik I.",
-        "princess": "Lisa I."
-      }
-    ],
-    "childPair": [
-      {
-        "prince": "Til I.",
-        "princess": "Pauline I."
-      }
-    ]
-  },
-  {
-    "session": "46. Session",
-    "year": "2024/2025",
-    "image": {
-      "src": "./src/img/verein/prinzenpaare/pp2425.JPG",
-      "ki": false,
-      "teilweiseKi": false
-    },
-    "adultPair": [
-      {
-        "prince": "Andreas II.",
-        "princess": "Anja II."
-      }
-    ],
-    "childPair": [
-      {
-        "prince": "Bruno I.",
-        "princess": "Lainy I."
-      }
-    ]
-  },
-  {
-    "session": "45. Session",
-    "year": "2023/2024",
-    "image": {
-      "src": "./src/img/verein/prinzenpaare/pp2324.JPG",
-      "ki": false,
-      "teilweiseKi": false
-    },
-    "adultPair": [
-      {
-        "prince": "Robin I.",
-        "princess": "Jenniefer I."
-      }
-    ],
-    "childPair": [
-      {
-        "prince": "Oskar I.",
-        "princess": "Fiona I."
-      }
-    ]
-  },
-  {
-    "session": "44. Session",
-    "year": "2022/2023",
-    "image": {
-      "src": "./src/img/verein/prinzenpaare/pp2223.JPG",
-      "ki": false,
-      "teilweiseKi": false
-    },
-    "adultPair": [
-      {
-        "prince": "René I.",
+        "prince": "Roy I.",
         "princess": "Anja I."
       }
     ],
     "childPair": [
       {
-        "prince": "Lennart I.",
-        "princess": "Mia I."
+        "prince": "Marcus I.",
+        "princess": "Annegret I."
+      }
+    ]
+  },
+  {
+    "session": "9. Session",
+    "year": "1987/1988",
+    "adultPair": [
+      {
+        "prince": "Steffen I.",
+        "princess": "Uta I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Thomas I.",
+        "princess": "Nicole I."
+      }
+    ]
+  },
+  {
+    "session": "8. Session",
+    "year": "1986/1987",
+    "adultPair": [
+      {
+        "prince": "Frank I.",
+        "princess": "Janette I."
+      }
+    ]
+  },
+  {
+    "session": "7. Session",
+    "year": "1985/1986",
+    "adultPair": [
+      {
+        "prince": "Rolf I.",
+        "princess": "Heidi I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Stefan I.",
+        "princess": "Anika I."
+      }
+    ]
+  },
+  {
+    "session": "6. Session",
+    "year": "1984/1985",
+    "adultPair": [
+      {
+        "prince": "Andreas I.",
+        "princess": "Marion I."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Stefan I.",
+        "princess": "Anika I."
+      }
+    ]
+  },
+  {
+    "session": "5. Session",
+    "year": "1983/1984",
+    "adultPair": [
+      {
+        "prince": "Bernd I.",
+        "princess": "Sabiene I."
+      }
+    ]
+  },
+  {
+    "session": "4. Session",
+    "year": "1982/1983",
+    "adultPair": [
+      {
+        "prince": "Michael I.",
+        "princess": "Elke I."
+      }
+    ]
+  },
+  {
+    "session": "3. Session",
+    "year": "1981/1982",
+    "adultPair": [
+      {
+        "prince": "Reiner I.",
+        "princess": "Gabriela I."
+      }
+    ]
+  },
+  {
+    "session": "2. Session",
+    "year": "1980/1981",
+    "adultPair": [
+      {
+        "prince": "Reiner I.",
+        "princess": "Gabriela I."
+      }
+    ]
+  },
+  {
+    "session": "1. Session",
+    "year": "1979/1980",
+    "adultPair": [
+      {
+        "prince": "Jürgen I.",
+        "princess": "Frau"
       }
     ]
   }
