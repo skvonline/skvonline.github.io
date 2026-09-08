@@ -197,6 +197,11 @@
   {
     "session": "36. Session",
     "year": "2014/2015",
+    "image": {
+      "src": "./src/img/verein/prinzenpaare/pp1415.JPG",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "adultPair": [
       {
         "prince": "Renè I.",
