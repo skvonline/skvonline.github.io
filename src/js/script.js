@@ -695,28 +695,40 @@ function normalizeRoyalEntry(entry) {
 
 function createRoyalFallbackMarkup(pair, options = {}) {
   const ariaHidden = options.ariaHidden !== false ? ' aria-hidden="true"' : '';
+  const hasSmallPair = Boolean(pair.smallPair);
+  const smallPairMarkup = hasSmallPair
+    ? `
+        <section class="royal-gallery-fallback-panel">
+          <span class="royal-gallery-fallback-label">Kleines Prinzenpaar</span>
+          <p class="royal-gallery-fallback-value">${pair.smallPair}</p>
+        </section>`
+    : '';
 
   return `
-    <div class="royal-gallery-placeholder"${ariaHidden}>
+    <div class="royal-gallery-placeholder${hasSmallPair ? '' : ' royal-gallery-placeholder--large-only'}"${ariaHidden}>
       <div class="royal-gallery-fallback-header">
         <h3 class="royal-gallery-fallback-session">${pair.session || 'Nicht hinterlegt'}</h3>
         <p class="royal-gallery-fallback-year">${pair.year || 'Jahr unbekannt'}</p>
       </div>
       <div class="royal-gallery-fallback-body">
         <section class="royal-gallery-fallback-panel">
-          <span class="royal-gallery-fallback-label">Großes Prinzenpaar</span>
+          <span class="royal-gallery-fallback-label">Gro&szlig;es Prinzenpaar</span>
           <p class="royal-gallery-fallback-value">${pair.largePair || 'Nicht hinterlegt'}</p>
         </section>
-        <section class="royal-gallery-fallback-panel">
-          <span class="royal-gallery-fallback-label">Kleines Prinzenpaar</span>
-          <p class="royal-gallery-fallback-value">${pair.smallPair || 'Nicht hinterlegt'}</p>
-        </section>
+        ${smallPairMarkup}
       </div>
     </div>`;
 }
 
 function createRoyalLightboxDetailsMarkup(pair) {
   const headingText = [pair.session, pair.year].filter(Boolean).join(' · ') || 'Prinzenpaar';
+  const smallPairMarkup = pair.smallPair
+    ? `
+        <section class="royals-lightbox-detail-card">
+          <span class="royals-lightbox-detail-label">Kleines Prinzenpaar</span>
+          <p class="royals-lightbox-detail-value">${pair.smallPair}</p>
+        </section>`
+    : '';
 
   return `
     <div class="royals-lightbox-detail-shell">
@@ -726,10 +738,7 @@ function createRoyalLightboxDetailsMarkup(pair) {
           <span class="royals-lightbox-detail-label">Großes Prinzenpaar</span>
           <p class="royals-lightbox-detail-value">${pair.largePair || 'Nicht hinterlegt'}</p>
         </section>
-        <section class="royals-lightbox-detail-card">
-          <span class="royals-lightbox-detail-label">Kleines Prinzenpaar</span>
-          <p class="royals-lightbox-detail-value">${pair.smallPair || 'Nicht hinterlegt'}</p>
-        </section>
+        ${smallPairMarkup}
       </div>
     </div>`;
 }
@@ -881,11 +890,13 @@ async function downloadRoyalImageWithOverlay(pair) {
     text: pair.largePair || 'Nicht hinterlegt',
     position: 'bottom-left',
   });
-  drawRoyalDownloadLabel(context, canvas.width, canvas.height, {
-    title: 'Kleines Prinzenpaar',
-    text: pair.smallPair || 'Nicht hinterlegt',
-    position: 'bottom-right',
-  });
+  if (pair.smallPair) {
+    drawRoyalDownloadLabel(context, canvas.width, canvas.height, {
+      title: 'Kleines Prinzenpaar',
+      text: pair.smallPair,
+      position: 'bottom-right',
+    });
+  }
 
   if (labelImage) {
     const labelWidth = Math.min(canvas.width * 0.29, 340);
@@ -1426,23 +1437,7 @@ async function loadHomeContent() {
       const interactiveAttributes = `aria-label="${pair.title || pair.session || 'Prinzenpaar'}" role="button" tabindex="0"`;
       const imageMarkup = pair.hasImage
         ? createImageMarkup(pair.image, pair.title || pair.session, 'royal-gallery-image')
-        : `
-          <div class="royal-gallery-placeholder" aria-hidden="true">
-            <div class="royal-gallery-fallback-header">
-              <h3 class="royal-gallery-fallback-session">${pair.session || 'Nicht hinterlegt'}</h3>
-              <p class="royal-gallery-fallback-year">${pair.year || 'Jahr unbekannt'}</p>
-            </div>
-            <div class="royal-gallery-fallback-body">
-              <section class="royal-gallery-fallback-panel">
-                <span class="royal-gallery-fallback-label">Großes Prinzenpaar</span>
-                <p class="royal-gallery-fallback-value">${pair.largePair || 'Nicht hinterlegt'}</p>
-              </section>
-              <section class="royal-gallery-fallback-panel">
-                <span class="royal-gallery-fallback-label">Kleines Prinzenpaar</span>
-                <p class="royal-gallery-fallback-value">${pair.smallPair || 'Nicht hinterlegt'}</p>
-              </section>
-            </div>
-          </div>`;
+        : createRoyalFallbackMarkup(pair);
       const detailsMarkup = pair.hasImage
         ? `
           ${createRoyalOverlayText(pair.session, 'top-left')}
