@@ -871,11 +871,14 @@ a {
 
 .royals-grid {
     gap: 1.25rem;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .royal-gallery-item {
     position: relative;
+    flex: 0 1 265px;
     padding: 0;
     border: 0;
     border-radius: 14px;
@@ -917,6 +920,14 @@ a {
     gap: 1rem;
     padding: 1.1rem;
     color: #f8fafc;
+}
+
+.royal-gallery-placeholder--large-only {
+    grid-template-rows: auto 1fr;
+}
+
+.royal-gallery-placeholder--large-only .royal-gallery-fallback-body {
+    align-self: center;
 }
 
 .royal-gallery-fallback-header {
