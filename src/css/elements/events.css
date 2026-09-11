@@ -5,6 +5,24 @@
     justify-content: center;
     gap: 0.8rem;
 }
+.events-empty-state {
+    width: min(680px, 100%);
+    padding: 1.4rem 1.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+}
+
+.events-empty-state h3 {
+    margin: 0 0 0.45rem;
+    color: #fff;
+}
+
+.events-empty-state p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+}
 
 .event-card {
     padding: 0.85rem;
@@ -194,5 +212,6 @@
     padding: 1rem;
     background: rgba(0, 0, 0, 0.45);
 }
+
 
 

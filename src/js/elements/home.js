@@ -10,18 +10,33 @@
   const events = Array.isArray(eventsRaw) ? eventsRaw.filter((entry) => isVisibleByWindow(entry)) : [];
   const news = Array.isArray(newsRaw) ? newsRaw.filter((entry) => isVisibleByWindow(entry)) : [];
 
-  chunkRender({
-    items: events,
-    containerId: 'events-grid',
-    buttonId: 'events-more',
-    chunkSize: 3,
-    renderItem: (event, index) => {
-      const imagePath = getEventImagePath(event);
-      const hasImage = Boolean(imagePath);
-      const imageSideClass = hasImage ? (index % 2 === 0 ? 'event-card--image-left' : 'event-card--image-right') : 'event-card--no-image';
-      const imageMarkup = hasImage
-        ? `<div class="event-card-media">${createImageMarkup(event.image, event.title || 'Veranstaltung', 'event-image')}</div>`
-        : '';
+  if (events.length === 0) {
+    const eventsContainer = document.getElementById('events-grid');
+    const eventsMoreButton = document.getElementById('events-more');
+    if (eventsContainer) {
+      eventsContainer.innerHTML = `
+        <article class="events-empty-state" aria-live="polite">
+          <h3>Gerade steht kein Termin bevor</h3>
+          <p>Schau gern bald wieder vorbei. Sobald neue Veranstaltungen feststehen, findest du sie hier.</p>
+        </article>
+      `;
+    }
+    if (eventsMoreButton) {
+      eventsMoreButton.hidden = true;
+    }
+  } else {
+    chunkRender({
+      items: events,
+      containerId: 'events-grid',
+      buttonId: 'events-more',
+      chunkSize: 3,
+      renderItem: (event, index) => {
+        const imagePath = getEventImagePath(event);
+        const hasImage = Boolean(imagePath);
+        const imageSideClass = hasImage ? (index % 2 === 0 ? 'event-card--image-left' : 'event-card--image-right') : 'event-card--no-image';
+        const imageMarkup = hasImage
+          ? `<div class="event-card-media">${createImageMarkup(event.image, event.title || 'Veranstaltung', 'event-image')}</div>`
+          : '';
 
       return `
       <article class="card event-card ${imageSideClass}">
@@ -38,9 +53,10 @@
         </div>
       </article>
     `;
-    },
-  });
-  setupEventShareButtons();
+      },
+    });
+    setupEventShareButtons();
+  }
 
   chunkRender({
     items: news,
