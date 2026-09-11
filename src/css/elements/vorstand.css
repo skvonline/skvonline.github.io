@@ -1,4 +1,9 @@
-﻿.board-section {
+﻿/*
+ * Styles für Vorstandseinleitung, Vorstandskarten, Hover-Overlay und Kontaktlinks.
+ * Enthält die interaktive Poster-Darstellung der Vorstandsmitglieder.
+ */
+
+.board-section {
     padding-top: 3rem;
     background: var(--skv-light);
 }
@@ -198,5 +203,6 @@
 .liEmail:hover {
     background-color: #d93025;
 }
+
 
 

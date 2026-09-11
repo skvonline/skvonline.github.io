@@ -1,4 +1,9 @@
-﻿function setupMobileMenu() {
+﻿/*
+ * Logik für Header, mobile Navigation, Smooth-Scrolling und das Hinweisband im Kopfbereich.
+ * Lädt und aktualisiert sichtbare Hinweise inklusive Countdown aus den Header-Daten.
+ */
+
+function setupMobileMenu() {
   const button = document.getElementById('menu_button');
   const mobileNav = document.getElementById('mobile-nav');
   const desktopMenu = document.querySelector('.header nav .main-menu');
@@ -264,5 +269,6 @@ async function setupHeaderNoticeBar(page) {
     countdownIntervalId = window.setInterval(refreshCountdownsAndPruneExpired, 1000);
   }
 }
+
 
 

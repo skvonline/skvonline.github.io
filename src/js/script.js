@@ -1,4 +1,9 @@
-﻿(function () {
+﻿/*
+ * Zentraler JavaScript-Einstiegspunkt der Webseite.
+ * Lädt die fachlichen Skriptdateien aus src/js/elements und startet danach die Seiteninitialisierung.
+ */
+
+(function () {
   const elementScripts = [
     'core.js',
     'header.js',
@@ -42,3 +47,4 @@
       console.error(error);
     });
 })();
+

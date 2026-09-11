@@ -1,4 +1,9 @@
-﻿window.SKV = window.SKV || {};
+﻿/*
+ * Seiteninitialisierung nach dem Laden aller JavaScript-Teildateien.
+ * Wählt anhand von body[data-page] die benötigten Komponenten und Element-Loader aus.
+ */
+
+window.SKV = window.SKV || {};
 window.SKV.init = async function init() {
   const page = document.body.dataset.page;
   setupProtectedImages();
@@ -68,3 +73,4 @@ window.SKV.init = async function init() {
   setupMobileMenu();
   setupHeaderSmoothScroll();
 };
+

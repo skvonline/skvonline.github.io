@@ -1,4 +1,9 @@
-﻿function setupHeroCarousel() {
+﻿/*
+ * Logik für die Hero-Galerie der Startseite.
+ * Lädt Galeriebilder aus der JSON-Datenquelle und steuert den automatischen Bildwechsel.
+ */
+
+function setupHeroCarousel() {
   const slides = Array.from(document.querySelectorAll('.hero-slide-wrapper'));
   if (slides.length <= 1) return;
 
@@ -33,5 +38,6 @@ async function loadHomeGallery() {
     );
   });
 }
+
 
 

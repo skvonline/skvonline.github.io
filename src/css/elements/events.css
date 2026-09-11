@@ -1,4 +1,9 @@
-﻿#events-grid {
+﻿/*
+ * Styles für Veranstaltungskarten, Empty-State und Veranstaltungsdetailseite.
+ * Steuert Kartenlayout, Eventbilder, Aktionsbereiche und Detailseiten-Overlay.
+ */
+
+#events-grid {
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
@@ -212,6 +217,7 @@
     padding: 1rem;
     background: rgba(0, 0, 0, 0.45);
 }
+
 
 
 

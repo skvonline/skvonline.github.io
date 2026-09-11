@@ -1,4 +1,9 @@
-﻿function getEventDetailsMarkup(event) {
+﻿/*
+ * Logik für Veranstaltungen und Veranstaltungsdetails.
+ * Formatiert Eventdaten, erzeugt Detail-URLs und rendert die einzelne Veranstaltungsdetailseite.
+ */
+
+function getEventDetailsMarkup(event) {
   const detailRows = [
     event.date && `<p><strong>Datum:</strong> ${event.date}</p>`,
     event.time && `<p><strong>Uhrzeit:</strong> ${event.time}</p>`,
@@ -142,5 +147,6 @@ async function loadEventDetailContent() {
   `;
   setupEventShareButtons();
 }
+
 
 

@@ -1,4 +1,9 @@
-﻿async function loadDownloadsContent() {
+﻿/*
+ * Rendering der Downloadseite.
+ * Lädt Download-Einträge aus JSON und erzeugt Karten mit Dateiname, Beschreibung und Downloadlink.
+ */
+
+async function loadDownloadsContent() {
   const downloadsContainer = document.getElementById('downloads-list');
   if (!downloadsContainer) {
     return;
@@ -48,5 +53,6 @@
     );
   });
 }
+
 
 

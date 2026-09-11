@@ -1,4 +1,9 @@
-﻿function setupBoardCards() {
+﻿/*
+ * Interaktionslogik für die Vorstandskarten.
+ * Steuert das Öffnen, Schließen und Tastaturverhalten der Detailbereiche.
+ */
+
+function setupBoardCards() {
   const boardCards = Array.from(document.querySelectorAll('.board-card'));
   if (boardCards.length === 0) {
     return;
@@ -49,5 +54,6 @@
     }
   });
 }
+
 
 

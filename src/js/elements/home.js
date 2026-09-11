@@ -1,4 +1,9 @@
-﻿async function loadHomeContent() {
+﻿/*
+ * Rendering der dynamischen Startseitenbereiche.
+ * Lädt Events, News, Vorstand, Elferrat, Prinzenpaare und Sponsoren aus JSON-Datenquellen.
+ */
+
+async function loadHomeContent() {
   const [eventsRaw, newsRaw, vorstand, elferrat, royals, sponsors] = await Promise.all([
     fetch('./src/data/events.json').then((r) => r.json()),
     fetch('./src/data/news.json').then((r) => r.json()),
@@ -183,6 +188,7 @@
     setupSponsorsMarquee();
   }
 }
+
 
 
 

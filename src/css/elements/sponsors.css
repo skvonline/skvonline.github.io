@@ -1,4 +1,9 @@
-﻿#sponsors {
+﻿/*
+ * Styles für den Sponsorenbereich und das animierte Sponsorenlaufband.
+ * Definiert Logo-Größen, Abstände und die Marquee-Animation.
+ */
+
+#sponsors {
     padding-bottom: 0;
     background: #fff;
 }
@@ -47,5 +52,6 @@
         transform: translateX(var(--sponsors-marquee-distance));
     }
 }
+
 
 

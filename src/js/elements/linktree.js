@@ -1,4 +1,9 @@
-﻿const LINKTREE_ICONS = {
+﻿/*
+ * Logik für die Linktree-Seite.
+ * Rendert Linktree-Einträge aus JSON und reduziert den Header auf das Hinweisband.
+ */
+
+const LINKTREE_ICONS = {
   website:
     '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18" fill="none" stroke="currentColor" stroke-width="2"></path></svg>',
   instagram:
@@ -70,5 +75,6 @@ function setupLinktreeHeaderMode() {
     attributeFilter: ['hidden'],
   });
 }
+
 
 

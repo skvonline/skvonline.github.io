@@ -1,4 +1,9 @@
-﻿.elferrat-card {
+﻿/*
+ * Styles für die Elferrat-Karten.
+ * Definiert Bildgrößen, Typografie und Rasterverhalten des Elferratsbereichs.
+ */
+
+.elferrat-card {
     text-align: center;
     padding: 1.25rem 1rem;
     border-radius: 16px;
@@ -38,5 +43,6 @@
     flex: 1 1 260px;
     max-width: 260px;
 }
+
 
 

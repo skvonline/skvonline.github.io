@@ -1,4 +1,9 @@
-﻿function setupTicketDatesVisibility() {
+﻿/*
+ * Logik für FAQ-Seiten und Kartenverkauf-Terminblock.
+ * Lädt FAQ-Daten, rendert Fragen und Antworten und steuert Suche, Filterung und Trefferstatus.
+ */
+
+function setupTicketDatesVisibility() {
   const ticketDates = document.querySelector('.ticket-dates[data-publish-at][data-delete-at]');
   if (!ticketDates) return;
 
@@ -171,5 +176,6 @@ function setupFaqSearch() {
   }
   applyFilters();
 }
+
 
 

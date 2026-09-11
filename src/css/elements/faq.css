@@ -1,4 +1,9 @@
-﻿.faq-card {
+﻿/*
+ * Styles für FAQ-Seiten, FAQ-Suche, Trefferstatus und Kartenverkauf-Terminblock.
+ * Enthält Akkordeon-Darstellung, Suchfeld und Hinweisbereiche.
+ */
+
+.faq-card {
     max-width: 900px;
 }
 
@@ -380,4 +385,5 @@
         grid-template-columns: 1fr;
     }
 }
+
 

@@ -1,4 +1,9 @@
-﻿.linktree-page {
+﻿/*
+ * Styles für die Linktree-Seite.
+ * Definiert Logo, Linkliste, Linkbuttons und die reduzierte Seitenoptik.
+ */
+
+.linktree-page {
     background: var(--skv-primary);
     min-height: 70vh;
     color: #fff;
@@ -60,5 +65,6 @@
     width: 100%;
     height: 100%;
 }
+
 
 

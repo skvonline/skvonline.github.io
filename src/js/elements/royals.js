@@ -1,4 +1,9 @@
-﻿function createRoyalOverlayText(value, modifierClass) {
+﻿/*
+ * Logik für die Prinzenpaar-Galerie und Lightbox.
+ * Normalisiert Prinzenpaar-Daten, rendert Fallbacks und erstellt Downloadbilder mit Beschriftung.
+ */
+
+function createRoyalOverlayText(value, modifierClass) {
   if (!value) {
     return '';
   }
@@ -466,5 +471,6 @@ function setupRoyalsLightbox(royals) {
     if (event.key === 'ArrowLeft') goPrev();
   });
 }
+
 
 

@@ -1,4 +1,9 @@
-﻿.header {
+﻿/*
+ * Styles für Header, Hauptnavigation, Social Links, mobiles Menü und Hinweisband.
+ * Enthält Desktop-Grundlayout und visuelle Zustände des Kopfbereichs.
+ */
+
+.header {
     position: sticky;
     top: 0;
     z-index: 20;
@@ -218,5 +223,6 @@
     padding: 1rem 4vw;
     gap: 0.5rem;
 }
+
 
 

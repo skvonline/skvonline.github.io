@@ -1,4 +1,9 @@
-﻿#news-grid {
+﻿/*
+ * Styles für News-Karten, News-Bilder, Datumsbadges, Linkbuttons und Share-Toast.
+ * Wird auf der Startseite für den Bereich Aktuelles verwendet.
+ */
+
+#news-grid {
     display: flex;
     flex-wrap: wrap;
     align-items: stretch;
@@ -141,5 +146,6 @@
 .share-toast--error {
     background: #b91c1c;
 }
+
 
 

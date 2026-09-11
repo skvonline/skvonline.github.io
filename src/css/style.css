@@ -1,4 +1,9 @@
-﻿@import url('./elements/base.css');
+﻿/*
+ * Zentraler CSS-Einstiegspunkt der Webseite.
+ * Importiert Basisstyles und die elementbezogenen Styles aus src/css/elements.
+ */
+
+@import url('./elements/base.css');
 @import url('./elements/header.css');
 @import url('./elements/hero.css');
 @import url('./elements/sponsors.css');
@@ -13,3 +18,4 @@
 @import url('./elements/linktree.css');
 @import url('./elements/faq.css');
 @import url('./elements/responsive.css');
+

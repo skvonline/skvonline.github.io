@@ -1,4 +1,9 @@
-﻿async function loadComponent(targetId, path) {
+﻿/*
+ * Gemeinsame JavaScript-Helfer für Komponenten, Pfade, Bilder, Sichtbarkeitsfenster und Chunk-Rendering.
+ * Diese Datei enthält Basisfunktionen, die von mehreren Seitenelementen verwendet werden.
+ */
+
+async function loadComponent(targetId, path) {
   const target = document.getElementById(targetId);
   if (!target) return;
 
@@ -180,5 +185,6 @@ function normalizeImagePathForSubpage(imagePath) {
 
   return imagePath;
 }
+
 
 

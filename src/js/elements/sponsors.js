@@ -1,4 +1,9 @@
-﻿function setupSponsorsMarquee() {
+﻿/*
+ * Logik für das Sponsorenlaufband.
+ * Klont Sponsoreneinträge und berechnet Animationstrecke sowie Geschwindigkeit responsiv.
+ */
+
+function setupSponsorsMarquee() {
   const track = document.getElementById('sponsors-track');
   if (!track) return;
 
@@ -48,5 +53,6 @@
     track.dataset.marqueeResizeBound = 'true';
   }
 }
+
 
 

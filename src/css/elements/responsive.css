@@ -1,4 +1,9 @@
-﻿@media (max-width: 700px) {
+﻿/*
+ * Gemeinsame responsive Anpassungen für mehrere Seitenelemente.
+ * Enthält mobile Navigation, mobile Kartenlayouts und Lightbox-Anpassungen.
+ */
+
+@media (max-width: 700px) {
     .event-card:not(.event-card--no-image) {
         flex-basis: 320px;
         max-width: 320px;
@@ -242,5 +247,6 @@
         background: var(--skv-primary);
     }
 }
+
 
 
