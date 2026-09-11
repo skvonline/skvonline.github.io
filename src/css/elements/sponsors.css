@@ -1,0 +1,51 @@
+﻿#sponsors {
+    padding-bottom: 0;
+    background: #fff;
+}
+
+.sponsors-marquee {
+    margin-top: 1.5rem;
+    overflow: hidden;
+}
+
+.sponsors-track {
+    --sponsors-marquee-duration: 24s;
+    --sponsors-marquee-distance: -50%;
+    display: flex;
+    gap: 1rem;
+    width: max-content;
+    will-change: transform;
+    animation: sponsors-marquee var(--sponsors-marquee-duration) linear infinite;
+}
+
+.sponsor-slide {
+    flex: 0 0 auto;
+    margin: 0;
+    height: 150px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+}
+
+.sponsor-image {
+    max-width: none;
+    width: auto;
+    height: 100px;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 2px solid #4169e1;
+    box-shadow: 0 0 10px rgba(65, 105, 225, 0.45);
+    background: #fff;
+}
+
+@keyframes sponsors-marquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(var(--sponsors-marquee-distance));
+    }
+}
+
+

@@ -1,0 +1,35 @@
+﻿.footer {
+    background: var(--skv-primary);
+    color: #fff;
+    padding: 2rem 0;
+}
+
+.footer-content {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.footer-logos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+.footer-logo {
+    height: 150px;
+    margin: 0 2rem;
+    width: auto;
+    max-width: min(120px, 28vw);
+    object-fit: contain;
+    object-position: center;
+}
+
+.footer-links {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+

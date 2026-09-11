@@ -1,0 +1,246 @@
+﻿@media (max-width: 700px) {
+    .event-card:not(.event-card--no-image) {
+        flex-basis: 320px;
+        max-width: 320px;
+    }
+
+    .event-card-layout,
+    .event-card--image-right .event-card-layout {
+        flex-direction: column;
+    }
+
+    .event-card-media {
+        flex-basis: auto;
+    }
+
+    .event-image {
+        min-height: 180px;
+    }
+
+    #news-grid {
+        gap: 0.8rem;
+    }
+
+    .news-card--large {
+        min-height: 0;
+    }
+
+    .news-card {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    .event-detail-overlay {
+        width: 100%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: auto;
+        padding: 0.9rem 0.95rem;
+        border-radius: 20px 20px 0 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.42));
+        gap: 0.3rem;
+    }
+
+    .sponsor-slide {
+        flex-basis: auto;
+        min-height: 100px;
+    }
+
+    .sponsor-image {
+        height: 100px;
+        width: auto;
+        max-width: none;
+        max-height: none;
+    }
+}
+
+
+@media (max-width: 960px) {
+    nav {
+        display: none;
+    }
+
+    .header-socials {
+        display: none;
+    }
+
+    .mobile-nav .header-socials {
+        display: flex;
+        justify-content: center;
+        gap: 0.7rem;
+        padding: 1rem 4vw 1.2rem;
+        margin-top: 0.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    #menu_button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mobile-nav {
+        display: block;
+    }
+
+    .mobile-nav[hidden] {
+        display: none;
+    }
+
+    .mobile-nav .main-menu {
+        width: 100%;
+        padding: 0.9rem 4vw 1.1rem;
+        gap: 0.35rem;
+    }
+
+    .mobile-nav .main-menu > li {
+        width: 100%;
+    }
+
+    .mobile-nav .main-menu > li > a {
+        display: block;
+        width: 100%;
+        padding: 0.58rem 0.75rem;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .mobile-nav .has-submenu > a::after {
+        float: right;
+        margin-top: 0.2rem;
+    }
+
+    .mobile-nav .submenu {
+        position: static;
+        display: block;
+        min-width: 0;
+        margin: 0 0 0 0.75rem;
+        padding: 0 0.55rem;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.06);
+        border-left: 2px solid transparent;
+        border-radius: 0 10px 10px 0;
+        box-shadow: none;
+        transform: none;
+        transition: max-height 0.28s ease, opacity 0.25s ease, padding 0.25s ease, margin 0.25s ease, border-color 0.25s ease;
+    }
+
+    .mobile-nav .has-submenu.is-open > .submenu {
+        margin-top: 0.3rem;
+        padding: 0.2rem 0.55rem;
+        max-height: 14rem;
+        opacity: 1;
+        border-left-color: rgba(255, 255, 255, 0.24);
+    }
+
+    .mobile-nav .submenu a {
+        padding: 0.32rem 0.2rem;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    .board-details {
+        bottom: -100%;
+    }
+
+    .board-card.is-open .board-details {
+        bottom: 0;
+    }
+
+    .board-card.is-open .board-poster::before {
+        bottom: 0;
+    }
+
+    .royals-lightbox-dialog {
+        width: min(92vw, 760px);
+        margin: 3vh auto;
+    }
+
+    .royals-lightbox-image {
+        max-height: calc(95vh - 13rem);
+    }
+}
+
+@media (max-width: 640px) {
+    #elferrat-grid {
+        gap: 0.7rem;
+    }
+
+    #elferrat-grid .elferrat-card {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    .elferrat-card {
+        display: grid;
+        grid-template-columns: 76px minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-items: center;
+        text-align: left;
+        column-gap: 0.75rem;
+        row-gap: 0.1rem;
+        padding: 0.7rem 0.8rem;
+        border-radius: 14px;
+    }
+
+    .elferrat-image {
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        width: 76px;
+        height: 76px;
+        margin: 0;
+        flex: 0 0 76px;
+    }
+
+    .elferrat-name {
+        grid-column: 2;
+        grid-row: 1;
+        margin: 0 0 0.2rem;
+        font-size: 1rem;
+        line-height: 1.25;
+    }
+
+    .elferrat-role {
+        grid-column: 2;
+        grid-row: 2;
+        font-size: 0.92rem;
+        line-height: 1.3;
+    }
+
+    .board-wrapper {
+        padding: 0;
+    }
+
+    .royal-gallery-overlay {
+        font-size: 0.74rem;
+    }
+
+    .royals-lightbox-dialog {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+        max-height: 92vh;
+    }
+
+    .royals-lightbox-nav {
+        width: 100%;
+        height: 42px;
+        font-size: 1.8rem;
+        background: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+    }
+
+    .royals-lightbox-nav--prev {
+        grid-row: 2;
+        background: var(--skv-primary);
+    }
+
+    .royals-lightbox-nav--next {
+        grid-row: 3;
+        background: var(--skv-primary);
+    }
+}
+
+
