@@ -63,33 +63,49 @@ async function loadHomeContent() {
     setupEventShareButtons();
   }
 
-  chunkRender({
-    items: news,
-    containerId: 'news-grid',
-    buttonId: 'news-more',
-    chunkSize: 3,
-    renderItem: (entry) => {
-      const dateMarkup = getNewsDateMarkup(entry);
-      const imageMarkup = normalizeImage(entry.image).src
-        ? `<div class="news-media">
-            ${createImageMarkup(entry.image, entry.title, 'news-image')}
-            ${dateMarkup}
-          </div>`
-        : '';
-      const newsSizeClass = entry.large ? ' news-card--large' : '';
-      const headerMarkup = !normalizeImage(entry.image).src && dateMarkup ? `<div class="news-header">${dateMarkup}</div>` : '';
-
-      return `
-        <article class="card news-card${newsSizeClass}">
-          ${headerMarkup}
-          ${imageMarkup}
-          <h3>${entry.title}</h3>
-          <p>${entry.text}</p>
-          ${getNewsLinksMarkup(entry)}
+  if (news.length === 0) {
+    const newsContainer = document.getElementById('news-grid');
+    const newsMoreButton = document.getElementById('news-more');
+    if (newsContainer) {
+      newsContainer.innerHTML = `
+        <article class="news-empty-state" aria-live="polite">
+          <h3>Gerade gibt es keine Neuigkeiten</h3>
+          <p>Schau gern bald wieder vorbei. Sobald es etwas Neues vom SKV gibt, findest du es hier.</p>
         </article>
       `;
-    },
-  });
+    }
+    if (newsMoreButton) {
+      newsMoreButton.hidden = true;
+    }
+  } else {
+    chunkRender({
+      items: news,
+      containerId: 'news-grid',
+      buttonId: 'news-more',
+      chunkSize: 3,
+      renderItem: (entry) => {
+        const dateMarkup = getNewsDateMarkup(entry);
+        const imageMarkup = normalizeImage(entry.image).src
+          ? `<div class="news-media">
+              ${createImageMarkup(entry.image, entry.title, 'news-image')}
+              ${dateMarkup}
+            </div>`
+          : '';
+        const newsSizeClass = entry.large ? ' news-card--large' : '';
+        const headerMarkup = !normalizeImage(entry.image).src && dateMarkup ? `<div class="news-header">${dateMarkup}</div>` : '';
+
+        return `
+          <article class="card news-card${newsSizeClass}">
+            ${headerMarkup}
+            ${imageMarkup}
+            <h3>${entry.title}</h3>
+            <p>${entry.text}</p>
+            ${getNewsLinksMarkup(entry)}
+          </article>
+        `;
+      },
+    });
+  }
 
   const vorstandGrid = document.getElementById('vorstand-grid');
   if (vorstandGrid) {

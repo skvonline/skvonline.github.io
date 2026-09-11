@@ -11,6 +11,26 @@
     gap: 1rem;
 }
 
+.news-empty-state {
+    width: min(680px, 100%);
+    padding: 1.4rem 1.6rem;
+    border: 1px solid rgba(31, 78, 216, 0.14);
+    border-radius: 18px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    color: #0f172a;
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
+}
+
+.news-empty-state h3 {
+    margin: 0 0 0.45rem;
+    color: var(--skv-dark);
+}
+
+.news-empty-state p {
+    margin: 0;
+    color: #334155;
+}
+
 .news-card--large {
     min-height: 360px;
 }
