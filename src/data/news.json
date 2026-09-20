@@ -1,5 +1,30 @@
 [
   {
+    "title": "Teilnahme am Lettiner Freundschaftswettkampf",
+    "date": "19.09.2026",
+    "text": "Am heutigen Samstag haben unser Solomariechen Luna und unsere Tanzgruppe Voyage am Lettiner Freundschaftswettkampf teilgenommen. Mehr Einblicke und die Ergebnisse findet ihr auf Instagram und Facebook. ",
+    "image": {
+      "src": "./src/img/news/25592.jpg",
+      "ki": false,
+      "teilweiseKi": false
+    },
+    "publishAt": "2026-09-19-21:00",
+    "deleteAt": "2027-09-19-23:59",
+    "links": [
+      {
+        "label": "Instagram",
+        "url": "https://www.instagram.com/p/DdemPbWEa7H/?stkn=eXJ3MGxndnBiNHds",
+        "type": "instagram"
+      },
+      {
+        "label": "Facebook",
+        "url": "https://www.facebook.com/share/p/1DgXP5K4es/",
+        "type": "facebook"
+      }
+    ],
+    "large": true
+  },
+  {
     "title": "Beginn des Kartenverkaufs für die 48. Session",
     "date": "04.09.2026",
     "text": "Bald geht es wieder los. Der Vorverkauf der Karten für die Lumpenbälle startet auch bald. Alle Informationen dazu findet ihr hier:",
