@@ -14,6 +14,7 @@
     'royals.js',
     'vorstand.js',
     'sponsors.js',
+    'masonry.js',
     'home.js',
     'downloads.js',
     'linktree.js',
@@ -47,4 +48,3 @@
       console.error(error);
     });
 })();
-

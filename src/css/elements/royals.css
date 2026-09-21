@@ -1,4 +1,4 @@
-﻿/*
+﻿﻿/*
  * Styles für Prinzenpaar-Galerie, Karten ohne Bild, Overlays und Lightbox.
  * Enthält auch die Darstellung der Download- und Detailinformationen in der Lightbox.
  */
@@ -26,11 +26,12 @@
 .royal-gallery-item {
     position: relative;
     flex: 0 1 265px;
+    min-width: 0;
+    aspect-ratio: 3 / 4;
     padding: 0;
     border: 0;
     border-radius: 14px;
     overflow: hidden;
-    min-height: 240px;
     box-shadow: 0 8px 20px rgba(30, 41, 59, 0.13);
     cursor: pointer;
 }
@@ -50,10 +51,22 @@
 }
 
 
+.royal-gallery-item > .image-with-label,
+.royal-gallery-item > .royal-gallery-placeholder {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+}
+
+.royal-gallery-item > .image-with-label {
+    display: block;
+}
+
 .royal-gallery-image {
     width: 100%;
     height: 100%;
-    min-height: 240px;
     object-fit: cover;
     display: block;
 }
@@ -369,7 +382,6 @@ body.lightbox-open {
     border-radius: 999px;
     font-size: 2rem;
 }
-
 
 
 

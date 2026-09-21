@@ -109,7 +109,9 @@ function setupFaqSearch() {
     ['Verein & Mitgliedschaft', /verein|mitglied|gruppen|mitmachen|unterstützen/i],
     ['Kontakt', /kontakt|informationen|antwort/i],
   ];
-  const normalize = (value) => value.toLocaleLowerCase('de').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  const normalize = (value) => value.toLocaleLowerCase('de')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/ae/g, 'a').replace(/oe/g, 'o').replace(/ue/g, 'u').replace(/ß/g, 'ss');
 
   sections.forEach((section) => {
     const heading = section.querySelector('h2');
@@ -136,11 +138,13 @@ function setupFaqSearch() {
 
   const applyFilters = () => {
     const term = normalize(searchInput.value.trim());
+    const words = term.split(/\s+/).filter(Boolean);
     let visibleCount = 0;
     sections.forEach((section) => {
       let sectionCount = 0;
       section.querySelectorAll('details').forEach((question) => {
-        const searchMatches = !term || normalize(`${question.textContent} ${question.dataset.tags}`).includes(term);
+        const searchableText = normalize(`${question.textContent} ${question.dataset.tags || ''}`);
+        const searchMatches = words.every((word) => searchableText.includes(word));
         question.hidden = !searchMatches;
         if (!question.hidden) sectionCount += 1;
       });
@@ -176,6 +180,5 @@ function setupFaqSearch() {
   }
   applyFilters();
 }
-
 
 

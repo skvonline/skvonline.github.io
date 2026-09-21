@@ -198,6 +198,8 @@ Diese Checkliste wird von oben nach unten abgearbeitet. Ein Punkt gilt erst als 
 - [ ] Trefferanzahl wird angezeigt.
 - [ ] Passende Fragen bleiben sichtbar.
 - [ ] Nicht passende Fragen werden ausgeblendet.
+- [ ] Mehrere Stichwörter in umgekehrter Reihenfolge liefern dieselben Treffer.
+- [ ] `Getränke` und `Getraenke` liefern dieselben Treffer; ebenso `Straße` und `Strasse`.
 - [ ] Suche über den X-Button leeren.
 - [ ] Kategorien sind wieder nutzbar.
 - [ ] Nach einem bewusst falschen Begriff suchen, z. B. `xyzabc`.

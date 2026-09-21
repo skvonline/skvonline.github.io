@@ -61,6 +61,7 @@ async function loadHomeContent() {
       },
     });
     setupEventShareButtons();
+    setupMasonryGrid('events-grid', '.event-card', { centerLastCard: true });
   }
 
   if (news.length === 0) {
@@ -85,27 +86,30 @@ async function loadHomeContent() {
       chunkSize: 3,
       renderItem: (entry) => {
         const dateMarkup = getNewsDateMarkup(entry);
-        const imageMarkup = normalizeImage(entry.image).src
+        const hasImage = Boolean(normalizeImage(entry.image).src);
+        const imageMarkup = hasImage
           ? `<div class="news-media">
               ${createImageMarkup(entry.image, entry.title, 'news-image')}
               ${dateMarkup}
             </div>`
           : '';
-        const newsSizeClass = entry.large ? ' news-card--large' : '';
-        const headerMarkup = !normalizeImage(entry.image).src && dateMarkup ? `<div class="news-header">${dateMarkup}</div>` : '';
 
         return `
-          <article class="card news-card${newsSizeClass}">
-            ${headerMarkup}
+          <article class="card news-card${hasImage ? '' : ' news-card--no-image'}">
             ${imageMarkup}
-            <h3>${entry.title}</h3>
-            <p>${entry.text}</p>
-            ${getNewsLinksMarkup(entry)}
+            <div class="news-body">
+              ${!hasImage && dateMarkup ? `<div class="news-header">${dateMarkup}</div>` : ''}
+              <h3>${entry.title}</h3>
+              <p>${entry.text}</p>
+              ${getNewsLinksMarkup(entry)}
+            </div>
           </article>
         `;
       },
     });
   }
+
+  if (news.length > 0) setupMasonryGrid('news-grid', '.news-card');
 
   const vorstandGrid = document.getElementById('vorstand-grid');
   if (vorstandGrid) {
@@ -204,7 +208,3 @@ async function loadHomeContent() {
     setupSponsorsMarquee();
   }
 }
-
-
-
-
