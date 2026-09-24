@@ -64,7 +64,7 @@ function setupHeroCarousel() {
         video.play().catch(skipUnavailableVideo);
       }
     } else if (slides.length > 1) {
-      timer = setTimeout(nextSlide, 5000);
+      timer = setTimeout(nextSlide, 10000);
     }
   }
 
