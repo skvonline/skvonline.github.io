@@ -445,6 +445,8 @@ Pfad: `src/data/gallerys/{xyz}.json`
 Die Einträge erscheinen in der Reihenfolge im Array; Bilder und Videos können
 beliebig gemischt werden. Nach dem letzten Eintrag beginnt die Galerie von vorn.
 `gallerys/sponsors.json` unterstützt weiterhin ausschließlich Bilder.
+Die sichtbaren Texte und ihre Layouts werden in `home-gallery-texts.json`
+gepflegt und über `textId` den Bildern oder Videos zugeordnet (Abschnitt 8.6).
 
 - Bilder bleiben jeweils fünf Sekunden sichtbar. Ein einzelnes Bild bleibt stehen.
 - Videos starten automatisch und stumm, auf Mobilgeräten innerhalb der Seite.
@@ -458,6 +460,7 @@ beliebig gemischt werden. Nach dem letzten Eintrag beginnt die Galerie von vorn.
 |------|-----|---------|--------------|
 | `image` | `object` | Für Bilder | Bildobjekt nach Abschnitt 1.5. |
 | `video` | `object` | Für Videos | Nur Headergalerie: Videoobjekt nach Abschnitt 8.3. |
+| `textId` | `string`  | Optional | Nur Headergalerie: `id` aus `home-gallery-texts.json`. |
 | `alt` | `string` | Empfohlen | Kurze Beschreibung des Bild- oder Videoinhalts. Steht neben `image` bzw. `video`, nicht darin. |
 
 Pro Eintrag entweder `image` oder `video` verwenden. Sind versehentlich beide
@@ -508,6 +511,7 @@ Video. `poster` ist optional und kann weggelassen werden.
 [
   {
     "alt": "Titelbild",
+    "textId": "welcome",
     "image": {
       "src": "./src/img/gallerys/home-gallery/01.JPG",
       "ki": false,
@@ -516,6 +520,7 @@ Video. `poster` ist optional und kann weggelassen werden.
   },
   {
     "alt": "Beschreibung des Videoinhalts",
+    "textId": "welcome",
     "video": {
       "src": "./src/img/gallerys/home-gallery/video1.mp4",
       "poster": "./src/img/gallerys/home-gallery/01.JPG",
@@ -526,6 +531,148 @@ Video. `poster` ist optional und kann weggelassen werden.
   }
 ]
 ```
+
+
+### 8.6 Datei: `home-gallery-texts.json`
+
+Pfad: `src/data/home-gallery-texts.json`
+
+Diese Datei enthält ein Array wiederverwendbarer Textblöcke. Alle Formate werden
+als reiner weißer Text horizontal und vertikal mittig angezeigt, ohne Kasten.
+Topline, Headline bzw. Countdown und Subline unterscheiden sich in Größe und Gewicht.
+Die Darstellung passt sich an kleine Bildschirme an.
+
+Die Zuordnung erfolgt über die eindeutige `id`: In `home-gallery.json` steht
+beispielsweise `"textId": "welcome"` neben `image` oder `video`.
+Mehrere Medien dürfen dieselbe `textId` verwenden.
+
+| Feld | Typ | Pflicht | Beschreibung |
+|------|-----|---------|--------------|
+| `id` | `string` | Ja | Eindeutiger Schlüssel des Textblocks. |
+| `format` | `string` | Empfohlen | Eines der sechs Formate aus der folgenden Tabelle. Standard: `headline-subline`. |
+| `topline` | `string` | Je nach Format | Kleine Zeile oberhalb des Hauptinhalts, in Großbuchstaben dargestellt. |
+| `headline` | `string` | Je nach Format | Große Überschrift. |
+| `subline` | `string` | Je nach Format | Kleinere Beschreibung unter dem Hauptinhalt. |
+| `countdown` | `string` | Bei Countdownformaten | Zielzeitpunkt ausschließlich im Format `JJJJ-MM_TT_HH:mm`, z. B. `2026-11_11_11:11`. |
+| `text_id` | `string` | Bei Countdownformaten | `id` des Textblocks, der nach Ablauf angezeigt wird, z. B. `welcome`. |
+
+#### Die sechs Formate
+
+| Nr. | `format` | Angezeigte Felder in Reihenfolge |
+|-----|----------|---------------------------------|
+| 1 | `headline-subline` | Headline + Subline |
+| 2 | `topline-headline` | Topline + Headline |
+| 3 | `topline-headline-subline` | Topline + Headline + Subline |
+| 4 | `countdown-subline` | Countdown + Subline |
+| 5 | `topline-countdown` | Topline + Countdown |
+| 6 | `topline-countdown-subline` | Topline + Countdown + Subline |
+
+Nur die zum Format gehörenden Felder werden angezeigt. Fehlende oder leere
+Textfelder werden ausgelassen. Unbekannte Formate verwenden `headline-subline`.
+Texte werden als Klartext ausgegeben; HTML wird nicht interpretiert.
+`\n` erzeugt einen Zeilenumbruch. `alt` im Galerieeintrag beschreibt weiterhin
+unabhängig davon das Medium für Screenreader.
+
+Die früheren Layoutfelder für Position, Breite und Hintergrund entfallen und
+werden ignoriert. Bestehende `eyebrow`-, `title`- und `text`-Felder werden noch als
+Ersatz für `topline`, `headline` und `subline` gelesen; neue Einträge sollten die
+neuen Feldnamen und ein ausdrückliches `format` verwenden.
+
+#### Countdown
+
+- Anzeige: Tage, Stunden, Minuten und Sekunden als reine Zahlen mit Beschriftungen.
+- Der sichtbare Countdown aktualisiert sich jede Sekunde und wird beim erneuten Anzeigen sofort neu berechnet.
+- Der Zielzeitpunkt hat genau das Format `JJJJ-MM_TT_HH:mm`: Bindestrich nach dem Jahr, Unterstriche vor Tag und Stunde, Doppelpunkt vor den Minuten. Beispiel: `2026-11_11_11:11`.
+- Die Uhrzeit wird in der lokalen Zeitzone des Browsers interpretiert. Sekunden oder Zeitzonenangaben sind nicht zulässig. Dieses Format gilt für den Galerie-Countdown; das Hinweisband behält sein bisheriges Datumsformat.
+- Nach Ablauf wird der über `text_id` referenzierte Textblock angezeigt, einschließlich seines Formats. Der Wechsel erfolgt spätestens beim nächsten Sekundentakt, ohne das Bild oder Video neu zu starten. Ist der Countdown beim Laden bereits abgelaufen, erscheint sofort der Folgetext.
+- Fehlt `text_id` oder existiert die angegebene ID nicht, bleibt der Countdown bei null stehen. Verweise auf weitere Countdowns sind möglich; bereits abgelaufene werden ebenfalls aufgelöst. Zirkuläre Verweise werden abgebrochen, der ursprüngliche Countdown bleibt dann bei null stehen.
+- Bei fehlendem oder ungültigem Zielzeitpunkt erscheint „Countdown nicht verfügbar“.
+- Der Countdown steuert nicht die Anzeigedauer: Bilder wechseln weiterhin nach fünf Sekunden, Videos nach ihrem Ende.
+
+#### Beispiele für alle sechs Formate
+
+Das folgende Array zeigt alle Varianten. Texte und Zielzeitpunkte passend zum
+gewünschten Inhalt anpassen. Die Countdownbeispiele werden erst sichtbar, wenn
+ihre `id` in `home-gallery.json` als `textId` zugeordnet wird.
+
+```json
+[
+  {
+    "id": "welcome",
+    "format": "headline-subline",
+    "headline": "Herzlich willkommen beim Sandersdorfer Karnevalsverein e.V.",
+    "subline": "Tradition, Gemeinschaft und Stimmung – seit 1979 mitten in Sandersdorf."
+  },
+  {
+    "id": "team",
+    "format": "topline-headline",
+    "topline": "Sandersdorfer Karnevalsverein e.V.",
+    "headline": "Unser Präsident Gerd"
+  },
+  {
+    "id": "strassenkarneval",
+    "format": "topline-headline-subline",
+    "topline": "Gemeinsam feiern",
+    "headline": "Straßenkarneval in Sandersdorf",
+    "subline": "Tradition, Gemeinschaft und Stimmung – mitten in Sandersdorf."
+  },
+  {
+    "id": "countdown-subline",
+    "format": "countdown-subline",
+    "countdown": "2026-11_11_11:11",
+    "text_id": "welcome",
+    "subline": "Bis zur Sessions-Eröffnung am Rathaus Sandersdorf."
+  },
+  {
+    "id": "topline-countdown",
+    "format": "topline-countdown",
+    "topline": "Die Session beginnt in",
+    "countdown": "2026-11_11_11:11",
+    "text_id": "welcome"
+  },
+  {
+    "id": "session",
+    "format": "topline-countdown-subline",
+    "topline": "Die Session beginnt in",
+    "countdown": "2026-11_11_11:11",
+    "text_id": "welcome",
+    "subline": "Am 11. November um 11:11 Uhr am Rathaus Sandersdorf."
+  }
+]
+```
+
+#### Vorbereitetes Countdownbeispiel
+
+In `home-gallery-texts.json` ist der Textblock `session-countdown` bereits angelegt.
+Sein Feld `"text_id": "welcome"` zeigt nach Ablauf den Begrüßungstext. Hier kann
+die `id` jedes anderen Textblocks aus derselben Datei eingetragen werden.
+`text_id` im Textblock bestimmt den Folgetext; `textId` im Galerieeintrag bestimmt
+den ursprünglich zugeordneten Text.
+Um ihn bei einem Bild oder Video anzuzeigen, dessen `textId` in `home-gallery.json`
+auf `"session-countdown"` setzen. Beispiel für einen Galerieeintrag:
+
+```json
+{
+  "alt": "Titelbild",
+  "textId": "session-countdown",
+  "image": {
+    "src": "./src/img/gallerys/home-gallery/01.JPG",
+    "ki": false,
+    "teilweiseKi": false
+  }
+}
+```
+
+#### Wechsel und Ersatztexte
+
+- Folgen Medien mit demselben sichtbaren Text und Format aufeinander, bleibt der Text ohne erneutes Einblenden stehen. Das gilt auch für gleiche Inhalte unter verschiedenen IDs und für identische Folgetexte abgelaufener Countdowns.
+
+- Text und Medium wechseln gemeinsam. Bei Videos bleibt der zugeordnete Text bis zum Videoende sichtbar; läuft sein Countdown vorher ab, wird bereits während des Videos der Folgetext angezeigt.
+- `"textId": null` blendet den sichtbaren Text für diesen Eintrag aus.
+- Fehlt `textId` oder ist die ID unbekannt, wird der Block `welcome` verwendet.
+- Fehlt auch `welcome` oder kann die Textdatei nicht geladen werden, erscheint der bisherige Begrüßungstext aus der Startseite.
+- Nur der aktive Textblock ist sichtbar und für Screenreader zugänglich. Der Countdown wird nicht jede Sekunde automatisch vorgelesen.
+- Die Galerie berücksichtigt die Höhe aller Textblöcke, damit nachfolgende Inhalte beim Wechsel nicht springen.
 
 ---
 
@@ -637,6 +784,7 @@ mit `./src/data/faqs/dummy.html` eine kopierbare Seitenvorlage bereit.
 7. `publishAt` liegt zeitlich vor `deleteAt` (wenn beide gesetzt).
 8. Headergalerie: pro Eintrag `image` oder `video` verwenden und einen passenden `alt`-Text setzen.
 9. KI-Labels: genau eine Kennzeichnung auf `true` setzen und `theme` angeben; ohne Label beide auf `false` setzen.
+10. Headertexte: eindeutige IDs in `home-gallery-texts.json` vergeben und `textId` in `home-gallery.json` prüfen; für keinen Text ausdrücklich `null` verwenden.
 
 ---
 
@@ -762,6 +910,7 @@ mit `./src/data/faqs/dummy.html` eine kopierbare Seitenvorlage bereit.
 [
   {
     "alt": "Titelbild",
+    "textId": "welcome",
     "image": {
       "src": "./src/img/gallerys/home-gallery/01.JPG",
       "ki": false,
@@ -770,6 +919,7 @@ mit `./src/data/faqs/dummy.html` eine kopierbare Seitenvorlage bereit.
   },
   {
     "alt": "Beschreibung des Videoinhalts",
+    "textId": "welcome",
     "video": {
       "src": "./src/img/gallerys/home-gallery/video1.mp4",
       "ki": false,

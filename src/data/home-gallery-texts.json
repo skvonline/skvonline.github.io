@@ -1,0 +1,28 @@
+[
+  {
+    "id": "welcome",
+    "headline": "Herzlich willkommen beim Sandersdorfer Karnevalsverein e.V.",
+    "subline": "Tradition, Gemeinschaft und Stimmung – seit 1979 mitten in Sandersdorf.",
+    "format": "headline-subline"
+  },
+  {
+    "id": "strassenkarneval",
+    "headline": "Straßenkarneval in Sandersdorf",
+    "topline": "Gemeinsam feiern",
+    "format": "topline-headline"
+  },
+  {
+    "id": "spassAnDerFreude",
+    "headline": "Aus Spaß an der Freude",
+    "format": "topline-headline",
+    "topline": "Sandoria Hellau"
+  },
+  {
+    "id": "session-counter",
+    "format": "topline-countdown-subline",
+    "topline": "Die Session beginnt in",
+    "countdown": "2026-11-11-11:11",
+    "text_id": "welcome",
+    "subline": "Wir sehen uns am 11.11. um 11:11 Uhr am Rathaus Sandersdorf."
+  }
+]

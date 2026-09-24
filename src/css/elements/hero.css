@@ -79,13 +79,105 @@
     user-select: none;
 }
 
-.hero h1 {
-    font-size: clamp(1.8rem, 5vw, 3rem);
-    margin-bottom: 1rem;
-}
-
 .lead {
     font-size: clamp(1rem, 2.4vw, 1.3rem);
 }
 
+.hero-content {
+    display: grid;
+    align-self: stretch;
+    padding-block: clamp(3rem, 8vw, 6rem);
+}
 
+.hero-text-panel {
+    grid-area: 1 / 1;
+    display: grid;
+    place-items: center;
+    min-width: 0;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+}
+
+.hero-text-panel.active {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.hero-text-box {
+    display: grid;
+    justify-items: center;
+    gap: clamp(0.9rem, 2vw, 1.5rem);
+    width: 100%;
+    max-width: 64rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 2px 18px rgb(0 0 0 / 35%);
+    overflow-wrap: anywhere;
+}
+
+.hero-text-box h1,
+.hero-text-box p {
+    margin: 0;
+    text-align: center;
+    white-space: pre-line;
+    text-wrap: balance;
+}
+
+.hero-headline {
+    max-width: 22ch;
+    font-size: clamp(2rem, 4.8vw, 4rem);
+    line-height: 1.12;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+}
+
+.hero-topline {
+    max-width: 60ch;
+    font-size: clamp(0.8rem, 1.6vw, 1rem);
+    line-height: 1.5;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.hero-subline {
+    max-width: 60ch;
+    font-size: clamp(1rem, 2vw, 1.35rem);
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+.hero-countdown {
+    display: flex;
+    justify-content: center;
+    gap: clamp(0.65rem, 3vw, 2.5rem);
+    max-width: 100%;
+    font-variant-numeric: tabular-nums;
+}
+
+.hero-countdown-unit {
+    display: grid;
+    gap: 0.45rem;
+    min-width: 0;
+}
+
+.hero-countdown-value {
+    font-size: clamp(1.8rem, 6.5vw, 5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+}
+
+.hero-countdown-label {
+    font-size: clamp(0.6rem, 1.4vw, 0.9rem);
+    line-height: 1.4;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-text-panel { transition: none; }
+}
