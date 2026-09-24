@@ -27,6 +27,7 @@
     z-index: -2;
 }
 
+.hero-slide-wrapper,
 .image-with-label.hero-slide-wrapper {
     position: absolute;
     inset: 0;
@@ -86,6 +87,5 @@
 .lead {
     font-size: clamp(1rem, 2.4vw, 1.3rem);
 }
-
 
 

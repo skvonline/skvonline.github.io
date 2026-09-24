@@ -83,6 +83,9 @@ Alle Bildreferenzen verwenden ein `image`-Objekt mit `src`, `ki`, `teilweiseKi` 
 - Wenn beide Felder `false` sind, ist `theme` optional.
 - Gekennzeichnete Bilder erhalten links oben das passende Label und werden gegen Kontextmenü und Drag-and-drop geschützt.
 
+Die gleichen KI-Regeln gelten für `video`-Objekte in der Headergalerie.
+Videoformat und Beispiele stehen in Abschnitt 8.
+
 ## 2) Datei: `news.json`
 
 Pfad: `src/data/news.json`
@@ -436,28 +439,90 @@ Unterstützte Icons:
 
 Pfad: `src/data/gallerys/{xyz}.json`
 
-### 8.1 Zweck
+### 8.1 Zweck und Wiedergabe
 
-Bildauflistung für Galerien.
+`gallerys/home-gallery.json` steuert die Headergalerie auf der Startseite.
+Die Einträge erscheinen in der Reihenfolge im Array; Bilder und Videos können
+beliebig gemischt werden. Nach dem letzten Eintrag beginnt die Galerie von vorn.
+`gallerys/sponsors.json` unterstützt weiterhin ausschließlich Bilder.
+
+- Bilder bleiben jeweils fünf Sekunden sichtbar. Ein einzelnes Bild bleibt stehen.
+- Videos starten automatisch und stumm, auf Mobilgeräten innerhalb der Seite.
+- Erst nach dem Videoende folgt der nächste Eintrag; eine Dauer muss nicht eingetragen werden.
+- Bei jedem erneuten Anzeigen startet das Video von vorn. Ein einzelnes Video wird wiederholt.
+- Meldet der Browser einen Ladefehler oder lehnt die Wiedergabe ab, folgt nach fünf Sekunden der nächste Eintrag.
 
 ### 8.2 Felder pro Eintrag
 
-| Feld  | Typ      | Pflicht  | Beschreibung                                      |
-|-------|----------|----------|---------------------------------------------------|
-| `image` | `object` | Ja       | Bildobjekt (siehe globale Bildregeln).              |
-| `alt` | `string` | Optional | Alt-Text (Fallback: `Bild aus der Home-Gallery`). |
+| Feld | Typ | Pflicht | Beschreibung |
+|------|-----|---------|--------------|
+| `image` | `object` | Für Bilder | Bildobjekt nach Abschnitt 1.5. |
+| `video` | `object` | Für Videos | Nur Headergalerie: Videoobjekt nach Abschnitt 8.3. |
+| `alt` | `string` | Empfohlen | Kurze Beschreibung des Bild- oder Videoinhalts. Steht neben `image` bzw. `video`, nicht darin. |
 
-### 8.3 Vorlage
+Pro Eintrag entweder `image` oder `video` verwenden. Sind versehentlich beide
+vorhanden und enthält `video.src` einen Pfad, wird das Video angezeigt.
+
+Bei Bildern wird `alt` als Bildalternativtext verwendet, bei Videos als
+`aria-label` und Fallback-Text. Ohne Beschreibung lautet der Ersatztext
+`Bild aus der Home-Gallery` bzw. `Video aus der Home-Gallery`.
+Der aktive Galerieeintrag ist für Screenreader zugänglich; inaktive Einträge
+sind ausgeblendet. Der Alternativtext erscheint nicht als sichtbare Bildunterschrift.
+
+### 8.3 Felder im `video`-Objekt
+
+| Feld | Typ | Pflicht | Beschreibung |
+|------|-----|---------|--------------|
+| `src` | `string` | Ja | Pfad zur Videodatei, z. B. `./src/img/gallerys/home-gallery/video1.mp4`. |
+| `poster` | `string` | Optional | Pfad zu einem Vorschaubild, das vor der Wiedergabe angezeigt werden kann. |
+| `ki` | `boolean` | Empfohlen | `true` für vollständig KI-generierte Videos, sonst `false`. |
+| `teilweiseKi` | `boolean` | Empfohlen | `true` für teilweise KI-generierte Videos, sonst `false`. |
+| `theme` | `string` | Bei KI-Label | `white` oder `black` bestimmt die Farbe des Labels. |
+
+Videodateien können direkt unter `src/img/gallerys/home-gallery/` abgelegt werden.
+`src` und `poster` sind Pfade relativ zur Startseite. Dateiname und
+Groß-/Kleinschreibung müssen mit der abgelegten Datei übereinstimmen.
+
+### 8.4 KI-Labels für Bilder und Videos
+
+Die Kennzeichnung erscheint wie bei Bildern links oben auf dem Video.
+Die Felder stehen innerhalb des jeweiligen `image`- oder `video`-Objekts.
+
+| `ki` | `teilweiseKi` | `theme` | Ergebnis |
+|------|--------------|---------|----------|
+| `false` | `false` | Optional | Kein Label. |
+| `true` | `false` | `white` oder `black` | Label „KI-generiert“. |
+| `false` | `true` | `white` oder `black` | Label „Teilweise KI-generiert“. |
+
+Beide Kennzeichnungen dürfen nicht gleichzeitig `true` sein. Bei einer solchen
+Kombination oder fehlendem bzw. ungültigem `theme` wird kein Label angezeigt.
+Die Farbe so wählen, dass das Label auf dem Inhalt gut erkennbar ist.
+
+### 8.5 Vorlage mit Bild und Video
+
+Die KI-Kennzeichnung und den Alternativtext passend zum tatsächlichen Inhalt setzen.
+Das folgende Beispiel zeigt ein Bild und ein als teilweise KI-generiert markiertes
+Video. `poster` ist optional und kann weggelassen werden.
 
 ```json
 [
   {
+    "alt": "Titelbild",
     "image": {
-      "src": "./src/img/home-gallery/01.JPG",
+      "src": "./src/img/gallerys/home-gallery/01.JPG",
       "ki": false,
       "teilweiseKi": false
-    },
-    "alt": "Titelbild"
+    }
+  },
+  {
+    "alt": "Beschreibung des Videoinhalts",
+    "video": {
+      "src": "./src/img/gallerys/home-gallery/video1.mp4",
+      "poster": "./src/img/gallerys/home-gallery/01.JPG",
+      "ki": false,
+      "teilweiseKi": true,
+      "theme": "white"
+    }
   }
 ]
 ```
@@ -567,9 +632,11 @@ mit `./src/data/faqs/dummy.html` eine kopierbare Seitenvorlage bereit.
 2. Top-Level ist ein Array.
 3. Pflichtfelder pro Dateityp sind befüllt.
 4. Datumsformate stimmen (`TT.MM.JJJJ` bzw. `JJJJ-MM-TT-HH:mm`).
-5. Alle Bildpfade/URLs existieren bzw. sind erreichbar.
+5. Alle Bild-, Video- und Vorschaubildpfade/URLs existieren bzw. sind erreichbar.
 6. Bei `links`: Jeder Eintrag hat mindestens `url`.
 7. `publishAt` liegt zeitlich vor `deleteAt` (wenn beide gesetzt).
+8. Headergalerie: pro Eintrag `image` oder `video` verwenden und einen passenden `alt`-Text setzen.
+9. KI-Labels: genau eine Kennzeichnung auf `true` setzen und `theme` angeben; ohne Label beide auf `false` setzen.
 
 ---
 
@@ -694,12 +761,20 @@ mit `./src/data/faqs/dummy.html` eine kopierbare Seitenvorlage bereit.
 ```json
 [
   {
+    "alt": "Titelbild",
     "image": {
-      "src": "./src/img/home-gallery/01.JPG",
+      "src": "./src/img/gallerys/home-gallery/01.JPG",
       "ki": false,
       "teilweiseKi": false
-    },
-    "alt": "Titelbild"
+    }
+  },
+  {
+    "alt": "Beschreibung des Videoinhalts",
+    "video": {
+      "src": "./src/img/gallerys/home-gallery/video1.mp4",
+      "ki": false,
+      "teilweiseKi": false
+    }
   }
 ]
 ```

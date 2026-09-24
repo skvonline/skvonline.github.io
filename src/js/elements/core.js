@@ -56,16 +56,21 @@ function normalizeImage(image) {
   };
 }
 
+function createAiLabelMarkup(mediaData, pathPrefix = './') {
+  const image = normalizeImage(mediaData);
+  const labelName = image.ki ? 'ki' : image.teilweiseKi ? 'teilweise_ki' : '';
+  return labelName
+    ? `<img class="ai-label" src="${pathPrefix}src/img/ki_labels/${labelName}_${image.theme}.png" alt="${image.ki ? 'KI-generiert' : 'Teilweise KI-generiert'}" draggable="false" />`
+    : '';
+}
+
 function createImageMarkup(imageData, alt, imageClass, options = {}) {
   const image = normalizeImage(imageData);
   if (!image.src) return '';
 
   const { wrapperClass = '', pathPrefix = './' } = options;
   const protectedClass = ` media-protected${image.ki || image.teilweiseKi ? ' ai-protected-media' : ''}`;
-  const labelName = image.ki ? 'ki' : image.teilweiseKi ? 'teilweise_ki' : '';
-  const labelMarkup = labelName
-    ? `<img class="ai-label" src="${pathPrefix}src/img/ki_labels/${labelName}_${image.theme}.png" alt="${image.ki ? 'KI-generiert' : 'Teilweise KI-generiert'}" draggable="false" />`
-    : '';
+  const labelMarkup = createAiLabelMarkup(image, pathPrefix);
 
   return `<span class="image-with-label ${wrapperClass}${protectedClass}">
     <img class="${imageClass}" src="${image.src}" alt="${alt}" loading="lazy" draggable="false" />
@@ -185,6 +190,5 @@ function normalizeImagePathForSubpage(imagePath) {
 
   return imagePath;
 }
-
 
 

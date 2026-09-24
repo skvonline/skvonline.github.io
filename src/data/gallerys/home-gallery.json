@@ -30,5 +30,13 @@
       "ki": false,
       "teilweiseKi": false
     }
+  },
+  {
+    "alt": "Video aus der Home-Gallery",
+    "video": {
+      "src": "./src/img/gallerys/home-gallery/video1.mp4",
+      "ki": false,
+      "teilweiseKi": false
+    }
   }
 ]
