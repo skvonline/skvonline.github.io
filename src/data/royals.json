@@ -494,6 +494,11 @@
   {
     "session": "19. Session",
     "year": "1997/1998",
+    "image": {
+      "src": "./src/img/verein/prinzenpaare/27478.jpg",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "adultPair": [
       {
         "prince": "Gerd II.",
