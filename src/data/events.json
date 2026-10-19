@@ -107,5 +107,94 @@
       }
     ],
     "deleteAt": "2026-11-21-23:59"
+  },
+  {
+    "title": "1. Hauptfasching",
+    "date": "23.01.2027",
+    "time": "19:11 Uhr",
+    "einlass": "18:11 Uhr",
+    "preis": "23,00 €",
+    "location": "Mehrzweckhalle Sandersdorf",
+    "image": {
+      "src": "./src/img/events/clubnacht.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
+    "publishAt": "2026-11-25-00:00",
+    "links": [
+      {
+        "label": "Kartenverkauf",
+        "url": "https://www.skvonline.de/faq/kartenverkauf/",
+        "type": "more"
+      }
+    ],
+    "deleteAt": "2027-01-23-23:59"
+  },
+  {
+    "title": "Familienfasching",
+    "date": "24.01.2027",
+    "time": "14:11 Uhr",
+    "einlass": "13:11 Uhr",
+    "preis": "10,00 €",
+    "location": "Mehrzweckhalle Sandersdorf",
+    "image": {
+      "src": "./src/img/events/default.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
+    "publishAt": "2026-11-25-00:00",
+    "links": [
+      {
+        "label": "Kartenverkauf",
+        "url": "https://www.skvonline.de/faq/kartenverkauf/",
+        "type": "more"
+      }
+    ],
+    "deleteAt": "2027-01-24-23:59"
+  },
+  {
+    "title": "Kinderfasching",
+    "date": "27.01.2027",
+    "time": "16:11 Uhr",
+    "einlass": "15:11 Uhr",
+    "preis": "0,00 €",
+    "location": "Mehrzweckhalle Sandersdorf",
+    "image": {
+      "src": "./src/img/events/default.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
+    "publishAt": "2026-11-25-00:00",
+    "deleteAt": "2027-01-27-23:59"
+  },
+  {
+    "title": "2. Hauptfasching",
+    "date": "30.01.2027",
+    "time": "19:11 Uhr",
+    "einlass": "18:11 Uhr",
+    "preis": "23,00 €",
+    "location": "Mehrzweckhalle Sandersdorf",
+    "image": {
+      "src": "./src/img/events/clubnacht.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
+    "publishAt": "2026-11-25-00:00",
+    "links": [
+      {
+        "label": "Kartenverkauf",
+        "url": "https://www.skvonline.de/faq/kartenverkauf/",
+        "type": "more"
+      }
+    ],
+    "deleteAt": "2027-01-30-23:59"
+  },
+  {
+    "title": "Karnevalsumzug in Sandersdorf",
+    "date": "07.02.2027",
+    "time": "13:11 Uhr",
+    "location": "Stadt Sandersdorf",
+    "publishAt": "2026-11-25-00:00",
+    "deleteAt": "2027-02-07-23:59"
   }
 ]
