@@ -1,6 +1,7 @@
 [
   {
     "title": "Sessions-Eröffnung",
+    "ausverkauft": false,
     "date": "11.11.2026",
     "time": "11:11 Uhr",
     "location": "Rathaus Sandersdorf",
@@ -26,6 +27,7 @@
   },
   {
     "title": "1. Lumpenball",
+    "ausverkauft": true,
     "date": "14.11.2026",
     "time": "19:11 Uhr",
     "einlass": "18:11 Uhr",
@@ -54,6 +56,7 @@
   },
   {
     "title": "2. Lumpenball",
+    "ausverkauft": false,
     "date": "20.11.2026",
     "time": "19:11 Uhr",
     "einlass": "18:11 Uhr",
@@ -82,6 +85,7 @@
   },
   {
     "title": "3. Lumpenball",
+    "ausverkauft": true,
     "date": "21.11.2026",
     "time": "19:11 Uhr",
     "einlass": "18:11 Uhr",
@@ -110,6 +114,7 @@
   },
   {
     "title": "1. Hauptfasching",
+    "ausverkauft": false,
     "date": "23.01.2027",
     "time": "19:11 Uhr",
     "einlass": "18:11 Uhr",
@@ -132,6 +137,7 @@
   },
   {
     "title": "Familienfasching",
+    "ausverkauft": false,
     "date": "24.01.2027",
     "time": "14:11 Uhr",
     "einlass": "13:11 Uhr",
@@ -154,6 +160,7 @@
   },
   {
     "title": "Kinderfasching",
+    "ausverkauft": false,
     "date": "27.01.2027",
     "time": "16:11 Uhr",
     "einlass": "15:11 Uhr",
@@ -169,6 +176,7 @@
   },
   {
     "title": "2. Hauptfasching",
+    "ausverkauft": false,
     "date": "30.01.2027",
     "time": "19:11 Uhr",
     "einlass": "18:11 Uhr",
@@ -191,6 +199,7 @@
   },
   {
     "title": "Karnevalsumzug in Sandersdorf",
+    "ausverkauft": false,
     "date": "07.02.2027",
     "time": "13:11 Uhr",
     "location": "Stadt Sandersdorf",

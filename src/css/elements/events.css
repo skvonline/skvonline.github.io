@@ -37,6 +37,7 @@
 }
 
 .event-card {
+    position: relative;
     padding: 0.85rem;
     min-width: 0;
     overflow-wrap: anywhere;
@@ -116,6 +117,46 @@
 .event-details {
     display: grid;
     gap: 0.4rem;
+}
+
+.event-sold-out {
+    position: absolute;
+    top: 1.4rem;
+    left: 1.1rem;
+    z-index: 2;
+    display: inline-block;
+    width: clamp(150px, 32vw, 180px);
+    aspect-ratio: 340 / 108;
+    background: url('../../img/events/ausverkauft-stempel.svg') center / contain no-repeat;
+    /* Der Text bleibt für Screenreader erhalten; die Grafik zeichnet den Stempel. */
+    color: transparent;
+    font-size: 0;
+    transform: rotate(-12deg);
+    pointer-events: none;
+}
+
+.event-card--image-right > .event-sold-out {
+    left: auto;
+    right: 1.1rem;
+    transform: rotate(12deg);
+}
+
+.event-card > .event-sold-out {
+    top: -0.9rem;
+    left: -1.5rem;
+}
+
+.event-card--image-right > .event-sold-out {
+    left: auto;
+    right: -1.5rem;
+}
+
+@media (max-width: 700px) {
+    .event-card--image-right > .event-sold-out {
+        left: -1.5rem;
+        right: auto;
+        transform: rotate(-12deg);
+    }
 }
 
 .event-details p {

@@ -38,13 +38,14 @@ async function loadHomeContent() {
       renderItem: (event, index) => {
         const imagePath = getEventImagePath(event);
         const hasImage = Boolean(imagePath);
-        const imageSideClass = hasImage ? (index % 2 === 0 ? 'event-card--image-left' : 'event-card--image-right') : 'event-card--no-image';
+        const imageSideClass = `${index % 2 === 0 ? 'event-card--image-left' : 'event-card--image-right'}${hasImage ? '' : ' event-card--no-image'}`;
         const imageMarkup = hasImage
           ? `<div class="event-card-media">${createImageMarkup(event.image, event.title || 'Veranstaltung', 'event-image')}</div>`
           : '';
 
       return `
       <article class="card event-card ${imageSideClass}">
+        ${getEventSoldOutMarkup(event)}
         <div class="event-card-layout">
           ${imageMarkup}
           <div class="event-card-body">

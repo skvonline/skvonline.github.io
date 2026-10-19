@@ -3,6 +3,12 @@
  * Formatiert Eventdaten, erzeugt Detail-URLs und rendert die einzelne Veranstaltungsdetailseite.
  */
 
+function getEventSoldOutMarkup(event) {
+  return event.ausverkauft === true
+    ? '<span class="event-sold-out">Ausverkauft</span>'
+    : '';
+}
+
 function getEventDetailsMarkup(event) {
   const detailRows = [
     event.date && `<p><strong>Datum:</strong> ${event.date}</p>`,
@@ -135,6 +141,7 @@ async function loadEventDetailContent() {
   detailContainer.innerHTML = `
     <div class="event-detail-shell${imageMarkup ? '' : ' event-detail-shell--no-image'}">
       ${imageMarkup}
+      ${getEventSoldOutMarkup(matchingEvent)}
       <div class="event-detail-overlay">
         <h2>${matchingEvent.title || 'Veranstaltung'}</h2>
         ${getEventDetailsMarkup(matchingEvent)}
@@ -147,6 +154,3 @@ async function loadEventDetailContent() {
   `;
   setupEventShareButtons();
 }
-
-
-
