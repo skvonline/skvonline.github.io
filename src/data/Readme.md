@@ -158,19 +158,18 @@ Zum Austausch Bildpfad, Alternativtext und Bildunterschrift ändern. Auf Wunsch
 werden im Entwurf keine Platzhalterhinweise angezeigt. Archivmaterial vor der
 Veröffentlichung durch die vorgesehenen Veranstaltungsaufnahmen ersetzen.
 
-Das 9:16-Video im Rückblick steht unter `review.video`: `src`, `title`,
-`caption`. Aktuell dient das vorhandene SKV-Video als abspielbarer Platzhalter.
-Das echte Hochformatvideo später unter `src` eintragen.
-Eine leere `caption` blendet die Videobeschriftung aus.
-Der Player hat kein Poster. Er versucht mit Ton zu starten, sobald er im sichtbaren Bereich
-erscheint, und läuft dort in Endlosschleife. Blockiert der Browser Autoplay
-mit Ton, startet das Video automatisch stumm. Der Ton lässt sich über die
-eigene Steuerung einschalten. Nur wenn auch stummes Autoplay blockiert wird,
-erscheint ein Startbutton. Außerhalb des Bildschirms oder bei
-ausgeblendetem Tab pausiert er. Eigene Bedienelemente bieten Abspielen/Pause, Ton und eine Fortschrittsleiste.
-Eine manuelle Pause bleibt bis zum erneuten Hineinscrollen bestehen.
-Das Video füllt die 9:16-Fläche aus; abweichende Formate werden mittig beschnitten.
-Es werden keine externen Bild- oder Videodienste verwendet.
+Das Video im Rückblick steht unter `review.video`: `provider`, `src`, `title`,
+`caption`. Mit `provider: "instagram"` enthält `src` die öffentliche Reel-URL
+(`https://www.instagram.com/reel/REEL_ID/`). Das Reel wird mit dem offiziellen Instagram-Embed-Skript eingebunden,
+maximal 340 Pixel breit. Die Höhe passt Instagram automatisch an den Inhalt an.
+Die zusätzliche Beitragsbeschreibung (`data-instgrm-captioned`) wird für die
+kompakte Ansicht weggelassen.
+Instagram bestimmt die Bedienelemente und die Wiedergabe; die eigene
+Videosteuerung und das automatische Pausieren gelten hier nicht.
+Wenn das Embed-Skript blockiert wird, bleibt der Link zum Reel sichtbar.
+Beim Laden des Iframes wird eine Verbindung zu Instagram hergestellt.
+Ohne `provider` kann weiterhin eine direkte MP4-URL mit dem eigenen Player
+verwendet werden. Eine leere `src` blendet den Videobereich aus.
 
 ### Ausrichtung der Hauptseite
 

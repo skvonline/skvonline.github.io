@@ -17,6 +17,12 @@ async function loadNarrengipfelContent() {
       <figcaption>${escape(image.caption)}</figcaption>
     </figure>`;
     const video = content.review.video;
+    const reel = video?.provider === 'instagram' && video.src?.match(/^https:\/\/(?:www\.)?instagram\.com\/reel\/([A-Za-z0-9_-]+)\/?(?:\?.*)?$/);
+    const instagramVideo = reel ? `<figure class="sng-instagram-figure" aria-label="${escape(video.title)}">
+      <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/${reel[1]}/" data-instgrm-version="14">
+        <a href="${escape(video.src)}" target="_blank" rel="noopener noreferrer">Video-Rückblick auf Instagram ansehen ↗</a>
+      </blockquote>
+    </figure>` : '';
     const next = content.next;
     const date = next?.date ? new Date(`${next.date}T12:00:00`) : null;
     const dateLabel = date?.toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' }) || '';
@@ -54,12 +60,12 @@ async function loadNarrengipfelContent() {
         </div></div>
       </div></section>
       <section class="section sng-section" aria-labelledby="review-title"><div class="container">
-        <div class="sng-review-layout"><div class="sng-review-copy">
+        <div class="sng-review-layout${video?.src ? '' : ' sng-review-without-video'}"><div class="sng-review-copy">
           <p class="sng-eyebrow">Rückblick auf die Premiere</p><h2 id="review-title">${escape(content.review.title)}</h2>
           <dl class="sng-stats">${content.review.stats.map((stat) => `<div class="card"><dt>${escape(stat.label)}</dt><dd>${escape(stat.value)}</dd></div>`).join('')}</dl>
           <div class="sng-copy">${paragraphs(content.review.paragraphs)}</div>
         </div>
-        <figure class="sng-video-figure">
+        ${instagramVideo || (video?.src ? `<figure class="sng-video-figure">
           <div class="sng-video-frame"><video id="sng-review-video" class="sng-review-video" loop playsinline preload="none" controlslist="nodownload noplaybackrate noremoteplayback" disablepictureinpicture disableremoteplayback draggable="false" aria-label="${escape(video.title)}"${video.caption ? ' aria-describedby="sng-video-caption"' : ''}>
             <source src="${escape(asset(video.src))}" type="video/mp4">
             Euer Browser unterstützt dieses Video nicht.
@@ -72,7 +78,7 @@ async function loadNarrengipfelContent() {
           </div><p class="sng-video-status" role="status" aria-live="polite"></p>
           </div>
           ${video.caption ? `<figcaption id="sng-video-caption">${escape(video.caption)}</figcaption>` : ''}
-        </figure></div>
+        </figure>` : '')}</div>
         <div class="sng-gallery" aria-label="Bilder aus dem Vereinsleben">${content.media.gallery.map((image) => imageFigure(image)).join('')}</div>
       </div></section>
       ${showNext ? `<section class="section sng-section sng-next-promo" aria-labelledby="next-title"><div class="container">
@@ -111,7 +117,31 @@ async function loadNarrengipfelContent() {
     console.error(error);
     // Der bereits enthaltene HTML-Inhalt bleibt bei einem Ladefehler erhalten.
   }
+  setupNarrengipfelInstagram();
   setupNarrengipfelVideo();
+}
+
+// Dynamisch eingesetzte Blockquotes ebenfalls vom offiziellen Embed-Skript verarbeiten.
+function setupNarrengipfelInstagram() {
+  if (!document.querySelector('.sng-instagram-figure .instagram-media')) return;
+  const process = () => {
+    window.instgrm?.Embeds?.process();
+  };
+  if (window.instgrm?.Embeds) {
+    process();
+    return;
+  }
+  let script = document.querySelector('script[data-sng-instagram]');
+  if (!script) {
+    script = document.createElement('script');
+    script.src = 'https://www.instagram.com/embed.js';
+    script.async = true;
+    script.dataset.sngInstagram = '';
+    script.addEventListener('load', process, { once: true });
+    document.head.append(script);
+  } else {
+    script.addEventListener('load', process, { once: true });
+  }
 }
 
 let cleanupNarrengipfelVideo = null;
