@@ -3,6 +3,51 @@
  * Lädt und aktualisiert sichtbare Hinweise inklusive Countdown aus den Header-Daten.
  */
 
+async function setupHeaderNavigation(page) {
+  const submenu = document.querySelector('[data-header-events]');
+  if (submenu) {
+    try {
+      const root = getRootPrefix(page);
+      const response = await fetch(`${root}src/data/events.json`);
+      if (!response.ok) throw new Error('Veranstaltungsmenü konnte nicht geladen werden.');
+      const entries = await response.json();
+      const events = Array.isArray(entries) ? entries.filter((event) => event?.title && isVisibleByWindow(event)) : [];
+      if (events.length) {
+        const overview = document.createElement('li');
+        const overviewLink = document.createElement('a');
+        overviewLink.href = `${root}#events`;
+        overviewLink.textContent = 'Alle Veranstaltungen';
+        overview.append(overviewLink);
+        submenu.append(overview);
+        events.forEach((event) => {
+          const item = document.createElement('li');
+          const link = document.createElement('a');
+          const token = getEventDetailToken(event);
+          link.href = token ? `${root}veranstaltungen/?${token}` : `${root}#events`;
+          link.textContent = event.title;
+          if (event.date) {
+            const date = document.createElement('span');
+            date.className = 'header-event-date';
+            date.textContent = event.date;
+            link.append(date);
+          }
+          item.append(link);
+          submenu.append(item);
+        });
+        submenu.closest('[data-events-menu]').classList.add('has-submenu');
+        submenu.hidden = false;
+      } else {
+        submenu.remove();
+      }
+    } catch (error) {
+      console.warn(error);
+      submenu.remove();
+    }
+  }
+  setupMobileMenu();
+  setupHeaderSmoothScroll();
+}
+
 function setupMobileMenu() {
   const button = document.getElementById('menu_button');
   const mobileNav = document.getElementById('mobile-nav');
@@ -25,6 +70,7 @@ function setupMobileMenu() {
     submenu.id = submenuId;
     toggle.setAttribute('aria-expanded', 'false');
     toggle.setAttribute('aria-controls', submenuId);
+    submenu.inert = true;
 
     parent.classList.remove('is-open');
 
@@ -34,6 +80,7 @@ function setupMobileMenu() {
 
       const isOpen = parent.classList.toggle('is-open');
       toggle.setAttribute('aria-expanded', String(isOpen));
+      submenu.inert = !isOpen;
       submenu.style.maxHeight = isOpen ? `${submenu.scrollHeight}px` : '0px';
     });
   });
@@ -57,6 +104,7 @@ function setupHeaderSmoothScroll() {
 
   headerLinks.forEach((link) => {
     link.addEventListener('click', (event) => {
+      if (event.defaultPrevented) return;
       const targetUrl = new URL(link.href, window.location.href);
       const isSamePage = targetUrl.pathname === window.location.pathname;
       const targetId = targetUrl.hash ? targetUrl.hash.slice(1) : '';
@@ -269,6 +317,4 @@ async function setupHeaderNoticeBar(page) {
     countdownIntervalId = window.setInterval(refreshCountdownsAndPruneExpired, 1000);
   }
 }
-
-
 

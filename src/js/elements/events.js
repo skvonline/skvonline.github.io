@@ -63,6 +63,9 @@ function parseEventTimeForShare(timeValue) {
 }
 
 function buildEventShareUrl(event) {
+  if (event?.contentId === 'narrengipfel') {
+    return new URL('/narrengipfel', window.location.origin).href;
+  }
   const eventToken = getEventDetailToken(event);
   if (!eventToken) {
     return '';

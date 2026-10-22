@@ -1,0 +1,164 @@
+[
+  {
+    "frage": "Was ist der Sandersdorfer Narrengipfel?",
+    "antwort": "<p>Der Sandersdorfer Narrengipfel ist eine geschlossene, nicht gewinnorientierte Karnevalsveranstaltung, bei der Vereine aus verschiedenen Regionen zusammenkommen, gemeinsam feiern und ein abwechslungsreiches Bühnenprogramm gestalten.</p>"
+  },
+  {
+    "frage": "Wer organisiert den Narrengipfel?",
+    "antwort": "<p>Der Narrengipfel wird ausschließlich vom Sandersdorfer Karnevalsverein e. V. organisiert.</p>"
+  },
+  {
+    "frage": "Wer darf am Narrengipfel teilnehmen?",
+    "antwort": "<p>Grundsätzlich kann jeder Karnevalsverein teilnehmen. Eine regionale Beschränkung oder verpflichtende Mitgliedschaft in einem bestimmten Landesverband gibt es nicht.</p>"
+  },
+  {
+    "frage": "Ist der Narrengipfel eine öffentliche Veranstaltung?",
+    "antwort": "<p>Nein. Der Narrengipfel ist eine geschlossene Veranstaltung für angemeldete Karnevalsvereine und persönlich eingeladene Gäste.</p>"
+  },
+  {
+    "frage": "Findet der Narrengipfel jedes Jahr statt?",
+    "antwort": "<p>Der Narrengipfel ist als jährlich wiederkehrende Veranstaltung geplant.</p>"
+  },
+  {
+    "frage": "Wie können wir unseren Verein anmelden?",
+    "antwort": "<p>Das Anmeldeformular kann über <a href=\"https://www.instagram.com/skv_sandoria\">Instagram</a>, <a href=\"https://www.facebook.com/skvonline\">Facebook</a> oder per E-Mail an <a href=\"mailto:{{email}}\">{{email}}</a> beim SKV angefordert werden. Anmeldestart, Anmeldeschluss und Eintrittspreis für {{year}} stehen noch nicht endgültig fest. Weitere Informationen folgen.</p>"
+  },
+  {
+    "frage": "Müssen wir einen eigenen Programmbeitrag mitbringen?",
+    "antwort": "<p>Nein. Die Teilnahme ist auch ohne eigenen Auftritt möglich. Programmbeiträge sind jedoch ausdrücklich willkommen.</p>"
+  },
+  {
+    "frage": "Wie viele Mitglieder dürfen wir mitbringen?",
+    "antwort": "<p>Die Teilnehmerzahl wird bei der Anmeldung angegeben. Die tatsächlichen Möglichkeiten hängen von den verfügbaren Kapazitäten ab.</p>"
+  },
+  {
+    "frage": "Können Kinder und Jugendliche teilnehmen?",
+    "antwort": "<p>Ja. Kinder und Jugendliche sind willkommen. Die Aufsicht und Betreuung minderjähriger Teilnehmer obliegt den jeweiligen Vereinen.</p>"
+  },
+  {
+    "frage": "Wie erhalten wir unsere Eintrittskarten?",
+    "antwort": "<p>Es werden keine separaten Eintrittskarten ausgegeben. Der Einlass erfolgt anhand einer Teilnehmerliste.</p>"
+  },
+  {
+    "frage": "Ist ein Wiedereinlass möglich?",
+    "antwort": "<p>Ja. Beim Einlass erhalten die Teilnehmer einen Stempel, der einen späteren Wiedereinlass ermöglicht.</p>"
+  },
+  {
+    "frage": "Wie erfolgt die Bezahlung?",
+    "antwort": "<p>Die Eintrittsgelder werden vereinsweise im Voraus überwiesen. Im Rahmen der Zahlungsabwicklung erhalten die Vereine eine Rechnung.</p>"
+  },
+  {
+    "frage": "Können wir unsere Teilnehmerzahl nachträglich ändern?",
+    "antwort": "<p>Änderungen werden nach Möglichkeit flexibel behandelt. Eine verbindliche Zusage für jede Änderung kann jedoch nicht gegeben werden.</p>"
+  },
+  {
+    "frage": "Welche Programmbeiträge können wir anmelden?",
+    "antwort": "<p>Grundsätzlich sind verschiedene karnevalistische Darbietungen willkommen, beispielsweise Gardetänze, Showtänze, Männerballette und Büttenreden.</p>"
+  },
+  {
+    "frage": "Können wir mehrere Auftritte anmelden?",
+    "antwort": "<p>Ja. Vereine können mehrere Beiträge vorschlagen. Der SKV stellt daraus ein abwechslungsreiches Gesamtprogramm zusammen.</p>"
+  },
+  {
+    "frage": "Ist jeder angemeldete Auftritt garantiert?",
+    "antwort": "<p>Nein. Die Anzahl der Auftritte richtet sich nach der verfügbaren Programmzeit. Jeder Verein, der auftreten möchte, soll nach Möglichkeit mindestens einen Beitrag präsentieren können.</p>"
+  },
+  {
+    "frage": "Gibt es eine maximale Auftrittsdauer?",
+    "antwort": "<p>Eine feste Höchstdauer für einzelne Beiträge ist nicht vorgegeben. Die Gesamtprogrammplanung liegt beim SKV.</p>"
+  },
+  {
+    "frage": "Wie lange dauert das Bühnenprogramm?",
+    "antwort": "<p>Das Bühnenprogramm dauert ungefähr drei bis maximal vier Stunden.</p>"
+  },
+  {
+    "frage": "Wird Bühnentechnik bereitgestellt?",
+    "antwort": "<p>Ja. Die Bühnen-, Licht- und Tontechnik wird vom SKV bereitgestellt.</p>"
+  },
+  {
+    "frage": "Wie wird unsere Auftrittsmusik eingereicht?",
+    "antwort": "<p>Die Musik muss vor der Veranstaltung an den SKV übermittelt werden. Weitere organisatorische Informationen erhalten die teilnehmenden Vereine.</p>"
+  },
+  {
+    "frage": "Dürfen wir eigene Requisiten mitbringen?",
+    "antwort": "<p>Ja. Requisiten sind grundsätzlich möglich und sollten möglichst vorab angekündigt werden. Der Auf- und Abbau erfolgt in Abstimmung mit dem Organisationsteam.</p>"
+  },
+  {
+    "frage": "Wo findet der Narrengipfel statt?",
+    "antwort": "<p>In der {{location}}.</p>"
+  },
+  {
+    "frage": "Gibt es Parkmöglichkeiten?",
+    "antwort": "<p>Ja. Rechts und links der Halle stehen große kostenfreie Parkflächen zur Verfügung.</p>",
+    "stichwoerter": [
+      "Parken",
+      "Anreise",
+      "Parkplatz",
+      "Parkplätze"
+    ]
+  },
+  {
+    "frage": "Ist die Veranstaltung barrierefrei?",
+    "antwort": "<p>Ja. Die Narrhalla ist barrierefrei zugänglich.</p>"
+  },
+  {
+    "frage": "Gibt es barrierefreie Umkleidemöglichkeiten?",
+    "antwort": "<p>Bei vorheriger Anmeldung kann eine barrierefreie Umkleidemöglichkeit organisiert werden.</p>"
+  },
+  {
+    "frage": "Gibt es Umkleideräume für auftretende Gruppen?",
+    "antwort": "<p>Ja. Es stehen Umkleideräume in der Mehrzweckhalle zur Verfügung. Bei Bedarf können weitere Räumlichkeiten in der Umgebung genutzt werden. Die Zuweisung erfolgt durch das Organisationsteam.</p>"
+  },
+  {
+    "frage": "Können Gegenstände in den Umkleideräumen bleiben?",
+    "antwort": "<p>Die Räume sind nicht abschließbar. Gegenstände können dort verbleiben, allerdings übernimmt der SKV keine Haftung.</p>"
+  },
+  {
+    "frage": "Gibt es eine Garderobe?",
+    "antwort": "<p>Ja. Es steht eine betreute Garderobe zur Verfügung. Die Gebühr beträgt voraussichtlich ungefähr 1 Euro pro Bügel.</p>"
+  },
+  {
+    "frage": "Gibt es feste Sitzplätze?",
+    "antwort": "<p>Ja. Die Platzverteilung erfolgt über einen Sitzplan. Dabei wird versucht, die Mitglieder eines Vereins möglichst gemeinsam zu platzieren.</p>"
+  },
+  {
+    "frage": "Welche Kleidung ist vorgesehen?",
+    "antwort": "<p>Vereinskleidung oder vollständige karnevalistische Uniform ist erwünscht.</p>"
+  },
+  {
+    "frage": "Wann beginnt der Einlass?",
+    "antwort": "<p>Der Einlass beginnt am {{date}} um 17:00 Uhr.</p>"
+  },
+  {
+    "frage": "Wann findet das Teilnehmerbriefing statt?",
+    "antwort": "<p>Das Teilnehmerbriefing ist für 18:00 Uhr vorgesehen.</p>"
+  },
+  {
+    "frage": "Wann beginnt das Programm?",
+    "antwort": "<p>Der offizielle Programmbeginn ist um 18:30 Uhr.</p>"
+  },
+  {
+    "frage": "Gibt es Speisen und Getränke?",
+    "antwort": "<p>Ja. Die gastronomische Versorgung übernimmt Franz und sein Team vom Sportis Sandersdorf.</p>"
+  },
+  {
+    "frage": "Kann vor Ort mit Karte bezahlt werden?",
+    "antwort": "<p>Nein. Für die gastronomische Versorgung ist ausschließlich Barzahlung möglich.</p>"
+  },
+  {
+    "frage": "Gibt es eine separate Verpflegung für auftretende Gruppen?",
+    "antwort": "<p>Nein. Für alle Teilnehmer gilt das reguläre gastronomische Angebot.</p>"
+  },
+  {
+    "frage": "Was passiert nach dem Bühnenprogramm?",
+    "antwort": "<p>Im Anschluss findet ein gemeinsamer Tanzabend mit DJ statt.</p>"
+  },
+  {
+    "frage": "Können Musikwünsche abgegeben werden?",
+    "antwort": "<p>Ja. Musikwünsche sind ausdrücklich willkommen.</p>"
+  },
+  {
+    "frage": "An wen können wir uns bei Fragen wenden?",
+    "antwort": "<p>An den Sandersdorfer Karnevalsverein e. V. unter <a href=\"mailto:{{email}}\">{{email}}</a>.</p>"
+  }
+]

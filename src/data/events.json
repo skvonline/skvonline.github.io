@@ -259,5 +259,28 @@
       }
     ],
     "deleteAt": "2027-02-07-23:59"
+  },
+  {
+    "title": "2. Sandersdorfer Narrengipfel",
+    "ausverkauft": false,
+    "date": "03.04.2027",
+    "time": "18:30 Uhr",
+    "einlass": "17:00 Uhr",
+    "location": "Narrhalla zu Sandersdorf – Mehrzweckhalle Sandersdorf",
+    "description": "Von Vereinen, für Vereine. Geschlossene Veranstaltung für angemeldete Karnevalsvereine. Bitte beachtet, dass es um 18:00 Uhr ein Briefing für alle Akteure geben wird.",
+    "publishAt": "2026-11-25-00:00",
+    "links": [
+      {
+        "label": "Zum Narrengipfel",
+        "url": "https://skvonline.de/narrengipfel",
+        "type": "more"
+      },
+      {
+        "label": "FAQ Narrengipfel",
+        "url": "https://skvonline.de/faq/narrengipfel",
+        "type": "more"
+      }
+    ],
+    "deleteAt": "2027-04-03-23:59"
   }
 ]

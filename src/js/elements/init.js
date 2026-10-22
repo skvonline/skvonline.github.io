@@ -25,8 +25,7 @@ window.SKV.init = async function init() {
     await loadComponent('footer-component', './components/footer.html');
     normalizeComponentLinks(page);
     await setupHeaderNoticeBar(page);
-    setupMobileMenu();
-    setupHeaderSmoothScroll();
+    await setupHeaderNavigation(page);
     await loadHomeGallery();
     setupHeroCarousel();
     await loadHomeContent();
@@ -43,13 +42,23 @@ window.SKV.init = async function init() {
     return;
   }
 
+  if (page === 'narrengipfel') {
+    await loadComponent('header-component', '../components/header.html');
+    await loadComponent('footer-component', '../components/footer.html');
+    normalizeComponentLinks(page);
+    document.querySelector('.header .logo a')?.setAttribute('href', '../');
+    await setupHeaderNoticeBar(page);
+    await setupHeaderNavigation(page);
+    await loadNarrengipfelContent();
+    return;
+  }
+
   if (page === 'legal') {
     await loadComponent('header-component', '../../components/header.html');
     await loadComponent('footer-component', '../../components/footer.html');
     normalizeComponentLinks(page);
     await setupHeaderNoticeBar(page);
-    setupMobileMenu();
-    setupHeaderSmoothScroll();
+    await setupHeaderNavigation(page);
     setupTicketDatesVisibility();
     await loadFaqContent();
     setupFaqSearch();
@@ -61,8 +70,7 @@ window.SKV.init = async function init() {
     await loadComponent('footer-component', '../components/footer.html');
     normalizeComponentLinks(page);
     await setupHeaderNoticeBar(page);
-    setupMobileMenu();
-    setupHeaderSmoothScroll();
+    await setupHeaderNavigation(page);
     await loadDownloadsContent();
     return;
   }
@@ -72,8 +80,7 @@ window.SKV.init = async function init() {
     await loadComponent('footer-component', '../components/footer.html');
     normalizeComponentLinks(page);
     await setupHeaderNoticeBar(page);
-    setupMobileMenu();
-    setupHeaderSmoothScroll();
+    await setupHeaderNavigation(page);
     await loadEventDetailContent();
     return;
   }
@@ -82,7 +89,5 @@ window.SKV.init = async function init() {
   await loadComponent('footer-component', '../components/footer.html');
   normalizeComponentLinks(page);
   await setupHeaderNoticeBar(page);
-  setupMobileMenu();
-  setupHeaderSmoothScroll();
+  await setupHeaderNavigation(page);
 };
-

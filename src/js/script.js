@@ -19,6 +19,7 @@
     'downloads.js',
     'linktree.js',
     'faq.js',
+    'narrengipfel.js',
     'init.js',
   ];
 
