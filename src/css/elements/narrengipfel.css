@@ -204,6 +204,38 @@ body[data-page="narrengipfel"] .header { box-shadow: none; }
   }
 }
 
+/* Mobil stehen Einführung und Gruppenfoto getrennt und ohne Überlagerung. */
+@media (max-width: 760px) {
+  .sng-hero { display: flex; flex-direction: column; }
+  .sng-hero::before { display: none; }
+  .sng-hero > .container { order: 0; box-sizing: border-box; width: 100%; }
+  .sng-hero-layout { padding-block: 1.5rem 1rem; }
+  .sng-hero-copy { max-width: 32rem; }
+  .sng-brand { gap: .8rem; margin-bottom: 1.25rem; }
+  .sng-hero .sng-logo-panel { flex-basis: 56px; width: 56px; }
+  .sng-brand .sng-eyebrow { font-size: .7rem; letter-spacing: .1em; }
+  .sng-hero .hero-headline {
+    font-size: clamp(1.9rem, 8.6vw, 2.6rem);
+    line-height: 1.1;
+    margin-bottom: .85rem;
+    overflow-wrap: normal;
+  }
+  .sng-hero .sng-motto { font-size: 1.1rem; margin-bottom: 1rem; }
+  .sng-hero .sng-lead { font-size: 1rem; line-height: 1.6; margin-bottom: 0; }
+  .sng-hero-image {
+    position: relative;
+    inset: auto;
+    z-index: auto;
+    order: 1;
+    display: block;
+    width: 100%;
+    height: clamp(210px, 62vw, 340px);
+    object-position: center 42%;
+    mask-image: linear-gradient(to bottom, transparent, #000 48px);
+    mask-composite: add;
+  }
+}
+
 /* Konzept und Erlebnis vor Veranstaltungsorganisation. */
 .sng-stage-copy, .sng-stage-copy h2, .sng-stage-copy h3, .sng-stage-copy p { text-align: left; }
 .sng-stage-copy h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
@@ -271,3 +303,31 @@ body[data-page="narrengipfel"] .header { box-shadow: none; }
 .sng-video-status:empty { display: none; }
 .sng-video-frame button:focus-visible, .sng-video-frame input:focus-visible { outline: 3px solid #ffdb75; outline-offset: -3px; }
 .sng-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+/* Ohne Videoquelle bleibt der Rückblick ohne leere Player-Spalte lesbar. */
+.sng-review-layout.sng-review-without-video { grid-template-columns: 1fr; }
+
+/* Offizieller Instagram-Embed: Höhe wird vom Anbieter an den Inhalt angepasst. */
+.sng-instagram-figure {
+  width: 100%;
+  max-width: 340px;
+  min-width: 0;
+  margin: 0 auto;
+}
+.sng-instagram-figure .instagram-media {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 16px !important;
+  box-shadow: 0 8px 24px rgb(14 43 125 / 10%) !important;
+  background: #fff;
+}
+.sng-instagram-figure blockquote { padding: 1.5rem; font-style: normal; }
+.sng-instagram-figure a { color: var(--skv-primary); text-underline-offset: .2em; }
+.sng-instagram-figure a:focus-visible { outline: 3px solid var(--skv-primary); outline-offset: 3px; }
+@media (min-width: 761px) and (max-width: 1000px) {
+  .sng-review-layout { grid-template-columns: minmax(0, 1fr) 326px; }
+}
