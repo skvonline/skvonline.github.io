@@ -1,0 +1,106 @@
+{
+  "title": "Sandersdorfer Narrengipfel",
+  "motto": "Von Vereinen, für Vereine.",
+  "intro": "Ein Abend, der Karnevalsvereine zusammenbringt: neue Gesichter kennenlernen, gemeinsam auf der Bühne stehen und die Freude am Karneval teilen.",
+  "email": "info@skvonline.de",
+  "idea": {
+    "title": "Viele Vereine. Ein gemeinsames Gefühl.",
+    "paragraphs": [
+      "Beim Sandersdorfer Narrengipfel treffen Menschen aufeinander, die dieselbe Leidenschaft leben – und sich vielleicht noch nie begegnet sind. Aus unterschiedlichen Traditionen wird ein gemeinsamer Abend voller Bühnenmomente, guter Gespräche und neuer Freundschaften.",
+      "Die Idee ist einfach: Vereine gestalten den Abend für Vereine. Ihr erlebt, was andere begeistert, bringt eure eigene Begeisterung mit und feiert miteinander. Der Sandersdorfer Karnevalsverein e. V. bringt euch dafür als Gastgeber zusammen. Die Veranstaltung ist nicht gewinnorientiert."
+    ],
+    "values": [
+      {
+        "title": "Gemeinschaft statt Konkurrenz",
+        "text": "Den eigenen Verein im Rücken, neue Freunde am Tisch: Hier ist Platz für Begegnungen, die über einen Abend hinausgehen."
+      },
+      {
+        "title": "Vielfalt erleben",
+        "text": "Jeder Verein hat seine Geschichten, Traditionen und Ideen. Genau diese Vielfalt macht den gemeinsamen Abend aus."
+      },
+      {
+        "title": "Aus Spaß an der Freude",
+        "text": "Wir schätzen, was die anderen mitbringen, und freuen uns miteinander. Gemeinschaft steht im Mittelpunkt."
+      }
+    ]
+  },
+  "stage": {
+    "title": "Eure Leidenschaft gehört dazu",
+    "text": "Gardetanz, Showtanz, Männerballett oder Büttenrede: Auf der Bühne wird sichtbar, wie vielfältig Karneval sein kann. Jeder Beitrag bringt ein Stück Vereinsleben mit – und alle feiern mit.",
+    "notice": "Ihr müsst nicht auf der Bühne stehen, um Teil davon zu sein. Kommt mit euren Vereinsfreunden, entdeckt andere Programme und genießt einen Abend, an dem der Karneval uns alle verbindet.",
+    "spirit": "Der Applaus gehört uns allen. Beim Sandersdorfer Narrengipfel zählt das gemeinsame Erlebnis, unabhängig davon, aus welchem Verein ihr kommt."
+  },
+  "review": {
+    "title": "2026 war erst der Anfang",
+    "stats": [
+      {
+        "value": "16",
+        "label": "teilnehmende Vereine"
+      },
+      {
+        "value": "Rund 300",
+        "label": "Karnevalisten"
+      },
+      {
+        "value": "1",
+        "label": "gemeinsame Leidenschaft"
+      }
+    ],
+    "paragraphs": [
+      "16 Vereine und rund 300 Karnevalisten haben 2026 gezeigt, wie viel Freude ein Abend über Vereinsgrenzen hinweg machen kann. Die Premiere erhielt durchweg positives Feedback – und machte Lust auf ein Wiedersehen.",
+      "Als überregionaler Nachfolger des ABI-Sessionsfinales öffnet der Sandersdorfer Narrengipfel den Blick über die Region hinaus. Daraus soll ein jährlicher Treffpunkt werden, zu dem Vereine immer wieder gerne zurückkommen."
+    ],
+    "video": {
+      "src": "/src/img/gallerys/narrengipfel/Recap-1-SNG.mp4",
+      "title": "Video-Rückblick auf die Premiere 2026",
+      "caption": ""
+    }
+  },
+  "join": {
+    "title": "Euer Verein gehört dazu",
+    "text": "Ihr möchtet mit eurem Verein dabei sein oder uns erst einmal kennenlernen? Schreibt uns – wir freuen uns auf euch."
+  },
+  "logo": {
+    "src": "/src/img/gallerys/narrengipfel/narrengipfel-logo.png",
+    "alt": "Logo des Sandersdorfer Narrengipfels"
+  },
+  "media": {
+    "hero": {
+      "src": "/src/img/gallerys/home-gallery/01.JPG",
+      "alt": "Karnevalisten auf der Bühne bei einer SKV-Veranstaltung",
+      "caption": "Karneval beim SKV"
+    },
+    "stage": {
+      "src": "/src/img/gallerys/home-gallery/04.JPG",
+      "alt": "SKV-Karnevalist mit Mikrofon auf der Bühne",
+      "caption": "Vereinsleben auf der Bühne"
+    },
+    "gallery": [
+      {
+        "src": "/src/img/gallerys/home-gallery/01.JPG",
+        "alt": "Karnevalisten in unterschiedlichen Kostümen auf der Bühne",
+        "caption": "Gemeinsam auf der Bühne"
+      },
+      {
+        "src": "/src/img/gallerys/home-gallery/03.JPG",
+        "alt": "SKV-Karnevalist in Uniform neben einer Konfettikanone",
+        "caption": "Karneval mit Tradition"
+      },
+      {
+        "src": "/src/img/gallerys/home-gallery/04.JPG",
+        "alt": "SKV-Karnevalist mit Mikrofon im Bühnenlicht",
+        "caption": "Menschen, die Karneval leben"
+      }
+    ]
+  },
+  "next": {
+    "publishAt": "2026-10-21-00:00",
+    "deleteAt": "2027-04-04-00:00",
+    "eyebrow": "Das nächste Wiedersehen",
+    "text": "Ein neuer Abend voller Begegnungen, Bühnenmomente und gemeinsamer Freude. Seid mit eurem Verein dabei!",
+    "edition": "2. Sandersdorfer Narrengipfel",
+    "date": "2027-04-03",
+    "location": "Narrhalla zu Sandersdorf – Mehrzweckhalle Sandersdorf",
+    "detailsUrl": "/veranstaltungen/?2027-04-03-18.30"
+  }
+}

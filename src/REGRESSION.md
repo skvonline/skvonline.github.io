@@ -342,3 +342,75 @@ Diese Checkliste wird von oben nach unten abgearbeitet. Ein Punkt gilt erst als 
 - [ ] Linktree ist erreichbar.
 - [ ] Mobile Produktivansicht kurz prüfen.
 - [ ] Produktive Browser-Konsole enthält keine relevanten Fehler.
+
+## 24. Sandersdorfer Narrengipfel
+
+- [ ] `/narrengipfel` und `/faq/narrengipfel` sind erreichbar.
+- [ ] Smartphone (320/390 px), Tablet (768 px) und Desktop (1440 px): kein
+      horizontaler Überlauf; Texte, Datum und Handlungsaufforderungen sind lesbar.
+- [ ] Hauptseite erklärt das Konzept; Datum 03. April 2027 erst nach dem Rückblick.
+- [ ] Keine Einlasszeiten, Auftrittsplanung oder Ablauf-Timeline auf der Hauptseite; Details im FAQ.
+- [ ] Hero bleibt ohne Terminangaben, Buttons und Breadcrumb-Zeile.
+- [ ] Gegenseitige Seitenlinks und E-Mail-Kontakt funktionieren.
+- [ ] Desktop- und mobiles Menü: Veranstaltungen → Narrengipfel / FAQ Narrengipfel.
+- [ ] FAQ-Übersicht verlinkt den Narrengipfel; Veranstaltungsliste enthält den Termin.
+- [ ] Sandersdorfer Narrengipfel-FAQ: 39 direkt zugängliche Fragen wie im Kartenverkauf-FAQ.
+- [ ] Frage mit Tab fokussieren und mit Enter öffnen/schließen.
+- [ ] Keine Suchleiste, Kategorie-Zwischenebene oder Verkaufsdetails.
+- [ ] Kontaktbereich mit Social-Icons und Rücklink zur Veranstaltungsseite.
+- [ ] Antworten enthalten aufgelöste Eckdaten statt `{{…}}`-Platzhaltern.
+- [ ] Beide Seiten enthalten auch ohne JavaScript die vollständigen Inhalte.
+- [ ] Individuelle Meta-Descriptions, Canonicals und gültige JSON-LD-Daten prüfen.
+- [ ] Die Sitemap enthält die korrekten URLs.
+- [ ] Preis, Anmeldestart und Anmeldeschluss bleiben als noch offen gekennzeichnet.
+- [ ] Allgemeines FAQ, Kartenverkauf-FAQ, Downloads und Startseite funktionieren weiter.
+- [ ] Browserkonsole und lokale Requests bleiben fehlerfrei.
+
+### Prüfung nach Umstellung auf die bestehende JavaScript-Architektur
+
+Beide Seiten unter normalen URLs und einem Projekt-Vorschaupfad getestet.
+Bei 320, 390, 768 und 1440 px sind SKV-Header und -Footer gestaltet, das Logo
+lädt und es gibt keinen horizontalen Überlauf. FAQ-Suche und Tastaturbedienung
+funktionieren; keine Browserfehler oder fehlgeschlagenen Ressourcenanfragen.
+Ein im Test geänderter JSON-Einlasswert erschien direkt auf der Seite, ohne
+Build-Schritt. Die Prüfwerkzeuge liegen außerhalb des Projekts.
+
+### Bilder und Video im Narrengipfel-Bereich
+
+- [ ] Hero-Bild, Bühnenbild und drei Galeriefotos laden; keine Platzhalterhinweise sichtbar.
+- [ ] Rückblick enthält einen nativen Videoplayer im Format 9:16.
+- [ ] Video startet mit Ton beim Sichtbarwerden, soweit der Browser dies erlaubt; sonst Startbutton.
+- [ ] Eigene Steuerung: Abspielen/Pause, Ton und Fortschritt per Tastatur bedienbar.
+- [ ] Keine Standardsteuerung, keine Downloadlinks und kein Video-Kontextmenü.
+- [ ] Herausscrollen pausiert; Hineinscrollen setzt die Wiedergabe fort.
+- [ ] Video hat kein Poster und lässt sich über `review.video.src` ersetzen.
+- [ ] Bildpfade, Alternativtexte und Beschriftungen sind in `media` pflegbar.
+- [ ] Layout auch bei 320/390 px ohne horizontalen Überlauf.
+
+Die Platzhalterbilder und Videowiedergabe wurden im lokalen Chromium geprüft,
+einschließlich der normalen und projektbezogenen Vorschaupfade bei 320–1440 px.
+
+### Optionale Bewerbung der nächsten Ausgabe
+
+- [ ] Vorhandener `next`-Block innerhalb des Zeitfensters: Veranstaltungskarte mit Datum, Ort und Kontakt.
+- [ ] Vor `publishAt` und ab `deleteAt` vollständig ohne leeren Abstand ausgeblendet.
+- [ ] Ein fehlender oder auf `null` gesetzter `next`-Block blendet den Bereich aus.
+- [ ] Ohne Datumsgrenzen wird ein vorhandener `next`-Block angezeigt.
+- [ ] Ohne JavaScript bleibt der ungeprüfte Terminbereich ausgeblendet.
+- [ ] Abschluss enthält Einladung, „Teilnahme anfragen“, FAQ-Link und Social-Icons; keine sichtbare E-Mail-Adresse.
+
+Zeitgrenzen vor/ab Veröffentlichung und vor/ab Ausblendung wurden mit fixierter
+Uhr geprüft; fehlende und unbegrenzte Konfigurationen ebenfalls.
+
+- [ ] Aktive Veranstaltungsbewerbung: keine allgemeine Einladung zusätzlich sichtbar.
+- [ ] Sonst: helle Einladung mit Teilnahme-Button, FAQ-Link und Social-Icons.
+
+### Dynamisches Veranstaltungs-Untermenü
+
+- [ ] Hover und Tastaturfokus auf „Veranstaltungen“ öffnen die Liste.
+- [ ] Alle aktuell veröffentlichten Veranstaltungen erscheinen einschließlich Datum.
+- [ ] Zukünftige und bereits ausgeblendete Einträge fehlen; ausverkaufte bleiben enthalten.
+- [ ] Veranstaltungslinks öffnen die passenden Detailseiten.
+- [ ] Mobile Liste lässt sich per Antippen öffnen/schließen und bei vielen Einträgen scrollen.
+- [ ] Zugeklappte mobile Untermenüs werden per Tab übersprungen.
+- [ ] Leere Liste oder Ladefehler lassen einen funktionierenden Übersichtslink zurück.

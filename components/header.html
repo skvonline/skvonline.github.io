@@ -14,7 +14,10 @@
     <nav aria-label="Hauptnavigation">
       <ul class="main-menu">
         <li><a href="/#welcome">Start</a></li>
-        <li><a href="/#events">Veranstaltungen</a></li>
+        <li data-events-menu>
+          <a href="/#events">Veranstaltungen</a>
+          <ul class="submenu events-submenu" data-header-events aria-label="Veröffentlichte Veranstaltungen" hidden></ul>
+        </li>
         <li><a href="/#news">News</a></li>
         <li class="has-submenu">
           <a>Verein</a>
