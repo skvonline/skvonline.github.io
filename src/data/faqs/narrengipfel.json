@@ -1,7 +1,7 @@
 [
   {
     "frage": "Was ist der Sandersdorfer Narrengipfel?",
-    "antwort": "<p>Der Sandersdorfer Narrengipfel ist eine geschlossene, nicht gewinnorientierte Karnevalsveranstaltung, bei der Vereine aus verschiedenen Regionen zusammenkommen, gemeinsam feiern und ein abwechslungsreiches Bühnenprogramm gestalten.</p>"
+    "antwort": "<p>Der Sandersdorfer Narrengipfel ist eine geschlossene Karnevalsveranstaltung, bei der Vereine aus verschiedenen Regionen zusammenkommen, gemeinsam feiern und ein abwechslungsreiches Bühnenprogramm gestalten.</p>"
   },
   {
     "frage": "Wer organisiert den Narrengipfel?",
@@ -25,7 +25,7 @@
   },
   {
     "frage": "Müssen wir einen eigenen Programmbeitrag mitbringen?",
-    "antwort": "<p>Nein. Die Teilnahme ist auch ohne eigenen Auftritt möglich. Programmbeiträge sind jedoch ausdrücklich willkommen.</p>"
+    "antwort": "<p>Nein. Die Teilnahme ist auch ohne eigenen Auftritt möglich. Programmbeiträge sind jedoch herzlich willkommen.</p>"
   },
   {
     "frage": "Wie viele Mitglieder dürfen wir mitbringen?",
@@ -53,7 +53,7 @@
   },
   {
     "frage": "Welche Programmbeiträge können wir anmelden?",
-    "antwort": "<p>Grundsätzlich sind verschiedene karnevalistische Darbietungen willkommen, beispielsweise Gardetänze, Showtänze, Männerballette und Büttenreden.</p>"
+    "antwort": "<p>Alles karnevalistischen Darbietungen sind willkommen.</p>"
   },
   {
     "frage": "Können wir mehrere Auftritte anmelden?",
@@ -69,7 +69,7 @@
   },
   {
     "frage": "Wie lange dauert das Bühnenprogramm?",
-    "antwort": "<p>Das Bühnenprogramm dauert ungefähr drei bis maximal vier Stunden.</p>"
+    "antwort": "<p>Die Dauer des Bühnenprogramms gestaltet sich flexibel nach den angemeldeten Programmpunkten.</p>"
   },
   {
     "frage": "Wird Bühnentechnik bereitgestellt?",
@@ -89,13 +89,7 @@
   },
   {
     "frage": "Gibt es Parkmöglichkeiten?",
-    "antwort": "<p>Ja. Rechts und links der Halle stehen große kostenfreie Parkflächen zur Verfügung.</p>",
-    "stichwoerter": [
-      "Parken",
-      "Anreise",
-      "Parkplatz",
-      "Parkplätze"
-    ]
+    "antwort": "<p>Ja. Rechts und links der Halle stehen große kostenfreie Parkflächen zur Verfügung.</p>"
   },
   {
     "frage": "Ist die Veranstaltung barrierefrei?",
@@ -126,18 +120,6 @@
     "antwort": "<p>Vereinskleidung oder vollständige karnevalistische Uniform ist erwünscht.</p>"
   },
   {
-    "frage": "Wann beginnt der Einlass?",
-    "antwort": "<p>Der Einlass beginnt am {{date}} um 17:00 Uhr.</p>"
-  },
-  {
-    "frage": "Wann findet das Teilnehmerbriefing statt?",
-    "antwort": "<p>Das Teilnehmerbriefing ist für 18:00 Uhr vorgesehen.</p>"
-  },
-  {
-    "frage": "Wann beginnt das Programm?",
-    "antwort": "<p>Der offizielle Programmbeginn ist um 18:30 Uhr.</p>"
-  },
-  {
     "frage": "Gibt es Speisen und Getränke?",
     "antwort": "<p>Ja. Die gastronomische Versorgung übernimmt Franz und sein Team vom Sportis Sandersdorf.</p>"
   },
@@ -156,9 +138,5 @@
   {
     "frage": "Können Musikwünsche abgegeben werden?",
     "antwort": "<p>Ja. Musikwünsche sind ausdrücklich willkommen.</p>"
-  },
-  {
-    "frage": "An wen können wir uns bei Fragen wenden?",
-    "antwort": "<p>An den Sandersdorfer Karnevalsverein e. V. unter <a href=\"mailto:{{email}}\">{{email}}</a>.</p>"
   }
 ]

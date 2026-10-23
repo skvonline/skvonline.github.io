@@ -7,7 +7,7 @@
     "title": "Viele Vereine. Ein gemeinsames Gefühl.",
     "paragraphs": [
       "Beim Sandersdorfer Narrengipfel treffen Menschen aufeinander, die dieselbe Leidenschaft leben – und sich vielleicht noch nie begegnet sind. Aus unterschiedlichen Traditionen wird ein gemeinsamer Abend voller Bühnenmomente, guter Gespräche und neuer Freundschaften.",
-      "Die Idee ist einfach: Vereine gestalten den Abend für Vereine. Ihr erlebt, was andere begeistert, bringt eure eigene Begeisterung mit und feiert miteinander. Der Sandersdorfer Karnevalsverein e. V. bringt euch dafür als Gastgeber zusammen. Die Veranstaltung ist nicht gewinnorientiert."
+      "Die Idee ist einfach: Vereine gestalten den Abend für Vereine. Ihr erlebt, was andere begeistert, bringt eure eigene Begeisterung mit und feiert miteinander. Der Sandersdorfer Karnevalsverein e. V. bringt euch dafür als Gastgeber zusammen."
     ],
     "values": [
       {
@@ -20,7 +20,7 @@
       },
       {
         "title": "Aus Spaß an der Freude",
-        "text": "Wir schätzen, was die anderen mitbringen, und freuen uns miteinander. Gemeinschaft steht im Mittelpunkt."
+        "text": "Wir schätzen, was die Anderen mitbringen, und freuen uns miteinander. Gemeinschaft steht im Mittelpunkt."
       }
     ]
   },
@@ -38,7 +38,7 @@
         "label": "teilnehmende Vereine"
       },
       {
-        "value": "Rund 300",
+        "value": "~ 300",
         "label": "Karnevalisten"
       },
       {
@@ -95,7 +95,7 @@
     ]
   },
   "next": {
-    "publishAt": "2026-10-21-00:00",
+    "publishAt": "2026-11-25-00:00",
     "deleteAt": "2027-04-04-00:00",
     "eyebrow": "Das nächste Wiedersehen",
     "text": "Ein neuer Abend voller Begegnungen, Bühnenmomente und gemeinsamer Freude. Seid mit eurem Verein dabei!",
