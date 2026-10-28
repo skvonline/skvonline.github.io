@@ -8,6 +8,18 @@ window.SKV.init = async function init() {
   const page = document.body.dataset.page;
   setupProtectedImages();
 
+  if (page === 'not-found') {
+    await loadComponent('header-component', '/components/header.html');
+    await loadComponent('footer-component', '/components/footer.html');
+    const logoLink = document.querySelector('#header-component .logo a');
+    if (logoLink) logoLink.setAttribute('href', '/');
+    normalizeComponentLinks(page);
+    await setupHeaderNoticeBar(page);
+    setupMobileMenu();
+    setupHeaderSmoothScroll();
+    return;
+  }
+
   if (page === 'home') {
     await loadComponent('header-component', './components/header.html');
     await loadComponent('footer-component', './components/footer.html');

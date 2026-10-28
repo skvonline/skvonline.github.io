@@ -14,6 +14,7 @@ async function loadComponent(targetId, path) {
 }
 
 function getRootPrefix(page) {
+  if (page === 'not-found') return '/';
   if (page === 'home') return './';
   if (page === 'linktree') return '../';
   if (page === 'legal') return '../../';
