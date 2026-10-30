@@ -53,9 +53,21 @@
     "video": {
       "src": "https://www.instagram.com/reel/DWRDwCbCEmp/",
       "title": "Video-Rückblick auf die Premiere 2026",
-      "caption": "",
       "provider": "instagram"
-    }
+    },
+    "quotes": [
+      {
+        "text": "Meine Leute waren so begeistert und sie hoffen, dass wir wirklich die EInladung wieder kriegen. (Narrengipfel 2026)",
+        "club": "Felgeleber Carnevalsclub",
+        "initials": "FCC",
+        "colors": ["blue", "yellow"]
+      },
+      {
+        "text": "Das ist so ein tolles Event. Wer da nicht dabei sein möchte, weiß ich auch nicht. (Narrengipfel 2026)",
+        "club": "Steffi Syska (Bürgermeisterin Sandersdorf-Brehna)",
+        "logo": "https://bmg-images.forward-publishing.io/2021/8/23/64b80bb5-b7b3-40a8-8a0a-a5ca0d4b0ea0.jpeg?rect=827%2C34%2C2967%2C2107&w=2048&auto=format"
+      }
+    ]
   },
   "join": {
     "title": "Euer Verein gehört dazu",
@@ -68,8 +80,7 @@
   "media": {
     "hero": {
       "src": "/src/img/gallerys/home-gallery/01.JPG",
-      "alt": "Karnevalisten auf der Bühne bei einer SKV-Veranstaltung",
-      "caption": "Karneval beim SKV"
+      "alt": "Karnevalisten auf der Bühne bei einer SKV-Veranstaltung"
     },
     "stage": {
       "src": "/src/img/gallerys/home-gallery/04.JPG",

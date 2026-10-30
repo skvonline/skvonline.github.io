@@ -331,3 +331,65 @@ body[data-page="narrengipfel"] .header { box-shadow: none; }
 @media (min-width: 761px) and (max-width: 1000px) {
   .sng-review-layout { grid-template-columns: minmax(0, 1fr) 326px; }
 }
+
+/* Teilnahme bereits im Einstieg; beide Aktionen bleiben auf kleinen Displays lesbar. */
+.sng-hero .sng-actions { align-items: center; }
+.sng-hero .sng-secondary { border: 1px solid currentColor; }
+
+/* Klar abgegrenzte Zitatkarte mit Vereinsabsender und großem Anführungszeichen. */
+.sng-guest-quotes { margin-top: 24px; padding: 24px; border: 1px solid #c5d5ef; border-top: 4px solid var(--skv-primary); border-radius: 16px; background: white; color: #0f172a; box-shadow: 0 6px 20px rgb(14 43 125 / 8%); }
+.sng-guest-quotes h3 { margin: 0 0 16px; text-align: left; color: var(--skv-primary); font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.sng-quotes-grid { display: grid; gap: 20px; min-width: 0; }
+.sng-quote { position: relative; isolation: isolate; overflow: hidden; display: grid; grid-template-columns: 120px minmax(0, 1fr); column-gap: 24px; row-gap: 8px; margin: 0; min-width: 0; }
+.sng-quote + .sng-quote { padding-top: 20px; border-top: 1px solid #d5e1f5; }
+.sng-quote-avatar { grid-column: 1; grid-row: 1; display: grid; place-items: center; align-self: end; justify-self: center; width: 64px; height: 64px; border-radius: 50%; background: var(--sng-quote-background, #e2ebff); color: var(--skv-primary); overflow: hidden; }
+.sng-quote-avatar--logo { background: white; }
+.sng-quote-avatar--border { box-sizing: border-box; border: 2px solid var(--sng-quote-border, var(--skv-primary)); }
+.sng-quote-avatar--unavailable::after { content: "–"; color: #64748b; }
+.sng-quote-initials { font-size: 1.2rem; font-weight: 700; }
+.sng-quote-avatar--colors .sng-quote-initials { color: white; text-shadow: 0 1px 3px rgb(0 0 0 / 75%); }
+.sng-quote-avatar img { display: block; width: 100%; height: 100%; min-width: 0; min-height: 0; border-radius: 50%; object-fit: cover; background: white; }
+.sng-quote blockquote { grid-column: 2; grid-row: 1 / 3; align-self: center; margin: 0; min-width: 0; }
+.sng-quote-mark { position: absolute; z-index: -1; right: 0; top: 0; bottom: 0; width: min(240px, 100%); color: var(--skv-primary); opacity: .2; pointer-events: none; user-select: none; }
+.sng-quote-mark svg { display: block; width: 100%; height: 100%; fill: currentColor; }
+.sng-quote blockquote p { margin: 0; color: #0f172a; text-align: left; font-size: clamp(16px, 1.8vw, 20px); font-weight: 500; line-height: 1.45; overflow-wrap: anywhere; }
+.sng-quote figcaption { grid-column: 1; grid-row: 2; align-self: start; color: #475569; font-size: .9rem; font-weight: 600; text-align: center; overflow-wrap: anywhere; }
+.sng-guest-quotes [hidden] { display: none; }
+.sng-guest-quotes[data-carousel-ready] { display: grid; grid-template-columns: 44px minmax(0, 1fr) 44px; column-gap: 16px; row-gap: 12px; align-items: center; }
+.sng-guest-quotes[data-carousel-ready] h3 { grid-column: 1 / -1; margin-bottom: 0; }
+.sng-guest-quotes[data-carousel-ready] .sng-quotes-grid { grid-column: 2; grid-row: 2; }
+.sng-guest-quotes[data-carousel-ready] .sng-quote { padding: 0; border: 0; }
+.sng-quote-controls:not([hidden]) { display: contents; }
+.sng-quote-controls button { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #a9bfe8; border-radius: 50%; background: white; color: var(--skv-primary); font: inherit; font-size: 1.25rem; cursor: pointer; }
+.sng-quote-prev { grid-column: 1; grid-row: 2; }
+.sng-quote-next { grid-column: 3; grid-row: 2; }
+.sng-quote-controls button:hover { background: #e2ebff; }
+.sng-quote-controls button:focus-visible { outline: 3px solid #a16400; outline-offset: 3px; }
+.sng-quote-position { grid-column: 2; grid-row: 3; text-align: center; color: #475569; font-size: .8rem; font-variant-numeric: tabular-nums; }
+@media (max-width: 760px) {
+  .sng-guest-quotes { padding: 20px; }
+  .sng-guest-quotes[data-carousel-ready] { grid-template-columns: minmax(0, 1fr); }
+  .sng-guest-quotes[data-carousel-ready] .sng-quotes-grid { grid-column: 1; }
+  .sng-quote-controls:not([hidden]) { grid-column: 1; grid-row: 3; display: flex; justify-content: center; align-items: center; gap: 16px; }
+}
+
+@media (max-width: 599px) {
+  .sng-quote { grid-template-columns: 88px minmax(0, 1fr); column-gap: 12px; }
+  .sng-quote-mark { width: min(160px, 100%); }
+}
+
+/* Kompakte lokale Freigabe; nach Zustimmung übernimmt der ursprüngliche Embed. */
+.sng-instagram-consent { box-sizing: border-box; display: flex; flex-direction: column; align-items: center; padding: 2rem 1.25rem 1.25rem; border: 1px solid #d5e1f5; border-radius: 16px; background: #f4f8ff; }
+.sng-instagram-play { display: grid; place-items: center; width: 56px; height: 56px; padding-left: 3px; box-sizing: border-box; border-radius: 50%; background: white; color: var(--skv-primary); font-size: 1.2rem; }
+.sng-instagram-consent .sng-instagram-heading { margin: 1rem 0 .5rem; font-size: 1.15rem; font-weight: 700; color: var(--skv-dark); }
+.sng-instagram-summary { margin: 0 0 1.25rem; color: #475569; font-size: .8rem; line-height: 1.6; }
+.sng-instagram-figure button { font: inherit; cursor: pointer; min-height: 44px; max-width: 100%; white-space: normal; }
+.sng-instagram-figure button:focus-visible, .sng-instagram-details summary:focus-visible { outline: 3px solid #a16400; outline-offset: 4px; }
+.sng-instagram-figure [hidden] { display: none; }
+.sng-instagram-details { width: 100%; margin-top: .75rem; font-size: .75rem; color: #475569; }
+.sng-instagram-details summary { display: list-item; width: fit-content; margin-inline: auto; padding-block: .6rem; cursor: pointer; }
+.sng-instagram-details p { text-align: left; line-height: 1.6; }
+.sng-instagram-figure .sng-instagram-remove { display: block; margin: .5rem auto 0; padding: .5rem; border: 0; background: transparent; color: #475569; font-size: .75rem; text-decoration: underline; text-underline-offset: .2em; }
+.sng-instagram-status { font-size: .8rem; line-height: 1.5; color: #475569; }
+.sng-instagram-status:empty { display: none; }
+.sng-instagram-figure > a { display: block; margin-top: .75rem; text-align: center; font-size: .75rem; }
