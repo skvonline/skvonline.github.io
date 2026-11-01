@@ -74,32 +74,32 @@
     "text": "Ihr möchtet mit eurem Verein dabei sein oder uns erst einmal kennenlernen? Schreibt uns – wir freuen uns auf euch."
   },
   "logo": {
-    "src": "/src/img/gallerys/narrengipfel/narrengipfel-logo.png",
+    "src": "/src/img/narrengipfel-logo.png",
     "alt": "Logo des Sandersdorfer Narrengipfels"
   },
   "media": {
     "hero": {
-      "src": "/src/img/gallerys/home-gallery/01.JPG",
+      "src": "/src/img/narrengipfel/01.JPG",
       "alt": "Karnevalisten auf der Bühne bei einer SKV-Veranstaltung"
     },
     "stage": {
-      "src": "/src/img/gallerys/home-gallery/04.JPG",
+      "src": "/src/img/narrengipfel/04.JPG",
       "alt": "SKV-Karnevalist mit Mikrofon auf der Bühne",
       "caption": "Vereinsleben auf der Bühne"
     },
     "gallery": [
       {
-        "src": "/src/img/gallerys/home-gallery/01.JPG",
+        "src": "/src/img/narrengipfel/01.JPG",
         "alt": "Karnevalisten in unterschiedlichen Kostümen auf der Bühne",
         "caption": "Gemeinsam auf der Bühne"
       },
       {
-        "src": "/src/img/gallerys/home-gallery/03.JPG",
+        "src": "/src/img/narrengipfel/03.JPG",
         "alt": "SKV-Karnevalist in Uniform neben einer Konfettikanone",
         "caption": "Karneval mit Tradition"
       },
       {
-        "src": "/src/img/gallerys/home-gallery/04.JPG",
+        "src": "/src/img/narrengipfel/04.JPG",
         "alt": "SKV-Karnevalist mit Mikrofon im Bühnenlicht",
         "caption": "Menschen, die Karneval leben"
       }

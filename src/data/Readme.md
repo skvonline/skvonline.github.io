@@ -1140,7 +1140,7 @@ Integration: `src/js/script.js`, `src/js/elements/init.js`,
 und `src/css/elements/narrengipfel.css`.
 Inhalte: `src/data/narrengipfel.json`, `src/data/faqs/narrengipfel.json`,
 `src/data/events.json`, `src/data/faq.json`,
-`src/img/gallerys/narrengipfel/narrengipfel-logo.png`.
+`../img/narrengipfel-logo.png`.
 Weitere Anpassungen: `src/js/elements/events.js`, `sitemap.xml`, diese Anleitung
 und `src/REGRESSION.md`.
 
