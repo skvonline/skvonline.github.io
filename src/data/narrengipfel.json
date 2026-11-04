@@ -87,8 +87,9 @@
   "media": {
     "hero": {
       "src": "/src/img/narrengipfel/01.JPG",
-      "ki": false,
+      "ki": true,
       "teilweiseKi": false,
+      "theme": "black",
       "alt": "Karnevalisten auf der Bühne bei einer SKV-Veranstaltung"
     },
     "stage": {

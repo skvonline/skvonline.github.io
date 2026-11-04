@@ -397,5 +397,8 @@ body[data-page="narrengipfel"] .header { box-shadow: none; }
 /* KI-Labels verwenden dieselben Assets wie die übrigen Bildbereiche. */
 .sng-logo-panel, .sng-quote-avatar { position: relative; }
 .sng-hero > .ai-label { left: auto; right: .5rem; }
+@media (max-width: 760px) {
+  .sng-hero > .ai-label { top: auto; bottom: .5rem; }
+}
 .sng-logo-panel > .ai-label, .sng-quote-avatar > .ai-label { top: .2rem; left: .2rem; width: 70%; height: auto; border-radius: 0; background: transparent; }
 .sng-quote-avatar > .ai-label { top: auto; bottom: .4rem; left: 15%; }
