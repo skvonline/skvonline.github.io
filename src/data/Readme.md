@@ -1147,12 +1147,20 @@ und `src/REGRESSION.md`.
 ### Bilder und Hochformatvideo
 
 Die Bildflächen werden in `narrengipfel.json` unter `media.hero`, `media.stage`
-und `media.gallery` gepflegt. Das Hero-Bild verwendet nur `src` und `alt`;
+und `media.gallery` gepflegt. Das Hero-Bild verwendet `src` und `alt`;
 eine Bildunterschrift wird dort nicht ausgegeben. Bühnen- und Galeriebilder
 verwenden zusätzlich `caption` als sichtbare Bildunterschrift.
 Zum Austausch die jeweils verwendeten Bildpfade und Texte ändern. Auf Wunsch
 werden im Entwurf keine Platzhalterhinweise angezeigt. Archivmaterial vor der
 Veröffentlichung durch die vorgesehenen Veranstaltungsaufnahmen ersetzen.
+
+Alle Bildobjekte (`logo`, `media.hero`, `media.stage` und `media.gallery`) unterstützen
+`ki`, `teilweiseKi` und `theme` nach denselben Regeln wie die übrigen Bilder:
+`ki: true` kennzeichnet vollständig, `teilweiseKi: true` teilweise KI-generierte
+Bilder. Nur eines der beiden Felder darf `true` sein; mit beiden auf `false`
+bleibt das Bild ohne Label. Für ein Label muss `theme` auf `"white"` oder
+`"black"` stehen. Bei Zitatbildern bleibt `logo` ein Bildpfad; die drei
+Kennzeichnungsfelder stehen direkt am jeweiligen Zitatobjekt.
 
 Das Video im Rückblick steht unter `review.video`: `provider`, `src` und `title`.
 Beim Instagram-Embed wird kein `caption`-Feld verwendet.

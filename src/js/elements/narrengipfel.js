@@ -14,6 +14,7 @@ async function loadNarrengipfelContent() {
     const content = await response.json();
     const imageFigure = (image, className = '') => `<figure class="sng-photo ${className}">
       <img src="${escape(asset(image.src))}" alt="${escape(image.alt)}" loading="lazy" decoding="async" width="1200" height="900">
+      ${createAiLabelMarkup(image, root)}
       <figcaption>${escape(image.caption)}</figcaption>
     </figure>`;
     const video = content.review.video;
@@ -45,11 +46,12 @@ async function loadNarrengipfelContent() {
     const mail = `mailto:${content.email}?subject=Teilnahme%20am%20Sandersdorfer%20Narrengipfel`;
     main.innerHTML = `
       <section class="section section-blue sng-hero">
+        ${createAiLabelMarkup(content.media.hero, root)}
         <img class="sng-hero-image" src="${escape(asset(content.media.hero.src))}" alt="${escape(content.media.hero.alt)}" width="1824" height="1368" fetchpriority="high">
         <div class="container">
           <div class="sng-hero-layout">
             <div class="sng-hero-copy">
-              <div class="sng-brand"><div class="sng-logo-panel"><img class="sng-logo" src="${escape(asset(content.logo.src))}" alt="${escape(content.logo.alt)}" width="96" height="96" fetchpriority="high"></div><p class="sng-eyebrow">Karneval verbindet<br>Seit 2026</p></div>
+              <div class="sng-brand"><div class="sng-logo-panel"><img class="sng-logo" src="${escape(asset(content.logo.src))}" alt="${escape(content.logo.alt)}" width="96" height="96" fetchpriority="high">${createAiLabelMarkup(content.logo, root)}</div><p class="sng-eyebrow">Karneval verbindet<br>Seit 2026</p></div>
               <h1 class="hero-headline">${escape(content.title)}</h1>
               <p class="sng-motto">${escape(content.motto)}</p>
               <p class="sng-lead">${escape(content.intro)}</p>
@@ -162,7 +164,7 @@ function createNarrengipfelQuoteAvatar(quote, escape, asset) {
   // Im Bildmodus dienen die Farben nur dem optionalen Rand, nicht dem Hintergrund.
   if (logo) {
     const valid = /^(?:\/(?!\/)|\.\.?\/)/.test(logo) || /^https:\/\//i.test(logo);
-    return `<span class="sng-quote-avatar sng-quote-avatar--logo${borderClass}"${borderStyle ? ` style="${borderStyle}"` : ''} aria-hidden="true">${valid ? `<img src="${escape(asset(logo))}" alt="" width="64" height="64" loading="lazy" referrerpolicy="no-referrer">` : '<span title="Bildpfad ungültig">–</span>'}</span>`;
+    return `<span class="sng-quote-avatar sng-quote-avatar--logo${borderClass}"${borderStyle ? ` style="${borderStyle}"` : ''} ${createAiLabelMarkup(quote, '../') ? '' : 'aria-hidden="true"'}>${valid ? `<img src="${escape(asset(logo))}" alt="" width="64" height="64" loading="lazy" referrerpolicy="no-referrer">${createAiLabelMarkup(quote, '../')}` : '<span title="Bildpfad ungültig">–</span>'}</span>`;
   }
   const background = getNarrengipfelQuoteBackground(quote);
   const style = `${borderStyle}${background ? `--sng-quote-background: ${background};` : ''}`;
@@ -178,7 +180,7 @@ function getNarrengipfelQuoteInitials(quote) {
 function setupNarrengipfelQuotes() {
   const section = document.querySelector('.sng-guest-quotes');
   if (!section || section.dataset.carouselReady) return;
-  section.querySelectorAll('.sng-quote-avatar img').forEach((image) => {
+  section.querySelectorAll('.sng-quote-avatar img:not(.ai-label)').forEach((image) => {
     if (image.dataset.fallbackReady) return;
     image.dataset.fallbackReady = 'true';
     const update = () => {
