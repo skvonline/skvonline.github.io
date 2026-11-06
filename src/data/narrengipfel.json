@@ -7,7 +7,8 @@
     "title": "Viele Vereine. Ein gemeinsames Gefühl.",
     "paragraphs": [
       "Beim Sandersdorfer Narrengipfel treffen Menschen aufeinander, die dieselbe Leidenschaft leben – und sich vielleicht noch nie begegnet sind. Aus unterschiedlichen Traditionen wird ein gemeinsamer Abend voller Bühnenmomente, guter Gespräche und neuer Freundschaften.",
-      "Die Idee ist einfach: Vereine gestalten den Abend für Vereine. Ihr erlebt, was andere begeistert, bringt eure eigene Begeisterung mit und feiert miteinander. Der Sandersdorfer Karnevalsverein e. V. bringt euch dafür als Gastgeber zusammen."
+      "Die Idee ist einfach: Vereine gestalten den Abend für Vereine.",
+      "Ihr erlebt, was andere begeistert, bringt eure eigene Begeisterung mit und feiert miteinander. Der Sandersdorfer Karnevalsverein e. V. bringt euch dafür als Gastgeber zusammen."
     ],
     "values": [
       {
@@ -63,7 +64,9 @@
         "colors": [
           "blue",
           "yellow"
-        ]
+        ],
+        "logo": "",
+        "border": false
       },
       {
         "text": "Das ist so ein tolles Event. Wer da nicht dabei sein möchte, weiß ich auch nicht. (Narrengipfel 2026)",
@@ -80,24 +83,24 @@
   },
   "logo": {
     "src": "/src/img/narrengipfel-logo.png",
+    "alt": "Logo des Sandersdorfer Narrengipfels",
     "ki": false,
-    "teilweiseKi": false,
-    "alt": "Logo des Sandersdorfer Narrengipfels"
+    "teilweiseKi": false
   },
   "media": {
     "hero": {
       "src": "/src/img/narrengipfel/01.JPG",
+      "alt": "Karnevalisten auf der Bühne bei einer SKV-Veranstaltung",
       "ki": true,
       "teilweiseKi": false,
-      "theme": "black",
-      "alt": "Karnevalisten auf der Bühne bei einer SKV-Veranstaltung"
+      "theme": "black"
     },
     "stage": {
       "src": "/src/img/narrengipfel/04.JPG",
-      "ki": false,
-      "teilweiseKi": false,
       "alt": "SKV-Karnevalist mit Mikrofon auf der Bühne",
-      "caption": "Vereinsleben auf der Bühne"
+      "caption": "Vereinsleben auf der Bühne",
+      "ki": false,
+      "teilweiseKi": false
     },
     "gallery": [
       {
@@ -109,10 +112,10 @@
       },
       {
         "src": "/src/img/narrengipfel/03.JPG",
-        "ki": false,
-        "teilweiseKi": false,
         "alt": "SKV-Karnevalist in Uniform neben einer Konfettikanone",
-        "caption": "Karneval mit Tradition"
+        "caption": "Karneval mit Tradition",
+        "ki": false,
+        "teilweiseKi": false
       },
       {
         "src": "/src/img/narrengipfel/04.JPG",
@@ -124,7 +127,7 @@
     ]
   },
   "next": {
-    "publishAt": "2026-11-25-00:00",
+    "publishAt": "2026-11-23-00:00",
     "deleteAt": "2027-04-04-00:00",
     "eyebrow": "Das nächste Wiedersehen",
     "text": "Ein neuer Abend voller Begegnungen, Bühnenmomente und gemeinsamer Freude. Seid mit eurem Verein dabei!",
@@ -132,5 +135,6 @@
     "date": "2027-04-03",
     "location": "Narrhalla zu Sandersdorf – Mehrzweckhalle Sandersdorf",
     "detailsUrl": "/veranstaltungen/?2027-04-03-18.30"
-  }
+  },
+  "emailSubject": ""
 }

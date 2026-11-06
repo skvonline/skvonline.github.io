@@ -43,7 +43,8 @@ async function loadNarrengipfelContent() {
     const showNext = Boolean(next) && isVisibleByWindow(next);
     const monthLabel = date?.toLocaleDateString('de-DE', { month: 'long', year: 'numeric' }) || '';
     const faq = `${root}faq/narrengipfel/`;
-    const mail = `mailto:${content.email}?subject=Teilnahme%20am%20Sandersdorfer%20Narrengipfel`;
+    const subject = typeof content.emailSubject === 'string' ? content.emailSubject.trim() : '';
+    const mail = `mailto:${content.email}${subject ? `?subject=${encodeURIComponent(subject)}` : ''}`;
     main.innerHTML = `
       <section class="section section-blue sng-hero">
         ${createAiLabelMarkup(content.media.hero, root)}
@@ -126,6 +127,7 @@ async function loadNarrengipfelContent() {
           </a>
         </div>
       </div></section>` : ''}`;
+    applyNarrengipfelImageLabels(content);
     document.title = `${content.title} | SKV`;
     const description = 'Von Vereinen, für Vereine: Beim Sandersdorfer Narrengipfel treffen Karnevalsvereine aufeinander, teilen ihre Bühnenmomente und feiern gemeinsam.';
     document.querySelector('meta[name="description"]').content = description;
@@ -463,4 +465,38 @@ function setupNarrengipfelVideo() {
     listeners.abort();
     video.pause();
   };
+}
+
+function applyNarrengipfelImageLabels(content, assetRoot = '../') {
+  const media = content.media || {};
+  const review = content.review || {};
+  const quotes = (Array.isArray(review.quotes) ? review.quotes : []).filter(item => typeof item?.text === 'string' && item.text.trim() && typeof item?.club === 'string' && item.club.trim());
+  const items = [
+    [document.querySelector('.sng-logo'), content.logo],
+    [document.querySelector('.sng-hero-image'), media.hero],
+    [document.querySelector('.sng-stage-photo img'), media.stage],
+    ...Array.from(document.querySelectorAll('.sng-gallery > figure')).map((figure, index) => [figure.querySelector('img'), media.gallery?.[index]]),
+    ...Array.from(document.querySelectorAll('.sng-quote')).map((quote, index) => [quote.querySelector('.sng-quote-avatar img'), quotes[index]]),
+  ];
+  for (const [image, data] of items) {
+    if (!image?.parentElement || !data) continue;
+    const parent = image.parentElement;
+    parent.querySelector(':scope > .sng-image-ai-label')?.remove();
+    const ki = data.ki === true;
+    const partial = data.teilweiseKi === true;
+    if (ki === partial || !['black', 'white'].includes(data.theme)) continue;
+    image.draggable = false;
+    image.oncontextmenu = event => event.preventDefault();
+    image.ondragstart = event => event.preventDefault();
+    // Respect labels supplied by newer versions of the original website.
+    if (parent.querySelector(':scope > .ai-label, :scope > .image-ai-label')) continue;
+    if (getComputedStyle(parent).position === 'static') parent.style.position = 'relative';
+    const label = document.createElement('img');
+    label.className = 'sng-image-ai-label';
+    label.alt = ki ? 'KI-generiert' : 'Teilweise KI-generiert';
+    label.src = new URL(`src/img/ki_labels/${ki ? 'ki' : 'teilweise_ki'}_${data.theme}.png`, new URL(assetRoot, document.baseURI)).href;
+    label.draggable = false;
+    Object.assign(label.style, { position: 'absolute', top: '.65rem', left: '.65rem', width: 'min(44%, 90px)', height: 'auto', maxHeight: 'none', objectFit: 'contain', zIndex: '3', pointerEvents: 'none', border: '0', borderRadius: '0', margin: '0' });
+    parent.append(label);
+  }
 }
