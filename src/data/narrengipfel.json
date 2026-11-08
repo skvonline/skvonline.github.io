@@ -49,7 +49,7 @@
     ],
     "paragraphs": [
       "16 Vereine und rund 300 Karnevalisten haben 2026 gezeigt, wie viel Freude ein Abend über Vereinsgrenzen hinweg machen kann. Die Premiere erhielt durchweg positives Feedback und machte Lust auf ein Wiedersehen."
-      ],
+    ],
     "video": {
       "src": "https://www.instagram.com/reel/DWRDwCbCEmp/",
       "title": "Video-Rückblick auf die Premiere 2026",
@@ -88,40 +88,50 @@
   },
   "media": {
     "hero": {
-      "src": "/src/img/narrengipfel/01.JPG",
+      "src": "/src/img/narrengipfel/IMG_1656.JPG",
       "alt": "Karnevalisten auf der Bühne bei einer SKV-Veranstaltung",
-      "ki": true,
+      "ki": false,
       "teilweiseKi": false,
       "theme": "black"
     },
     "stage": {
-      "src": "/src/img/narrengipfel/04.JPG",
+      "src": "/src/img/narrengipfel/DSC01750.JPG",
       "alt": "SKV-Karnevalist mit Mikrofon auf der Bühne",
-      "caption": "Vereinsleben auf der Bühne",
+      "caption": "Vereinsleben auf und neben der Bühne",
       "ki": false,
       "teilweiseKi": false
     },
     "gallery": [
       {
-        "src": "/src/img/narrengipfel/01.JPG",
+        "src": "/src/img/narrengipfel/IMG_1656.JPG",
         "alt": "Karnevalisten in unterschiedlichen Kostümen auf der Bühne",
         "caption": "Gemeinsam auf der Bühne",
         "ki": false,
         "teilweiseKi": false
       },
       {
-        "src": "/src/img/narrengipfel/03.JPG",
+        "src": "/src/img/narrengipfel/IMG_1707.JPG",
         "alt": "SKV-Karnevalist in Uniform neben einer Konfettikanone",
         "caption": "Karneval mit Tradition",
         "ki": false,
         "teilweiseKi": false
       },
       {
-        "src": "/src/img/narrengipfel/04.JPG",
+        "src": "/src/img/narrengipfel/IMG_2092.JPG",
         "alt": "SKV-Karnevalist mit Mikrofon im Bühnenlicht",
-        "caption": "Menschen, die Karneval leben",
+        "caption": "Karneval leben",
         "ki": false,
         "teilweiseKi": false
+      },
+      {
+        "src": "/src/img/narrengipfel/IMG_2328.JPG",
+        "alt": "Sketch auf der Bühne",
+        "caption": "Gemeinsam lachen"
+      },
+      {
+        "src": "/src/img/narrengipfel/IMG_2658.JPG",
+        "alt": "Solomariechen auf der Bühne",
+        "caption": "Gemeinsam feiern"
       }
     ]
   },
