@@ -30,8 +30,36 @@ async function loadFaqContent() {
     const response = await fetch(source);
     if (!response.ok) throw new Error(`FAQ konnte nicht geladen werden (${response.status})`);
 
-    const categories = await response.json();
+    let categories = await response.json();
     if (!Array.isArray(categories)) throw new Error('Das FAQ-JSON muss ein Array enthalten.');
+
+    // Optionaler Veranstaltungskontext: zentrale Eckdaten statt doppelter Pflege.
+    if (container.dataset.faqContext) {
+      const contextResponse = await fetch(container.dataset.faqContext);
+      if (!contextResponse.ok) throw new Error('Die Veranstaltungsdaten konnten nicht geladen werden.');
+      const content = await contextResponse.json();
+      const event = content.next;
+      const eventDate = new Date(`${event.date}T12:00:00`);
+      const context = {
+        ...event,
+        date: eventDate.toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' }),
+        year: String(eventDate.getFullYear()),
+        email: content.email,
+      };
+      const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;',
+      }[char]));
+      const resolveEntry = (entry) => ({
+        ...entry,
+        antwort: entry.antwort.replace(/\{\{(\w+)\}\}/g, (_, key) => {
+          if (!(key in context)) throw new Error(`Unbekanntes FAQ-Feld: ${key}`);
+          return escapeHtml(context[key]);
+        }),
+      });
+      categories = categories.map((entry) => Array.isArray(entry.fragen)
+        ? { ...entry, fragen: entry.fragen.map(resolveEntry) }
+        : resolveEntry(entry));
+    }
 
     container.replaceChildren();
     if (categories.every((entry) => entry?.frage && typeof entry.antwort === 'string')) {
@@ -81,7 +109,10 @@ async function loadFaqContent() {
     });
   } catch (error) {
     console.error(error);
-    container.innerHTML = '<p class="faq-loading">Das FAQ konnte leider nicht geladen werden. Bitte versuche es später erneut.</p>';
+    // Vorgerenderte Antworten bleiben auch bei einem Netzwerkfehler nutzbar.
+    if (!container.querySelector('details')) {
+      container.innerHTML = '<p class="faq-loading">Das FAQ konnte leider nicht geladen werden. Bitte versuche es später erneut.</p>';
+    }
   }
 }
 
@@ -180,5 +211,3 @@ function setupFaqSearch() {
   }
   applyFilters();
 }
-
-
