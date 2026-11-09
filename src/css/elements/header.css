@@ -226,3 +226,18 @@
 
 
 
+
+/* Veranstaltungen werden aus denselben veröffentlichten Einträgen wie auf der Startseite geladen. */
+.events-submenu { width: 20rem; max-width: 90vw; max-height: min(65vh, 34rem); overflow-y: auto; border-radius: 0 0 12px 12px; box-shadow: 0 12px 24px rgba(4, 16, 55, .2); }
+.events-submenu a { padding: .65rem 1rem; text-align: left; line-height: 1.4; }
+.events-submenu li:first-child { border-bottom: 1px solid rgba(255, 255, 255, .25); }
+.events-submenu a:hover, .events-submenu a:focus-visible { background: rgba(255, 255, 255, .12); }
+.events-submenu a:focus-visible { outline: 2px solid white; outline-offset: -3px; }
+.header-event-date { display: block; margin-top: .15rem; font-size: .8rem; font-weight: 400; color: #dbe6ff; }
+@media (max-width: 960px) {
+  .mobile-nav .events-submenu { width: auto; box-shadow: none; }
+  .mobile-nav .has-submenu.is-open > .events-submenu { max-height: min(50vh, 28rem) !important; overflow-y: auto; }
+}
+@media (max-width: 960px) {
+  .mobile-nav { max-height: calc(100dvh - 120px); overflow-y: auto; }
+}
