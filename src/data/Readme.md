@@ -1114,9 +1114,9 @@ mit dem JSON und der dynamischen Darstellung abgleichen. Auch diese README bei
 Bei einer neuen Ausgabe zusätzlich die statischen Metadaten und Rückfalltexte
 in beiden HTML-Dateien, den Termin in `events.json` und die Sitemap prüfen.
 
-Die FAQ-Antworten können zentrale Eckdaten mit `{{date}}`, `{{year}}`,
-`{{location}}`
-und `{{email}}` übernehmen. Das vorhandene FAQ-Skript löst diese beim Laden auf.
+Die FAQ-Antworten können zentrale Eckdaten mit `{{date}}` und `{{location}}`
+übernehmen. Das vorhandene FAQ-Skript löst diese beim Laden auf. E-Mail-Adresse
+und Jahreszahl werden direkt in den FAQ-Antworten gepflegt.
 
 ### Logo einsetzen
 

@@ -43,8 +43,6 @@ async function loadFaqContent() {
       const context = {
         ...event,
         date: eventDate.toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' }),
-        year: String(eventDate.getFullYear()),
-        email: content.email,
       };
       const escapeHtml = (value) => String(value).replace(/[&<>"']/g, (char) => ({
         '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#x27;',
