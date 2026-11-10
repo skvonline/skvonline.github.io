@@ -122,6 +122,7 @@
     "einlass": "18:11 Uhr",
     "preis": "23,00 €",
     "location": "Mehrzweckhalle Sandersdorf",
+    "description": "Ab geht die Party! Getreu dem Motto \"Sandoria Hellau - Horror und Grusel beim SKV\" entführen wir Euch in eine Welt voller unheimlicher Gestalten und Schreckmomente.\n\nHinweis: Eintritt ab 16 Jahren mit Muttizettel",
     "image": {
       "src": "./src/img/events/clubnacht.png",
       "ki": false,
@@ -154,6 +155,7 @@
     "einlass": "13:11 Uhr",
     "preis": "10,00 €",
     "location": "Mehrzweckhalle Sandersdorf",
+    "description": "Auch dieses Jahr gibt es wieder unsere Veranstaltung für Familien. Wir freuen uns Euch alle begrüßen zu dürfen.\nHinweis: Eine barrierefreie Teilnahme ist problemlos möglich.",
     "image": {
       "src": "./src/img/events/default.png",
       "ki": false,
@@ -186,6 +188,7 @@
     "einlass": "15:11 Uhr",
     "preis": "0,00 €",
     "location": "Mehrzweckhalle Sandersdorf",
+    "description": "Jetzt geht die Party ab für unsere Kids! Wir haben wie jedes Jahr ein kleines Programm für euch vorbereitet und natürlich auch schon Süßigkeiten auf Lager ;)\nNach unserem kurzen Programm haben wir auch wieder diverse Spielstände für Euch ...",
     "image": {
       "src": "./src/img/events/default.png",
       "ki": false,
@@ -213,6 +216,7 @@
     "einlass": "18:11 Uhr",
     "preis": "23,00 €",
     "location": "Mehrzweckhalle Sandersdorf",
+    "description": "Ab geht die Party! Getreu dem Motto \"Sandoria Hellau - Horror und Grusel beim SKV\" entführen wir Euch in eine Welt voller unheimlicher Gestalten und Schreckmomente.\n\nHinweis: Eintritt ab 16 Jahren mit Muttizettel",
     "image": {
       "src": "./src/img/events/clubnacht.png",
       "ki": false,
@@ -243,6 +247,12 @@
     "date": "07.02.2027",
     "time": "13:11 Uhr",
     "location": "Stadt Sandersdorf",
+    "description": "Wie jedes Jahr möchten wir auch dieses Jahr die Session mit dem großen Karnevalsumzug durch Sandersdorf abschließen. Wir freuen uns bereits euch alle am Straßenrand zu sehen und mich euch ein letztes Mal diese Session zu feiern.\n\nIhr möchtet am Umzug teilnehmen? Das Anmeldeformular und die Sicherheitsbelehrung findet Ihr im Downloadsbereich unserer Webseite.",
+    "image": {
+      "src": "./src/img/events/Umzug2027.png",
+      "ki": false,
+      "teilweiseKi": false
+    },
     "publishAt": "2026-11-23-00:00",
     "links": [
       {
@@ -252,8 +262,13 @@
       },
       {
         "label": "E-Mail",
-        "url": "mailto:info@skvonline.de",
+        "url": "mailto:info@skvonline.de?subject=Anfrage%20zum%20Karnevalsumzug%20Sandersdorf%202027",
         "type": "mail"
+      },
+      {
+        "label": "Zu den Downloads",
+        "url": "https://skvonline.de/downloads",
+        "type": "more"
       }
     ],
     "deleteAt": "2027-02-07-23:59"
@@ -264,7 +279,7 @@
     "time": "18:30 Uhr",
     "einlass": "17:00 Uhr",
     "location": "Narrhalla zu Sandersdorf – Mehrzweckhalle Sandersdorf",
-    "description": "Von Vereinen, für Vereine. Geschlossene Veranstaltung für angemeldete Karnevalsvereine. Bitte beachtet, dass es um 18:00 Uhr ein Briefing für alle Akteure geben wird.",
+    "description": "Von Vereinen, für Vereine. Geschlossene Veranstaltung für angemeldete Karnevalsvereine. Anmeldung erfolgt über Anmeldeformular, welches Ihr auf Anfrage erhaltet. Bitte beachtet, dass es um 18:00 Uhr ein Briefing für alle Akteure geben wird.",
     "publishAt": "2026-11-23-00:00",
     "links": [
       {
@@ -276,6 +291,16 @@
         "label": "FAQ Narrengipfel",
         "url": "https://skvonline.de/faq/narrengipfel",
         "type": "more"
+      },
+      {
+        "label": "Maps",
+        "url": "https://maps.app.goo.gl/tAwJbH2cMwa1GWu1A",
+        "type": "maps"
+      },
+      {
+        "label": "E-Mail",
+        "url": "mailto:info@skvonline.de?subject=Anfrage%20zum%20Narrengipfel%202027",
+        "type": "mail"
       }
     ],
     "deleteAt": "2027-04-03-23:59"
