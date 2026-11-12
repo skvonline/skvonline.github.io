@@ -1,35 +1,5 @@
 [
   {
-    "title": "Sessions-Eröffnung",
-    "date": "11.11.2026",
-    "time": "11:11 Uhr",
-    "location": "Rathaus Sandersdorf",
-    "image": {
-      "src": "./src/img/events/sessionseroeffnung.png",
-      "ki": false,
-      "teilweiseKi": false
-    },
-    "publishAt": "2026-04-01-00:00",
-    "links": [
-      {
-        "label": "Maps",
-        "url": "https://maps.app.goo.gl/vgFrF9jjJLxYL7fg8",
-        "type": "maps"
-      },
-      {
-        "label": "E-Mail",
-        "url": "mailto:info@skvonline.de",
-        "type": "mail"
-      },
-      {
-        "label": "Live auf Instagram",
-        "url": "https://www.instagram.com/skv_sandoria?upcoming_event_id=18132010069752057",
-        "type": "more"
-      }
-    ],
-    "deleteAt": "2026-11-11-23:59"
-  },
-  {
     "title": "1. Lumpenball",
     "ausverkauft": true,
     "date": "14.11.2026",
@@ -128,7 +98,7 @@
       "ki": false,
       "teilweiseKi": false
     },
-    "publishAt": "2026-11-23-00:00",
+    "publishAt": "2026-11-14-00:00",
     "links": [
       {
         "label": "Maps",
@@ -161,7 +131,7 @@
       "ki": false,
       "teilweiseKi": false
     },
-    "publishAt": "2026-11-23-00:00",
+    "publishAt": "2026-11-14-00:00",
     "links": [
       {
         "label": "Maps",
@@ -194,7 +164,7 @@
       "ki": false,
       "teilweiseKi": false
     },
-    "publishAt": "2026-11-23-00:00",
+    "publishAt": "2026-11-14-00:00",
     "links": [
       {
         "label": "Maps",
@@ -222,7 +192,7 @@
       "ki": false,
       "teilweiseKi": false
     },
-    "publishAt": "2026-11-23-00:00",
+    "publishAt": "2026-11-14-00:00",
     "links": [
       {
         "label": "Maps",
