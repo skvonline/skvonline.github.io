@@ -1,5 +1,21 @@
 [
   {
+    "session": "48. Session",
+    "year": "2026/2027",
+    "adultPair": [
+      {
+        "prince": "Michael III.",
+        "princess": "Anja III."
+      }
+    ],
+    "childPair": [
+      {
+        "prince": "Mika I.",
+        "princess": "Hanna I."
+      }
+    ]
+  },
+  {
     "session": "47. Session",
     "year": "2025/2026",
     "image": {
@@ -31,7 +47,7 @@
     "adultPair": [
       {
         "prince": "Andreas II.",
-        "princess": "Anja III."
+        "princess": "Anja II."
       }
     ],
     "childPair": [
@@ -73,7 +89,7 @@
     "adultPair": [
       {
         "prince": "Renè II.",
-        "princess": "Anja II."
+        "princess": "Anja I."
       }
     ],
     "childPair": [
@@ -94,7 +110,7 @@
     "adultPair": [
       {
         "prince": "Renè II.",
-        "princess": "Anja II."
+        "princess": "Anja I."
       }
     ],
     "childPair": [
@@ -630,7 +646,7 @@
     "adultPair": [
       {
         "prince": "Roy I.",
-        "princess": "Anja I."
+        "princess": "Antje I."
       }
     ],
     "childPair": [
